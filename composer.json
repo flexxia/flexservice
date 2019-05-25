@@ -1,10 +1,10 @@
 {
-    "name": "root/flexservice",
+    "name": "flexxia/flexservice",
     "type": "drupal-metiore-module",
     "authors": [
         {
-            "name": "km",
-            "email": "kmarshall@metiore.ca"
+            "name": "k m",
+            "email": "kmarshall@metiore.c"
         }
     ],
     "require": {}
