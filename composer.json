@@ -1,11 +1,14 @@
 {
     "name": "flexxia/flexservice",
-    "type": "drupal-metiore-module",
+    "description": "Drupal 8 modules with composer",
+    "type": "drupal-flex-service",
+    "license": "MIT",
     "authors": [
         {
             "name": "k m",
-            "email": "kmarshall@metiore.ca"
+            "email": "john@example.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {}
 }
