@@ -1,0 +1,11 @@
+{
+    "name": "root/flexservice",
+    "type": "drupal-metiore-module",
+    "authors": [
+        {
+            "name": "km",
+            "email": "kmarshall@metiore.ca"
+        }
+    ],
+    "require": {}
+}
