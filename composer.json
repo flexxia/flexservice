@@ -2,13 +2,12 @@
     "name": "flexxia/flexservice",
     "description": "Drupal 8 modules with composer",
     "type": "drupal-flex-service",
-    "license": "MIT",
+    "license": "GPL-2.0+",
     "authors": [
         {
             "name": "k m",
             "email": "john@example.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {}
 }
