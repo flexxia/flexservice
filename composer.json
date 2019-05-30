@@ -1,7 +1,7 @@
 {
     "name": "flexxia/flexservice",
     "description": "Drupal 8 modules with composer",
-    "type": "drupal-flex-service",
+    "type": "drupal-module",
     "license": "GPL-2.0+",
     "authors": [
         {
