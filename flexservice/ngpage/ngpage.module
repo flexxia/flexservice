@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains ngpage.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ngpage_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ngpage module.
+    case 'help.page.ngpage':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('NG angular page') . '</p>';
+      return $output;
+
+    default:
+  }
+}
