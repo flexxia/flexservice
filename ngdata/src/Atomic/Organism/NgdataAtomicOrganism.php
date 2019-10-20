@@ -153,6 +153,55 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function blockTileMeetingHtml($meeting_node = NULL, $meeting_share_link = TRUE, $meeting_snapshot_link = FALSE) {
+    $path_args = \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
+
+    $fixed_section_param = $this->blockTileMeetingValue($meeting_node);
+
+    $output = '';
+    $output .= '<div class="row margin-left-12 margin-bottom-12">';
+      $output .= '<div class="col-md-9">';
+        $output .= '<span class="color-00a9e0 font-size-20 font-weight-300">';
+          $output .= \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($meeting_node, 'field_meeting_program');
+        $output .= '</span>';
+      $output .= '</div>';
+
+      if ($meeting_share_link && \Drupal::currentUser()->isAuthenticated()) {
+        $output .= '<div class="col-md-2 float-right">';
+          $output .= $this->blockTileMeetingShareLink($meeting_node->id());
+        $output .= '</div>';
+      }
+
+    $output .= '</div>';
+    $output .= '<div class="margin-left-12 clear-both">';
+      foreach ($fixed_section_param as $row) {
+        $output .= '<span class="col-md-3 col-sm-6 padding-top-12">';
+          $output .= '<span class="dashpage-square-text">';
+            $output .= $row['value'] . ':';
+          $output .= '</span>';
+          $output .= '<span class="dashpage-square-text padding-left-6">';
+            $output .= $row['value_one'];
+          $output .= '</span>';
+        $output .= '</span>';
+      }
+    $output .= '</div>';
+
+    if ($meeting_snapshot_link) {
+      if (method_exists($meeting_node, 'id')) {
+        $meeting_url = Url::fromUserInput('/ngpage/meeting/page/' . $meeting_node->id());
+
+        $output .= '<div class="col-md-12 margin-top-12 margin-left-12 clear-both">';
+          $output .= \Drupal::l(t('Meeting Snapshot'), $meeting_url);
+        $output .= '</div>';
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function blockHeaderHtmlQuestionTitle($question_term = NULL) {
     $output = '<div class="block-comment-header-wrapper clear-both">';
       $output .= '<div class="panel-header block-header bg-0f69af color-fff line-height-42 padding-left-18 padding-right-24 margin-top-12">';

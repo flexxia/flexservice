@@ -160,7 +160,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
 
     $output = $this->organism->basicSection();
     $output['blockClass'] = "col-xs-12 margin-top-6";
-    $output['blockHeader'] = $DashpageObjectContent->blockTileMeetingHtml($meeting_entity);
+    $output['blockHeader'] = $this->organism->blockTileMeetingHtml($meeting_entity);
 
     return $output;
   }
