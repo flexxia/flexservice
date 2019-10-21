@@ -21,7 +21,7 @@ ngpage.primeng.form:
   path: '/ngpage/{section}/form/{entity_id}/{start}/{end}'
   defaults:
     _controller: '\Drupal\ngpage\Controller\NgpageController::ngPrimengForm'
-    _title: 'EMD Form'
+    _title: 'Ng Form'
   requirements:
     _permission: 'access content'
 
@@ -30,7 +30,7 @@ ngpage.primeng.page:
   path: '/ngpage/{section}/page/{entity_id}/{start}/{end}'
   defaults:
     _controller: '\Drupal\ngpage\Controller\NgpageController::ngPrimengPage'
-    _title: 'EMD Dashboard'
+    _title: 'Dashboard'
   requirements:
     _permission: 'access content'
 
