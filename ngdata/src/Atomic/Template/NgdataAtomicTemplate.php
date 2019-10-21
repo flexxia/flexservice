@@ -200,8 +200,8 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   /**
    *
    */
-  public function renderHtmlBasicTableTopSpeaker($meeting_nodes = array()) {
-    $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes, 10);
+  public function renderHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL) {
+    $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid);
 
     $thead_data = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
     $tbody_data = $tableData;

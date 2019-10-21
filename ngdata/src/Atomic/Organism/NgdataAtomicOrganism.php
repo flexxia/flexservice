@@ -502,8 +502,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
         );
       }
    */
-  public function tableContentSpeakerList($meeting_nodes = array()) {
-    $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes);
+  public function tableContentSpeakerList($meeting_nodes = array(), $limit_row = NULL, $question_tid = NULL) {
+    $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);

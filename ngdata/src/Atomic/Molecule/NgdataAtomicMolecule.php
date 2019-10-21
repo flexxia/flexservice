@@ -422,7 +422,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
             'Rating' => \Drupal::service('ngdata.term.question')
-              ->getRaidoQuestionTidStatsAverage(134, $meeting_nodes_by_current_user),
+              ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user),
           );
         }
       }

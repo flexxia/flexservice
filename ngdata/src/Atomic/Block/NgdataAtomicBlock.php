@@ -836,10 +836,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function getBlockHtmlBasicTableTopSpeaker($meeting_nodes = array()) {
+  public function getBlockHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL) {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
     $output['blockClass'] = "col-xs-12 col-sm-12 col-md-6 margin-top-24";
-    $output['blockHeader'] = $this->template->renderHtmlBasicTableTopSpeaker($meeting_nodes);
+    $output['blockHeader'] = $this->template->renderHtmlBasicTableTopSpeaker($meeting_nodes, $limit_row, $question_tid);
 
     return $output;
   }
