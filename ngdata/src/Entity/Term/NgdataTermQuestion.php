@@ -130,8 +130,14 @@ class NgdataTermQuestion extends NgdataTerm {
    * @return Average mean
    */
   public function getRaidoQuestionTidStatsAverage($question_tid = NULL, $meeting_nodes = array()) {
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-    $output = $this->getRaidoQuestionTermStatsAverage($question_term, $meeting_nodes);
+    $output = NULL;
+
+    if ($question_tid) {
+      $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
+      if ($question_tid) {
+        $output = $this->getRaidoQuestionTermStatsAverage($question_term, $meeting_nodes);
+      }
+    }
 
     return $output;
   }
