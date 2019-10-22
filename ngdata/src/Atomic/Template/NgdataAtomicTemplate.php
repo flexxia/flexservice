@@ -200,7 +200,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   /**
    *
    */
-  public function renderHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL) {
+  public function renderHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid);
 
     $thead_data = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
@@ -209,7 +209,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
     $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
 
-    $table = $this->organism->htmlSectionBasicTableTemplate('Top Speakers', $thead, $tbody);
+    $table = $this->organism->htmlSectionBasicTableTemplate('Top Speakers', $thead, $tbody, $color_box_palette, $bg_color_class);
 
     return $table;
   }
