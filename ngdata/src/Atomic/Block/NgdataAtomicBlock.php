@@ -825,10 +825,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function getBlockHtmlBasicTableTopProgram($meeting_nodes = array(), $block_class = "col-md-6") {
+  public function getBlockHtmlBasicTableTopProgram($meeting_nodes = array(), $block_class = "col-md-6", $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
     $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-24 " . $block_class;
-    $output['blockHeader'] = $this->template->renderHtmlBasicTableTopProgram($meeting_nodes);
+    $output['blockHeader'] = $this->template->renderHtmlBasicTableTopProgram($meeting_nodes, $color_box_palette, $bg_color_class);
 
     return $output;
   }
@@ -836,10 +836,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function getBlockHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL, $block_class = "col-md-6") {
+  public function getBlockHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL, $block_class = "col-md-6", $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
     $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-24 " . $block_class;
-    $output['blockHeader'] = $this->template->renderHtmlBasicTableTopSpeaker($meeting_nodes, $limit_row, $question_tid);
+    $output['blockHeader'] = $this->template->renderHtmlBasicTableTopSpeaker($meeting_nodes, $limit_row, $question_tid, $color_box_palette, $bg_color_class);
 
     return $output;
   }
