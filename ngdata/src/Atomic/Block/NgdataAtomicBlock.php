@@ -481,12 +481,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function blockChartjsTotalEventsByBusinessunit($meeting_nodes = array()) {
+  public function blockChartjsTotalEventsByBusinessunit($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
     $output = $this->blockChartjs("pie");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Business Unit", FALSE,'bg-149b5f');
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Business Unit", FALSE, $bg_color_class);
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-24 margin-bottom-20";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermListByVocabulary('businessunit')['label'];
@@ -508,12 +508,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * bar chart
    */
-  public function blockChartTotalEventsByEventType($meeting_nodes = array()) {
+  public function blockChartTotalEventsByEventType($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
     $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Type", FALSE, 'bg-149b5f');
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Type", FALSE, $bg_color_class);
 
     $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
       ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
