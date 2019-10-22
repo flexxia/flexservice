@@ -564,12 +564,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * @internal stackbar chart X-axis is Month,
    */
-  public function blockChartjsMeetingsByMonthByEventType($meeting_nodes = array()) {
+  public function blockChartjsMeetingsByMonthByEventType($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
     $output = $this->blockChartjs("bar");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Event Implementation", FALSE, 'bg-ffc832');
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Event Implementation", FALSE, $bg_color_class);
 
     $datasets_data = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes);
@@ -622,12 +622,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * @internal stackbar chart X-axis is Month,
    */
-  public function blockChartjsHcpReachByMonthByEventType($meeting_nodes = array()) {
+  public function blockChartjsHcpReachByMonthByEventType($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
     $output = $this->blockChartjs("bar");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Event Type", FALSE, 'bg-e61e50');
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Event Type", FALSE, $bg_color_class);
 
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE);
@@ -675,12 +675,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * @internal bar chart, bar chart is array($data) of stackbar chart
    */
-  public function blockChartjsMeetingsByProvince($meeting_nodes = array()) {
+  public function blockChartjsMeetingsByProvince($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
     $output = $this->blockChartjs("bar");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Location of Events", FALSE, 'bg-ffc832');
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Location of Events", FALSE, $bg_color_class);
 
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByProvince($meeting_nodes, TRUE);
@@ -705,12 +705,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * @internal bar chart, bar chart is array($data) of stackbar chart
    */
-  public function blockChartjsHcpReachByProvince($meeting_nodes = array()) {
+  public function blockChartjsHcpReachByProvince($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
     $output = $this->blockChartjs("bar");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Location", FALSE, 'bg-e61e50');
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Location", FALSE, $bg_color_class);
 
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByProvince($meeting_nodes, FALSE);
