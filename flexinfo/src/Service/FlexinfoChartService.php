@@ -1478,7 +1478,7 @@ class FlexinfoChartService {
         $bg_color_class = 'bg-' . $legend_color[$key];
       }
 
-      $legends .= '<div class="clear-both height-32 text-center">';
+      $legends .= '<div class="clear-both height-32 text-center fn-render-legend-square">';
         $legends .= '<span class="legend-square ' . $bg_color_class . '">';
         $legends .= '</span>';
         $legends .= '<span class="float-left legend-text">';
