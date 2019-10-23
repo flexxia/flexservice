@@ -11,7 +11,7 @@ class NgdataFormField {
   /**
    *
    */
-  public function getFieldBasicProperty($question_term, $fieldName, $fieldTitle) {
+  public function getFieldBasicProperty($question_term = NULL, $fieldName, $fieldTitle) {
     $output = array(
       // 'fieldName' => $fieldName,
       'fieldId' => $fieldName,
@@ -24,7 +24,7 @@ class NgdataFormField {
         'refer_tid' => "",
         'refer_uid' => "",
         'refer_other' => "",
-        'question_tid' => $question_term->id(),
+        'question_tid' => $question_term ? $question_term->id() : NULL,
       ],
     );
 
@@ -58,10 +58,10 @@ class NgdataFormField {
   }
 
   /**
-   *
+   * customhtml
    */
-  public function getCustomtext($question_term, $fieldName = NULL, $fieldTitle = NULL, $options = array()) {
-    $output = $this->getFieldBasicProperty($fieldName . 1, $fieldTitle);
+  public function getCustomtext($fieldName = NULL, $fieldTitle = NULL, $options = array()) {
+    $output = $this->getFieldBasicProperty(NULL, $fieldName, $fieldTitle);
 
     $output['fieldType'] = "customtext";
     $output['inputType'] = "customtext";
