@@ -308,7 +308,9 @@ class NgdataFormPage {
 
     // temporary return
     $DashpageObjectContent = new DashpageObjectContent();
-    $form_elements[] = \Drupal::service('ngdata.form.field')->getCustomhtml("meeting_tile", $DashpageObjectContent->blockTileMeetingHtml($meeting_node));
+    $meeting_tile_html = $DashpageObjectContent->blockTileMeetingHtml($meeting_node);
+    $meeting_tile_html .= "<div>.</div><hr />";
+    $form_elements[] = \Drupal::service('ngdata.form.field')->getCustomhtml("meeting_tile", $meeting_tile_html);
 
     $form_elements[] = \Drupal::service('ngdata.atomic.template')->blockHtmlClearBoth();
     return $form_elements;
