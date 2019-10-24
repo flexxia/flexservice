@@ -310,7 +310,7 @@ class NgdataFormPage {
     $DashpageObjectContent = new DashpageObjectContent();
     $form_elements[] = \Drupal::service('ngdata.form.field')->getCustomhtml("meeting_tile", $DashpageObjectContent->blockTileMeetingHtml($meeting_node));
 
-    $form_elements[] = \Drupal::service('ngdata.form.template')->blockHtmlClearBoth();
+    $form_elements[] = \Drupal::service('ngdata.atomic.template')->blockHtmlClearBoth();
     return $form_elements;
 
     // add node name for "title" field
