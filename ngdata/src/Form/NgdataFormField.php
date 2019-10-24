@@ -60,6 +60,22 @@ class NgdataFormField {
   /**
    * customhtml
    */
+  public function getCustomhtml($fieldName = NULL, $fieldTitle = NULL, $options = array()) {
+    $output = $this->getFieldBasicProperty(NULL, $fieldName, $fieldTitle);
+
+    $output['fieldType'] = "customhtml";
+    $output['inputType'] = "customhtml";
+    $output['displayType'] = "customhtml";
+    $output['fieldLabel'] = $fieldTitle;
+
+    $output = $this->setFieldProperty($output, $options);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getCustomtext($fieldName = NULL, $fieldTitle = NULL, $options = array()) {
     $output = $this->getFieldBasicProperty(NULL, $fieldName, $fieldTitle);
 
