@@ -62,7 +62,6 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function programPageContent($meeting_nodes, $entity_id, $start, $end) {
     $output = [];
     $output[] = $this->template->blockHtmlProgramNameHeader($entity_id);
-    // $output[] = $this->blockHtmlClearBoth();
     $output = array_merge($output, $this->organism->tileSectionGroup($meeting_nodes, FALSE));
     $output[] = $this->template->blockHtmlClearBoth();
     $output = array_merge($output, $this->blockgroup->blockGroupForProgramSnapshot($entity_id, $meeting_nodes));

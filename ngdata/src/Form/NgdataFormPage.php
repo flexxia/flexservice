@@ -2,6 +2,8 @@
 
 namespace Drupal\ngdata\Form;
 
+use Drupal\dashpage\Content\DashpageObjectContent;
+
 /**
  *
   \Drupal::service('ngdata.form.page')->demo();
@@ -304,9 +306,11 @@ class NgdataFormPage {
   public function formNodeEvaluationFieldsBasicElements($meeting_node = NULL) {
     $form_elements = [];
 
-
     // temporary return
-    // \Drupal::service('ngdata.form.field')->demo();
+    $DashpageObjectContent = new DashpageObjectContent();
+    $form_elements[] = \Drupal::service('ngdata.form.field')->getCustomhtml("meeting_tile", $DashpageObjectContent->blockTileMeetingHtml($meeting_node));
+
+    $form_elements[] = \Drupal::service('ngdata.form.template')->blockHtmlClearBoth();
     return $form_elements;
 
     // add node name for "title" field
