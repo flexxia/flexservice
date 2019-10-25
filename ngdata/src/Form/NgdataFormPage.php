@@ -128,17 +128,6 @@ class NgdataFormPage {
       ),
     );
 
-    $options = array(
-      array(
-        "parent" => array(
-          "parentName"=> "businessUnit",
-          "parentId"=> 1
-        ),
-        "value" => 3011,
-        "label" => "All Program"
-      ),
-    );
-
     $terms = \Drupal::getContainer()
       ->get('flexinfo.term.service')
       ->getFullTermsFromVidName('program');
