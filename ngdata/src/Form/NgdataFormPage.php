@@ -24,6 +24,7 @@ class NgdataFormPage {
       "childId" => "field_theraparea_list",
       "options" => [],
       "availableDataName" => "available" . "field_businessunit_list",
+      "functionName" => "getFieldHcpBusinessUnit",
     );
 
     $options = array(
@@ -60,11 +61,12 @@ class NgdataFormPage {
       "fieldLabel" => "Therapeutic Area",
       "inputType" => "radio",
       "displayType" => "dropdown",
-      "default" => 1,
+      "default" => NULL,
       "child" => "Program",
       "childId" => "field_program_list",
       "options" => [],
       "availableDataName" => "available" . "field_theraparea_list",
+      "functionName" => "getFieldHcpTherapArea",
     );
 
     $options = array(
@@ -115,6 +117,7 @@ class NgdataFormPage {
       "child" => "",
       "options" => [],
       "availableDataName" => "available" . "field_program_list",
+      "functionName" => "getFieldHcpProgram",
     );
 
     $options = array(
