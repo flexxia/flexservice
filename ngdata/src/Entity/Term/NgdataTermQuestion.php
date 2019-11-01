@@ -190,11 +190,23 @@ class NgdataTermQuestion extends NgdataTerm {
    *
    */
   public function getTextfieldQuestionAllData($meeting_nodes = array(), $question_tid = NULL) {
+    $output = array();
+
     $evaluation_nodes = \Drupal::getContainer()
       ->get('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
+    $output = $this->getTextfieldQuestionAllDataFromEvaluationNodes($evaluation_nodes, $question_tid);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getTextfieldQuestionAllDataFromEvaluationNodes($evaluation_nodes = array(), $question_tid = NULL) {
     $output = array();
+
     if ($evaluation_nodes && is_array($evaluation_nodes)) {
       foreach ($evaluation_nodes as $evaluation_node) {
         $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
