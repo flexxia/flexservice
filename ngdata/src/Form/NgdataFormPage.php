@@ -161,7 +161,7 @@ class NgdataFormPage {
     $output = array(
       array(
         "fieldId" => "field_hcp",
-        "fieldLabel" => "HCP Comments",
+        "fieldLabel" => "HCP Comments By Program",
         "inputType" => "text",
         "displayType" => "customtext",
         "default" => [],
@@ -234,7 +234,9 @@ class NgdataFormPage {
                     $meeting_node,
                     $question_term->getName() . ' - ' . $speaker_user->getUsername(),
                     array(
-                      'refer_uid' => $speaker_user->id(),
+                      'returnValue' => array(
+                        'refer_uid' => $speaker_user->id(),
+                      )
                     )
                   );
                 }
