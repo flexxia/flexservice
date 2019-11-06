@@ -157,6 +157,45 @@ class NgdataFormPage {
   /**
    *
    */
+  public function getFieldHcpTextQuestions() {
+    $output = array(
+      "fieldId" => "field_textquestion_list",
+      "fieldLabel" => "Question",
+      "inputType" => "radio",
+      "displayType" => "dropdown",
+      "default" => NULL,
+      "child" => "",
+      "options" => [],
+      "availableDataName" => "available" . "field_textquestion_list",
+      "functionName" => "getFieldHcpTextQuestions",
+    );
+
+    $options = array();
+
+    $textfield_tid= \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getTidByTermName($term_name = 'textfield', $vocabulary_name = 'fieldtype');
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.queryterm.service')
+      ->wrapperTermEntitysByField('questionlibrary', 'field_queslibr_fieldtype', $textfield_tid);
+
+    if ($terms & is_array($terms)) {
+      foreach ($terms as $key => $term) {
+        $options[] = array(
+          "value" => $term->id(),
+          "label"=> $term->getName()
+        );
+      }
+    }
+
+    $output["options"] = $options;
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function formHcpCommentsPage() {
     $output = array(
       array(
