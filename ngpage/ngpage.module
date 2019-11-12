@@ -22,3 +22,12 @@ function ngpage_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+/**
+ * Implements hook_form_alter(). hook_form_FORM_ID_alter()
+ * Consider using this hook: hook_entity_field_values_init()
+ * set default value for meeting title
+ */
+function ngpage_form_node_meeting_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['title']['widget'][0]['value']['#value'] = 'Meeting -';
+}
