@@ -121,4 +121,19 @@ class NgpageController extends ControllerBase {
     return new RedirectResponse($url);
   }
 
+  /**
+   *
+   */
+  public function summaryEvaluationForm($entity_id) {
+    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\NgpageSummaryEvaluationForm', $entity_id);
+
+    // or render
+    $build = array(
+      '#type' => 'markup',
+      '#markup' => render($form),
+    );
+
+    return $build;
+  }
+
 }

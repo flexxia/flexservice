@@ -17,6 +17,16 @@ ngpage.ngpage_controller_hello:
 #     _permission: 'access content'
 
 #
+ngpage.summaryevaluation.form:
+  path: '/ngpage/summaryevaluation/basicform/{entity_id}'
+  defaults:
+    _controller: '\Drupal\ngpage\Controller\NgpageController::summaryEvaluationForm'
+    _title: 'Ng Form'
+  requirements:
+    _permission: 'access content'
+    _role: 'authenticated'
+
+#
 ngpage.primeng.form:
   path: '/ngpage/{section}/form/{entity_id}/{start}/{end}'
   defaults:
@@ -43,6 +53,7 @@ ngpage.standard.menu.item:
   requirements:
     _permission: 'access content'
 
+#
 ngpage.guest.page:
   path: '/ngguest/{section}/page/{entity_id}/{start}/{end}'
   defaults:
@@ -50,3 +61,4 @@ ngpage.guest.page:
     _title: 'Guestpage Page'
   requirements:
     _access: 'TRUE'
+
