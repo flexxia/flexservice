@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Contains \Drupal\manageinfo\Form\ManageinfoSummaryEvaluationForm.php.
+ * Contains \Drupal\ngpage\Form\NgpageSummaryEvaluationForm.php.
  */
 
-namespace Drupal\manageinfo\Form;
+namespace Drupal\ngpage\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
