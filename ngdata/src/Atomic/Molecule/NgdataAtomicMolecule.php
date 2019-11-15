@@ -568,6 +568,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         // \Drupal::l('Summary', Url::fromUserInput('/manageinfo/summaryevaluation/form/' . $node->id())),
         'Edit' => \Drupal::getContainer()->get('flexinfo.node.service')->getNodeEditLink($node->id()),
         'Add' => \Drupal::l('Add', Url::fromUserInput('/ngpage/evaluation/form/' . $node->id())),
+        'Summary' => \Drupal::l('Add', Url::fromUserInput('/ngpage/summaryevaluation/basicform/' . $node->id())),
       );
     }
 
