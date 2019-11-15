@@ -97,6 +97,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
           $form['reactset']['question_answer_textfield_'. $tid . '_' . 1] = array(
             '#type' => 'textarea',
             '#title' => NULL,
+            '#description' => 'use "&&&" to break line',
           );
 
           $answer_set['textfield'][$tid][] = 1;
