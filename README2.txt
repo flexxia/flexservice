@@ -34,3 +34,14 @@ git add -f web/modules/custom/flexservice
  *
  */
 sudo cp -rp source/web/libraries/primeng7app/. new/web/libraries/primeng7app/
+
+/**
+ *
+ */
+sudo git rm --cached web/modules/custom/flexrepo
+sudo rm -rf .git/modules/web/modules/custom/flexrepo
+sudo rm -rf web/modules/custom/flexrepo
+
+sudo nano .gitmodules
+
+sudo nano .git/config
