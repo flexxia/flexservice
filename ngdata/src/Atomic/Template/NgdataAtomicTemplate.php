@@ -192,7 +192,8 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
     $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
 
-    $table = $this->organism->htmlSectionBasicTableTemplate('Top Programs', $thead, $tbody, $color_box_palette, $bg_color_class);
+    $tbody_copy = $this->molecule->tableDataByTopProgram($meeting_nodes, 10, FALSE);
+    $table .= $this->organism->htmlSectionBasicTableTemplate('Top Programs', $thead, $tbody, $color_box_palette, $bg_color_class, $enable_copy = TRUE, $tbody_copy);
 
     return $table;
   }
@@ -209,7 +210,8 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
     $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
 
-    $table = $this->organism->htmlSectionBasicTableTemplate('Top Speakers', $thead, $tbody, $color_box_palette, $bg_color_class);
+    $tbody_copy = $this->molecule->tableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid, False);
+    $table .= $this->organism->htmlSectionBasicTableTemplate('Top Speakers', $thead, $tbody, $color_box_palette, $bg_color_class, $enable_copy = TRUE, $tbody_copy);
 
     return $table;
   }

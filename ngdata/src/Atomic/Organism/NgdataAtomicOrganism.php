@@ -448,7 +448,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function htmlSectionBasicTableTemplate($header = NULL, $thead = NULL, $tbody = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+  public function htmlSectionBasicTableTemplate($header = NULL, $thead = NULL, $tbody = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $enable_copy_button = FALSE, $tbody_copy_data = NULL, $enable_export_button = TRUE) {
     $table = $this->molecule->getBlockHeader($header, $color_box_palette, $bg_color_class);
     $table .= '<div class="html-basic-table-wrapper">';
       $table .= '<table class="table">';
@@ -457,6 +457,27 @@ class NgdataAtomicOrganism extends NgdataAtomic {
             $table .= $thead;
           $table .= '</tr>';
         $table .= '</thead>';
+
+        if ($tbody_copy_data) {
+          $tbody_copy_data = str_replace('"', '#', json_encode($tbody_copy_data));
+        }
+
+        if ($enable_export_button) {
+          $table .= "<button class=\"margin-top-6 margin-bottom-6 float-right margin-right-36 bg-f7f8f9 border-1-ccc border-radius-3\" onclick=\"exportHtmlTable('";
+            $table .= $thead;
+            $table .="', '";
+            $table .= $tbody_copy_data;
+          $table .= "')\">Export</button>";
+        }
+
+        if ($enable_copy_button) {
+          $table .= "<button class=\"margin-top-6 margin-bottom-6 float-right margin-right-16 bg-f7f8f9 border-1-ccc border-radius-3\" onclick=\"copyHtmlTable('";
+            $table .= $thead;
+            $table .= "', '";
+            $table .= $tbody_copy_data ;
+          $table .= "')\">Copy</button>";
+        }
+
         $table .= '<tbody>';
           $table .= $tbody;
         $table .= '</tbody>';

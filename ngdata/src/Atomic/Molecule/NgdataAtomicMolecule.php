@@ -272,7 +272,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
-  public function tableDataByTopProgram($meeting_nodes = array(), $limit_row = NULL) {
+  public function tableDataByTopProgram($meeting_nodes = array(), $limit_row = NULL, $encapsule_with_html = TRUE) {
     $output = array();
 
     $program_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('program', 0);
@@ -328,14 +328,21 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $program_short_name = \Drupal\Component\Utility\Unicode::truncate($term->name, 36, $wordsafe = TRUE, $add_ellipsis = TRUE);
 
-          $program_html = '<div class="html-tooltip-wrapper">';
-            $program_html .= '<span class="html-tooltip-text-wrapper">';
-              $program_html .= \Drupal::l($program_short_name, $internal_url);
-            $program_html .= '</span>';
-            $program_html .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-6 padding-5 position-absolute z-index-1">';
-              $program_html .= $term->name;
-            $program_html .= '</span>';
-          $program_html .= '</div>';
+
+          if ($encapsule_with_html) {
+            $program_html = '<div class="html-tooltip-wrapper">';
+              $program_html .= '<span class="html-tooltip-text-wrapper">';
+                $program_html .= \Drupal::l($program_short_name, $internal_url);
+              $program_html .= '</span>';
+              $program_html .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-6 padding-5 position-absolute z-index-1">';
+                $program_html .= $term->name;
+              $program_html .= '</span>';
+            $program_html .= '</div>';
+          }
+          else {
+            $program_html = $term->name;
+            $program_html = str_replace(':', '^^', json_encode($program_html));
+          }
 
           $output[] = array(
             'Program' => $program_html,
@@ -353,7 +360,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
-  public function tableDataByTopSpeaker($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134) {
+  public function tableDataByTopSpeaker($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134, $encapsule_with_html = TRUE) {
     $output = array();
 
     $speaker_users = \Drupal::getContainer()
@@ -415,7 +422,13 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           //   $speaker_name_link .= '</a>';
           // $speaker_name_link .= '</span>';
 
-          $speaker_name_link = $DashTabSpeaker->getHtmlModalContent($user);
+          if ($encapsule_with_html) {
+            $speaker_name_link = $DashTabSpeaker->getHtmlModalContent($user);
+          }
+          else {
+            $speaker_name_link = $user->getDisplayName();
+            $speaker_name_link = str_replace(':', '^^', json_encode($speaker_name_link));
+          }
 
           $output[] = array(
             'Speaker' => $speaker_name_link,

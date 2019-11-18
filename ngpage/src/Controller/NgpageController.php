@@ -93,6 +93,7 @@ class NgpageController extends ControllerBase {
           'ngpage/bootstrap_slider',
           'ngpage/html2canvas_save_png',
           // 'ngpage/bootstrap_modal_template',
+          'ngpage/copy_htmltable_button_template',
         ],
       ],
     );

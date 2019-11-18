@@ -49,3 +49,8 @@ bootstrap_slider:
 html2canvas_save_png:
   js:
     js/html2canvas_save_png_controller.js: {}
+
+#copy html table.js
+copy_htmltable_button_template:
+  js:
+    js/copy_htmltable.js: {}
