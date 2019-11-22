@@ -7,6 +7,20 @@ sudo composer require flexxia/flexservice
 composer require vendor/package dev-master#0d7d6c88
 
 
+### to add on composer.json for project
+"extra": {
+    "installer-paths": {
+        "web/core": ["type:drupal-core"],
+        "web/libraries/{$name}": ["type:drupal-library"],
+        "web/modules/contrib/{$name}": ["type:drupal-module"],
+        "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+        "web/themes/contrib/{$name}": ["type:drupal-theme"],
+        "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+        "drush/contrib/{$name}": ["type:drupal-drush"]
+    }
+}
+
+
 ###
 sudo composer require --dev flexxia/flexservice:dev-master
 sudo php -d memory_limit=2048M /usr/local/bin/composer require --dev "flexxia/flexservice:dev-master"
