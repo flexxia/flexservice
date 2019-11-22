@@ -18,7 +18,7 @@ use Drupal\Core\Form\FormStateInterface;
      _form: '\Drupal\navinfo\Form\ProvinceFilterForm'
    requirements:
      _permission: 'access content'
- *
+ */
 /**
  * Implements an example form.
  */
@@ -28,7 +28,7 @@ class ProvinceFilterForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'provincefilter_form';
+    return 'province_filter_form';
   }
 
   /**
