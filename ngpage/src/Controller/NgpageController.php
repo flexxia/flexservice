@@ -136,4 +136,19 @@ class NgpageController extends ControllerBase {
     return $build;
   }
 
+  /**
+   *
+   */
+  public function ngDrupalFormSample($bundle) {
+    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\NgpageSummaryEvaluationForm');
+
+    $build = array(
+      '#type' => 'markup',
+      '#title' => $this->t('Drupal Form Sample Page'),
+      '#markup' => render($form),
+    );
+
+    return $build;
+  }
+
 }

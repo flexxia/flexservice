@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * @todo use form
- $form = \Drupal::formBuilder()->getForm('\Drupal\navinfo\Form\ProvinceFilterForm');
+ $form = \Drupal::formBuilder()->getForm('Drupal\navinfo\Form\ProvinceFilterForm');
 
  # or on routing
  navinfo.provincefilter.form:

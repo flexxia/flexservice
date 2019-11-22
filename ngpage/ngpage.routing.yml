@@ -62,3 +62,12 @@ ngpage.guest.page:
   requirements:
     _access: 'TRUE'
 
+#
+ngpage.drupalform.sample:
+  path: '/ngguest/drupalform/sample/{bundle}/'
+  defaults:
+    _controller: '\Drupal\ngpage\Controller\NgpageController::ngDrupalFormSample'
+    _title: 'Drupal Form Sample Page'
+  requirements:
+    _access: 'TRUE'
+
