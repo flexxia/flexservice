@@ -9,6 +9,15 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * @todo use form
  $form = \Drupal::formBuilder()->getForm('\Drupal\navinfo\Form\ProvinceFilterForm');
+
+ # or on routing
+ navinfo.provincefilter.form:
+   path: '/navinfo/provincefilter/form'
+   defaults:
+     _title: 'Province Filter Form'
+     _form: '\Drupal\navinfo\Form\ProvinceFilterForm'
+   requirements:
+     _permission: 'access content'
  *
 /**
  * Implements an example form.
