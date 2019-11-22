@@ -1,14 +1,13 @@
-
 <?php
 
-namespace Drupal\navinfo\Form;
+namespace Drupal\ngpage\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
  * @todo use form
- $form = \Drupal::formBuilder()->getForm('Drupal\navinfo\Form\EventtypeFilterForm');
+ $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
  */
 
 /**
@@ -31,33 +30,17 @@ class EventtypeFilterForm extends FormBase {
       ->get('flexinfo.term.service')
       ->getFullTermsFromVidName('eventtype');
     foreach ($terms as $term) {
-      $image_file = strip_tags(strtolower($term->getDescription())) . '.png';
-      $image_file = str_replace("\r\n", "", $image_file);
-
-      $image_render_array = [
-        '#theme' => 'image_style',
-        '#style_name' => 'thumbnail',
-        '#uri' => 'public://images/' . $image_file,
-        '#width' => 30,
-        '#height' => 26,
-        '#attributes' => array(
-          'class' => array('float-left', 'margin-top-2', 'height-16'),
-        ),
-        // optional parameters
-      ];
-
       $row = '';
       $row .= '<li class="province-filter-option-wrapper display-inline-block">';
         $row .= '<span class="display-inline-block float-left margin-right-6">';
-          $row .= $term->getDescription();
+          $row .= $term->getName();
         $row .= '</span>';
-        $row .= render($image_render_array);
       $row .= '</li>';
       $options[$term->id()] = $row;
     }
 
     $user_default_provinces = \Drupal::service('user.data')
-      ->get('navinfo', \Drupal::currentUser()->id(), 'default_term_eventtype');
+      ->get('ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype');
     if (!$user_default_provinces) {
       $user_default_provinces = [];
     }
@@ -96,7 +79,7 @@ class EventtypeFilterForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $filter_result = $this->filterEventtypeResult($form_state->getValue('eventtype_selection'));
 
-    \Drupal::service('user.data')->set('navinfo', \Drupal::currentUser()->id(), 'default_term_eventtype', $filter_result);
+    \Drupal::service('user.data')->set('ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype', $filter_result);
 
     if (\Drupal::currentUser()->id() == 1) {
       drupal_set_message($this->t('Your eventtype is @number', ['@number' => implode(", ", $filter_result)]));

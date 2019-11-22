@@ -47,7 +47,10 @@ sudo git add -f web/modules/custom/flexservice
 /**
  *
  */
-sudo cp -rp source/web/libraries/primeng7app/. new/web/libraries/primeng7app/
+# Do not Ignore flexservice folder
+!web/modules/custom/flexservice/
+!web/modules/custom/flexservice**/*
+!web/modules/custom/flexservice/*
 
 /**
  *
