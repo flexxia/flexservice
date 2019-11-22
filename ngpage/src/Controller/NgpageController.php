@@ -140,7 +140,7 @@ class NgpageController extends ControllerBase {
    *
    */
   public function ngDrupalFormSample($bundle) {
-    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\NgpageSummaryEvaluationForm');
+    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
 
     $build = array(
       '#type' => 'markup',

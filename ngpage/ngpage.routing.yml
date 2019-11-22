@@ -64,7 +64,7 @@ ngpage.guest.page:
 
 #
 ngpage.drupalform.sample:
-  path: '/ngguest/drupalform/sample/{bundle}/'
+  path: '/ngform/drupalform/sample/{bundle}'
   defaults:
     _controller: '\Drupal\ngpage\Controller\NgpageController::ngDrupalFormSample'
     _title: 'Drupal Form Sample Page'

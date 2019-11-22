@@ -39,9 +39,9 @@ composer show flexxia/flexservice
  */
 sudo git update-index --assume-unchanged web/modules/custom/flexservice/
 
-git rm -r --cached web/modules/custom/flexservice/*
+sudo git rm -r --cached web/modules/custom/flexservice/*
 
-git add -f web/modules/custom/flexservice
+sudo git add -f web/modules/custom/flexservice
 
 
 /**
