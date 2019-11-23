@@ -46,8 +46,6 @@ class EventtypeFilterForm extends FormBase {
     return $form;
   }
 
-
-
   /**
    * {@inheritdoc}
    */
@@ -63,10 +61,14 @@ class EventtypeFilterForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $filter_result = $this->_filterEventtypeResult($form_state->getValue('eventtype_selection'));
 
-    \Drupal::service('user.data')->set('ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype', $filter_result);
+    \Drupal::service('user.data')->set(
+      'ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype', $filter_result
+    );
 
     if (\Drupal::currentUser()->id() == 1) {
-      drupal_set_message($this->t('Your eventtype is @number', ['@number' => implode(", ", $filter_result)]));
+      drupal_set_message(
+        $this->t('Your eventtype is @number', ['@number' => implode(", ", $filter_result)])
+      );
     }
   }
 
@@ -79,6 +81,8 @@ class EventtypeFilterForm extends FormBase {
     $output = array_filter($raw_array);
     return $output;
   }
+
+
 
   /**
    * @return
