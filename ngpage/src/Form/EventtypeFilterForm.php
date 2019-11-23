@@ -26,28 +26,10 @@ class EventtypeFilterForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
-      ->getFullTermsFromVidName('eventtype');
-    foreach ($terms as $term) {
-      $row = '';
-      $row .= '<li class="province-filter-option-wrapper display-inline-block">';
-        $row .= '<span class="display-inline-block float-left margin-right-6">';
-          $row .= $term->getName();
-        $row .= '</span>';
-      $row .= '</li>';
-      $options[$term->id()] = $row;
-    }
-
-    $user_default_provinces = \Drupal::service('user.data')
-      ->get('ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype');
-    if (!$user_default_provinces) {
-      $user_default_provinces = [];
-    }
     $form['eventtype_selection'] = array(
       '#type' => 'checkboxes',
-      '#options' => $options,
-      '#default_value' => $user_default_provinces,
+      '#options' => $this->_getTermOptions(),
+      '#default_value' => $this->_getUserDefaultValue(),
       '#title' => '',
       '#attributes' => array('class' => array('display-inline-block', 'float-left', 'margin-left-24')),
     );
@@ -64,6 +46,8 @@ class EventtypeFilterForm extends FormBase {
     return $form;
   }
 
+
+
   /**
    * {@inheritdoc}
    */
@@ -77,7 +61,7 @@ class EventtypeFilterForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $filter_result = $this->filterEventtypeResult($form_state->getValue('eventtype_selection'));
+    $filter_result = $this->_filterEventtypeResult($form_state->getValue('eventtype_selection'));
 
     \Drupal::service('user.data')->set('ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype', $filter_result);
 
@@ -91,8 +75,41 @@ class EventtypeFilterForm extends FormBase {
    * remove all empty array elements
    * @return is $raw_array like array(58)
    */
-  public function filterEventtypeResult($raw_array = array()) {
+  public function _filterEventtypeResult($raw_array = array()) {
     $output = array_filter($raw_array);
+    return $output;
+  }
+
+  /**
+   * @return
+   */
+  public function _getTermOptions() {
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('eventtype');
+    foreach ($terms as $term) {
+      $row = '';
+      $row .= '<li class="province-filter-option-wrapper display-inline-block">';
+        $row .= '<span class="display-inline-block float-left margin-right-6">';
+          $row .= $term->getName();
+        $row .= '</span>';
+      $row .= '</li>';
+      $options[$term->id()] = $row;
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return
+   */
+  public function _getUserDefaultValue() {
+    $output = \Drupal::service('user.data')
+      ->get('ngpage', \Drupal::currentUser()->id(), 'default_term_eventtype');
+    if (!$output) {
+      $output = [];
+    }
+
     return $output;
   }
 
