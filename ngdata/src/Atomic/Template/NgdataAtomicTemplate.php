@@ -38,13 +38,13 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   /**
    *
    */
-  public function blockTableTemplate($tableHeader, $tableContent) {
+  public function blockTableTemplate($tableHeader, $tableContent, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $tableId = uniqid(NULL, TRUE);
     $output = $this->organism->basicSection("table");
 
     $output['blockClass'] = "col-md-12 margin-top-24";
     $output['blockClassSub'] = $this->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader($tableHeader);
+    $output['blockHeader'] = $this->molecule->getBlockHeader($tableHeader, $color_box_palette, $bg_color_class);
 
     $output['blockContent'][0]['tabData']['tableId'] = 'tableId-' . $tableId;
     $output['blockContent'][0]['tabData']['middle'] = $tableContent;
