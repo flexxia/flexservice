@@ -242,7 +242,24 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
+  public function getBlockChartByRadioQuestionForPieFromQuestionTid($question_tid = NULL, $meeting_nodes = array(), $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+    $output = [];
+
+    $question_term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($question_tid);
+
+    $output = $this->getBlockChartByRadioQuestion($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getBlockChartByRadioQuestionForPie($question_term = NULL, $meeting_nodes = array(), $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+    $output = [];
+
     if (\Drupal::service('ngdata.term.question')
       ->getChartLegendSortOrderValueByQuestionTerm($question_term) == 'Ascend') {
       $output = $this->getBlockChartByRadioQuestionForPieAscendOrder($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
