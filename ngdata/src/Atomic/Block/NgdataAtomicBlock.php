@@ -245,10 +245,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
   public function getBlockChartByRadioQuestionForPie($question_term = NULL, $meeting_nodes = array(), $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
     if (\Drupal::service('ngdata.term.question')
       ->getChartLegendSortOrderValueByQuestionTerm($question_term) == 'Ascend') {
-      $output = $this->getBlockChartByRadioQuestionForPieAscendOrder($question_term, $meeting_nodes);
+      $output = $this->getBlockChartByRadioQuestionForPieAscendOrder($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
     }
     else {
-      $output = $this->getBlockChartByRadioQuestionForPieDescendOrder($question_term, $meeting_nodes);
+      $output = $this->getBlockChartByRadioQuestionForPieDescendOrder($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
     }
 
     return $output;
