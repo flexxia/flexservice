@@ -72,9 +72,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end) {
+  public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = $this->organism->tileSectionGroup($meeting_nodes);
-    $output[] = $this->template->blockTableTemplate("View Events", $this->organism->tableContentEventList($meeting_nodes));
+    $output[] = $this->template->blockTableTemplate("View Events", $this->organism->tableContentEventList($meeting_nodes), $color_box_palette, $bg_color_class);
 
     return $output;
   }
@@ -82,9 +82,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function programlistPageContent($meeting_nodes, $entity_id, $start, $end) {
+  public function programlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = $this->organism->tileSectionGroup($meeting_nodes);
-    $output[] = $this->template->blockTableTemplate("View Programs", $this->organism->tableContentProgramList($meeting_nodes));
+    $output[] = $this->template->blockTableTemplate("View Programs", $this->organism->tableContentProgramList($meeting_nodes), $color_box_palette, $bg_color_class);
 
     return $output;
   }
@@ -92,9 +92,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end) {
+  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = [];
-    $output[] = $this->template->blockTableTemplate("Speaker List", $this->organism->tableContentSpeakerList($meeting_nodes));
+    $output[] = $this->template->blockTableTemplate("Speaker List", $this->organism->tableContentSpeakerList($meeting_nodes), $color_box_palette, $bg_color_class);
 
     return $output;
   }
