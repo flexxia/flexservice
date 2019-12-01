@@ -249,7 +249,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       ->getStorage('taxonomy_term')
       ->load($question_tid);
 
-    $output = $this->getBlockChartByRadioQuestion($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
+    $output = $this->getBlockChartByRadioQuestionForPie($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
 
     return $output;
   }
