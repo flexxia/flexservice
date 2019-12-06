@@ -92,9 +92,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $limit_row = NULL, $question_tid = NULL) {
     $output = [];
-    $output[] = $this->template->blockTableTemplate("Speaker List", $this->organism->tableContentSpeakerList($meeting_nodes), $color_box_palette, $bg_color_class);
+    $output[] = $this->template->blockTableTemplate("Speaker List", $this->organism->tableContentSpeakerList($meeting_nodes, $limit_row, $question_tid), $color_box_palette, $bg_color_class);
 
     return $output;
   }
