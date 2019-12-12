@@ -550,6 +550,66 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function tableContentCustomTermProgram() {
+    $tableData = $this->molecule->tableDataByCustomTermByProgram();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableContentCustomTermQuestion() {
+    $tableData = $this->molecule->tableDataByCustomTermByQestion();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableContentCustomTermEvaluationForm() {
+    $tableData = $this->molecule->tableDataByCustomTermEvaluationForm();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableContentCustomTermBusinessunit() {
+    $tableData = $this->molecule->tableDataByCustomTermBusinessunit();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+   /**
+   *
+   */
+  public function tableContentCustomTermTherapeuticarea() {
+    $tableData = $this->molecule->tableDataByCustomTermTherapeuticarea();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function tableContentStandardterm($entity_id, $start, $end) {
     $tableData = $this->molecule->tableDataByStandardterm($entity_id, $start, $end);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);

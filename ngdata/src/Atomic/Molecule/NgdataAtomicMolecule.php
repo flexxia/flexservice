@@ -491,6 +491,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       foreach ($program_terms as $key => $term) {
         $output[] = array(
           'Name' => $term->getName(),
+          'DESCRIPTION' => $term->getDescription(),
           'Edit' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
         );
       }
@@ -603,5 +604,129 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
     return $output;
   }
+
+  /**
+   * @return array
+   */
+  public function tableDataByCustomTermByProgram() {
+    $output = array();
+
+    $program_terms = \Drupal::service('flexinfo.term.service')->getFullTermsFromVidName('program');
+    if (is_array($program_terms)) {
+      foreach ($program_terms as $key => $term) {
+        $theraparea_term = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($term, 'field_program_theraparea');
+
+        $output[] = array(
+          'Name' => $term->getName(),
+          'BU' => \Drupal::getContainer()->get('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermName($theraparea_term, 'field_theraparea_businessunit'),
+          'TA' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($theraparea_term, 'name'),
+          'Edit' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+        );
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
+   */
+  public function tableDataByCustomTermByQestion() {
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('questionlibrary');
+
+    $evaluation_terms = \Drupal::getContainer()->get('flexinfo.term.service')->getFullTermsFromVidName($vid = 'evaluationform');
+
+    if (is_array($terms)) {
+
+      foreach ($terms as $term) {
+
+        $output[] = array(
+          'NAME' => $term->getName(),
+          'FieldType' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($term, 'field_queslibr_fieldtype'),
+          'QuestionType' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($term, 'field_queslibr_questiontype'),
+          'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+        );
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableDataByCustomTermEvaluationForm() {
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('evaluationform');
+
+    $program_terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('program');
+
+    foreach ($terms as $term) {
+
+      $program_num = 0;
+      foreach ($program_terms as $program_term) {
+        $evaluation_tids = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIds($program_term, 'field_program_evaluationform');
+        if (in_array($term->id(), $evaluation_tids)) {
+          $program_num ++;
+        }
+
+      }
+
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'DESCRIPTION' => $term->getDescription(),
+        'PROGRAM NUM' => $program_num,
+        'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableDataByCustomTermBusinessunit() {
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('businessunit');
+
+    foreach ($terms as $term) {
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'DESCRIPTION' => $term->getDescription(),
+        'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableDataByCustomTermTherapeuticarea() {
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('therapeuticarea');
+
+    foreach ($terms as $term) {
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'DESCRIPTION' => $term->getDescription(),
+        'BU' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($term, 'field_theraparea_businessunit'),
+        'EDIT' => \Drupal::getContainer()->get('flexinfo.term.service')->getTermEditLink($term->id()),
+      );
+    }
+
+    return $output;
+  }
+
 
 }

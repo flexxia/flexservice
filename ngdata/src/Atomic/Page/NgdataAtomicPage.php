@@ -130,6 +130,91 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
+  public function customTermProgramPageContent($entity_id, $start, $end) {
+    $output = [];
+
+    $create_new_meeting_link = \Drupal::l(
+      'Add New Program',
+      Url::fromUserInput('/admin/structure/taxonomy/manage/program/add')
+    );
+
+    $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
+    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermProgram());
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function customTermQuestionPageContent($entity_id, $start, $end) {
+    $output = [];
+
+    $create_new_meeting_link = \Drupal::l(
+      'Add New Question',
+      Url::fromUserInput('/admin/structure/taxonomy/manage/questionlibrary/add')
+    );
+
+    $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
+    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermQuestion());
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function customTermEvaluationFormPageContent($entity_id, $start, $end) {
+    $output = [];
+
+    $create_new_meeting_link = \Drupal::l(
+      'Add New Evaluation Form',
+      Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
+    );
+
+    $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
+    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermEvaluationForm());
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function customTermBusinessunitPageContent($entity_id, $start, $end) {
+    $output = [];
+
+    $create_new_meeting_link = \Drupal::l(
+      'Add New Evaluation Form',
+      Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
+    );
+
+    $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
+    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermBusinessunit());
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function customTermTherapeuticareaPageContent($entity_id, $start, $end) {
+    $output = [];
+
+    $create_new_meeting_link = \Drupal::l(
+      'Add New Evaluation Form',
+      Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
+    );
+
+    $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
+    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermTherapeuticarea());
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function standardtermPageContent($entity_id, $start, $end) {
     $output = [];
 
