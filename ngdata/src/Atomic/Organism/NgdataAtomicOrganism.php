@@ -595,7 +595,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     return $output;
   }
 
- /**
+  /**
    *
    */
   public function tableContentCustomTermTherapeuticarea() {
