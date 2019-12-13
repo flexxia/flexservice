@@ -1,34 +1,17 @@
 #
-primeng_app:
-  css:
-    theme:
-      /libraries/primengapp/node_modules/primeicons/primeicons.css: {}
-      /libraries/primengapp/node_modules/primeng/resources/themes/omega/theme.css: {}
-      css/primeng_page_override_style.css: {}
-  js:
-    /libraries/primengapp/node_modules/chart.js/dist/Chart.js: {}
-    /libraries/primengapp/node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js: {}
-    /libraries/primengapp/dist/my-angular6/runtime.js: {}
-    /libraries/primengapp/dist/my-angular6/polyfills.js: {}
-    /libraries/primengapp/dist/my-angular6/styles.js: {}
-    /libraries/primengapp/dist/my-angular6/vendor.js: {}
-    /libraries/primengapp/dist/my-angular6/main.js: {}
-
-#
 primeng7_app:
   css:
     theme:
-      /libraries/primeng7app/node_modules/primeicons/primeicons.css: {}
-      # /libraries/primeng7app/node_modules/primeng/resources/themes/omega/theme.css: {}
+      /libraries/flexprimeng/primeng7app/node_modules/primeicons/primeicons.css: {}
       css/primeng_page_override_style.css: {}
   js:
-    /libraries/primeng7app/node_modules/chart.js/dist/Chart.js: {}
-    /libraries/primeng7app/node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js: {}
-    /libraries/primeng7app/dist/angular7-primeng7-template/runtime.js: {}
-    /libraries/primeng7app/dist/angular7-primeng7-template/polyfills.js: {}
-    /libraries/primeng7app/dist/angular7-primeng7-template/styles.js: {}
-    /libraries/primeng7app/dist/angular7-primeng7-template/vendor.js: {}
-    /libraries/primeng7app/dist/angular7-primeng7-template/main.js: {}
+    /libraries/flexprimeng/primeng7app/node_modules/chart.js/dist/Chart.js: {}
+    /libraries/flexprimeng/primeng7app/node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js: {}
+    /libraries/flexprimeng/primeng7app/dist/angular7-primeng7-template/runtime.js: {}
+    /libraries/flexprimeng/primeng7app/dist/angular7-primeng7-template/polyfills.js: {}
+    /libraries/flexprimeng/primeng7app/dist/angular7-primeng7-template/styles.js: {}
+    /libraries/flexprimeng/primeng7app/dist/angular7-primeng7-template/vendor.js: {}
+    /libraries/flexprimeng/primeng7app/dist/angular7-primeng7-template/main.js: {}
 
 #
 bootstrap_modal_template:
