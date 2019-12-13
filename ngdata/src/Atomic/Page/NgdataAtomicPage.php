@@ -122,7 +122,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     );
 
     $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomNodeMeeting($entity_id, $start, $end));
+    $output[] = $this->template->blockTableTemplate(ucfirst($entity_id), $this->organism->tableContentCustomNodeMeeting($entity_id, $start, $end));
 
     return $output;
   }
@@ -240,7 +240,7 @@ class NgdataAtomicPage extends NgdataAtomic {
 
     $vocabulary_entity = taxonomy_vocabulary_load($entity_id);
 
-    if ($vocabulary_entity->getDescription()) {
+    if ($vocabulary_entity && $vocabulary_entity->getDescription()) {
       $headerText = $vocabulary_entity->getDescription();
     }
     else {
@@ -274,7 +274,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     );
 
     $output[] = $this->block->getBlockHtmlSnippet($create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomUserForAdminSection());
+    $output[] = $this->template->blockTableTemplate(ucfirst($entity_id), $this->organism->tableContentCustomUserForAdminSection());
 
     return $output;
   }
