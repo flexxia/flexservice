@@ -728,5 +728,74 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     return $output;
   }
 
+  /**
+   *
+   */
+  public function tableDataByCustomTermQuestionEvaluationForm() {
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('questionlibrary');
+
+    $evaluation_terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName($vid = 'evaluationform');
+
+    foreach ($terms as $term) {
+      $evaluationform_num = 0;
+      $evaluationform_terms = array();
+      foreach ($evaluation_terms as $key => $evaluation_term) {
+        $question_tids = \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldAllTargetIds($evaluation_term, 'field_evaluationform_questionset');
+
+        if (in_array($term->id(), $question_tids)) {
+          $evaluationform_num++;
+          $evaluationform_terms[] = $evaluation_term;
+
+        }
+      }
+
+      $evaluationform_counter = 0;
+      $evaluationform_data = '';
+      foreach ($evaluationform_terms as $question_evaluationform_term) {
+        $evaluationform_counter ++;
+        $question_evaluationform_term_name = str_replace("'", '`', $question_evaluationform_term->getName());
+        $question_evaluationform_term_name = str_replace('"', '`', $question_evaluationform_term_name);
+        $evaluationform_data .= ' <ol> ' . ' ( ' . $evaluationform_counter . ' ) ' . '<a href= ' . base_path() . 'taxonomy/term/' . $question_evaluationform_term->id() . '/edit' . '>' . $question_evaluationform_term->getName() . ' </a></ol>';
+      }
+
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'EvalNum' => $this->tablePopUpTemplate($evaluationform_num, $evaluationform_data, $term->id()),
+        'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tablePopUpTemplate($evaluation_num, $popup_body, $popup_id) {
+    $output = '<div data-toggle="modal" data-target="#modalContent' . $popup_id . '">';
+      $output .= $evaluation_num;
+    $output .= '</div>';
+
+    $output .= '<div class="modal fade" id="modalContent' . $popup_id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+      $output .= '<div class="modal-dialog" role="document">';
+        $output .= '<div class="modal-content">';
+          $output .= '<div class="modal-body margin-50">';
+            $output .= $popup_body;
+          $output .= '</div>';
+          $output .= '<div class="modal-footer margin-auto">';
+            $output .= '<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>';
+          $output .= '</div>';
+        $output .= '</div>';
+      $output .= '</div>';
+    $output .= '</div>';
+
+    return $output;
+  }
 
 }

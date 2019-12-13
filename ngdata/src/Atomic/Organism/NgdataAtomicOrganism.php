@@ -595,11 +595,23 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     return $output;
   }
 
-   /**
+ /**
    *
    */
   public function tableContentCustomTermTherapeuticarea() {
     $tableData = $this->molecule->tableDataByCustomTermTherapeuticarea();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableContentCustomTermQuestionEvaluationForm() {
+    $tableData = $this->molecule->tableDataByCustomTermQuestionEvaluationForm();
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
