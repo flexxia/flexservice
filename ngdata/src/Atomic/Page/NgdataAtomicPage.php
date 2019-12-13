@@ -121,7 +121,11 @@ class NgdataAtomicPage extends NgdataAtomic {
       Url::fromUserInput('/node/add/meeting')
     );
 
-    $output[] = $this->block->getBlockHtmlSnippet($create_new_meeting_link);
+    $svg = '<span style="width:28px; float:left; margin-right:4px;">
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-plus-circle fa-w-16 fa-lg"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" class=""></path></svg>
+    </span>';
+
+    $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_meeting_link);
     $output[] = $this->template->blockTableTemplate(ucfirst($entity_id), $this->organism->tableContentCustomNodeMeeting($entity_id, $start, $end));
 
     return $output;
@@ -294,7 +298,11 @@ class NgdataAtomicPage extends NgdataAtomic {
       Url::fromUserInput('/admin/people/create')
     );
 
-    $output[] = $this->block->getBlockHtmlSnippet($create_new_term_link);
+    $svg = '<span style="width:28px; float:left; margin-right:4px;">
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-plus-circle fa-w-16 fa-lg"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" class=""></path></svg>
+    </span>';
+
+    $output[] = $this->block->getBlockHtmlSnippet($svg .$create_new_term_link);
     $output[] = $this->template->blockTableTemplate(ucfirst($entity_id), $this->organism->tableContentCustomUserForAdminSection());
 
     return $output;
