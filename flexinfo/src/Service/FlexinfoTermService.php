@@ -454,4 +454,44 @@ class FlexinfoTermService {
 
   /** - - - - - - By - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+  /**
+   * @param
+   * @return businessunit term
+   */
+  public function getBuTermFromProgramTid($program_tid) {
+    $output = NULL;
+
+    $program_entity = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($program_tid);
+
+    if ($program_entity) {
+      $output = $this->getBuTermFromProgramTerm($program_entity);
+    }
+
+    return $output;
+  }
+
+  /**
+   * @param
+   * @return businessunit term
+   */
+  public function getBuTermFromProgramTerm($program_entity) {
+    $output = NULL;
+
+    if ($program_entity) {
+      $theraparea_entity = \Drupal::getContainer()
+        ->get('flexinfo.field.service')
+        ->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_theraparea');
+
+      if ($theraparea_entity) {
+        $output = \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermEntity($theraparea_entity, 'field_theraparea_businessunit');
+      }
+    }
+
+    return $output;
+  }
+
 }
