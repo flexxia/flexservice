@@ -8,7 +8,7 @@ use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-use Drupal\ngjson\Content\ExportDataContent;
+use Drupal\ngjson\Content\NgjsonExportDataContent;
 
 /**
  * Class NgpageController.
@@ -34,6 +34,7 @@ class NgpageController extends ControllerBase {
 
     return $build;
   }
+
   /**
    * @return string
    */
@@ -49,8 +50,8 @@ class NgpageController extends ControllerBase {
       '#markup' => $markup,
     );
 
-    $ExportDataContent = new ExportDataContent();
-    $tbody_data = $ExportDataContent->standardDataTemplate();
+    $NgjsonExportDataContent = new NgjsonExportDataContent();
+    $tbody_data = $NgjsonExportDataContent->standardDataTemplate();
 
     $header = array_keys(current($tbody_data));
 

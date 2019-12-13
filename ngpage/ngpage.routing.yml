@@ -8,15 +8,6 @@ ngpage.ngpage_controller_hello:
     _permission: 'access content'
 
 #
-# ngpage.export_table_data.excel:
-#   path: '/ngpage/export_table_data/excel'
-#   defaults:
-#     _controller: '\Drupal\ngpage\Controller\NgpageController::exportTableDataToExcel'
-#     _title: 'NgpageController'
-#   requirements:
-#     _permission: 'access content'
-
-#
 ngpage.summaryevaluation.form:
   path: '/ngpage/summaryevaluation/basicform/{entity_id}'
   defaults:
@@ -62,6 +53,15 @@ ngpage.guest.page:
   requirements:
     _access: 'TRUE'
 
+
+ngpage.export_table_data.excel:
+  path: '/ngpage/export_table_data/excel'
+  defaults:
+    _controller: '\Drupal\ngpage\Controller\NgpageController::exportTableDataToExcel'
+    _title: 'NgpageController'
+  requirements:
+    _permission: 'access content'
+
 #
 ngpage.drupalform.sample:
   path: '/ngform/drupalform/sample/{bundle}'
@@ -70,4 +70,3 @@ ngpage.drupalform.sample:
     _title: 'Drupal Form Sample Page'
   requirements:
     _access: 'TRUE'
-
