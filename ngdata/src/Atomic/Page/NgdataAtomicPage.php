@@ -202,7 +202,7 @@ class NgdataAtomicPage extends NgdataAtomic {
 
     $create_new_term_link = \Drupal::l(
       'Add New Business Unit',
-      Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
+      Url::fromUserInput('/admin/structure/taxonomy/manage/businessunit/add')
     );
 
     $svg = '<span style="width:28px; float:left; margin-right:4px;">
@@ -223,7 +223,7 @@ class NgdataAtomicPage extends NgdataAtomic {
 
     $create_new_term_link = \Drupal::l(
       'Add New Therapeutic Area',
-      Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
+      Url::fromUserInput('/admin/structure/taxonomy/manage/therapeuticarea/add')
     );
 
     $svg = '<span style="width:28px; float:left; margin-right:4px;">
