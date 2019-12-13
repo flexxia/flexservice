@@ -143,7 +143,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermProgram());
+    $output[] = $this->template->blockTableTemplate('Program', $this->organism->tableContentCustomTermProgram());
 
     return $output;
   }
@@ -164,7 +164,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermQuestion());
+    $output[] = $this->template->blockTableTemplate('Question', $this->organism->tableContentCustomTermQuestion());
 
     return $output;
   }
@@ -185,7 +185,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermEvaluationForm());
+    $output[] = $this->template->blockTableTemplate('Evaluation Form', $this->organism->tableContentCustomTermEvaluationForm());
 
     return $output;
   }
@@ -206,7 +206,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermBusinessunit());
+    $output[] = $this->template->blockTableTemplate('Business Unit', $this->organism->tableContentCustomTermBusinessunit());
 
     return $output;
   }
@@ -227,7 +227,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentCustomTermTherapeuticarea());
+    $output[] = $this->template->blockTableTemplate('Therapeutic Area', $this->organism->tableContentCustomTermTherapeuticarea());
 
     return $output;
   }
@@ -238,8 +238,17 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function standardtermPageContent($entity_id, $start, $end) {
     $output = [];
 
+    $vocabulary_entity = taxonomy_vocabulary_load($entity_id);
+
+    if ($vocabulary_entity->getDescription()) {
+      $headerText = $vocabulary_entity->getDescription();
+    }
+    else {
+      $headerText = $entity_id;
+    }
+
     $create_new_term_link = \Drupal::l(
-      'Add New ' . ucfirst($entity_id),
+      'Add New ' . ucfirst($headerText),
       Url::fromUserInput('/admin/structure/taxonomy/manage/' . $entity_id . '/add')
     );
 
@@ -248,7 +257,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_term_link);
-    $output[] = $this->template->blockTableTemplate($entity_id, $this->organism->tableContentStandardterm($entity_id, $start, $end));
+    $output[] = $this->template->blockTableTemplate(ucfirst($headerText), $this->organism->tableContentStandardterm($entity_id, $start, $end));
 
     return $output;
   }
