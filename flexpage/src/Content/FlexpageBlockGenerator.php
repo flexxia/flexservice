@@ -223,7 +223,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*
+  /**
    * Content Render Table
    */
   public function contentRenderMildderTable() {
@@ -280,7 +280,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*
+  /**
    * Content Render Table
    */
   public function phpTableSortSettings() {
@@ -304,7 +304,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $sort_settings;
   }
 
-  /*
+  /**
    * Content Render Table
    */
   public function contentRenderPhpTable() {
@@ -327,7 +327,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     $output = '';
     return $output;
   }
-  /*
+  /**
    * Content Render Table
    */
   public function contentRenderPhpTableTemplate($table_content) {
@@ -391,7 +391,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*
+  /**
    * Content Render MultiContainer
    */
   public function contentRenderMultiContainer() {
@@ -420,7 +420,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*
+  /**
    * Content Elements contains multiple tabs
    */
   public function contentRenderMultiTabs() {
@@ -449,7 +449,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*
+  /**
    * Content Render Bottom
    */
   public function contentRenderBottom() {
@@ -461,7 +461,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*
+  /**
    * Content Render Top
    */
   public function contentRenderTop() {
@@ -473,16 +473,16 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /*----------------------------------------------------------------------------*/
+  /**----------------------------------------------------------------------------*/
 
-  /*
+  /**
    * Top fixed widgets
    */
   public function topWidgetsFixed($nid = NULL) {
     $output = '';
     $output .= '<div data-ng-repeat="widget in pageData.fixedSection">';
       $output .= '<div ng-switch="widget.type">';
-        /*
+        /**
          * Widget type "widgetOne"
          */
         $output .= '<div ng-switch-when="widgetOne">';
@@ -518,7 +518,7 @@ class FlexpageBlockGenerator extends ControllerBase {
           $output .= '</div>';
         $output .= '</div>';
 
-        /*
+        /**
          * Widget type "htmlSnippet"
          */
         $output .= '<div ng-switch-when="htmlSnippet">';
