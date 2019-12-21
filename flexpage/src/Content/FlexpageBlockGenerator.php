@@ -327,6 +327,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     $output = '';
     return $output;
   }
+
   /**
    * Content Render Table
    */
@@ -473,7 +474,7 @@ class FlexpageBlockGenerator extends ControllerBase {
     return $output;
   }
 
-  /**----------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------------*/
 
   /**
    * Top fixed widgets
