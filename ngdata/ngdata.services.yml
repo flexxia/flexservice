@@ -16,6 +16,9 @@ services:
   ngdata.atomic.template:
     class: Drupal\ngdata\Atomic\Template\NgdataAtomicTemplate
     arguments: []
+  ngdata.atomic.template.component:
+    class: Drupal\ngdata\Atomic\Template\NgdataAtomicTemplateComponent
+    arguments: []
   ngdata.atomic.block:
     class: Drupal\ngdata\Atomic\Block\NgdataAtomicBlock
     arguments: []
