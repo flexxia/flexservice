@@ -559,6 +559,37 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     return $output;
   }
 
+
+  /**
+   * @return array
+   */
+  public function tableDataByEventListTemplate2($meeting_nodes = array(), $limit_row = NULL) {
+    $output = array();
+
+    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
+
+    foreach ($nodes as $node) {
+      $program_entity = \Drupal::getContainer()
+        ->get('flexinfo.field.service')
+        ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
+
+      $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
+
+      $output[] = array(
+        'Date' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+        'Program Name' => $program_entity ? $program_entity->getName() : '',
+        'City' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_city'),
+        'Speaker' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
+        'HCP Reach' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_signature'),
+        'Responses' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
+        'Status' => $this->atomic->getAtom->getMeetingStatusIconHtml($node),
+        'View' => \Drupal::l('View', $internal_url),
+      );
+    }
+
+    return $output;
+  }
+
   /**
    * @return array
    */
