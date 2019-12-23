@@ -641,7 +641,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     return $output;
   }
 
-
   /**
    * @return array
    */
