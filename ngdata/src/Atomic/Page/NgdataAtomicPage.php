@@ -72,7 +72,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = NULL) {
+  public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = 'tableDataByEventList') {
     $output = $this->organism->tileSectionGroup($meeting_nodes);
     $output[] = $this->template->blockTableTemplate("View Events", $this->organism->tableContentEventList($meeting_nodes, $table_data_template_name), $color_box_palette, $bg_color_class);
 
@@ -82,7 +82,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function programlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = NULL) {
+  public function programlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = 'tableDataByTopProgram') {
     $output = $this->organism->tileSectionGroup($meeting_nodes);
     $output[] = $this->template->blockTableTemplate("View Programs", $this->organism->tableContentProgramList($meeting_nodes, $table_data_template_name), $color_box_palette, $bg_color_class);
 
@@ -92,7 +92,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $limit_row = NULL, $question_tid = NULL, $table_data_template_name = NULL) {
+  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $limit_row = NULL, $question_tid = NULL, $table_data_template_name = 'tableDataByTopSpeaker') {
     $output = [];
     $output[] = $this->template->blockTableTemplate(
       "Speaker List",
