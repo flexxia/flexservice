@@ -72,9 +72,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+  public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = NULL) {
     $output = $this->organism->tileSectionGroup($meeting_nodes);
-    $output[] = $this->template->blockTableTemplate("View Events", $this->organism->tableContentEventList($meeting_nodes), $color_box_palette, $bg_color_class);
+    $output[] = $this->template->blockTableTemplate("View Events", $this->organism->tableContentEventList($meeting_nodes, $table_data_template_name), $color_box_palette, $bg_color_class);
 
     return $output;
   }
@@ -92,9 +92,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $limit_row = NULL, $question_tid = NULL) {
+  public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $limit_row = NULL, $question_tid = NULL, $table_data_template_name = NULL) {
     $output = [];
-    $output[] = $this->template->blockTableTemplate("Speaker List", $this->organism->tableContentSpeakerList($meeting_nodes, $limit_row, $question_tid), $color_box_palette, $bg_color_class);
+    $output[] = $this->template->blockTableTemplate("Speaker List", $this->organism->tableContentSpeakerList($meeting_nodes, $limit_row, $question_tid, $table_data_template_name), $color_box_palette, $bg_color_class);
 
     return $output;
   }

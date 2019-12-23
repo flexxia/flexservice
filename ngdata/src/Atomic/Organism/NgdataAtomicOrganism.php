@@ -468,9 +468,10 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
   /**
    *
-   */
-  public function tableContentEventList($meeting_nodes = array()) {
     $tableData = $this->molecule->tableDataByEventList($meeting_nodes);
+   */
+  public function tableContentEventList($meeting_nodes = array(), $table_data_template_name = 'tableDataByEventList') {
+    $tableData = $this->molecule->{$table_data_template_name}($meeting_nodes);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
@@ -502,9 +503,11 @@ class NgdataAtomicOrganism extends NgdataAtomic {
           'Rating' => rand(100, 200),
         );
       }
-   */
-  public function tableContentSpeakerList($meeting_nodes = array(), $limit_row = NULL, $question_tid = NULL) {
+
     $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid);
+   */
+  public function tableContentSpeakerList($meeting_nodes = array(), $limit_row = NULL, $question_tid = NULL, $table_data_template_name = 'tableDataByTopSpeaker') {
+    $tableData = $this->molecule->{$table_data_template_name}($meeting_nodes, $limit_row, $question_tid);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
