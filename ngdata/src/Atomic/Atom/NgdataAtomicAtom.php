@@ -226,4 +226,26 @@ class NgdataAtomicAtom extends NgdataAtomic {
     return $output;
   }
 
+  /**
+   * @return font awesome icon
+   */
+  public function getMeetingStatusIconHtml($node = NULL) {
+    $output = '';
+
+    $output = '<div class="html-tooltip-wrapper color-a5d13f">';
+      $output .= '<span class="html-tooltip-text-wrapper">';
+        $output .= '<i class=" fa ' . \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingStatusIcon($node) . ' fa-lg color-';
+        $output .= \Drupal::getContainer()->get('flexinfo.node.service')
+          ->getMeetingStatusColorCode($node);
+        $output .= '" aria-hidden="true">';
+        $output .= '</i>';
+      $output .= '</span>';
+      $output .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-20 padding-5 position-absolute z-index-1">';
+        $output .= '<span>' . \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingStatus($node) . '</span>';
+      $output .= '</span>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
 }
