@@ -407,6 +407,10 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           ->get('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
 
+        $bu_term = \Drupal::getContainer()
+          ->get('flexinfo.term.service')
+          ->getBuTermFromProgramTid($term->tid);
+
         if (count($meeting_nodes_by_current_term) > 0) {
 
           $signature_total = array_sum(
@@ -433,7 +437,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $output[] = array(
             'Program' => $program_html,
-            'BU' => 'BUBUBU',
+            'BU' => $bu_term->getName(),
             'Events' => count($meeting_nodes_by_current_term),
             'Reach' => $signature_total,
             'Responses' => $evaluation_nums,
