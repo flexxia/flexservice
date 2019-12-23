@@ -82,9 +82,9 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function programlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+  public function programlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = NULL) {
     $output = $this->organism->tileSectionGroup($meeting_nodes);
-    $output[] = $this->template->blockTableTemplate("View Programs", $this->organism->tableContentProgramList($meeting_nodes), $color_box_palette, $bg_color_class);
+    $output[] = $this->template->blockTableTemplate("View Programs", $this->organism->tableContentProgramList($meeting_nodes, $table_data_template_name), $color_box_palette, $bg_color_class);
 
     return $output;
   }

@@ -480,9 +480,10 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
   /**
    *
-   */
-  public function tableContentProgramList($meeting_nodes = array()) {
     $tableData = $this->molecule->tableDataByTopProgram($meeting_nodes);
+   */
+  public function tableContentProgramList($meeting_nodes = array(), $table_data_template_name = 'tableDataByTopProgram') {
+    $tableData = $this->molecule->{$table_data_template_name}($meeting_nodes);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
