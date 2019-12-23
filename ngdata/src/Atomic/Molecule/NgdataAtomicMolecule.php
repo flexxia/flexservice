@@ -664,7 +664,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
         'HCP Reach' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_signature'),
         'Responses' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
-        'Status' => $this->atomic->getAtom->getMeetingStatusIconHtml($node),
+        'Status' => $this->atom->getMeetingStatusIconHtml($node),
         'View' => \Drupal::l('View', $internal_url),
       );
     }
