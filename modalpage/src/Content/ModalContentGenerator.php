@@ -7,9 +7,6 @@ namespace Drupal\modalpage\Content;
 
 use Drupal\Core\Controller\ControllerBase;
 
-use Drupal\modalpage\Content\ModalTabSpeaker;
-
-
 /**
  * An example controller.
  */
