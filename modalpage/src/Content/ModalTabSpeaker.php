@@ -330,6 +330,12 @@ class ModalTabSpeaker {
       ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_evaluationnum')
     );
 
+    $rating_score = 0;
+    if ($this->question_tid) {
+      $rating_score = \Drupal::service('ngdata.term.question')
+        ->getRaidoQuestionTidStatsAverage($this->question_tid, $meeting_nodes_by_current_user);
+    }
+
     $output = array(
       array(
         "tabNumber" => count($meeting_nodes),
@@ -344,8 +350,7 @@ class ModalTabSpeaker {
         "tabContent" => 'RESPONSES',
       ),
       array(
-        "tabNumber" => \Drupal::service('ngdata.term.question')
-          ->getRaidoQuestionTidStatsAverage($this->question_tid, $meeting_nodes_by_current_user),
+        "tabNumber" => $rating_score,
         "tabContent" => 'RATING',
       )
     );
