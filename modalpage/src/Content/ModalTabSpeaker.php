@@ -1,17 +1,11 @@
 <?php
 
-
 /**
  * @file
- * Contains \Drupal\ngdata\Content\ModalTabSpeaker.
+ * Contains \Drupal\modalpage\Content\ModalTabSpeaker.
  */
 
-namespace Drupal\dashpage\Content;
-
-use Drupal\Core\Url;
-use Drupal\Component\Utility\Unicode;
-use Drupal\ngjson\Content\EventStandardLayoutContent;
-
+namespace Drupal\modalpage\Content;
 
 /**
  *

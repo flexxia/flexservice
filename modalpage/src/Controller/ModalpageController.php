@@ -12,7 +12,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Drupal\modalpage\Content\DashpageModalGenerator;
-use Drupal\flexpage\Controller\FlexpageController;
 
 
 /**

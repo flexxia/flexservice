@@ -3,7 +3,7 @@ modalpage.standard.modal:
   path: '/modalpage/modal/{section}/page/{entity_id}'
   defaults:
     _controller: '\Drupal\modalpage\Controller\ModalpageController::standardModalPage'
-    _title: 'Snapshot Map'
+    _title: 'modal page'
   requirements:
     _permission: 'access content'
 
@@ -12,7 +12,7 @@ modalpage.standard.modaljson:
   path: '/modalpage/modal/{section}/json/{entity_id}'
   defaults:
     _controller: '\Drupal\modalpage\Controller\ModalpageController::standardModalJson'
-    _title: 'Snapshot Map JSON'
+    _title: 'modal JSON'
   requirements:
     _permission: 'access content'
   options:
