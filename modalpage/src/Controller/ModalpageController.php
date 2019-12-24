@@ -21,6 +21,7 @@ class ModalpageController extends ControllerBase {
 
   /**
    * @return debug page
+   * @param  $entity_id is speaker user uid
      modalpage/modal/speakerpop/json/32
    */
   public function standardModalPage($section, $entity_id) {
