@@ -20,7 +20,8 @@ use Drupal\modalpage\Content\ModalContentGenerator;
 class ModalpageController extends ControllerBase {
 
   /**
-   * {@inheritdoc}
+   * @return debug page
+     modalpage/modal/speakerpop/json/32
    */
   public function standardModalPage($section, $entity_id) {
     $DashpageModalContentGenerator = new DashpageModalContentGenerator();
@@ -43,6 +44,7 @@ class ModalpageController extends ControllerBase {
 
   /**
    * {@inheritdoc}
+     modaljson/modal/speakerpop/json/32
    */
   public function standardModalJson($section, $entity_id) {
     $DashpageModalContentGenerator = new DashpageModalContentGenerator();
