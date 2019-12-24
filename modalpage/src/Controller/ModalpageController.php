@@ -24,8 +24,8 @@ class ModalpageController extends ControllerBase {
      modalpage/modal/speakerpop/json/32
    */
   public function standardModalPage($section, $entity_id) {
-    $DashpageModalContentGenerator = new DashpageModalContentGenerator();
-    $markup = $DashpageModalContentGenerator->standardModalPage($section, $entity_id);
+    $ModalContentGenerator = new ModalContentGenerator();
+    $markup = $ModalContentGenerator->standardModalPage($section, $entity_id);
 
     dpm($markup['all']['header']);
     // $markup = render($markup['speaker']);
@@ -47,8 +47,8 @@ class ModalpageController extends ControllerBase {
      modaljson/modal/speakerpop/json/32
    */
   public function standardModalJson($section, $entity_id) {
-    $DashpageModalContentGenerator = new DashpageModalContentGenerator();
-    $object_content_data['content'] = $DashpageModalContentGenerator->standardModalPage($section, $entity_id);
+    $ModalContentGenerator = new ModalContentGenerator();
+    $object_content_data['content'] = $ModalContentGenerator->standardModalPage($section, $entity_id);
 
     return new JsonResponse($object_content_data);
 

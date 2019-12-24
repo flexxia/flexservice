@@ -30,8 +30,10 @@ class ModalContentGenerator extends ControllerBase {
 
       $user = \Drupal::entityTypeManager()->getStorage('user')->load($entity_id);
       if ($user) {
-        $start_timestamp_ytd = strtotime(date('Y', time()) . "-01-01");
+        // January 1, 2017
         $start_timestamp_all = 1483246800;
+
+        $start_timestamp_ytd = strtotime(date('Y', time()) . "-01-01");
         $end_timestamp = strtotime("now");
 
         $output['speaker'] = $this->getSpeakerInfo($user);
