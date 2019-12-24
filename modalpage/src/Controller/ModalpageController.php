@@ -11,7 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Drupal\modalpage\Content\DashpageModalGenerator;
+use Drupal\modalpage\Content\ModalContentGenerator;
 
 
 /**
@@ -23,8 +23,8 @@ class ModalpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function standardModalPage($section, $entity_id) {
-    $DashpageModalGenerator = new DashpageModalGenerator();
-    $markup = $DashpageModalGenerator->standardModalPage($section, $entity_id);
+    $DashpageModalContentGenerator = new DashpageModalContentGenerator();
+    $markup = $DashpageModalContentGenerator->standardModalPage($section, $entity_id);
 
     dpm($markup['all']['header']);
     // $markup = render($markup['speaker']);
@@ -45,8 +45,8 @@ class ModalpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function standardModalJson($section, $entity_id) {
-    $DashpageModalGenerator = new DashpageModalGenerator();
-    $object_content_data['content'] = $DashpageModalGenerator->standardModalPage($section, $entity_id);
+    $DashpageModalContentGenerator = new DashpageModalContentGenerator();
+    $object_content_data['content'] = $DashpageModalContentGenerator->standardModalPage($section, $entity_id);
 
     return new JsonResponse($object_content_data);
 

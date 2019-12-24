@@ -10,7 +10,7 @@ use Drupal\Core\Url;
  * @deprecate
  */
 use Drupal\flexpage\Content\FlexpageEventLayout;
-use Drupal\dashpage\Content\DashTabSpeaker;
+use Drupal\modalpage\Content\ModalTabSpeaker;
 use Drupal\ngjson\Content\EventStandardLayoutContent;
 
 /**
@@ -489,7 +489,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       }
 
       /** - - - - - - second loop for top 10 - - - - - - - -  - - - - - - - - - - - - - - -  */
-      $DashTabSpeaker = new DashTabSpeaker();
+      $ModalTabSpeaker = new ModalTabSpeaker();
 
       foreach ($top_speaker_users as $user_array) {
         $user = $user_array['user'];
@@ -514,7 +514,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           //   $speaker_name_link .= '</a>';
           // $speaker_name_link .= '</span>';
 
-          $speaker_name_link = $DashTabSpeaker->getHtmlModalContent($user);
+          $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
 
           $output[] = array(
             'Speaker' => $speaker_name_link,
@@ -570,7 +570,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       }
 
       /** - - - - - - second loop for top 10 - - - - - - - -  - - - - - - - - - - - - - - -  */
-      $DashTabSpeaker = new DashTabSpeaker();
+      $ModalTabSpeaker = new ModalTabSpeaker();
 
       foreach ($top_speaker_users as $user_array) {
         $user = $user_array['user'];
@@ -595,7 +595,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           //   $speaker_name_link .= '</a>';
           // $speaker_name_link .= '</span>';
 
-          $speaker_name_link = $DashTabSpeaker->getHtmlModalContent($user);
+          $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
 
           $output[] = array(
             'Speaker' => $speaker_name_link,

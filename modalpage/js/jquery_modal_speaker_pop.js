@@ -24,7 +24,7 @@ jQuery(document).on("click", "#modalPageAnchor", function() {
     // jQuery('.tab-header-text').text(e.currentTarget.classList[2]);
     // var userUid = jQuery(this).data('useruid');
 
-    var jsonFileUrl = drupalSettings.path.baseUrl + 'dashpage/modal/speakerpop/json/' + userUid;
+    var jsonFileUrl = drupalSettings.path.baseUrl + 'modalpage/modal/speakerpop/json/' + userUid;
 
     /**
      * axios.get
