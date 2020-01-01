@@ -37,15 +37,17 @@ composer show flexxia/flexservice
  */
 sudo rm -r web/modules/custom/flexservice/.git
 
+sudo git rm -r --cached web/modules/custom/flexservice/*
+sudo git rm -r --cached web/modules/custom/flexservice
+sudo git rm -r -f --cached web/modules/custom/flexservice
+
+sudo git add -f web/modules/custom/flexservice
+sudo git add -f web/modules/custom/flexservice/*
+
+sudo git update-index --really-refresh
 
 sudo git update-index --assume-unchanged web/modules/custom/flexservice/
 sudo git update-index --no-assume-unchanged web/modules/custom/flexservice/
-
-sudo git rm -r --cached web/modules/custom/flexservice/*
-sudo git rm -r --cached web/modules/custom/flexservice
-
-sudo git add -f web/modules/custom/flexservice
-
 
 
 /**
