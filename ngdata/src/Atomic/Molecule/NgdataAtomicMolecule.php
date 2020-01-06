@@ -767,6 +767,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     foreach ($nodes as $node) {
       $program_entity = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
 
+      $theraparea_entity = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_theraparea');
+
       $output[] = array(
         'Name' => $program_entity ? $program_entity->getName() : '',
         'Date' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
