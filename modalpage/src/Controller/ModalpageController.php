@@ -35,6 +35,7 @@ class ModalpageController extends ControllerBase {
       $html_text .= '<h5>';
       $html_text .= 'This is YTD data';
       $html_text .= '</h5>';
+      $html_text .= '# attah on THEME_preprocess_HOOK()';
     $html_text .= '</div>';
 
     $markup = $html_text;
