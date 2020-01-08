@@ -26,12 +26,21 @@ class ModalpageController extends ControllerBase {
    */
   public function standardModalPage($section, $entity_id) {
     $ModalContentGenerator = new ModalContentGenerator();
-    $markup = $ModalContentGenerator->standardModalPage($section, $entity_id);
+    $content = $ModalContentGenerator->standardModalPage($section, $entity_id);
 
-    dpm($markup['all']['header']);
-    // $markup = render($markup['speaker']);
-    // $markup = render($markup['all']['header']);
-    $markup = render($markup['ytd']['header']);
+    dpm($content['all']['header']);
+
+    $html_text = '';
+    $html_text .= '<div>';
+      $html_text .= '<h5>';
+      $html_text .= 'This is YTD data';
+      $html_text .= '</h5>';
+    $html_text .= '</div>';
+
+    $markup = $html_text;
+    $markup .= render($content['ytd']['header']);
+    // $markup = render($content['speaker']);
+    // $markup = render($content['all']['header']);
 
     $build = array(
       '#type' => 'markup',
