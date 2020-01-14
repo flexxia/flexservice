@@ -517,6 +517,20 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
   /**
    *
+    $tableData = $this->molecule->tableDataByTermQuestion($meeting_nodes);
+   */
+  public function tableContentQuestionList($meeting_nodes = array(), $table_data_template_name = 'tableDataByTermQuestion') {
+    $tableData = $this->molecule->{$table_data_template_name}($meeting_nodes);
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+    // $output['tSortField'] = "Program";
+
+    return $output;
+  }
+
+  /**
+   *
    */
   public function tableContentStandardnode($entity_id, $start, $end) {
     $tableData = $this->molecule->tableDataByStandardnode($entity_id, $start, $end);

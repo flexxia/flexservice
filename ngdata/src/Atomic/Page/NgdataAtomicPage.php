@@ -109,6 +109,16 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
+  public function questionlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = 'tableDataByTermQuestion') {
+    $output = [];
+    $output[] = $this->template->blockTableTemplate("Question", $this->organism->tableContentQuestionList($meeting_nodes, $table_data_template_name), $color_box_palette, $bg_color_class);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function standardnodePageContent($entity_id, $start, $end) {
     $output = [];
     // $output[] = 'Add new node link';
