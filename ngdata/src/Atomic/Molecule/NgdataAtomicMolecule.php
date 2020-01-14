@@ -462,78 +462,18 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $program_trees = \Drupal::entityTypeManager()
+    $term_trees = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
       ->loadTree('questionlibrary', 0);
 
     if (is_array($program_trees)) {
 
-      // first loop get top 10 Program
-      $top_program_trees = array();
-      foreach ($program_trees as $key => $term) {
-        $meeting_nodes_by_current_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
-          ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
+      foreach ($term_trees as $key => $term) {
 
-        if (count($meeting_nodes_by_current_term) > 0) {
-          $num_meeting_nodes = count($meeting_nodes_by_current_term);
-
-          $top_program_trees[] = array(
-            'term' => $term,
-            'num_meeting_nodes' => $num_meeting_nodes,
-          );
-
-          // for sort order condition criteria
-          $sort_value[] = $num_meeting_nodes;
-        }
-      }
-
-
-
-      /** - - - - - - second loop for top 10 - - - - - - - -  - - - - - - - - - - - - - - -  */
-      foreach ($top_program_trees as $key => $top_program) {
-        $term = $top_program['term'];
-
-        $meeting_nodes_by_current_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
-          ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
-
-        $bu_term = \Drupal::getContainer()
-          ->get('flexinfo.term.service')
-          ->getBuTermFromProgramTid($term->tid);
-
-        if (count($meeting_nodes_by_current_term) > 0) {
-
-          $signature_total = array_sum(
-            \Drupal::getContainer()->get('flexinfo.field.service')
-            ->getFieldFirstValueCollection($meeting_nodes_by_current_term, 'field_meeting_signature')
-          );
-          $evaluation_nums = array_sum(
-            \Drupal::getContainer()->get('flexinfo.field.service')
-            ->getFieldFirstValueCollection($meeting_nodes_by_current_term, 'field_meeting_evaluationnum')
-          );
-
-          $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/program/page/' . $term->tid, array('attributes' => array('class' => array('text-primary'))));
-
-          $program_short_name = \Drupal\Component\Utility\Unicode::truncate($term->name, 36, $wordsafe = TRUE, $add_ellipsis = TRUE);
-
-          $program_html = '<div class="html-tooltip-wrapper">';
-            $program_html .= '<span class="html-tooltip-text-wrapper">';
-              $program_html .= \Drupal::l($program_short_name, $internal_url);
-            $program_html .= '</span>';
-            $program_html .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-6 padding-5 position-absolute z-index-1">';
-              $program_html .= $term->name;
-            $program_html .= '</span>';
-          $program_html .= '</div>';
-
-          $output[] = array(
-            'Program' => $program_html,
-            'BU' => $bu_term->getName(),
-            'Events' => count($meeting_nodes_by_current_term),
-            'Reach' => $signature_total,
-            'Responses' => $evaluation_nums,
-          );
-        }
+        $output[] = array(
+          'name' => $term->getName(),
+          'id' => $term->id(),
+        );
       }
     }
 
