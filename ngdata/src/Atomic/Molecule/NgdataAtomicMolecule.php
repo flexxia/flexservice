@@ -493,8 +493,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $evaluation_result = 0;
         $answer_result = 0;
         if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
-           ($evaluationform_tids_by_question as $row) {
-
+          foreach ($evaluationform_tids_by_question as $row) {
             // get meeting node nid as multidimensional array search by value For multiple results
             $match_keys = array_keys(array_column($all_evaluationform_tids, 'form_tid'), $row);
             if ($match_keys && is_array($match_keys)) {
