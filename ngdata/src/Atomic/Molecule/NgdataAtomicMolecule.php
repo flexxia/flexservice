@@ -462,17 +462,20 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $term_trees = \Drupal::entityTypeManager()
-      ->getStorage('taxonomy_term')
-      ->loadTree('questionlibrary', 0);
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('questionlibrary');
 
-    if (is_array($program_trees)) {
+    $terms = array_slice($terms, 0, 5);
 
-      foreach ($term_trees as $key => $term) {
-
+    if (is_array($terms)) {
+      foreach ($terms as $key => $term) {
         $output[] = array(
-          'name' => $term->getName(),
+          'Name' => $term->getName(),
           'id' => $term->id(),
+          'Evaluation' => $term->id(),
+          'Answer' => $term->id(),
+          'Percentage' => $term->id(),
         );
       }
     }
