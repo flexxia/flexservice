@@ -492,6 +492,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $meeting_result = 0;
         $evaluation_result = 0;
         $answer_result = 0;
+        $nids_string = '';
         if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
           foreach ($evaluationform_tids_by_question as $row) {
             // get meeting node nid as multidimensional array search by value For multiple results
@@ -499,6 +500,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             if ($match_keys && is_array($match_keys)) {
               foreach ($match_keys as $meeting_nid) {
                 $meeting_result += 1;
+                $nids_string .= $meeting_nid . ' - ';
                 $evaluation_result += $all_evaluationform_tids[$meeting_nid]['evaluation_num'];
               }
             }
@@ -510,7 +512,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'id' => $term->id(),
           'Meeting' => $meeting_result,
           'Evaluation' => $evaluation_result,
-          'Answer' => $answer_result,
+          'Answer' => $nids_string,
           'Percentage' => count($evaluationform_tids_by_question),
         );
       }
