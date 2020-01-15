@@ -466,14 +466,21 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       ->get('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
-    $terms = array_slice($terms, 0, 5);
+    $start = rand(10, (count($terms) - 5));
+    $terms = array_slice($terms, $start, 5);
 
     if (is_array($terms)) {
       foreach ($terms as $key => $term) {
+        $tid = $term->id();
+
+        $evaluationform_tids = \Drupal::getContainer()
+          ->get('flexinfo.queryterm.service')
+          ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $tid);
+
         $output[] = array(
           'Name' => $term->getName(),
           'id' => $term->id(),
-          'Evaluation' => $term->id(),
+          'Evaluation' => count($evaluationform_tids),
           'Answer' => $term->id(),
           'Percentage' => $term->id(),
         );
