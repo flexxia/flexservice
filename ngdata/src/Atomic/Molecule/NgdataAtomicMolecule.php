@@ -462,9 +462,11 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       ->get('flexinfo.querynode.service')
       ->nodesByBundle('meeting');
 
-    $all_evaluationform_tids = [];
+    // get all evaluation form tid array base on meeting nid
+    $meeting_evaluationform_tids = [];
     foreach ($meeting_nodes as $meeting_node) {
-      $all_evaluationform_tids[$meeting_node->id()] = array(
+
+      $meeting_evaluationform_tids[$meeting_node->id()] = array(
         'evaluation_num' => \Drupal::getContainer()
           ->get('flexinfo.field.service')
           ->getFieldFirstValue($meeting_node, 'field_meeting_evaluationnum'),
@@ -474,6 +476,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       );
     }
 
+    //
     $terms = \Drupal::getContainer()
       ->get('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
@@ -483,24 +486,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
     if (is_array($terms)) {
       foreach ($terms as $term) {
-        $tid = $term->id();
 
         $evaluationform_tids_by_question = \Drupal::getContainer()
           ->get('flexinfo.queryterm.service')
-          ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $tid);
+          ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
 
         $meeting_result = 0;
         $evaluation_result = 0;
         $answer_result = 0;
         $nids_string = '';
+
         if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
           foreach ($evaluationform_tids_by_question as $row) {
 
             // get meeting node nid as multidimensional array search by value For multiple results
             $match_keys = array_keys(
               array_combine(
-                array_keys($all_evaluationform_tids),
-                array_column($all_evaluationform_tids, 'form_tid')
+                array_keys($meeting_evaluationform_tids),
+                array_column($meeting_evaluationform_tids, 'form_tid')
               ),
               $row
             );
@@ -509,18 +512,27 @@ class NgdataAtomicMolecule extends NgdataAtomic {
               foreach ($match_keys as $meeting_nid) {
                 $meeting_result += 1;
                 $nids_string .= $meeting_nid . ' - ';
-                $evaluation_result += $all_evaluationform_tids[$meeting_nid]['evaluation_num'];
+                $evaluation_result += $meeting_evaluationform_tids[$meeting_nid]['evaluation_num'];
               }
             }
           }
         }
+
+        // query Evaluation Answer
+        $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+        $query = $query_container
+          ->queryNidsByBundle('evaluation');
+        $group = $query_container
+          ->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $term->id());
+        $query->condition($group);
+        $evaluation_nids = $query_container->runQueryWithGroup($query);
 
         $output[] = array(
           'Name' => $term->getName(),
           'id' => $term->id(),
           'Meeting' => $meeting_result,
           'Evaluation' => $evaluation_result,
-          'Answer' => $nids_string,
+          'Answer' => count($evaluation_nids),
           'Percentage' => count($evaluationform_tids_by_question),
         );
       }
