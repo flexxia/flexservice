@@ -451,16 +451,28 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
   /**
    * @return array
-    $output[] = array(
-      'Program' => $program_html,
-      'BU' => 'BUBUBU',
-      'Events' => count($meeting_nodes_by_current_term),
-      'Reach' => $signature_total,
-      'Responses' => $evaluation_nums,
-    );
+    $meeting_nids = \Drupal::getContainer()
+      ->get('flexinfo.querynode.service')
+      ->queryNidsByBundle('meeting');
    */
   public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
+
+    $meeting_nodes = \Drupal::getContainer()
+      ->get('flexinfo.querynode.service')
+      ->nodesByBundle('meeting');
+
+    $all_evaluationform_tids = [];
+    foreach ($meeting_nodes as $meeting_node) {
+      $all_evaluationform_tids[$meeting_node->id()] = array(
+        'evaluation_num' => \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldFirstValue($meeting_node, 'field_meeting_evaluationnum'),
+        'form_tid' => \Drupal::getContainer()
+        ->get('flexinfo.node.service')
+        ->getMeetingEvaluationformTid($meeting_node)
+      );
+    }
 
     $terms = \Drupal::getContainer()
       ->get('flexinfo.term.service')
@@ -470,17 +482,23 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $terms = array_slice($terms, $start, 5);
 
     if (is_array($terms)) {
-      foreach ($terms as $key => $term) {
+      foreach ($terms as $term) {
         $tid = $term->id();
 
-        $evaluationform_tids = \Drupal::getContainer()
+        $evaluationform_tids_by_question = \Drupal::getContainer()
           ->get('flexinfo.queryterm.service')
           ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $tid);
+
+        if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
+          foreach ($evaluationform_tids_by_question as $row) {
+
+          }
+        }
 
         $output[] = array(
           'Name' => $term->getName(),
           'id' => $term->id(),
-          'Evaluation' => count($evaluationform_tids),
+          'Evaluation' => count($evaluationform_tids_by_question),
           'Answer' => $term->id(),
           'Percentage' => $term->id(),
         );
