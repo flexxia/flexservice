@@ -489,18 +489,30 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           ->get('flexinfo.queryterm.service')
           ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $tid);
 
+        $meeting_result = 0;
+        $evaluation_result = 0;
+        $answer_result = 0;
         if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
-          foreach ($evaluationform_tids_by_question as $row) {
+           ($evaluationform_tids_by_question as $row) {
 
+            // get meeting node nid as multidimensional array search by value For multiple results
+            $match_keys = array_keys(array_column($all_evaluationform_tids, 'form_tid'), $row);
+            if ($match_keys && is_array($match_keys)) {
+              foreach ($match_keys as $meeting_nid) {
+                $meeting_result += 1;
+                $evaluation_result += $all_evaluationform_tids[$meeting_nid]['evaluation_num'];
+              }
+            }
           }
         }
 
         $output[] = array(
           'Name' => $term->getName(),
           'id' => $term->id(),
-          'Evaluation' => count($evaluationform_tids_by_question),
-          'Answer' => $term->id(),
-          'Percentage' => $term->id(),
+          'Meeting' => $meeting_result,
+          'Evaluation' => $evaluation_result,
+          'Answer' => $answer_result,
+          'Percentage' => count($evaluationform_tids_by_question),
         );
       }
     }
