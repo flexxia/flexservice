@@ -492,6 +492,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
 
         $evaluation_result = 0;
+        $answer_result = 0;
         if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
           foreach ($evaluationform_tids_by_question as $row) {
 
@@ -520,12 +521,17 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           ->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $term->id());
         $query->condition($group);
         $query_evaluation_nids = $query_container->runQueryWithGroup($query);
+        if ($query_evaluation_nids) {
+          $answer_result = count($query_evaluation_nids);
+        }
 
         $output[] = array(
           'Name' => $term->getName(),
           'Evaluation' => $evaluation_result,
-          'Answer' => count($query_evaluation_nids),
-          'Percentage' => count($evaluationform_tids_by_question),
+          'Answer' => $answer_result,
+          'Percentage' => \Drupal::getContainer()
+            ->get('flexinfo.calc.service')
+            ->getPercentageDecimal($answer_result, $evaluation_result) . '%',
         );
       }
     }
