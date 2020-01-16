@@ -481,8 +481,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       ->get('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
-    $start = rand(10, (count($terms) - 5));
-    $terms = array_slice($terms, $start, 5);
+    // $start = rand(10, (count($terms) - 5));
+    // $terms = array_slice($terms, $start, 5);
 
     if (is_array($terms)) {
       foreach ($terms as $term) {
