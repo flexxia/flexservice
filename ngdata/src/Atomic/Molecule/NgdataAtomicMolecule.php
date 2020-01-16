@@ -491,11 +491,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           ->get('flexinfo.queryterm.service')
           ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
 
-        $meeting_result = 0;
         $evaluation_result = 0;
-        $answer_result = 0;
-        $nids_string = '';
-
         if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
           foreach ($evaluationform_tids_by_question as $row) {
 
@@ -510,8 +506,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
             if ($match_keys && is_array($match_keys)) {
               foreach ($match_keys as $meeting_nid) {
-                $meeting_result += 1;
-                $nids_string .= $meeting_nid . ' - ';
                 $evaluation_result += $meeting_evaluationform_tids[$meeting_nid]['evaluation_num'];
               }
             }
@@ -525,14 +519,12 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $group = $query_container
           ->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $term->id());
         $query->condition($group);
-        $evaluation_nids = $query_container->runQueryWithGroup($query);
+        $query_evaluation_nids = $query_container->runQueryWithGroup($query);
 
         $output[] = array(
           'Name' => $term->getName(),
-          'id' => $term->id(),
-          'Meeting' => $meeting_result,
           'Evaluation' => $evaluation_result,
-          'Answer' => count($evaluation_nids),
+          'Answer' => count($query_evaluation_nids),
           'Percentage' => count($evaluationform_tids_by_question),
         );
       }
