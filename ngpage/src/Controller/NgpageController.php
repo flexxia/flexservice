@@ -138,19 +138,14 @@ class NgpageController extends ControllerBase {
   }
 
   /**
-   *
+   * @todo page to debug drupal form
    */
   public function ngDrupalFormStandard($bundle) {
-    $form['default_sample'] = array(
-      '#type' => 'checkboxes',
-      '#options' => array(
-        '1' => 'Yes'
-      ),
-      '#title' => 'Drupal Sample Form',
-      '#attributes' => array('class' => array('display-inline-block', 'float-left', 'margin-left-24')),
-    );
+    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\DrupalSampleForm');
 
-    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
+    if ($bundle == 'eventtype') {
+      $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
+    }
 
     $build = array(
       '#type' => 'markup',
