@@ -140,12 +140,21 @@ class NgpageController extends ControllerBase {
   /**
    *
    */
-  public function ngDrupalFormSample($bundle) {
+  public function ngDrupalFormStandard($bundle) {
+    $form['default_sample'] = array(
+      '#type' => 'checkboxes',
+      '#options' => array(
+        '1' => 'Yes'
+      ),
+      '#title' => 'Drupal Sample Form',
+      '#attributes' => array('class' => array('display-inline-block', 'float-left', 'margin-left-24')),
+    );
+
     $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
 
     $build = array(
       '#type' => 'markup',
-      '#title' => $this->t('Drupal Form Sample Page'),
+      '#title' => $this->t('Drupal Form Standard Page H2'),
       '#markup' => render($form),
     );
 

@@ -82,8 +82,6 @@ class EventtypeFilterForm extends FormBase {
     return $output;
   }
 
-
-
   /**
    * @return
    */
