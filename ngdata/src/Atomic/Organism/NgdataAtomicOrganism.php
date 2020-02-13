@@ -48,7 +48,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function basicSection($type = "htmlSnippt", $save_png_icon_style = "float-right margin-top-12 margin-right-16") {
+  public function basicSection($type = "htmlSnippt", $save_png_icon_style = "float-right margin-top-12 margin-right-16", $save_png_icon_enable = TRUE) {
     $blockId = uniqid(rand());
 
     $output = array(
