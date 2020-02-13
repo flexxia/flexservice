@@ -58,13 +58,32 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    */
   public function getBlockHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = "";
-    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-50">';
+    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-60">';
       if ($color_box_palette) {
         $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
         $output .= '</span>';
       }
 
       $output .= '<span class="margin-top-6 margin-left-14 line-height-1-2 display-block">';
+        $output .= $title;
+      $output .= '</span>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getBlockTableHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0093d0 font-size-16') {
+    $output = "";
+    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-50">';
+      if ($color_box_palette) {
+        $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
+        $output .= '</span>';
+      }
+
+      $output .= '<span class="margin-left-14 line-height-1-2 display-block">';
         $output .= $title;
       $output .= '</span>';
     $output .= '</div>';

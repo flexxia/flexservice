@@ -45,7 +45,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
 
     $output['blockClass'] = "col-md-12 margin-top-24";
     $output['blockClassSub'] = $this->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader($tableHeader, $color_box_palette, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockTableHeader($tableHeader, $color_box_palette, $bg_color_class);
 
     $output['blockContent'][0]['tabData']['tableId'] = 'tableId-' . $tableId;
     $output['blockContent'][0]['tabData']['middle'] = $tableContent;
