@@ -57,7 +57,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       "blockClass" => "col-md-12 margin-top-24",
       "blockClassSub" => NULL,
       'blockId' => $blockId,
-      'blockIcon' => $this->molecule->savePngIcon($save_png_icon_style, $blockId),
+      'blockIcon' => $this->molecule->savePngIcon($save_png_icon_style, $blockId, $save_png_icon_enable),
       "blockContent" => array($this->basicTab($type)),
     );
     return $output;
