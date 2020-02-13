@@ -42,7 +42,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $output .= '</a>';
 
       $output .= '<div class="drop-down-icon-menu dropdown-menu padding-20 margin-left-n-86 text-align-center" aria-labelledby="dropdownMenuLink">';
-        $output .= '<a onclick="saveHtmlToPng(\'' . $save_block_id . '\')" class="dropdown-item color-000 font-size-14" href="javascript:void(0);">SAVE PNG</a>';
+        $output .= '<a onclick="saveHtmlToPng(\'' . $save_block_id . '\')" class="dropdown-item color-000 font-size-14" href="javascript:void(0);">';
+          $output .= 'SAVE PNG';
+        $output .= '</a>';
       $output .= '</div>';
       }
 
