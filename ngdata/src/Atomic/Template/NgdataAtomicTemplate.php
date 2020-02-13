@@ -41,7 +41,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   public function blockTableTemplate($tableHeader, $tableContent, $color_box_palette = FALSE, $bg_color_class = 'bg-0093d0 font-size-16') {
     $tableId = uniqid(NULL, TRUE);
 
-    $output = $this->organism->basicSection("table", NULL, $save_png_icon_enable = FALSE);
+    $output = $this->organism->basicSection("table", 'float-right margin-top-12', $save_png_icon_enable = FALSE);
 
     $output['blockClass'] = "col-md-12 margin-top-24";
     $output['blockClassSub'] = $this->blockChartCssSet()['blockClassSub'];
