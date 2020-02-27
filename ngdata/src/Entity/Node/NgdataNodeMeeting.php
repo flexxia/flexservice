@@ -90,7 +90,7 @@ class NgdataNodeMeeting extends NgdataNode {
    * @deprecated by 2020 Feb
    */
   public function meetingNodesByEventType($meeting_nodes = array()) {
-    $output = $this->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'eventtype', 'field_meeting_eventtype')
+    $output = $this->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'eventtype', 'field_meeting_eventtype');
 
     return $output;
   }
