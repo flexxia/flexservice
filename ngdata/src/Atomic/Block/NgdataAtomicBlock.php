@@ -697,7 +697,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events Over Time", FALSE, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Events Over Time", FALSE, $bg_color_class);
 
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByMonth($meeting_nodes, TRUE, $step);
