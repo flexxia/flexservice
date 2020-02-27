@@ -692,6 +692,66 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * @internal bar chart, bar chart is array($data) of stackbar chart
    */
+  public function blockChartjsMeetingsByMonth($meeting_nodes = array(), $bg_color_class = 'bg-ffc832', $step = 1) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events Over Time", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartLineDataByMonth($meeting_nodes, TRUE, $step);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => array(
+        array(
+          "data" => $datasets_data_0,
+          "backgroundColor" => "#0f69af",
+          "borderColor" => "#0f69af",
+          "borderWidth" => 1
+        )
+      )
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
+
+    return $output;
+  }
+
+  /**
+   * @internal bar chart, bar chart is array($data) of stackbar chart
+   */
+  public function blockChartjsHcpReachByMonth($meeting_nodes = array(), $bg_color_class = 'bg-e61e50', $step = 1) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach Over Time", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartLineDataByMonth($meeting_nodes, FALSE, $step);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => array(
+        array(
+          "data" => $datasets_data_0,
+          "backgroundColor" => "#0f69af",
+          "borderColor" => "#0f69af",
+          "borderWidth" => 1
+        )
+      )
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
+
+    return $output;
+  }
+
+  /**
+   * @internal bar chart, bar chart is array($data) of stackbar chart
+   */
   public function blockChartjsMeetingsByProvince($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
     $output = $this->blockChartjs("bar");
 
