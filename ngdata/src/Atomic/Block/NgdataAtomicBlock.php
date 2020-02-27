@@ -154,6 +154,36 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * bar chart
+   */
+  public function blockChartTotalEventsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Funding Source Event Total", FALSE, $bg_color_class);
+
+    $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'FundingSource', 'field_meeting_fundingsource'))
+    );
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('eventtype')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderWidth" => 1
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
    * @param $entity_id is current businessunit tid
    */
   public function blockChartTotalEventsByTherapeuticArea($meeting_nodes = array(), $entity_id = NULL) {
