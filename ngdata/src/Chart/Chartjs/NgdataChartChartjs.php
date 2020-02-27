@@ -377,11 +377,10 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    * $by_event = True, FALSE is by HCP Reach
    */
-  public function chartBarDataByEventsByMonth($meeting_nodes = array(), $by_event = TRUE, $step = 1) {
+  public function chartLineDataByEventsByMonth($meeting_nodes = array(), $by_event = TRUE, $step = 1) {
     $output = [];
 
     foreach ($meeting_nodes as $key => $row) {
-      $month_num = array();
       for ($j = 1; $j < 13; $j += $step) {
         $months = array($j);
         if ($step == 3) {
