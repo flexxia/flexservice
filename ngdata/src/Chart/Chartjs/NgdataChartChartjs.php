@@ -380,26 +380,23 @@ class NgdataChartChartjs extends NgdataChart {
   public function chartLineDataByMonth($meeting_nodes = array(), $by_event = TRUE, $step = 1) {
     $output = [];
 
-    foreach ($meeting_nodes as $key => $row) {
-      for ($j = 1; $j < 13; $j += $step) {
-        $months = array($j);
-        if ($step == 3) {
-          $months = array($j, $j + 1, $j + 2);
-        }
-
-        $meeting_nodes_by_month = \Drupal::getContainer()->get('flexinfo.querynode.service')->meetingNodesByMonth($row, $months);
-
-        if ($by_event) {
-          $output[] = count($meeting_nodes_by_month);
-        }
-        else {
-          $output[] = array_sum(
-            \Drupal::getContainer()->get('flexinfo.field.service')
-            ->getFieldFirstValueCollection($meeting_nodes_by_month, 'field_meeting_signature')
-          );
-        }
+    for ($j = 1; $j < 13; $j += $step) {
+      $months = array($j);
+      if ($step == 3) {
+        $months = array($j, $j + 1, $j + 2);
       }
 
+      $meeting_nodes_by_month = \Drupal::getContainer()->get('flexinfo.querynode.service')->meetingNodesByMonth($meeting_nodes, $months);
+
+      if ($by_event) {
+        $output[] = count($meeting_nodes_by_month);
+      }
+      else {
+        $output[] = array_sum(
+          \Drupal::getContainer()->get('flexinfo.field.service')
+          ->getFieldFirstValueCollection($meeting_nodes_by_month, 'field_meeting_signature')
+        );
+      }
     }
 
     return $output;
