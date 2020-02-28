@@ -421,8 +421,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     $legend_color = \Drupal::service('flexinfo.setting.service')
       ->colorPlateOutputKeyByPaletteName('colorPlatePieChartOne', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
 
-    $output = \Drupal::getContainer()
-      ->get('flexinfo.chart.service')
+    $output = \Drupal::service('ngdata.atomic.atom')
       ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');
 
     return $output;
