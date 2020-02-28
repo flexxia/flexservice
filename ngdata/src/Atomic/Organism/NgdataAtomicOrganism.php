@@ -402,6 +402,35 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function getLegendHorizontalTotalEventsByBU($meeting_nodes = array()) {
+    $chartData = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByBU($meeting_nodes)
+      )
+    );
+    $chartLabel = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('businessunit')['label'];
+
+    $legend_text = array();
+    if ($chartData && is_array($chartData)) {
+      foreach ($chartData as $key => $row) {
+        $legend_text[] = $chartLabel[$key] . '(' . $chartData[$key] . ')';
+      }
+    }
+
+    $legend_color = \Drupal::service('flexinfo.setting.service')
+      ->colorPlateOutputKeyByPaletteName('colorPlatePieChartOne', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
+
+    $output = \Drupal::getContainer()
+      ->get('flexinfo.chart.service')
+      ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getLegendTotalEventsByTherapeuticArea($meeting_nodes = array(), $businessunit_tid = NULL) {
     $legend_text = [];
 
