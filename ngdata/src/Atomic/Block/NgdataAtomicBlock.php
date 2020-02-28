@@ -161,7 +161,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Funding Source Event Total", FALSE, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Funding Source Event Totals", FALSE, $bg_color_class);
 
     $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
       ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
