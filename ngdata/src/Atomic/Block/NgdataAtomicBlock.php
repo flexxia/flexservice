@@ -170,7 +170,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
-      ->getTermListByVocabulary('eventtype')['label'];
+      ->getTermListByVocabulary('fundingsource')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => $datasets_data,
       "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
