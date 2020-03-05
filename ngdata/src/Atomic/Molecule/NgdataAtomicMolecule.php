@@ -735,9 +735,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventList($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
-
-    foreach ($nodes as $node) {
+    foreach ($meeting_nodes as $node) {
       $program_entity = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
@@ -764,9 +762,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventListTemplate2($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
-
-    foreach ($nodes as $node) {
+    foreach ($meeting_nodes as $node) {
       $program_entity = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
