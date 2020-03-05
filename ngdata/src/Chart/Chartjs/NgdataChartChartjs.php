@@ -65,26 +65,26 @@ class NgdataChartChartjs extends NgdataChart {
       ]
     ];
 
-    if ($datasets_data && is_array($datasets_data)) {
-      $max_value = max($datasets_data);
+    // if ($datasets_data && is_array($datasets_data)) {
+    //   $max_value = max($datasets_data);
 
-      $yaxes_max = 10;
-      if ($max_value > 999) {
-        $yaxes_max = round($max_value, -2) + 100;
+    //   $yaxes_max = 10;
+    //   if ($max_value > 999) {
+    //     $yaxes_max = round($max_value, -2) + 100;
 
-        if (((round($max_value, -2) / 100) % 2) == 0) {
-          $yaxes_max = $yaxes_max + 100;
-        }
-      }
-      elseif ($max_value > 99) {
-        $yaxes_max = round($max_value, -2) + 100;
-      }
-      elseif ($max_value > 9) {
-        $yaxes_max = round(($max_value * 1.1), -1) + 10;
-      }
+    //     if (((round($max_value, -2) / 100) % 2) == 0) {
+    //       $yaxes_max = $yaxes_max + 100;
+    //     }
+    //   }
+    //   elseif ($max_value > 99) {
+    //     $yaxes_max = round($max_value, -2) + 100;
+    //   }
+    //   elseif ($max_value > 9) {
+    //     $yaxes_max = round(($max_value * 1.1), -1) + 10;
+    //   }
 
-      $output["scales"]["yAxes"][0]["ticks"]["max"] = $yaxes_max;
-    }
+    //   $output["scales"]["yAxes"][0]["ticks"]["max"] = $yaxes_max;
+    // }
 
     return $output;
   }
