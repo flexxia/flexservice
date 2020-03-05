@@ -138,14 +138,18 @@ class NgpageController extends ControllerBase {
   }
 
   /**
-   *
+   * @todo page to debug drupal form
    */
-  public function ngDrupalFormSample($bundle) {
-    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
+  public function ngDrupalFormStandard($bundle) {
+    $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\DrupalSampleForm');
+
+    if ($bundle == 'eventtype') {
+      $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\EventtypeFilterForm');
+    }
 
     $build = array(
       '#type' => 'markup',
-      '#title' => $this->t('Drupal Form Sample Page'),
+      '#title' => $this->t('Drupal Form Standard Page H2'),
       '#markup' => render($form),
     );
 

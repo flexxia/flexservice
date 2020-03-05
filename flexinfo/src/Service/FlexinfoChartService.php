@@ -1497,19 +1497,21 @@ class FlexinfoChartService {
   public function renderLegendSquareColorKeyPlusOne($legend_text = array(), $legend_color = array(), $max_length = NULL, $legends_class = 'font-size-12') {
     $legends = '<div class="legends-square-wrapper padding-top-24 margin-top-24 margin-left-12 width-pt-100 ' . $legends_class . '">';
 
-    foreach ($legend_text as $key => $value) {
-      $bg_color_class = NULL;
-      if (isset($legend_color[$key + 1])) {
-        $bg_color_class = 'bg-' . $legend_color[$key + 1];
-      }
+    if (is_array($legend_text)) {
+      foreach ($legend_text as $key => $value) {
+        $bg_color_class = NULL;
+        if (isset($legend_color[$key + 1])) {
+          $bg_color_class = 'bg-' . $legend_color[$key + 1];
+        }
 
-      $legends .= '<div class="clear-both height-32 text-center">';
-        $legends .= '<span class="legend-square ' . $bg_color_class . '">';
-        $legends .= '</span>';
-        $legends .= '<span class="float-left legend-text">';
-          $legends .= $value;
-        $legends .= '</span>';
-      $legends .= '</div>';
+        $legends .= '<div class="clear-both height-32 text-center">';
+          $legends .= '<span class="legend-square ' . $bg_color_class . '">';
+          $legends .= '</span>';
+          $legends .= '<span class="float-left legend-text">';
+            $legends .= $value;
+          $legends .= '</span>';
+        $legends .= '</div>';
+      }
     }
     $legends .= '</div>';
 

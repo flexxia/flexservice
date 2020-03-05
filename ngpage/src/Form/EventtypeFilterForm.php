@@ -30,7 +30,7 @@ class EventtypeFilterForm extends FormBase {
       '#type' => 'checkboxes',
       '#options' => $this->_getTermOptions(),
       '#default_value' => $this->_getUserDefaultValue(),
-      '#title' => '',
+      '#title' => 'EventType Form',
       '#attributes' => array('class' => array('display-inline-block', 'float-left', 'margin-left-24')),
     );
 
@@ -82,12 +82,12 @@ class EventtypeFilterForm extends FormBase {
     return $output;
   }
 
-
-
   /**
    * @return
    */
   public function _getTermOptions() {
+    $output = [];
+
     $terms = \Drupal::getContainer()
       ->get('flexinfo.term.service')
       ->getFullTermsFromVidName('eventtype');
@@ -98,7 +98,7 @@ class EventtypeFilterForm extends FormBase {
           $row .= $term->getName();
         $row .= '</span>';
       $row .= '</li>';
-      $options[$term->id()] = $row;
+      $output[$term->id()] = $row;
     }
 
     return $output;

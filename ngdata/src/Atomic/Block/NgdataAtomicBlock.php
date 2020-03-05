@@ -32,6 +32,19 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * @see Bootstrap Slider
+   */
+  public function blockBootstrapSliderByQuestion($meeting_nodes = array(), $question_tid = NULL) {
+    $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0 padding-bottom-48";
+    $output['blockHeader'] = $this->template->dataBootstrapSliderByQuestion($meeting_nodes, $question_tid);
+
+    return $output;
+  }
+
+  /**
    *
    */
   public function blockChartjs($chart_type = "pie", $middle_class = "col-md-6", $right_class = "col-md-6", $bg_color_class = 'bg-0f69af') {
@@ -45,6 +58,450 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
       ->basicMiddleChart($chart_type, $middle_class, $right_class);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsMetricQuestionSwitch($meeting_nodes = array(), $question_tid = NULL, $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+    $output = array();
+
+    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
+
+    if ($question_term) {
+      switch ($chart_type) {
+        case 'bar':
+          $output = $this->getBlockChartByRadioQuestionForBar($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
+          break;
+
+        default:
+          $output = $this->getBlockChartByRadioQuestionForPie($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
+          break;
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsMetricQuestionSelectkeySwitch($meeting_nodes = array(), $question_tid = NULL, $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
+
+    $output = $this->getBlockChartBySelectkeyQuestionForPie($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsTotalEventsByBusinessunit($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("pie");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Business Unit", FALSE, $bg_color_class);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermListByVocabulary('businessunit')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => \Drupal::service('ngdata.node.meeting')
+        ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+          ->meetingNodesByBU($meeting_nodes)
+      ),
+      "backgroundColor" => array_values(\Drupal::service('baseinfo.setting.service')
+        ->colorPlatePieChartOne(NULL, TRUE))
+    ]];
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByBU($meeting_nodes);
+
+    return $output;
+  }
+
+  /**
+   * bar chart
+   */
+  public function blockChartTotalEventsByEventType($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Type", FALSE, $bg_color_class);
+
+    $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByEventType($meeting_nodes))
+    );
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('eventtype')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderWidth" => 1
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
+   * bar chart
+   */
+  public function blockChartTotalEventsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Funding Source Event Totals", FALSE, $bg_color_class);
+
+    $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'FundingSource', 'field_meeting_fundingsource'))
+    );
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('fundingsource')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderWidth" => 1
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
+   * @param $entity_id is current businessunit tid
+   */
+  public function blockChartTotalEventsByTherapeuticArea($meeting_nodes = array(), $entity_id = NULL) {
+    $output = $this->blockChartjs("pie");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Therapeutic Area");
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-6";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermTherapeuticAreaListByBu($entity_id)['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => \Drupal::service('ngdata.node.meeting')
+        ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+          ->meetingNodesByTherapeuticArea($meeting_nodes, $entity_id)
+      ),
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, TRUE))
+    ]];
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByTherapeuticArea($meeting_nodes, $entity_id);
+
+    return $output;
+  }
+
+  /**
+   * @internal stackbar chart X-axis is Month,
+   */
+  public function blockChartjsMeetingsByMonthByEventType($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Event Implementation", FALSE, $bg_color_class);
+
+    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByMonthByEventType($meeting_nodes);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => $datasets_data,
+    ];
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes);
+
+    return $output;
+  }
+
+  /**
+   * @internal stackbar chart X-axis is Quarter,
+   */
+  public function blockChartjsMeetingsByQuarterByEventType($meeting_nodes = array()) {
+    $output = [];
+    $output = $this->blockChartjs("bar");
+
+    // init tab 2
+    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
+      ->basicTab('chart');
+    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
+      ->basicMiddleChart($chart_type = 'bar');
+
+    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByMonthByEventType($meeting_nodes, TRUE, $step = 3);
+
+    $output['blockContent'][0]['tabData']['top']['styleClass'] = "bg-0f69af color-fff height-60 padding-15 padding-left-14";
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getQuarterNameAbb(),
+      "datasets" => $datasets_data,
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes);
+
+    return $output;
+  }
+
+  /**
+   * @internal stackbar chart X-axis is Month,
+   */
+  public function blockChartjsHcpReachByMonthByEventType($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Event Type", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => $datasets_data_0,
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_0);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsHcpReachByQuarterByEventType($meeting_nodes = array()) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
+      ->basicTab('chart');
+    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
+      ->basicMiddleChart($chart_type = 'bar');
+
+    $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE, $step = 3);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getQuarterNameAbb(),
+      "datasets" => $datasets_data_1,
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
+
+    return $output;
+  }
+
+  /**
+   * @internal bar chart, bar chart is array($data) of stackbar chart
+   */
+  public function blockChartjsMeetingsByMonth($meeting_nodes = array(), $bg_color_class = 'bg-ffc832', $step = 1) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Events Over Time", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartLineDataByMonth($meeting_nodes, TRUE, $step);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => array(
+        array(
+          "data" => $datasets_data_0,
+          "backgroundColor" => "#0f69af",
+          "borderColor" => "#0f69af",
+          "borderWidth" => 1
+        )
+      )
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
+
+    return $output;
+  }
+
+  /**
+   * @internal bar chart, bar chart is array($data) of stackbar chart
+   */
+  public function blockChartjsHcpReachByMonth($meeting_nodes = array(), $bg_color_class = 'bg-e61e50', $step = 1) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach Over Time", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartLineDataByMonth($meeting_nodes, FALSE, $step);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => array(
+        array(
+          "data" => $datasets_data_0,
+          "backgroundColor" => "#0f69af",
+          "borderColor" => "#0f69af",
+          "borderWidth" => 1
+        )
+      )
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
+
+    return $output;
+  }
+
+  /**
+   * @internal bar chart, bar chart is array($data) of stackbar chart
+   */
+  public function blockChartjsMeetingsByProvince($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Location of Events", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartLineDataByProvince($meeting_nodes, TRUE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
+      "datasets" => array(
+        array(
+          "data" => $datasets_data_0,
+          "backgroundColor" => "#0f69af",
+          "borderColor" => "#0f69af",
+          "borderWidth" => 1
+        )
+      )
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
+
+    return $output;
+  }
+
+  /**
+   * @internal bar chart, bar chart is array($data) of stackbar chart
+   */
+  public function blockChartjsHcpReachByProvince($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Location", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartLineDataByProvince($meeting_nodes, FALSE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
+      "datasets" => array(
+        array(
+          "data" => $datasets_data_0,
+          "backgroundColor" => "#0f69af",
+          "borderColor" => "#0f69af",
+          "borderWidth" => 1
+        )
+      )
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsMeetingsByProvinceByEventType($meeting_nodes = array()) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
+      ->basicTab('chart');
+    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
+      ->basicMiddleChart($chart_type = 'bar');
+
+    $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByProvinceByEventType($meeting_nodes, TRUE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
+      "datasets" => $datasets_data_1,
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, TRUE);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsHcpReachByProvinceByEventType($meeting_nodes = array()) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
+      ->basicTab('chart');
+    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
+      ->basicMiddleChart($chart_type = 'bar');
+
+    $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByProvinceByEventType($meeting_nodes, FALSE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
+      "datasets" => $datasets_data_1,
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsWithoutLegendMetricQuestion($meeting_nodes = array(), $question_tid = NULL, $chart_type = "bar", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+    $output = $this->blockChartjsMetricQuestionSwitch($meeting_nodes, $question_tid, $chart_type, $color_box_palette, $bg_color_class);
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = [];
 
     return $output;
   }
@@ -457,373 +914,6 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100 margin-bottom-12";
     $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
     $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsMetricQuestionSwitch($meeting_nodes = array(), $question_tid = NULL, $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
-    $output = array();
-
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    if ($question_term) {
-      switch ($chart_type) {
-        case 'bar':
-          $output = $this->getBlockChartByRadioQuestionForBar($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
-          break;
-
-        default:
-          $output = $this->getBlockChartByRadioQuestionForPie($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
-          break;
-      }
-    }
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsMetricQuestionSelectkeySwitch($meeting_nodes = array(), $question_tid = NULL, $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    $output = $this->getBlockChartBySelectkeyQuestionForPie($question_term, $meeting_nodes, $chart_type, $color_box_palette, $bg_color_class);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsTotalEventsByBusinessunit($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
-    $output = $this->blockChartjs("pie");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Business Unit", FALSE, $bg_color_class);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermListByVocabulary('businessunit')['label'];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
-      "data" => \Drupal::service('ngdata.node.meeting')
-        ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
-          ->meetingNodesByBU($meeting_nodes)
-      ),
-      "backgroundColor" => array_values(\Drupal::service('baseinfo.setting.service')
-        ->colorPlatePieChartOne(NULL, TRUE))
-    ]];
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByBU($meeting_nodes);
-
-    return $output;
-  }
-
-  /**
-   * bar chart
-   */
-  public function blockChartTotalEventsByEventType($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
-    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Type", FALSE, $bg_color_class);
-
-    $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
-      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
-        ->meetingNodesByEventType($meeting_nodes))
-    );
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
-      ->getTermListByVocabulary('eventtype')['label'];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
-      "data" => $datasets_data,
-      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
-      "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
-      "borderWidth" => 1
-    ]];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarOption($datasets_data);
-
-    return $output;
-  }
-
-  /**
-   * @param $entity_id is current businessunit tid
-   */
-  public function blockChartTotalEventsByTherapeuticArea($meeting_nodes = array(), $entity_id = NULL) {
-    $output = $this->blockChartjs("pie");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Therapeutic Area");
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-6";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermTherapeuticAreaListByBu($entity_id)['label'];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
-      "data" => \Drupal::service('ngdata.node.meeting')
-        ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
-          ->meetingNodesByTherapeuticArea($meeting_nodes, $entity_id)
-      ),
-      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, TRUE))
-    ]];
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByTherapeuticArea($meeting_nodes, $entity_id);
-
-    return $output;
-  }
-
-  /**
-   * @internal stackbar chart X-axis is Month,
-   */
-  public function blockChartjsMeetingsByMonthByEventType($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Event Implementation", FALSE, $bg_color_class);
-
-    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarDataByEventsByMonthByEventType($meeting_nodes);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
-      "datasets" => $datasets_data,
-    ];
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data);
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes);
-
-    return $output;
-  }
-
-  /**
-   * @internal stackbar chart X-axis is Quarter,
-   */
-  public function blockChartjsMeetingsByQuarterByEventType($meeting_nodes = array()) {
-    $output = [];
-    $output = $this->blockChartjs("bar");
-
-    // init tab 2
-    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
-      ->basicTab('chart');
-    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
-      ->basicMiddleChart($chart_type = 'bar');
-
-    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarDataByEventsByMonthByEventType($meeting_nodes, TRUE, $step = 3);
-
-    $output['blockContent'][0]['tabData']['top']['styleClass'] = "bg-0f69af color-fff height-60 padding-15 padding-left-14";
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getQuarterNameAbb(),
-      "datasets" => $datasets_data,
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data);
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes);
-
-    return $output;
-  }
-
-  /**
-   * @internal stackbar chart X-axis is Month,
-   */
-  public function blockChartjsHcpReachByMonthByEventType($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Event Type", FALSE, $bg_color_class);
-
-    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
-      "datasets" => $datasets_data_0,
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_0);
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsHcpReachByQuarterByEventType($meeting_nodes = array()) {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
-      ->basicTab('chart');
-    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
-      ->basicMiddleChart($chart_type = 'bar');
-
-    $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE, $step = 3);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getQuarterNameAbb(),
-      "datasets" => $datasets_data_1,
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
-
-    return $output;
-  }
-
-  /**
-   * @internal bar chart, bar chart is array($data) of stackbar chart
-   */
-  public function blockChartjsMeetingsByProvince($meeting_nodes = array(), $bg_color_class = 'bg-ffc832') {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Location of Events", FALSE, $bg_color_class);
-
-    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
-      ->chartLineDataByProvince($meeting_nodes, TRUE);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
-      "datasets" => array(
-        array(
-          "data" => $datasets_data_0,
-          "backgroundColor" => "#0f69af",
-          "borderColor" => "#0f69af",
-          "borderWidth" => 1
-        )
-      )
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
-
-    return $output;
-  }
-
-  /**
-   * @internal bar chart, bar chart is array($data) of stackbar chart
-   */
-  public function blockChartjsHcpReachByProvince($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Location", FALSE, $bg_color_class);
-
-    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
-      ->chartLineDataByProvince($meeting_nodes, FALSE);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
-      "datasets" => array(
-        array(
-          "data" => $datasets_data_0,
-          "backgroundColor" => "#0f69af",
-          "borderColor" => "#0f69af",
-          "borderWidth" => 1
-        )
-      )
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartBarOption($datasets_data_0);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsMeetingsByProvinceByEventType($meeting_nodes = array()) {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
-      ->basicTab('chart');
-    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
-      ->basicMiddleChart($chart_type = 'bar');
-
-    $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarDataByEventsByProvinceByEventType($meeting_nodes, TRUE);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
-      "datasets" => $datasets_data_1,
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, TRUE);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsHcpReachByProvinceByEventType($meeting_nodes = array()) {
-    $output = $this->blockChartjs("bar");
-
-    $output['blockContent'][0] = \Drupal::service('ngdata.atomic.organism')
-      ->basicTab('chart');
-    $output['blockContent'][0]['tabData']['middle'] = \Drupal::service('ngdata.atomic.organism')
-      ->basicMiddleChart($chart_type = 'bar');
-
-    $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
-      ->chartBarDataByEventsByProvinceByEventType($meeting_nodes, FALSE);
-
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
-      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
-      "datasets" => $datasets_data_1,
-    ];
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function blockChartjsWithoutLegendMetricQuestion($meeting_nodes = array(), $question_tid = NULL, $chart_type = "bar", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
-    $output = $this->blockChartjsMetricQuestionSwitch($meeting_nodes, $question_tid, $chart_type, $color_box_palette, $bg_color_class);
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
-
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = [];
-
-    return $output;
-  }
-
-  /**
-   * @see Bootstrap Slider
-   */
-  public function blockBootstrapSliderByQuestion($meeting_nodes = array(), $question_tid = NULL) {
-    $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
-
-    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
-    $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0 padding-bottom-48";
-    $output['blockHeader'] = $this->template->dataBootstrapSliderByQuestion($meeting_nodes, $question_tid);
 
     return $output;
   }

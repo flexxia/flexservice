@@ -63,10 +63,10 @@ ngpage.export_table_data.excel:
     _permission: 'access content'
 
 #
-ngpage.drupalform.sample:
-  path: '/ngform/drupalform/sample/{bundle}'
+ngpage.drupalform.standard:
+  path: '/ngform/drupalform/standard/{bundle}'
   defaults:
-    _controller: '\Drupal\ngpage\Controller\NgpageController::ngDrupalFormSample'
-    _title: 'Drupal Form Sample Page'
+    _controller: '\Drupal\ngpage\Controller\NgpageController::ngDrupalFormStandard'
+    _title: 'Drupal Form Standard Page'
   requirements:
     _access: 'TRUE'

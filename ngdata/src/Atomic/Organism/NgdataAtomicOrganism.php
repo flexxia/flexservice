@@ -48,7 +48,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function basicSection($type = "htmlSnippt", $save_png_icon_style = "float-right margin-top-12 margin-right-16") {
+  public function basicSection($type = "htmlSnippt", $save_png_icon_style = "float-right margin-top-12 margin-right-16", $save_png_icon_enable = TRUE) {
     $blockId = uniqid(rand());
 
     $output = array(
@@ -57,7 +57,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       "blockClass" => "col-md-12 margin-top-24",
       "blockClassSub" => NULL,
       'blockId' => $blockId,
-      'blockIcon' => $this->molecule->savePngIcon($save_png_icon_style, $blockId),
+      'blockIcon' => $this->molecule->savePngIcon($save_png_icon_style, $blockId, $save_png_icon_enable),
       "blockContent" => array($this->basicTab($type)),
     );
     return $output;
@@ -402,6 +402,34 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function getLegendHorizontalTotalEventsByBU($meeting_nodes = array()) {
+    $chartData = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByBU($meeting_nodes)
+      )
+    );
+    $chartLabel = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('businessunit')['label'];
+
+    $legend_text = array();
+    if ($chartData && is_array($chartData)) {
+      foreach ($chartData as $key => $row) {
+        $legend_text[] = $chartLabel[$key] . '(' . $chartData[$key] . ')';
+      }
+    }
+
+    $legend_color = \Drupal::service('flexinfo.setting.service')
+      ->colorPlateOutputKeyByPaletteName('colorPlatePieChartOne', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
+
+    $output = \Drupal::service('ngdata.atomic.atom')
+      ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getLegendTotalEventsByTherapeuticArea($meeting_nodes = array(), $businessunit_tid = NULL) {
     $legend_text = [];
 
@@ -428,6 +456,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    *
    */
   public function legendTotalEventsByEventType($meeting_nodes = array(), $by_event = TRUE) {
+    $legend_text = [];
+
     $chartData = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes, $by_event);
     $chartLabel = \Drupal::service('ngdata.term')->getTermListByVocabulary('eventtype')['label'];
@@ -511,6 +541,20 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+    $tableData = $this->molecule->tableDataByTermQuestion($meeting_nodes);
+   */
+  public function tableContentQuestionList($meeting_nodes = array(), $table_data_template_name = 'tableDataByTermQuestion') {
+    $tableData = $this->molecule->{$table_data_template_name}($meeting_nodes);
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+    // $output['tSortField'] = "Program";
 
     return $output;
   }

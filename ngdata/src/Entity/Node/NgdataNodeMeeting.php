@@ -87,17 +87,26 @@ class NgdataNodeMeeting extends NgdataNode {
   }
 
   /**
-   *
+   * @deprecated by 2020 Feb
    */
   public function meetingNodesByEventType($meeting_nodes = array()) {
+    $output = $this->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'eventtype', 'field_meeting_eventtype');
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function meetingNodesByStandardTermWithNodeField($meeting_nodes = array(), $vid = 'eventtype', $node_field = 'field_meeting_eventtype') {
     $output = array();
 
-    $eventTypeList = \Drupal::service('ngdata.term')->getTermListByVocabulary('eventtype');
+    $TermList = \Drupal::service('ngdata.term')->getTermListByVocabulary($vid);
 
-    foreach ($eventTypeList['tid'] as $key => $value) {
-      $output[$value] = \Drupal::getContainer()
+    foreach ($TermList['tid'] as $key => $row) {
+      $output[$row] = \Drupal::getContainer()
         ->get('flexinfo.querynode.service')
-        ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_eventtype', array($value), 'IN');
+        ->wrapperMeetingNodesByFieldValue($meeting_nodes, $node_field, array($row), 'IN');
     }
 
     return $output;

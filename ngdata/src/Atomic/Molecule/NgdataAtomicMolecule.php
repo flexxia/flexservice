@@ -30,18 +30,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   }
 
   /**
-   * @param $icon_position is css style, need include "float-right" and margin-top-12 margin-right-16
+   * @param $save_png_icon_style is css style, need include "float-right" and margin-top-12 margin-right-16
    */
-  public function savePngIcon($icon_position = NULL, $save_block_id = NULL) {
+  public function savePngIcon($save_png_icon_style = NULL, $save_block_id = NULL, $save_png_icon_enable = TRUE) {
     $output = "";
-    $output .= '<div class="drop-down-icon-wrapper dropdown show ' . $icon_position . '">';
-      $output .= '<a class="drop-down-icon-toggle dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-        $output .= '<i class="fa fa-angle-down color-fff"></i>';
-      $output .= '</a>';
+    $output .= '<div class="drop-down-icon-wrapper dropdown show ' . $save_png_icon_style . '">';
 
-      $output .= '<div class="drop-down-icon-menu dropdown-menu padding-20 margin-left-n-86 text-align-center" aria-labelledby="dropdownMenuLink">';
-        $output .= '<a onclick="saveHtmlToPng(\'' . $save_block_id . '\')" class="dropdown-item color-000 font-size-14" href="javascript:void(0);">SAVE PNG</a>';
-      $output .= '</div>';
+      if ($save_png_icon_enable) {
+        $output .= '<a class="drop-down-icon-toggle dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+          $output .= '<i class="fa fa-angle-down color-fff"></i>';
+        $output .= '</a>';
+
+        $output .= '<div class="drop-down-icon-menu dropdown-menu padding-20 margin-left-n-86 text-align-center" aria-labelledby="dropdownMenuLink">';
+          $output .= '<a onclick="saveHtmlToPng(\'' . $save_block_id . '\')" class="dropdown-item color-000 font-size-14" href="javascript:void(0);">';
+            $output .= 'SAVE PNG';
+          $output .= '</a>';
+        $output .= '</div>';
+      }
+
     $output .= '</div>';
 
     return $output;
@@ -58,7 +64,26 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $output .= '</span>';
       }
 
-      $output .= '<span class="margin-top-6 line-height-1-2 margin-left-14 display-block">';
+      $output .= '<span class="margin-top-6 margin-left-14 line-height-1-2 display-block">';
+        $output .= $title;
+      $output .= '</span>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getBlockTableHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0093d0 font-size-16') {
+    $output = "";
+    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-50">';
+      if ($color_box_palette) {
+        $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
+        $output .= '</span>';
+      }
+
+      $output .= '<span class="margin-left-14 line-height-1-2 display-block">';
         $output .= $title;
       $output .= '</span>';
     $output .= '</div>';
@@ -70,11 +95,13 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    *
    */
   public function getBlockMeetingHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
-    $output = '<div class="' . $bg_color_class . ' color-fff padding-15 height-60">';
+    $output = "";
+    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-60">';
       if ($color_box_palette) {
         $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
         $output .= '</span>';
       }
+
       $output .= '<span class="margin-left-14 line-height-1-2 display-block">';
         $output .= $title;
       $output .= '</span>';
@@ -88,8 +115,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    */
   public function tileBlockHeader($num, $tile_name = NULL, $css_class = NULL) {
     $output = "";
-    $output .= '<div class="line-height-1 height-100 padding-12' . $css_class . '">';
-      $output .= '<div class="font-size-28 margin-top-10">';
+    $output .= '<div class="line-height-1 height-84 padding-12' . $css_class . '">';
+      $output .= '<div class="font-size-20 margin-top-6">';
         $output .= $num;
       $output .= "</div>";
 
@@ -451,6 +478,96 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
   /**
    * @return array
+    $meeting_nids = \Drupal::getContainer()
+      ->get('flexinfo.querynode.service')
+      ->queryNidsByBundle('meeting');
+   */
+  public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
+    $output = array();
+
+    $meeting_nodes = \Drupal::getContainer()
+      ->get('flexinfo.querynode.service')
+      ->nodesByBundle('meeting');
+
+    // get all evaluation form tid array base on meeting nid
+    $meeting_evaluationform_tids = [];
+    foreach ($meeting_nodes as $meeting_node) {
+
+      $meeting_evaluationform_tids[$meeting_node->id()] = array(
+        'evaluation_num' => \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldFirstValue($meeting_node, 'field_meeting_evaluationnum'),
+        'form_tid' => \Drupal::getContainer()
+        ->get('flexinfo.node.service')
+        ->getMeetingEvaluationformTid($meeting_node)
+      );
+    }
+
+    //
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('questionlibrary');
+
+    // $start = rand(10, (count($terms) - 5));
+    // $terms = array_slice($terms, $start, 5);
+
+    if (is_array($terms)) {
+      foreach ($terms as $term) {
+
+        $evaluationform_tids_by_question = \Drupal::getContainer()
+          ->get('flexinfo.queryterm.service')
+          ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
+
+        $evaluation_result = 0;
+        $answer_result = 0;
+        if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
+          foreach ($evaluationform_tids_by_question as $row) {
+
+            // get meeting node nid as multidimensional array search by value For multiple results
+            $match_keys = array_keys(
+              array_combine(
+                array_keys($meeting_evaluationform_tids),
+                array_column($meeting_evaluationform_tids, 'form_tid')
+              ),
+              $row
+            );
+
+            if ($match_keys && is_array($match_keys)) {
+              foreach ($match_keys as $meeting_nid) {
+                $evaluation_result += $meeting_evaluationform_tids[$meeting_nid]['evaluation_num'];
+              }
+            }
+          }
+        }
+
+        // query Evaluation Answer
+        $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+        $query = $query_container
+          ->queryNidsByBundle('evaluation');
+        $group = $query_container
+          ->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $term->id());
+        $query->condition($group);
+        $query_evaluation_nids = $query_container->runQueryWithGroup($query);
+        if ($query_evaluation_nids) {
+          $answer_result = count($query_evaluation_nids);
+        }
+
+        $output[] = array(
+          'Name' => $term->getName(),
+          'Evaluation' => $evaluation_result,
+          'Answer' => $answer_result,
+          'Percentage' => \Drupal::getContainer()
+            ->get('flexinfo.calc.service')
+            ->getPercentageDecimal($answer_result, $evaluation_result) . '%',
+        );
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
    */
   public function tableDataByTopSpeaker($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134) {
     $output = array();
@@ -618,9 +735,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventList($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
-
-    foreach ($nodes as $node) {
+    foreach ($meeting_nodes as $node) {
       $program_entity = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
@@ -647,9 +762,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventListTemplate2($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
-
-    foreach ($nodes as $node) {
+    foreach ($meeting_nodes as $node) {
       $program_entity = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
