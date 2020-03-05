@@ -456,6 +456,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    *
    */
   public function legendTotalEventsByEventType($meeting_nodes = array(), $by_event = TRUE) {
+    $legend_text = [];
+
     $chartData = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes, $by_event);
     $chartLabel = \Drupal::service('ngdata.term')->getTermListByVocabulary('eventtype')['label'];
