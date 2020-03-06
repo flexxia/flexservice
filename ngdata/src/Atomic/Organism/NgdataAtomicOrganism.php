@@ -478,6 +478,27 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function legendTotalEventsByFundingSource($meeting_nodes = array(), $by_event = TRUE) {
+    $chartData = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByMonthByFundingSource($meeting_nodes, $by_event);
+    $chartLabel = \Drupal::service('ngdata.term')->getTermListByVocabulary('fundingsource')['label'];
+    if ($chartData && is_array($chartData)) {
+      foreach ($chartData as $key => $row) {
+        $legend_text[] = $chartLabel[$key] . '(' . array_sum($row['data']) . ')';
+      }
+    }
+
+    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, FALSE);
+    $legends = \Drupal::getContainer()
+      ->get('flexinfo.chart.service')
+      ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
+
+    return $legends;
+  }
+
+  /**
+   *
+   */
   public function htmlSectionBasicTableTemplate($header = NULL, $thead = NULL, $tbody = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $table = $this->molecule->getBlockHeader($header, $color_box_palette, $bg_color_class);
     $table .= '<div class="html-basic-table-wrapper">';
