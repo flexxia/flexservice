@@ -257,6 +257,48 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    * $by_event = True, FALSE is by HCP Reach
    */
+  public function chartBarDataByEventsByMonthByFundingSource($meeting_nodes = array(), $by_event = TRUE, $step = 1) {
+    $output = [];
+
+    $meeting_nodes_by_fundingSource = \Drupal::service('ngdata.node.meeting')
+      ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'fundingsource', 'field_meeting_fundingsource');
+
+    foreach ($meeting_nodes_by_fundingSource as $key => $row) {
+      $month_num = array();
+      for ($j = 1; $j < 13; $j += $step) {
+        $months = array($j);
+        if ($step == 3) {
+          $months = array($j, $j + 1, $j + 2);
+        }
+
+        $meeting_nodes_by_month = \Drupal::getContainer()->get('flexinfo.querynode.service')->meetingNodesByMonth($row, $months);
+
+        if ($by_event) {
+          $month_num[] = count($meeting_nodes_by_month);
+        }
+        else {
+          $month_num[] = array_sum(
+            \Drupal::getContainer()->get('flexinfo.field.service')
+            ->getFieldFirstValueCollection($meeting_nodes_by_month, 'field_meeting_signature')
+          );
+        }
+      }
+
+      $color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne($key + 1, TRUE);
+      $output[] = array(
+        "backgroundColor" => $color,
+        "borderColor" => $color,
+        "pointColor" => $color,
+        "data" => $month_num,
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   * $by_event = True, FALSE is by HCP Reach
+   */
   public function chartBarDataByEventsByProvinceByEventType($meeting_nodes = array(), $by_event = TRUE) {
     $output = [];
 

@@ -351,6 +351,32 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * @internal stackbar chart X-axis is Month,
+   */
+  public function blockChartjsHcpReachByMonthByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("HCP Reach By Funding Source", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEventsByMonthByFundingSource($meeting_nodes, FALSE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
+      "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
+      "datasets" => $datasets_data_0,
+    ];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_0);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByFundingSource($meeting_nodes, FALSE);
+
+    return $output;
+  }
+
+  /**
    * @internal bar chart, bar chart is array($data) of stackbar chart
    */
   public function blockChartjsMeetingsByMonth($meeting_nodes = array(), $bg_color_class = 'bg-ffc832', $step = 1) {
