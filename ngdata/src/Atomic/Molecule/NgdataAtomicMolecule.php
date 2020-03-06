@@ -298,6 +298,39 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
   /**
    * @return array
+   */
+  public function tableDataByHcpReachByCountry($meeting_nodes = array()) {
+    $output = array();
+
+    $terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName('country');
+    if (is_array($terms)) {
+      foreach ($terms as $key => $term) {
+        $meeting_nodes_by_current_term = \Drupal::getContainer()
+          ->get('flexinfo.querynode.service')
+          ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_country', array($term->id()), 'IN');
+
+        $signature_total = 0;
+        if (count($meeting_nodes_by_current_term) > 0) {
+          $signature_total = array_sum(
+            \Drupal::getContainer()
+              ->get('flexinfo.field.service')
+              ->getFieldFirstValueCollection($meeting_nodes_by_current_term, 'field_meeting_signature')
+          );
+        }
+
+        $output[] = array(
+          'Country' => $term->getName(),
+          'Reach' => $signature_total,
+        );
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
     $output[] = array(
       'Program' => $program_html,
       'Events' => count($meeting_nodes_by_current_term),
@@ -735,7 +768,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventList($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    foreach ($meeting_nodes as $node) {
+    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
+
+    foreach ($nodes as $node) {
       $program_entity = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
@@ -762,7 +797,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventListTemplate2($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    foreach ($meeting_nodes as $node) {
+    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
+
+    foreach ($nodes as $node) {
       $program_entity = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
