@@ -549,7 +549,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output = $this->blockChartjs($chart_type);
 
-    $output['blockClass'] = "col-md-6 margin-top-24";
+    $output['blockClass'] = "col-md-6 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
     $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(\Drupal::getContainer()
         ->get('flexinfo.chart.service')
@@ -589,7 +589,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEvaluationByPrePostByQuestions($meeting_nodes, $question_term);
 
-    $output['blockClass'] = "col-md-6 margin-top-24";
+    $output['blockClass'] = "col-md-6 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
     $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(\Drupal::getContainer()
         ->get('flexinfo.chart.service')
@@ -633,7 +633,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output = $this->blockChartjs($chart_type);
 
-    $output['blockClass'] = "col-md-6 margin-top-24";
+    $output['blockClass'] = "col-md-6 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
     $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(\Drupal::getContainer()
         ->get('flexinfo.chart.service')
@@ -807,7 +807,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
   public function getBlockChartByRadioQuestionForPieTemplate($chart_type = "pie") {
     $output = $this->blockChartjs($chart_type);
 
-    $output['blockClass'] = "col-md-6 margin-top-24";
+    $output['blockClass'] = "col-md-6 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-12 margin-bottom-20";
