@@ -126,6 +126,36 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * bar chart
    */
+  public function blockChartTotalEventsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Country", FALSE, $bg_color_class);
+
+    $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'FundingSource', 'field_meeting_fundingsource'))
+    );
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('fundingsource')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderWidth" => 1
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
+   * bar chart
+   */
   public function blockChartTotalEventsByEventType($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
     $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
 
@@ -161,7 +191,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Funding Source Event Totals", FALSE, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Funding Source", FALSE, $bg_color_class);
 
     $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
       ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
