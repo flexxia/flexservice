@@ -29,7 +29,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
    *
    */
   public function blockChartCssSet() {
-    $output['blockClass'] = "col-md-6 margin-top-24";
+    $output['blockClass'] = "col-md-6 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
 
     return $output;
@@ -61,8 +61,8 @@ class NgdataAtomicTemplate extends NgdataAtomic {
 
     $output['tabShow'] = "hide";
 
-    $output['blockClass'] = "block-html-clear-both-wrapper clear-both height-16 min-height-20";
-    $output['blockClass'] = "block-html-clear-both-wrapper clear-both col-xs-12 margin-top-6";
+    $output['blockClass'] = "block-html-clear-both-wrapper clear-both";
+    $output['blockClass'] = "block-html-clear-both-wrapper clear-both col-xs-12";
     $output['blockClass'] = "block-html-clear-both-wrapper";
 
     $output['blockHeader'] = '<div style="clear:both; height:1px;">666</div>';
@@ -177,6 +177,23 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
 
     $table = $this->organism->htmlSectionBasicTableTemplate($title, $thead, $tbody);
+
+    return $table;
+  }
+
+  /**
+   *
+   */
+  public function renderHtmlBasicTableByHcpReachByCountry($meeting_nodes = array(), $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+    $tableData = $this->molecule->tableDataByHcpReachByCountry($meeting_nodes);
+
+    $thead_data = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+    $tbody_data = $tableData;
+
+    $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
+    $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
+
+    $table = $this->organism->htmlSectionBasicTableTemplate('Country', $thead, $tbody, $color_box_palette, $bg_color_class);
 
     return $table;
   }
