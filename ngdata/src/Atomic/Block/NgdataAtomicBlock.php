@@ -126,6 +126,36 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * bar chart
    */
+  public function blockChartTotalEventsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Country", FALSE, $bg_color_class);
+
+    $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'Country', 'field_meeting_country'))
+    );
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('country')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      "borderWidth" => 1
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
+   * bar chart
+   */
   public function blockChartTotalEventsByEventType($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
     $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
 
@@ -161,7 +191,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Funding Source Event Totals", FALSE, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Funding Source", FALSE, $bg_color_class);
 
     $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
       ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
@@ -914,6 +944,18 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100 margin-bottom-12";
     $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
     $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
+
+    return $output;
+  }
+
+  /** - - - Html Basic Table - - - */
+  /**
+   *
+   */
+  public function getBlockHtmlBasicTableByHcpReachByCountry($meeting_nodes = array(), $block_class = "col-md-6", $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+    $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
+    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-24 " . $block_class;
+    $output['blockHeader'] = $this->template->renderHtmlBasicTableByHcpReachByCountry($meeting_nodes, $color_box_palette, $bg_color_class);
 
     return $output;
   }
