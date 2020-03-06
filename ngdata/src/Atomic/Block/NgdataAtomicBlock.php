@@ -135,12 +135,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $datasets_data = array_values(\Drupal::service('ngdata.node.meeting')
       ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
-        ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'FundingSource', 'field_meeting_fundingsource'))
+        ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'Country', 'field_meeting_country'))
     );
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
-      ->getTermListByVocabulary('fundingsource')['label'];
+      ->getTermListByVocabulary('country')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => $datasets_data,
       "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
