@@ -187,7 +187,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    * bar chart
    */
   public function blockChartTotalEventsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
-    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-24");
+    $output = $this->blockChartjs("bar", $middle_class = "col-md-12 margin-top-12");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
@@ -980,7 +980,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlBasicTableByHcpReachByCountry($meeting_nodes = array(), $block_class = "col-md-6", $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
-    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-24 " . $block_class;
+    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-12 " . $block_class;
     $output['blockHeader'] = $this->template->renderHtmlBasicTableByHcpReachByCountry($meeting_nodes, $color_box_palette, $bg_color_class);
 
     return $output;
