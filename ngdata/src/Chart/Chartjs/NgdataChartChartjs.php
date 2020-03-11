@@ -260,8 +260,8 @@ class NgdataChartChartjs extends NgdataChart {
   public function chartBarDataByEventsByMonthByFundingSource($meeting_nodes = array(), $by_event = TRUE, $step = 1) {
     $output = [];
 
-    $meeting_nodes_by_fundingSource = \Drupal::service('ngdata.node.meeting')
-      ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'fundingsource', 'field_meeting_fundingsource');
+    $meeting_nodes_by_fundingSource = array_values(\Drupal::service('ngdata.node.meeting')
+      ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'fundingsource', 'field_meeting_fundingsource'));
 
     foreach ($meeting_nodes_by_fundingSource as $key => $row) {
       $month_num = array();
