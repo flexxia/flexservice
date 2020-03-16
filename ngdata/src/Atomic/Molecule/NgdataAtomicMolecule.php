@@ -64,10 +64,26 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $output .= '</span>';
       }
 
-      $output .= '<span class="margin-top-6 margin-left-14 line-height-1-2 display-block">';
+      $output .= '<span class="margin-top-6 margin-left-14 line-height-1-2 text-center font-size-16 display-block">';
         $output .= $title;
       $output .= '</span>';
     $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getBlockHeaderForProgramName($program_tid = NULL) {
+    $program_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($program_tid);
+
+    $output = '';
+    if ($program_term) {
+      $output .= '<span class="col-md-10 color-00a9e0 font-size-20 font-weight-300">';
+        $output .= $program_term->getName();
+      $output .= '</span>';
+    }
 
     return $output;
   }
@@ -83,7 +99,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $output .= '</span>';
       }
 
-      $output .= '<span class="margin-left-14 line-height-1-2 display-block">';
+      $output .= '<span class="margin-left-14 line-height-1-2 font-size-16 display-block">';
         $output .= $title;
       $output .= '</span>';
     $output .= '</div>';
@@ -102,7 +118,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $output .= '</span>';
       }
 
-      $output .= '<span class="margin-left-14 line-height-1-2 display-block">';
+      $output .= '<span class="margin-left-14 line-height-1-2 font-size-16 display-block">';
         $output .= $title;
       $output .= '</span>';
     $output .= '</div>';
@@ -230,22 +246,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $legend_color = \Drupal::service('ngdata.term.question')
       ->getRaidoQuestionColors($question_term);
     $output = \Drupal::getContainer()->get('flexinfo.chart.service')->renderLegendSquare($legend_text, $legend_color);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function getBlockHeaderForProgramName($program_tid = NULL) {
-    $program_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($program_tid);
-
-    $output = '';
-    if ($program_term) {
-      $output .= '<span class="col-md-10 color-00a9e0 font-size-20 font-weight-300">';
-        $output .= $program_term->getName();
-      $output .= '</span>';
-    }
 
     return $output;
   }
