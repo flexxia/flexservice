@@ -75,8 +75,29 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    *
    */
+  public function getBlockMeetingHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
+    $output = "";
+    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-60">';
+      if ($color_box_palette) {
+        $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
+        $output .= '</span>';
+      }
+
+      $output .= '<span class="margin-left-14 line-height-1-2 font-size-16 display-block">';
+        $output .= $title;
+      $output .= '</span>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getBlockHeaderForProgramName($program_tid = NULL) {
-    $program_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($program_tid);
+    $program_term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($program_tid);
 
     $output = '';
     if ($program_term) {
@@ -94,25 +115,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function getBlockTableHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0093d0 font-size-16') {
     $output = "";
     $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-50">';
-      if ($color_box_palette) {
-        $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
-        $output .= '</span>';
-      }
-
-      $output .= '<span class="margin-left-14 line-height-1-2 font-size-16 display-block">';
-        $output .= $title;
-      $output .= '</span>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function getBlockMeetingHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
-    $output = "";
-    $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-60">';
       if ($color_box_palette) {
         $output .= '<span class="float-left display-block height-32 width-32 border-1-eee margin-left-6 margin-right-12 ' . $color_box_palette . '">';
         $output .= '</span>';
