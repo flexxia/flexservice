@@ -391,6 +391,39 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   }
 
   /**
+   * @param $terms is full terms
+    $terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName('country');
+   */
+  public function tableDataByHcpReachByStandardterm($meeting_nodes = array(), $terms = array(), $vid = 'Vid', $meeting_field = 'field_meeting_country') {
+    $output = array();
+
+    if (is_array($terms)) {
+      foreach ($terms as $key => $term) {
+        $meeting_nodes_by_current_term = \Drupal::getContainer()
+          ->get('flexinfo.querynode.service')
+          ->wrapperMeetingNodesByFieldValue($meeting_nodes, $meeting_field, array($term->id()), 'IN');
+
+        $signature_total = 0;
+        if (count($meeting_nodes_by_current_term) > 0) {
+          $signature_total = array_sum(
+            \Drupal::getContainer()
+              ->get('flexinfo.field.service')
+              ->getFieldFirstValueCollection($meeting_nodes_by_current_term, 'field_meeting_signature')
+          );
+        }
+
+        $output[] = array(
+          ucwords($vid) => $term->getName(),
+          'Reach' => $signature_total,
+        );
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    * @return array
     $meeting_nids = \Drupal::getContainer()
       ->get('flexinfo.querynode.service')
