@@ -864,51 +864,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   }
 
   /**
-   * @param $header_array is array('Name', 'City', 'Edit')
-   * @return array
-      $output = array(
-        array(
-          'field' => 'Name',
-          'header' => 'Name',
-        ),
-        array(
-          'field' => 'City',
-          'header' => 'City',
-        ),
-        array(
-          'field' => 'Edit',
-          'header' => 'Edit',
-        ),
-      );
-   */
-  public function tableHeaderGenerateFromArray($header_array = array()) {
-    $output = array();
-
-    foreach ($header_array as $key => $value) {
-      $output[] = array(
-        'field' => $value,
-        'header' => $value,
-      );
-    }
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function tableHeaderGenerateFromTableDataArrayKeys($tableData = array()) {
-    $output = array();
-
-    if (isset($tableData[0])) {
-      $array_keys = array_keys($tableData[0]);
-      $output = $this->tableHeaderGenerateFromArray($array_keys);
-    }
-
-    return $output;
-  }
-
-  /**
    * @return array
    */
   public function tableDataByCustomNodeByMeeting($entity_id, $start, $end) {
@@ -1134,6 +1089,51 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'EvalNum' => $this->tablePopUpTemplate($evaluationform_num, $evaluationform_data, $term->id()),
         'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
       );
+    }
+
+    return $output;
+  }
+
+  /**
+   * @param $header_array is array('Name', 'City', 'Edit')
+   * @return array
+      $output = array(
+        array(
+          'field' => 'Name',
+          'header' => 'Name',
+        ),
+        array(
+          'field' => 'City',
+          'header' => 'City',
+        ),
+        array(
+          'field' => 'Edit',
+          'header' => 'Edit',
+        ),
+      );
+   */
+  public function tableHeaderGenerateFromArray($header_array = array()) {
+    $output = array();
+
+    foreach ($header_array as $key => $value) {
+      $output[] = array(
+        'field' => $value,
+        'header' => $value,
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableHeaderGenerateFromTableDataArrayKeys($tableData = array()) {
+    $output = array();
+
+    if (isset($tableData[0])) {
+      $array_keys = array_keys($tableData[0]);
+      $output = $this->tableHeaderGenerateFromArray($array_keys);
     }
 
     return $output;
