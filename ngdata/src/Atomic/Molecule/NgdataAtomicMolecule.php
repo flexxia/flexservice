@@ -333,6 +333,96 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
   /**
    * @return array
+    $meeting_nids = \Drupal::getContainer()
+      ->get('flexinfo.querynode.service')
+      ->queryNidsByBundle('meeting');
+   */
+  public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
+    $output = array();
+
+    $meeting_nodes = \Drupal::getContainer()
+      ->get('flexinfo.querynode.service')
+      ->nodesByBundle('meeting');
+
+    // get all evaluation form tid array base on meeting nid
+    $meeting_evaluationform_tids = [];
+    foreach ($meeting_nodes as $meeting_node) {
+
+      $meeting_evaluationform_tids[$meeting_node->id()] = array(
+        'evaluation_num' => \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldFirstValue($meeting_node, 'field_meeting_evaluationnum'),
+        'form_tid' => \Drupal::getContainer()
+        ->get('flexinfo.node.service')
+        ->getMeetingEvaluationformTid($meeting_node)
+      );
+    }
+
+    //
+    $terms = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getFullTermsFromVidName('questionlibrary');
+
+    // $start = rand(10, (count($terms) - 5));
+    // $terms = array_slice($terms, $start, 5);
+
+    if (is_array($terms)) {
+      foreach ($terms as $term) {
+
+        $evaluationform_tids_by_question = \Drupal::getContainer()
+          ->get('flexinfo.queryterm.service')
+          ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
+
+        $evaluation_result = 0;
+        $answer_result = 0;
+        if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
+          foreach ($evaluationform_tids_by_question as $row) {
+
+            // get meeting node nid as multidimensional array search by value For multiple results
+            $match_keys = array_keys(
+              array_combine(
+                array_keys($meeting_evaluationform_tids),
+                array_column($meeting_evaluationform_tids, 'form_tid')
+              ),
+              $row
+            );
+
+            if ($match_keys && is_array($match_keys)) {
+              foreach ($match_keys as $meeting_nid) {
+                $evaluation_result += $meeting_evaluationform_tids[$meeting_nid]['evaluation_num'];
+              }
+            }
+          }
+        }
+
+        // query Evaluation Answer
+        $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+        $query = $query_container
+          ->queryNidsByBundle('evaluation');
+        $group = $query_container
+          ->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $term->id());
+        $query->condition($group);
+        $query_evaluation_nids = $query_container->runQueryWithGroup($query);
+        if ($query_evaluation_nids) {
+          $answer_result = count($query_evaluation_nids);
+        }
+
+        $output[] = array(
+          'Name' => $term->getName(),
+          'Evaluation' => $evaluation_result,
+          'Answer' => $answer_result,
+          'Percentage' => \Drupal::getContainer()
+            ->get('flexinfo.calc.service')
+            ->getPercentageDecimal($answer_result, $evaluation_result) . '%',
+        );
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
     $output[] = array(
       'Program' => $program_html,
       'Events' => count($meeting_nodes_by_current_term),
@@ -505,96 +595,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Responses' => $evaluation_nums,
           );
         }
-      }
-    }
-
-    return $output;
-  }
-
-  /**
-   * @return array
-    $meeting_nids = \Drupal::getContainer()
-      ->get('flexinfo.querynode.service')
-      ->queryNidsByBundle('meeting');
-   */
-  public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
-    $output = array();
-
-    $meeting_nodes = \Drupal::getContainer()
-      ->get('flexinfo.querynode.service')
-      ->nodesByBundle('meeting');
-
-    // get all evaluation form tid array base on meeting nid
-    $meeting_evaluationform_tids = [];
-    foreach ($meeting_nodes as $meeting_node) {
-
-      $meeting_evaluationform_tids[$meeting_node->id()] = array(
-        'evaluation_num' => \Drupal::getContainer()
-          ->get('flexinfo.field.service')
-          ->getFieldFirstValue($meeting_node, 'field_meeting_evaluationnum'),
-        'form_tid' => \Drupal::getContainer()
-        ->get('flexinfo.node.service')
-        ->getMeetingEvaluationformTid($meeting_node)
-      );
-    }
-
-    //
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
-      ->getFullTermsFromVidName('questionlibrary');
-
-    // $start = rand(10, (count($terms) - 5));
-    // $terms = array_slice($terms, $start, 5);
-
-    if (is_array($terms)) {
-      foreach ($terms as $term) {
-
-        $evaluationform_tids_by_question = \Drupal::getContainer()
-          ->get('flexinfo.queryterm.service')
-          ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
-
-        $evaluation_result = 0;
-        $answer_result = 0;
-        if ($evaluationform_tids_by_question && is_array($evaluationform_tids_by_question)) {
-          foreach ($evaluationform_tids_by_question as $row) {
-
-            // get meeting node nid as multidimensional array search by value For multiple results
-            $match_keys = array_keys(
-              array_combine(
-                array_keys($meeting_evaluationform_tids),
-                array_column($meeting_evaluationform_tids, 'form_tid')
-              ),
-              $row
-            );
-
-            if ($match_keys && is_array($match_keys)) {
-              foreach ($match_keys as $meeting_nid) {
-                $evaluation_result += $meeting_evaluationform_tids[$meeting_nid]['evaluation_num'];
-              }
-            }
-          }
-        }
-
-        // query Evaluation Answer
-        $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
-        $query = $query_container
-          ->queryNidsByBundle('evaluation');
-        $group = $query_container
-          ->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $term->id());
-        $query->condition($group);
-        $query_evaluation_nids = $query_container->runQueryWithGroup($query);
-        if ($query_evaluation_nids) {
-          $answer_result = count($query_evaluation_nids);
-        }
-
-        $output[] = array(
-          'Name' => $term->getName(),
-          'Evaluation' => $evaluation_result,
-          'Answer' => $answer_result,
-          'Percentage' => \Drupal::getContainer()
-            ->get('flexinfo.calc.service')
-            ->getPercentageDecimal($answer_result, $evaluation_result) . '%',
-        );
       }
     }
 
