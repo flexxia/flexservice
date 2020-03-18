@@ -365,7 +365,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByHcpReachByStandardterm($meeting_nodes = array(), $terms = array(), $vid = 'Vid', $meeting_field = 'field_meeting_country') {
     $output = array();
 
-    if (is_array($terms)) {
+    if (is_array($terms) && $terms) {
       foreach ($terms as $key => $term) {
         $meeting_nodes_by_current_term = \Drupal::getContainer()
           ->get('flexinfo.querynode.service')
