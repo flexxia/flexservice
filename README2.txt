@@ -21,13 +21,13 @@ sudo composer require flexxia/flexservice
 ######################
 sudo composer require --dev flexxia/flexservice:dev-master
 
-sudo php -d memory_limit=2048M /usr/local/bin/composer require --dev "flexxia/flexservice:dev-master"
-sudo php -d memory_limit=2048M /usr/local/bin/composer require "flexxia/flexservice dev-master#0d7d6c88"
+sudo php -d memory_limit=4096M /usr/local/bin/composer require --dev "flexxia/flexservice:dev-master"
+sudo php -d memory_limit=4096M /usr/local/bin/composer require "flexxia/flexservice dev-master#0d7d6c88"
 
 
 ######################
 sudo composer remove flexxia/flexservice
-sudo php -d memory_limit=2048M /usr/local/bin/composer remove flexxia/flexservice
+sudo php -d memory_limit=4096M /usr/local/bin/composer remove flexxia/flexservice
 
 composer show flexxia/flexservice
 
