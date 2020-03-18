@@ -236,7 +236,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
     $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
 
-    $table = $this->organism->htmlSectionBasicTableTemplate('Top Speakersqq', $thead, $tbody, $color_box_palette, $bg_color_class);
+    $table = $this->htmlSectionBasicTableTemplate('Top Speakersqq', $thead, $tbody, $color_box_palette, $bg_color_class);
 
     return $table;
   }
