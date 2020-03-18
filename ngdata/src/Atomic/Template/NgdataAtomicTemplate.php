@@ -185,7 +185,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
    *
    */
   public function renderHtmlBasicTableByHcpReachByMeetingTermField($meeting_nodes = array(), $terms = array(), $vid = 'Country', $meeting_field = 'field_meeting_country', $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
-    $tableData = $this->molecule->tableDataByHcpReachByStandardterm($meeting_nodes, $terms, $vid, $meeting_field = 'field_meeting_country');
+    $tableData = $this->molecule->tableDataByHcpReachByStandardterm($meeting_nodes, $terms, $vid, $meeting_field);
 
     $table = $this->renderHtmlBasicTableTemplate(ucwords($vid), $tableData, $color_box_palette, $bg_color_class);
 
