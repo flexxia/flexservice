@@ -187,13 +187,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   public function renderHtmlBasicTableByHcpReachByCountry($meeting_nodes = array(), $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $tableData = $this->molecule->tableDataByHcpReachByCountry($meeting_nodes);
 
-    $thead_data = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
-    $tbody_data = $tableData;
-
-    $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
-    $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
-
-    $table = $this->organism->htmlSectionBasicTableTemplate('Country', $thead, $tbody, $color_box_palette, $bg_color_class);
+    $table = $this->renderHtmlBasicTableTemplate('Country22', $tableData, $color_box_palette, $bg_color_class);
 
     return $table;
   }
@@ -204,13 +198,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   public function renderHtmlBasicTableTopProgram($meeting_nodes = array(), $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $tableData = $this->molecule->tableDataByTopProgram($meeting_nodes, 10);
 
-    $thead_data = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
-    $tbody_data = $tableData;
-
-    $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
-    $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
-
-    $table = $this->organism->htmlSectionBasicTableTemplate('Top Programs', $thead, $tbody, $color_box_palette, $bg_color_class);
+    $table = $this->renderHtmlBasicTableTemplate('Top Programs', $tableData, $color_box_palette, $bg_color_class);
 
     return $table;
   }
@@ -236,7 +224,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     $thead = \Drupal::service('ngdata.atomic.molecule')->getTableTheadHtmlByField($thead_data);
     $tbody = \Drupal::service('ngdata.atomic.molecule')->getTableTbodyHtml($tbody_data);
 
-    $table = $this->organism->htmlSectionBasicTableTemplate('Top Speakersqq', $thead, $tbody, $color_box_palette, $bg_color_class);
+    $table = $this->organism->htmlSectionBasicTableTemplate($title, $thead, $tbody, $color_box_palette, $bg_color_class);
 
     return $table;
   }
