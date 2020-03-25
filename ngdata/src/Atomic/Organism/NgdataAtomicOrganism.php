@@ -155,7 +155,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    */
   public function blockHeaderHtmlQuestionTitle($question_term = NULL) {
     $output = '<div class="block-comment-header-wrapper clear-both">';
-      $output .= '<div class="panel-header block-header bg-0f69af color-fff line-height-42 padding-left-18 padding-right-24 margin-top-12">';
+      $output .= '<div class="panel-header block-header bg-0f69af color-fff line-height-px-42 padding-left-18 padding-right-24 margin-top-12">';
         $output .= '<span>';
           $output .= \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($question_term);
         $output .= '</span>';
