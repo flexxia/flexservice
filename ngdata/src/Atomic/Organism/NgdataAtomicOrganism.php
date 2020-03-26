@@ -89,7 +89,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    */
   public function basicMiddleChart($chart_type = "pie", $middle_class = "col-md-6", $right_class = "col-md-6") {
     $output = array(
-      "class" => "min-height-340",
+      "class" => "min-height-320",
       "middleLeft" => [
         "value" => ""
       ],
