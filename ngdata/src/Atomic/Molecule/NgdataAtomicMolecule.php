@@ -1116,10 +1116,12 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $output = array();
 
     foreach ($header_array as $key => $value) {
-      $output[] = array(
-        'field' => $value,
-        'header' => $value,
-      );
+      if ($value !== 'exportData') {
+        $output[] = array(
+          'field' => $value,
+          'header' => $value,
+        );
+      }
     }
 
     return $output;
