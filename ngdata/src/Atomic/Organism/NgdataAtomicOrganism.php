@@ -144,7 +144,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    */
   public function tileSection($num, $tile_name, $css_class) {
     $output = $this->basicSection();
-    $output['blockClass'] = "col-xs-12 col-sm-6 col-md-3 margin-top-12 height-100 color-fff";
+    $output['blockClass'] = "col-xs-12 col-sm-6 col-md-3 margin-top-12 height-90 color-fff";
     $output['blockHeader'] = $this->molecule->tileBlockHeader($num, $tile_name, $css_class, TRUE);
 
     return $output;
