@@ -71,15 +71,15 @@ class NgdataAtomicAtom extends NgdataAtomic {
   /**
    *
    */
-  public function renderChartBottomFooterAveragePercentage($question_term = NULL, $meeting_nodes = array()) {
+  public function renderChartBottomFooterAverageNumber($question_term = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
     $chartAllData = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
 
-    $meanByPercentage = \Drupal::getContainer()
+    $mean_number = \Drupal::getContainer()
       ->get('flexinfo.calc.service')
       ->getPercentageDecimal(array_sum($chartAllData), count($chartAllData), 0);
 
-    $output = $meanByPercentage / 100;
+    $output = $mean_number / 100;
 
     return $output;
   }
@@ -140,7 +140,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
       $output = $this->renderChartBottomFooterByKeyValuePercentage($question_term, $meeting_nodes, $footeranswer);
     }
     else {
-      $output = $this->renderChartBottomFooterAveragePercentage($question_term, $meeting_nodes);
+      $output = $this->renderChartBottomFooterAverageNumber($question_term, $meeting_nodes);
     }
 
     return $output;
