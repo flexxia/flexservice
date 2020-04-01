@@ -738,7 +738,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         }
       }
 
-      // // cut table off to specify number
+      // cut table off to specify number
       if ($limit_row) {
         if (count($top_speaker_users) > $limit_row) {
           $top_speaker_users = array_slice($top_speaker_users, 0, $limit_row);
@@ -759,17 +759,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             \Drupal::getContainer()->get('flexinfo.field.service')
             ->getFieldFirstValueCollection($meeting_nodes_by_current_user, 'field_meeting_signature')
           );
-          $evaluation_nums = array_sum(
-            \Drupal::getContainer()->get('flexinfo.field.service')
-            ->getFieldFirstValueCollection($meeting_nodes_by_current_user, 'field_meeting_evaluationnum')
-          );
-
-          // $speaker_name_link = $user->getDisplayName();
-          // $speaker_name_link = '<span id="modal-page-anchor" data-useruid="' . $user->id() . '">';
-          //   $speaker_name_link .= '<a href="#" class="">';
-          //     $speaker_name_link .= $user->getDisplayName();
-          //   $speaker_name_link .= '</a>';
-          // $speaker_name_link .= '</span>';
 
           $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
 
@@ -780,7 +769,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Speaker' => $speaker_name_link,
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
-            'Responses' => $evaluation_nums,
             'Rating' => $rating,
           );
 
@@ -788,7 +776,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Speaker' => $user->getUserName(),
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
-            'Responses' => $evaluation_nums,
             'Rating' => $rating,
           );
 
@@ -832,7 +819,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         }
       }
 
-      // // cut table off to specify number
+      // cut table off to specify number
       if ($limit_row) {
         if (count($top_speaker_users) > $limit_row) {
           $top_speaker_users = array_slice($top_speaker_users, 0, $limit_row);
@@ -857,13 +844,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             \Drupal::getContainer()->get('flexinfo.field.service')
             ->getFieldFirstValueCollection($meeting_nodes_by_current_user, 'field_meeting_evaluationnum')
           );
-
-          // $speaker_name_link = $user->getDisplayName();
-          // $speaker_name_link = '<span id="modal-page-anchor" data-useruid="' . $user->id() . '">';
-          //   $speaker_name_link .= '<a href="#" class="">';
-          //     $speaker_name_link .= $user->getDisplayName();
-          //   $speaker_name_link .= '</a>';
-          // $speaker_name_link .= '</span>';
 
           $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
 
