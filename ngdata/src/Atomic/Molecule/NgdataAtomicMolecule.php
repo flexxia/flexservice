@@ -600,12 +600,21 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             $program_html .= '</span>';
           $program_html .= '</div>';
 
-          $output[] = array(
+          $row = array(
             'Program' => $program_html,
             'Events' => count($meeting_nodes_by_current_term),
             'Reach' => $signature_total,
             'Responses' => $evaluation_nums,
           );
+
+          $row['exportData'] = array(
+            'Program' => $term->name,
+            'Events' => count($meeting_nodes_by_current_term),
+            'Reach' => $signature_total,
+            'Responses' => $evaluation_nums,
+          );
+
+          $output[] = $row;
         }
       }
     }
