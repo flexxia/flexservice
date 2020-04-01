@@ -313,8 +313,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
 
-      $date = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
-      $program_name = $program_entity ? $program_entity->getName() : '',
+      $date = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstValueDateFormat($node, 'field_meeting_date');
+      $program_name = $program_entity ? $program_entity->getName() : '';
       $province = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstTargetIdTermName($node, 'field_meeting_province');
       $speaker = \Drupal::service('flexinfo.field.service')
@@ -365,8 +366,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
 
-      $output[] = array(
-        'Date' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+        $date => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
         'Program Name' => $program_entity ? $program_entity->getName() : '',
         'City' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_city'),
         'Speaker' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
@@ -375,6 +375,27 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Status' => $this->atom->getMeetingStatusIconHtml($node),
         'View' => \Drupal::l('View', $internal_url),
       );
+
+      $row = array(
+        'Date' = $date,
+        'Program Name' = $program_name,
+        'Province' = $province,
+        'Speaker' = $speaker,
+        'Reach' = $reach,
+        'Responses' = $responses,
+        'View' = \Drupal::l('View', $internal_url),
+      );
+
+      $row['exportData'] = array(
+        'Date' = $date,
+        'Program Name' = $program_name,
+        'Province' = $province,
+        'Speaker' = $speaker,
+        'Reach' = $reach,
+        'Responses' = $responses,
+      );
+
+      $output[] = $row;
     }
 
     return $output;
