@@ -396,7 +396,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' = $speaker,
         'HCP Reach' = $reach,
         'Responses' = $responses,
-        'Status' = $this->atom->getMeetingStatusIconHtml($node),
+        'Status' = \Drupal::service('flexinfo.node.service')->getMeetingStatus($node),
       );
 
       $output[] = $row;
