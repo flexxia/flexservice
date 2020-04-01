@@ -366,33 +366,37 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
 
-        $date => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
-        'Program Name' => $program_entity ? $program_entity->getName() : '',
-        'City' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_city'),
-        'Speaker' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
-        'HCP Reach' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_signature'),
-        'Responses' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
-        'Status' => $this->atom->getMeetingStatusIconHtml($node),
-        'View' => \Drupal::l('View', $internal_url),
+        $date = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+        $program_name = $program_entity ? $program_entity->getName() : '';
+        $city = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermName($node, 'field_meeting_city');
+        $speaker = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker');
+        $reach = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstValue($node, 'field_meeting_signature');
+        $responses = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
       );
 
       $row = array(
         'Date' = $date,
         'Program Name' = $program_name,
-        'Province' = $province,
+        'City' = $city,
         'Speaker' = $speaker,
-        'Reach' = $reach,
+        'HCP Reach' = $reach,
         'Responses' = $responses,
+        'Status' = $this->atom->getMeetingStatusIconHtml($node),
         'View' = \Drupal::l('View', $internal_url),
       );
 
       $row['exportData'] = array(
         'Date' = $date,
         'Program Name' = $program_name,
-        'Province' = $province,
+        'City' = $city,
         'Speaker' = $speaker,
-        'Reach' = $reach,
+        'HCP Reach' = $reach,
         'Responses' = $responses,
+        'Status' = $this->atom->getMeetingStatusIconHtml($node),
       );
 
       $output[] = $row;
