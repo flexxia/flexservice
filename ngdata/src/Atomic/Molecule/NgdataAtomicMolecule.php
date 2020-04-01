@@ -786,7 +786,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $row['exportData'] = array(
             'Speaker' => $user->getUserName(),
-            '#Events' => $num_meeting_nodes,
+            'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
             'Responses' => $evaluation_nums,
             'Rating' => $rating,
@@ -867,14 +867,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
 
-          $output[] = array(
-            'Speaker' => $speaker_name_link,
-            'Events' => $num_meeting_nodes,
-            'Reach' => $signature_total,
-            'Responses' => $evaluation_nums,
-            'Rating' => \Drupal::service('ngdata.term.question')
-              ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user),
-          );
+          $rating = \Drupal::service('ngdata.term.question')
+              ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user);
 
           $row = array(
             'Speaker' => $speaker_name_link,
@@ -886,7 +880,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $row['exportData'] = array(
             'Speaker' => $user->getUserName(),
-            '#Events' => $num_meeting_nodes,
+            'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
             'Responses' => $evaluation_nums,
             'Rating' => $rating,
