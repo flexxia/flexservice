@@ -773,13 +773,26 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
 
-          $output[] = array(
+          $rating = \Drupal::service('ngdata.term.question')
+            ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user);
+
+          $row = array(
             'Speaker' => $speaker_name_link,
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
-            'Rating' => \Drupal::service('ngdata.term.question')
-              ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user),
+            'Responses' => $evaluation_nums,
+            'Rating' => $rating,
           );
+
+          $row['exportData'] = array(
+            'Speaker' => $user->getUserName(),
+            '#Events' => $num_meeting_nodes,
+            'Reach' => $signature_total,
+            'Responses' => $evaluation_nums,
+            'Rating' => $rating,
+          );
+
+          $output[] = $row;
         }
       }
     }
@@ -862,6 +875,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Rating' => \Drupal::service('ngdata.term.question')
               ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user),
           );
+
+          $row = array(
+            'Speaker' => $speaker_name_link,
+            'Events' => $num_meeting_nodes,
+            'Reach' => $signature_total,
+            'Responses' => $evaluation_nums,
+            'Rating' => $rating,
+          );
+
+          $row['exportData'] = array(
+            'Speaker' => $user->getUserName(),
+            '#Events' => $num_meeting_nodes,
+            'Reach' => $signature_total,
+            'Responses' => $evaluation_nums,
+            'Rating' => $rating,
+          );
+
+          $output[] = $row;
         }
       }
     }
