@@ -365,7 +365,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
 
-      $date = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+      $date = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date');
       $program_name = $program_entity ? $program_entity->getName() : '';
       $city = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstTargetIdTermName($node, 'field_meeting_city');
@@ -387,7 +387,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'View' > \Drupal::l('View', $internal_url),
       );
 
-      $row['exportData'] => array(
+      $row['exportData'] = array(
         'Date' => $date,
         'Program Name' => $program_name,
         'City' => $city,
