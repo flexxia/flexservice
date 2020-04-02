@@ -324,25 +324,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         ->getFieldFirstValue($node, 'field_meeting_signature');
       $responses = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
-      );
 
       $row = array(
-        'Date' = $date,
-        'Program Name' = $program_name,
-        'Province' = $province,
-        'Speaker' = $speaker,
-        'Reach' = $reach,
-        'Responses' = $responses,
-        'View' = \Drupal::l('View', $internal_url),
+        'Date' => $date,
+        'Program Name' => $program_name,
+        'Province' => $province,
+        'Speaker' => $speaker,
+        'Reach' => $reach,
+        'Responses' => $responses,
+        'View' => \Drupal::l('View', $internal_url),
       );
 
       $row['exportData'] = array(
-        'Date' = $date,
-        'Program Name' = $program_name,
-        'Province' = $province,
-        'Speaker' = $speaker,
-        'Reach' = $reach,
-        'Responses' = $responses,
+        'Date' => $date,
+        'Program Name' => $program_name,
+        'Province' => $province,
+        'Speaker' => $speaker,
+        'Reach' => $reach,
+        'Responses' => $responses,
       );
 
       $output[] = $row;
@@ -366,37 +365,36 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
 
-        $date = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
-        $program_name = $program_entity ? $program_entity->getName() : '';
-        $city = \Drupal::service('flexinfo.field.service')
-          ->getFieldFirstTargetIdTermName($node, 'field_meeting_city');
-        $speaker = \Drupal::service('flexinfo.field.service')
-          ->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker');
-        $reach = \Drupal::service('flexinfo.field.service')
-          ->getFieldFirstValue($node, 'field_meeting_signature');
-        $responses = \Drupal::service('flexinfo.field.service')
-          ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
-      );
+      $date = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+      $program_name = $program_entity ? $program_entity->getName() : '';
+      $city = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstTargetIdTermName($node, 'field_meeting_city');
+      $speaker = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker');
+      $reach = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstValue($node, 'field_meeting_signature');
+      $responses = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
 
       $row = array(
-        'Date' = $date,
-        'Program Name' = $program_name,
-        'City' = $city,
-        'Speaker' = $speaker,
-        'HCP Reach' = $reach,
-        'Responses' = $responses,
-        'Status' = $this->atom->getMeetingStatusIconHtml($node),
-        'View' = \Drupal::l('View', $internal_url),
+        'Date' > $date,
+        'Program Name' > $program_name,
+        'City' > $city,
+        'Speaker' > $speaker,
+        'HCP Reach' > $reach,
+        'Responses' > $responses,
+        'Status' > $this->atom->getMeetingStatusIconHtml($node),
+        'View' > \Drupal::l('View', $internal_url),
       );
 
-      $row['exportData'] = array(
-        'Date' = $date,
-        'Program Name' = $program_name,
-        'City' = $city,
-        'Speaker' = $speaker,
-        'HCP Reach' = $reach,
-        'Responses' = $responses,
-        'Status' = \Drupal::service('flexinfo.node.service')->getMeetingStatus($node),
+      $row['exportData'] => array(
+        'Date' => $date,
+        'Program Name' => $program_name,
+        'City' => $city,
+        'Speaker' => $speaker,
+        'HCP Reach' => $reach,
+        'Responses' => $responses,
+        'Status' => \Drupal::service('flexinfo.node.service')->getMeetingStatus($node),
       );
 
       $output[] = $row;
