@@ -287,10 +287,12 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $tbody_html = NULL;
     foreach ($tbody_data as $row) {
       $tbody_html .= '<tr>';
-      foreach ($row as $value) {
-        $tbody_html .= '<td>';
-          $tbody_html .= $value;
-        $tbody_html .= '</td>';
+      foreach ($row as $key => $value) {
+        if ($key !== 'exportData') {
+          $tbody_html .= '<td>';
+            $tbody_html .= $value;
+          $tbody_html .= '</td>';
+        }
       }
       $tbody_html .= '</tr>';
     }
