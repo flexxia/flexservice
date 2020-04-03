@@ -379,14 +379,14 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
 
       $row = array(
-        'Date' > $date,
-        'Program Name' > $program_name,
-        'City' > $city,
-        'Speaker' > $speaker,
-        'HCP Reach' > $reach,
-        'Responses' > $responses,
-        'Status' > $this->atom->getMeetingStatusIconHtml($node),
-        'View' > \Drupal::l('View', $internal_url),
+        'Date' => $date,
+        'Program Name' => $program_name,
+        'City' => $city,
+        'Speaker' => $speaker,
+        'HCP Reach' => $reach,
+        'Responses' => $responses,
+        'Status' => $this->atom->getMeetingStatusIconHtml($node),
+        'View' => \Drupal::l('View', $internal_url),
       );
 
       $row['exportData'] = array(
