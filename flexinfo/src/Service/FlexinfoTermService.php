@@ -96,7 +96,7 @@ class FlexinfoTermService {
 
   /**
    * @return array, terms entity
-   \Drupal::getContainer()->get('flexinfo.term.service')->getFullTermsFromVidName($vid);
+   \Drupal::service('flexinfo.term.service')->getFullTermsFromVidName($vid);
    */
   public function getFullTermsFromVidName($vid = NULL) {
     $tids = $this->getTidsFromVidName($vid);
@@ -107,7 +107,7 @@ class FlexinfoTermService {
 
   /**
    * @return term name
-   \Drupal::getContainer()->get('flexinfo.term.service')->getNameByTid($target_id);
+   \Drupal::service('flexinfo.term.service')->getNameByTid($target_id);
    */
   public function getNameByTid($tid = NULL) {
     $output = NULL;
@@ -161,7 +161,7 @@ class FlexinfoTermService {
 
   /**
    * @return array, term tids
-   \Drupal::getContainer()->get('flexinfo.term.service')->getTidsFromVidName($vid);
+   \Drupal::service('flexinfo.term.service')->getTidsFromVidName($vid);
    */
   public function getNamesFromVidName($vid = NULL) {
     $trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0);
@@ -172,7 +172,7 @@ class FlexinfoTermService {
 
   /**
    * @return term
-   \Drupal::getContainer()->get('flexinfo.term.service')->getTermByTermName($term_name);
+   \Drupal::service('flexinfo.term.service')->getTermByTermName($term_name);
    */
   public function getTermByTermName($term_name = NULL, $vocabulary = NULL) {
     $output = NULL;
@@ -201,7 +201,7 @@ class FlexinfoTermService {
 
   /**
    * @return array, terms entity
-   \Drupal::getContainer()->get('flexinfo.term.service')->getTermsFromTids($tids);
+   \Drupal::service('flexinfo.term.service')->getTermsFromTids($tids);
    */
   public function getTermsFromTids($tids = array()) {
     $terms = array();
@@ -242,7 +242,7 @@ class FlexinfoTermService {
 
   /**
    * @return array, term tids
-   \Drupal::getContainer()->get('flexinfo.term.service')->getTidsFromFullTerms($terms);
+   \Drupal::service('flexinfo.term.service')->getTidsFromFullTerms($terms);
    */
   public function getTidsFromFullTerms($terms = array()) {
     $tids = array();
@@ -273,7 +273,7 @@ class FlexinfoTermService {
 
   /**
    * @return array, term tids
-   \Drupal::getContainer()->get('flexinfo.term.service')->getTidsFromVidName($vid);
+   \Drupal::service('flexinfo.term.service')->getTidsFromVidName($vid);
    */
   public function getTidsFromVidName($vid = NULL) {
     $trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0);
@@ -284,7 +284,7 @@ class FlexinfoTermService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.term.service')->sortTermByTermName($terms);
+   \Drupal::service('flexinfo.term.service')->sortTermByTermName($terms);
    */
   public function sortTermByTermName($terms = array(), $asc_order = TRUE) {
     $output = array();
