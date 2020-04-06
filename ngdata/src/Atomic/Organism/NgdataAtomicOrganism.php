@@ -420,14 +420,40 @@ class NgdataAtomicOrganism extends NgdataAtomic {
      </div>
    </div>
    */
-  public function getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes = array()) {
-    $output = $this->getLegendTotalEventsByBU($meeting_nodes);
+   public function getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes = array()) {
+     $output = $this->getLegendTotalEventsByBU($meeting_nodes);
 
-    $p = '/<div class="clear-both.+Immunology\(\w*\)<\/span><\/div>/';
-    $output = preg_replace($p, "", $output);
+     $user_default_businessunit_tids = \Drupal::service('user.data')
+       ->get('navinfo', \Drupal::currentUser()->id(), 'default_term_businessunit');
+     if ($user_default_businessunit_tids) {
 
-    return $output;
-  }
+       $trees = \Drupal::entityTypeManager()
+         ->getStorage('taxonomy_term')
+         ->loadTree('businessunit', 0);
+
+       $temp_match = [];
+       foreach ($trees as $key => $term) {
+         $preg_string = '/<div class="clear-both.+' . $term->name . '\(\w*\)<\/span><\/div>/';
+
+         if (in_array($term->tid, $user_default_businessunit_tids)) {
+           preg_match($preg_string, $output, $matches);
+           $temp_match["temp_match_" . $key] = $matches[0];
+           $output = preg_replace($preg_string, "temp_match_" . $key, $output);
+         }
+         else {
+           $output = preg_replace($preg_string, "", $output);
+         }
+       }
+
+       if ($temp_match) {
+         foreach ($temp_match as $temp_match_key => $row) {
+           $output = str_replace($temp_match_key, $row, $output);
+         }
+       }
+     }
+
+     return $output;
+   }
 
   /**
    *
