@@ -371,7 +371,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   }
 
   /**
-   *
+   * @return string
    */
   public function getLegendTotalEventsByBU($meeting_nodes = array()) {
     $chartData = array_values(\Drupal::service('ngdata.node.meeting')
@@ -395,6 +395,36 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     $output = \Drupal::getContainer()
       ->get('flexinfo.chart.service')
       ->renderLegendSquare($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
+
+    return $output;
+  }
+
+  /**
+   * @return string
+   * filter below string
+   <div style="margin-top:110px;" class="legend-square-wrapper margin-left-12 width-pt-100 font-size-14">
+     <div class="clear-both height-32 text-center fn-render-legend-square">
+       <span class="legend-square bg-0093d0">
+       </span>
+       <span class="float-left legend-text">Immunology(0)</span>
+     </div>
+     <div class="clear-both height-32 text-center fn-render-legend-square">
+       <span class="legend-square bg-002596">
+       </span>
+       <span class="float-left legend-text">Oncology(0)</span>
+     </div>
+     <div class="clear-both height-32 text-center fn-render-legend-square">
+       <span class="legend-square bg-ff9933">
+       </span>
+       <span class="float-left legend-text">Specialty(1)</span>
+     </div>
+   </div>
+   */
+  public function getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes = array()) {
+    $output = $this->getLegendTotalEventsByBU($meeting_nodes);
+
+    $p = '/<div class="clear-both.+Immunology\(\w*\)<\/span><\/div>/';
+    $output = preg_replace($p, "", $output);
 
     return $output;
   }
