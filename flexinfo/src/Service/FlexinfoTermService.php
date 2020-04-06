@@ -123,6 +123,28 @@ class FlexinfoTermService {
   }
 
   /**
+   * @return array of term names
+   \Drupal::service('flexinfo.term.service')->getNamesByTids($tids);
+   */
+  public function getNamesByTids($tids = array()) {
+    $output = array();
+
+    if ($tids) {
+      $terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadMultiple($tids);
+
+      if ($terms) {
+        foreach ($terms as $term) {
+          $output[] = $term->getName();
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    * @return array, term tids
    */
   public function getNamesFromTermTree($term_tree = array()) {
