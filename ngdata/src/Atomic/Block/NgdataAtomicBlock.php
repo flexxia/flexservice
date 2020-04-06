@@ -124,6 +124,17 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * @return string
+   */
+  public function blockChartjsTotalEventsByBusinessunitWithLegendRelevant($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjsTotalEventsByBusinessunit($meeting_nodes, $bg_color_class);
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes);
+
+    return $output;
+  }
+
+  /**
    * bar chart
    */
   public function blockChartTotalEventsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
