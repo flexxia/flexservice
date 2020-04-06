@@ -419,6 +419,10 @@ class NgdataAtomicOrganism extends NgdataAtomic {
        <span class="float-left legend-text">Specialty(1)</span>
      </div>
    </div>
+   *
+   *
+   *
+   <div style="margin-top:110px;" class="legend-square-wrapper margin-left-12 width-pt-100 font-size-14"><div class="clear-both height-32 text-center fn-render-legend-square"><span class="legend-square bg-0093d0"></span><span class="float-left legend-text">Immunology(0)</span></div><div class="clear-both height-32 text-center fn-render-legend-square"><span class="legend-square bg-002596"></span><span class="float-left legend-text">Oncology(0)</span></div><div class="clear-both height-32 text-center fn-render-legend-square"><span class="legend-square bg-ff9933"></span><span class="float-left legend-text">Specialty(1)</span></div></div>
    */
    public function getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes = array()) {
      $output = $this->getLegendTotalEventsByBU($meeting_nodes);
