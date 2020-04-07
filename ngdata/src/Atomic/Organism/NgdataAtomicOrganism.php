@@ -559,6 +559,44 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function legendTotalEventsByFundingSourceWithLegendRelevant($meeting_nodes = array(), $by_event = TRUE) {
+    $output = $this->legendTotalEventsByFundingSource($meeting_nodes, $by_event);
+
+    $user_default_term_tids = \Drupal::service('user.data')
+      ->get('navinfo', \Drupal::currentUser()->id(), 'default_term_fundingsource');
+    if ($user_default_term_tids) {
+
+      $trees = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadTree('fundingsource', 0);
+
+      $temp_match = [];
+      foreach ($trees as $key => $term) {
+        $preg_string = '/<div class="clear-both.+' . $term->name . '\(\w*\)<\/span><\/div>/';
+
+        if (in_array($term->tid, $user_default_term_tids)) {
+          preg_match($preg_string, $output, $matches);
+          $temp_match["temp_match_" . $key] = $matches[0];
+          $output = preg_replace($preg_string, "temp_match_" . $key, $output);
+        }
+        else {
+          $output = preg_replace($preg_string, "", $output);
+        }
+      }
+
+      if ($temp_match) {
+        foreach ($temp_match as $temp_match_key => $row) {
+          $output = str_replace($temp_match_key, $row, $output);
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function htmlSectionBasicTableTemplate($header = NULL, $thead = NULL, $tbody = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $table = $this->molecule->getBlockHeader($header, $color_box_palette, $bg_color_class);
     $table .= '<div class="html-basic-table-wrapper">';
