@@ -230,7 +230,7 @@ class FlexinfoChartService {
     if ($pool_data && $chart_label) {
 
       foreach ($pool_data as $key => $row) {
-        $fillColor[] = \Drupal::getContainer()->get('flexinfo.setting.service')->{$color_plate}(5 - $key + 1, TRUE);
+        $fillColor[] = \Drupal::service('flexinfo.setting.service')->{$color_plate}(5 - $key + 1, TRUE);
 
         $pool_data_convert[$key] = $pool_data[4 - $key];
         $chart_label_convert[$key] = $chart_label[4 - $key];
@@ -786,7 +786,7 @@ class FlexinfoChartService {
         }
       }
 
-      $color_plate = \Drupal::getContainer()->get('flexinfo.setting.service')->{$color_plate_name}();
+      $color_plate = \Drupal::service('flexinfo.setting.service')->{$color_plate_name}();
     }
 
     foreach ($pool_data as $key => $value) {
@@ -1042,7 +1042,7 @@ class FlexinfoChartService {
     // lable tid 2453 is ABCDEFGHIJKLMNOPQRSTUVWXYZ
     elseif ($question_label_tid == 2453) {
       // question_scale_max_length
-      $max_length = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+      $max_length = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
       $letter_label_key = array(
         'A',
@@ -1062,8 +1062,8 @@ class FlexinfoChartService {
 
     $color_plate = 'colorPlateThree';
     if (\Drupal::hasService('baseinfo.chart.service')) {
-      if(method_exists(\Drupal::getContainer()->get('baseinfo.chart.service'), 'renderChartPieLegendColorPlate')){
-        $color_plate = \Drupal::getContainer()->get('baseinfo.chart.service')->renderChartPieLegendColorPlate();
+      if(method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartPieLegendColorPlate')){
+        $color_plate = \Drupal::service('baseinfo.chart.service')->renderChartPieLegendColorPlate();
       }
     }
 
@@ -1071,7 +1071,7 @@ class FlexinfoChartService {
 
     for ($i = $max_length - 1; $i >= 0; $i--) {
       $legends .= '<div class="clear-both height-32 text-center">';
-        $legends .= '<span class="legend-square bg-' . \Drupal::getContainer()->get('flexinfo.setting.service')->{$color_plate}($i + 2) . '">';
+        $legends .= '<span class="legend-square bg-' . \Drupal::service('flexinfo.setting.service')->{$color_plate}($i + 2) . '">';
         $legends .= '</span>';
         $legends .= '<span class="float-left legend-text">';
 
@@ -1104,7 +1104,7 @@ class FlexinfoChartService {
    */
   public function renderChartPieLegendByDataByColorByLegend($pool_data = array(), $color_plate = array(), $legend_data = array(), $max_length = NULL) {
     if (!$color_plate) {
-      $color_plate = \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree();
+      $color_plate = \Drupal::service('flexinfo.setting.service')->colorPlateThree();
     }
     if (!$max_length) {
       $max_length = 4;
@@ -1142,7 +1142,7 @@ class FlexinfoChartService {
    */
   public function renderChartPieLegendByDataByColorByLegendAscend($pool_data = array(), $color_plate = array(), $legend_data = array(), $max_length = NULL) {
     if (!$color_plate) {
-      $color_plate = \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree();
+      $color_plate = \Drupal::service('flexinfo.setting.service')->colorPlateThree();
     }
 
     if (!$legend_data) {
@@ -1178,7 +1178,7 @@ class FlexinfoChartService {
 
     foreach ($legend_data as $key => $value) {
       $legends .= '<div class="clear-both height-32 text-center">';
-        $legends .= '<span class="legend-square bg-' . \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFive($key) . '">';
+        $legends .= '<span class="legend-square bg-' . \Drupal::service('flexinfo.setting.service')->colorPlateFive($key) . '">';
         $legends .= '</span>';
         $legends .= '<span class="float-left legend-text">';
           $legends .= $value;
@@ -1200,7 +1200,7 @@ class FlexinfoChartService {
     $color_key = 1;
     foreach ($legend_data as $value) {
       $legends .= '<div class="clear-both height-32 text-center">';
-        $legends .= '<span class="legend-square bg-' . \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFour($color_key) . '">';
+        $legends .= '<span class="legend-square bg-' . \Drupal::service('flexinfo.setting.service')->colorPlateFour($color_key) . '">';
         $legends .= '</span>';
         $legends .= '<span class="float-left legend-text">';
           $legends .= $value;
@@ -1217,7 +1217,7 @@ class FlexinfoChartService {
   /**
    * @param
    * @return
-   \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartLineDataSet();
+   \Drupal::service('flexinfo.chart.service')->renderChartLineDataSet();
    */
   public function renderChartLineDataSet($pool_data = array(), $chart_label = array()) {
     $chart_data = array();
@@ -1251,8 +1251,8 @@ class FlexinfoChartService {
       foreach ($pool_data_array as $region_name => $pool_data) {
         $datasets[] = array(
           "fillColor" => "#2fa9e0",
-          "strokeColor" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFour($color_key, TRUE),
-          "pointColor" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFour($color_key, TRUE),
+          "strokeColor" => \Drupal::service('flexinfo.setting.service')->colorPlateFour($color_key, TRUE),
+          "pointColor" => \Drupal::service('flexinfo.setting.service')->colorPlateFour($color_key, TRUE),
           "pointStrokeColor" => "#fff",
           "data" => $pool_data,
         );
@@ -1272,7 +1272,7 @@ class FlexinfoChartService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.chart.service')->getChartLegendOne();
+   \Drupal::service('flexinfo.chart.service')->getChartLegendOne();
    */
   public function getChartLegendOne($key = NULL) {
     $legends = array(
@@ -1388,10 +1388,10 @@ class FlexinfoChartService {
    *
    */
   public function getChartTitleByLayoutTerm($layout_term = NULL) {
-    $term_block_title = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($layout_term, 'field_layout_blocktitle');
+    $term_block_title = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($layout_term, 'field_layout_blocktitle');
 
     if (empty($term_block_title)) {
-      $term_question_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($layout_term, 'field_layout_question');
+      $term_question_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($layout_term, 'field_layout_question');
 
       $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_question_tid);
       if ($question_term) {
