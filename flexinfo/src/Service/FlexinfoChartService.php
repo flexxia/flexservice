@@ -613,7 +613,7 @@ class FlexinfoChartService {
       }
     }
 
-    $right_num = \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($calc_data, $sum_data, 0);
+    $right_num = \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($calc_data, $sum_data, 0);
 
     return $right_num;
   }
@@ -624,7 +624,7 @@ class FlexinfoChartService {
   public function renderChartBottomFooterValueCombine5and4($pool_data = array(), $question_term = NULL) {
     $sum_data = array_sum($pool_data);
 
-    $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+    $question_scale = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
     $calc_data = 0;
     // set as last value
@@ -652,7 +652,7 @@ class FlexinfoChartService {
       }
     }
 
-    $right_num = \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($calc_data, $sum_data, 0);
+    $right_num = \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($calc_data, $sum_data, 0);
 
     return $right_num;
   }
@@ -663,8 +663,8 @@ class FlexinfoChartService {
   public function renderChartDoughnutDataSet($pool_data = array(), $chart_label = array(), $max_length = NULL) {
     $color_plate = 'colorPlateDoughnut';
     if (\Drupal::hasService('baseinfo.chart.service')) {
-      if(method_exists(\Drupal::getContainer()->get('baseinfo.chart.service'), 'renderChartDoughnutDataSetColorPlate')){
-        $color_plate = \Drupal::getContainer()->get('baseinfo.chart.service')->renderChartDoughnutDataSetColorPlate();
+      if(method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartDoughnutDataSetColorPlate')){
+        $color_plate = \Drupal::service('baseinfo.chart.service')->renderChartDoughnutDataSetColorPlate();
       }
     }
 
@@ -673,7 +673,7 @@ class FlexinfoChartService {
     foreach ($pool_data as $key => $value) {
       $chart_data[] = array(
         "value" => $value,
-        "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->{$color_plate}($key + 1, TRUE),
+        "color" => \Drupal::service('flexinfo.setting.service')->{$color_plate}($key + 1, TRUE),
         "title" => "1(12)",
       );
 
@@ -722,9 +722,9 @@ class FlexinfoChartService {
    * @see $this->renderLegendSquare()
    */
   public function renderChartDoughnutLegend($pool_data = array(), $question_term = NULL, $max_length = NULL) {
-    $question_label_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_label');
+    $question_label_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_label');
 
-    $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+    $question_scale = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
     if (empty($max_length)) {
       $max_length = $question_scale;
     }
@@ -739,7 +739,7 @@ class FlexinfoChartService {
 
     for ($i = 0; $i < $max_length; $i++) {
       $legends .= '<div class="clear-both height-32 text-center">';
-        $legends .= '<span class="legend-square bg-' . \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree(6 - $i) . '">';
+        $legends .= '<span class="legend-square bg-' . \Drupal::service('flexinfo.setting.service')->colorPlateThree(6 - $i) . '">';
         $legends .= '</span>';
         $legends .= '<span class="float-left legend-text">';
           $legends .= $letter_label_key[$i];
@@ -770,7 +770,7 @@ class FlexinfoChartService {
         "title" => "2(28)"
       ),
     );
-   \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartPieDataSet();
+   \Drupal::service('flexinfo.chart.service')->renderChartPieDataSet();
    */
   public function renderChartPieDataSet($pool_data = array(), $chart_label = array(), $max_length = NULL, $question_term = NULL, $color_plate = array()) {
     $chart_data = array();
@@ -781,8 +781,8 @@ class FlexinfoChartService {
     if (!$color_plate) {
       $color_plate_name = 'colorPlateFive';
       if (\Drupal::hasService('baseinfo.chart.service')) {
-        if(method_exists(\Drupal::getContainer()->get('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
-          $color_plate_name = \Drupal::getContainer()->get('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
+        if(method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
+          $color_plate_name = \Drupal::service('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
         }
       }
 
@@ -804,13 +804,13 @@ class FlexinfoChartService {
     }
 
     if ($question_term) {
-      $question_label_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_label');
+      $question_label_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_label');
 
       // lable tid 2453 is ABCDEFGHIJKLMNOPQRSTUVWXYZ
       // lable tid 2458 is Yes No
       if ($question_label_tid == 2453 || $question_label_tid == 2458) {
 
-        $question_scale_max_length = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+        $question_scale_max_length = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
         if ($question_scale_max_length) {
 
           if ($question_scale_max_length == 2) {
@@ -854,12 +854,12 @@ class FlexinfoChartService {
     if (!$color_plate) {
       $color_plate_name = 'colorPlateFive';
       if (\Drupal::hasService('baseinfo.chart.service')) {
-        if(method_exists(\Drupal::getContainer()->get('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
-          $color_plate_name = \Drupal::getContainer()->get('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
+        if(method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
+          $color_plate_name = \Drupal::service('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
         }
       }
 
-      $color_plate = \Drupal::getContainer()->get('flexinfo.setting.service')->{$color_plate_name}();
+      $color_plate = \Drupal::service('flexinfo.setting.service')->{$color_plate_name}();
     }
 
     foreach ($pool_data as $key => $value) {
@@ -904,7 +904,7 @@ class FlexinfoChartService {
     foreach ($pool_data as $key => $value) {
       $chart_data[] = array(
         "value" => $value,
-        "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFive($key + 1, TRUE),
+        "color" => \Drupal::service('flexinfo.setting.service')->colorPlateFive($key + 1, TRUE),
         "title" => "1(12)",
       );
 
@@ -943,7 +943,7 @@ class FlexinfoChartService {
     foreach ($pool_data as $key => $value) {
       $chart_data[] = array(
         "value" => $value,
-        "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFive($key + 1, TRUE),
+        "color" => \Drupal::service('flexinfo.setting.service')->colorPlateFive($key + 1, TRUE),
         "title" => "1(12)",
       );
 
@@ -982,7 +982,7 @@ class FlexinfoChartService {
     foreach ($pool_data as $key => $value) {
       $chart_data[] = array(
         "value" => $value,
-        "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFour($key + 1, TRUE),
+        "color" => \Drupal::service('flexinfo.setting.service')->colorPlateFour($key + 1, TRUE),
         "title" => "1(12)",
       );
 
@@ -998,7 +998,7 @@ class FlexinfoChartService {
 
   /**
    * @param
-   \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartTopLegendOne();
+   \Drupal::service('flexinfo.chart.service')->renderChartTopLegendOne();
    */
   public function renderChartTopLegendOne($top_text = array()) {
     $output = '<div class="margin-top-12 margin-left-18 font-size-12 text-center">';
@@ -1013,9 +1013,9 @@ class FlexinfoChartService {
    * @see $this->renderLegendSquare()
    */
   public function renderChartPieLegend($pool_data = array(), $question_term = NULL, $max_length = NULL) {
-    $question_label_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_label');
+    $question_label_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_label');
 
-    $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+    $question_scale = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
     if (empty($max_length)) {
       $max_length = $question_scale;
     }
