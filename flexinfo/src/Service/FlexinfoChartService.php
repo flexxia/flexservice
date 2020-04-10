@@ -1403,23 +1403,31 @@ class FlexinfoChartService {
   }
 
   /**
-   \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($question_term);
+   \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term);
    */
-  public function getChartTitleByQuestion($question_term = NULL) {
-    $chart_title = NULL;
+   public function getChartTitleByQuestion($question_term = NULL) {
+     $output = NULL;
 
-    $set_title = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_charttitle');
-    if ($set_title) {
-      $chart_title = $set_title;
-    }
-    else {
-      if ($question_term->getName()) {
-        $chart_title = $question_term->getName();
-      }
-    }
+     $custom_title = \Drupal::service('flexinfo.field.service')
+       ->getFieldFirstValue($question_term, 'field_queslibr_charttitle');
 
-    return $chart_title;
-  }
+     if ($custom_title) {
+       $output = $custom_title;
+     }
+     else {
+       if ($question_term->getName()) {
+         $output = $question_term->getName();
+
+         $language_id = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+         if($question_term->hasTranslation($language_id)) {
+           $output = $question_term->getTranslation($language_id)->getName();
+         }
+       }
+     }
+
+     return $output;
+   }
 
   /**
    * @return chart_type function_name, like - getChartPie, getChartDoughnut
