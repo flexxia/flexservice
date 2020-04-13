@@ -1404,8 +1404,9 @@ class FlexinfoChartService {
 
   /**
    \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term);
+   * @param $view_type = 'meeting_view' or 'program_view'
    */
-   public function getChartTitleByQuestion($question_term = NULL) {
+   public function getChartTitleByQuestion($question_term = NULL, $view_type = NULL) {
      $output = NULL;
 
      $custom_title = \Drupal::service('flexinfo.field.service')
