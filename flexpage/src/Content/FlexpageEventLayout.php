@@ -74,7 +74,9 @@ class FlexpageEventLayout extends ControllerBase {
 
     if (is_array($question_tids) && count($question_tids) > 0) {
 
-      $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids);
+      $question_terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadMultiple($question_tids);
       foreach ($question_terms as $question_term) {
         $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
