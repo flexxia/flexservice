@@ -284,7 +284,8 @@ class FlexpageBlockGenerator extends ControllerBase {
    * Content Render Table
    */
   public function phpTableSortSettings() {
-    $path_args = \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
+    $path_args = \Drupal::service('flexinfo.setting.service')
+      ->getCurrentPathArgs();
 
     $table_sort_column = 0;
     $table_sort_type = 'asc'; // asc or desc
@@ -310,7 +311,8 @@ class FlexpageBlockGenerator extends ControllerBase {
   public function contentRenderPhpTable() {
     $table_content = '';
 
-    $path_args = \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
+    $path_args = \Drupal::service('flexinfo.setting.service')
+      ->getCurrentPathArgs();
 
     if (isset($path_args[4])) {
       if ($path_args[1] == 'flexpage' && $path_args[2] == 'webinar' && strlen($path_args[4]) > 0) {
