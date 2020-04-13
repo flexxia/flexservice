@@ -78,13 +78,16 @@ class FlexpageEventLayout extends ControllerBase {
         ->getStorage('taxonomy_term')
         ->loadMultiple($question_tids);
       foreach ($question_terms as $question_term) {
-        $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+        $question_scale = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
         // $chart_type_method like "getChartDoughnut"
-        $chart_type_method = \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTypeFunctionNameByQuestion($question_term);
+        $chart_type_method = \Drupal::service('flexinfo.chart.service')
+          ->getChartTypeFunctionNameByQuestion($question_term);
 
         // $chart_render_method like "renderChartPieDataSet"
-        $chart_render_method = \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTypeRenderFunctionByQuestion($question_term);
+        $chart_render_method = \Drupal::service('flexinfo.chart.service')
+          ->getChartTypeRenderFunctionByQuestion($question_term);
 
         $pool_data = array(
           "0" => $this->getQuestionAnswerByQuestionTid($meeting_nodes, $question_term->id(), 1),
@@ -282,9 +285,9 @@ class FlexpageEventLayout extends ControllerBase {
       ->get('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
-    $legend_data = \Drupal::getContainer()->get('baseinfo.chart.service')->getChartLegendFromLegendTextField($question_term);
+    $legend_data = \Drupal::service('baseinfo.chart.service')->getChartLegendFromLegendTextField($question_term);
     if ($question_scale == 7) {
-      $legend_data = \Drupal::getContainer()->get('baseinfo.chart.service')->getChartLegendPie7();
+      $legend_data = \Drupal::service('baseinfo.chart.service')->getChartLegendPie7();
     }
 
     for ($i = $question_scale; $i > 0; $i--) {
