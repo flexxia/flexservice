@@ -1418,6 +1418,13 @@ class FlexinfoChartService {
        if ($question_term->getName()) {
          $output = $question_term->getName();
 
+         $path_args = \Drupal::service('flexinfo.setting.service')
+          ->getCurrentPathArgs();
+
+         if (strtolower($path_args[2]) == 'meeting') {
+
+         }
+
          $language_id = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
          if($question_term->hasTranslation($language_id)) {
