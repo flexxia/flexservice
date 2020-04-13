@@ -37,6 +37,8 @@ class NgdataAtomicPage extends NgdataAtomic {
    *
    */
   public function meetingPageContent($section, $entity_id, $start, $end) {
+    $output = [];
+
     $meeting_entity = \Drupal::entityTypeManager()
       ->getStorage('node')
       ->load($entity_id);
@@ -48,7 +50,6 @@ class NgdataAtomicPage extends NgdataAtomic {
     $EventStandardLayoutContent = new EventStandardLayoutContent();
     $MeetingQuestionBlockGroup = $EventStandardLayoutContent->blockEventsSnapshot(array($meeting_entity), $evaluationform_tid, 'meeting_view');
 
-    $output = [];
     $output[] = $this->template->blockHtmlTileMeetingHeader($meeting_entity);
     $output[] = $this->template->blockHtmlClearBoth();
     $output = array_merge($output, $MeetingQuestionBlockGroup);
@@ -61,8 +62,10 @@ class NgdataAtomicPage extends NgdataAtomic {
    */
   public function programPageContent($meeting_nodes, $entity_id, $start, $end) {
     $output = [];
+
     $output[] = $this->template->blockHtmlProgramNameHeader($entity_id);
     $output = array_merge($output, $this->organism->tileSectionGroup($meeting_nodes, FALSE));
+
     $output[] = $this->template->blockHtmlClearBoth();
     $output = array_merge($output, $this->blockgroup->blockGroupForProgramSnapshot($entity_id, $meeting_nodes));
 
@@ -94,6 +97,7 @@ class NgdataAtomicPage extends NgdataAtomic {
    */
   public function speakerlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $limit_row = NULL, $question_tid = NULL, $table_data_template_name = 'tableDataByTopSpeaker') {
     $output = [];
+
     $output[] = $this->template->blockTableTemplate(
       "Speaker List",
       $this->organism->tableContentSpeakerList(
