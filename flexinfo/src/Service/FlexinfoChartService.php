@@ -1405,36 +1405,41 @@ class FlexinfoChartService {
   /**
    * @param $view_type = 'meeting_view' or 'program_view'
    */
-   public function getChartTitleByQuestion($question_term = NULL, $view_type = NULL) {
-     $output = NULL;
+  public function getChartTitleByQuestion($question_term = NULL) {
+    $output = NULL;
 
-     $custom_title = \Drupal::service('flexinfo.field.service')
-       ->getFieldFirstValue($question_term, 'field_queslibr_charttitle');
+    $custom_title = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_charttitle');
 
-     if ($custom_title) {
-       $output = $custom_title;
-     }
-     else {
-       if ($question_term->getName()) {
-         $output = $question_term->getName();
+    if ($custom_title) {
+      $output = $custom_title;
+    }
+    else {
+      if ($question_term->getName()) {
+        $output = $question_term->getName();
 
-         $path_args = \Drupal::service('flexinfo.setting.service')
-          ->getCurrentPathArgs();
+        $path_args = \Drupal::service('flexinfo.setting.service')
+         ->getCurrentPathArgs();
+        if (strtolower($path_args[2]) == 'meeting') {
 
-         if (strtolower($path_args[2]) == 'meeting') {
+          if (isset($path_args[4])) {
+            $meeting_entity = \Drupal::entityTypeManager()
+              ->getStorage('node')
+              ->load($path_args[4]);
 
-         }
+            $language_id =  \Drupal::service('flexinfo.field.service')
+              ->getFieldFirstTargetId($meeting_entity, 'field_meeting_language');
 
-         $language_id = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            if($question_term->hasTranslation($language_id)) {
+              $output = $question_term->getTranslation($language_id)->getName();
+            }
+          }
+        }
+      }
+    }
 
-         if($question_term->hasTranslation($language_id)) {
-           $output = $question_term->getTranslation($language_id)->getName();
-         }
-       }
-     }
-
-     return $output;
-   }
+    return $output;
+  }
 
   /**
    * @return chart_type function_name, like - getChartPie, getChartDoughnut
