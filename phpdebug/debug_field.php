@@ -110,7 +110,6 @@ function _update_field_first_values_by_vid() {
 
 /**
  *
-  _update_field_first_value();
   $field_name = 'field_queslibr_chartlegend';
  */
 function _update_field_first_value($entity = NULL, $value = NULL) {
@@ -119,6 +118,19 @@ function _update_field_first_value($entity = NULL, $value = NULL) {
 
   $field_values = $field->getValue();
   $field_values[0]['value'] = $value;
+  $field->setValue($field_values);
+  $entity->save();
+}
+
+/**
+ *
+ */
+function _update_field_first_target_id($entity = NULL, $target_id = NULL) {
+  $field_name = 'field_queslibr_chartlegend';
+  $field = $entity->get($field_name);
+
+  $field_values = $field->getValue();
+  $field_values[0]['target_id'] = $target_id;
   $field->setValue($field_values);
   $entity->save();
 }
