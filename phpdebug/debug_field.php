@@ -111,6 +111,7 @@ function _update_field_first_values_by_vid() {
 /**
  *
   _update_field_first_value();
+  $field_name = 'field_queslibr_chartlegend';
  */
 function _update_field_first_value($entity = NULL, $value = NULL) {
   $field_name = 'field_queslibr_chartfooter';
