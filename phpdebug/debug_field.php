@@ -99,7 +99,8 @@ function _set_field_value($entity_id = NULL) {
   _update_field_first_values_by_vid();
  */
 function _update_field_first_values_by_vid() {
-  $entitys = \Drupal::getContainer()->get('flexinfo.term.service')->getFullTermsFromVidName($vid = 'questionlibrary');
+  $entitys = \Drupal::service('flexinfo.term.service')
+    ->getFullTermsFromVidName($vid = 'questionlibrary');
 
   foreach ($entitys as $key => $entity) {
     _update_field_first_value($entity, $value = 'BEST ANSWER');
