@@ -95,7 +95,7 @@ function _set_field_value($entity_id = NULL) {
 
 /**
  *
-  require_once(DRUPAL_ROOT . '/modules/custom/flexrepo/phpdebug/debug_field.php');
+  require_once(DRUPAL_ROOT . '/modules/custom/flexservice/phpdebug/debug_field.php');
   _update_field_first_values_by_vid();
  */
 function _update_field_first_values_by_vid() {
