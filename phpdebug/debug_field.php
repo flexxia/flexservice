@@ -112,15 +112,22 @@ function _update_field_first_values_by_vid() {
  *
   $field_name = 'field_queslibr_footeranswer';
  */
-function _update_field_first_value($entity = NULL, $value = NULL) {
-  $field_name = 'field_queslibr_chartfooter';
-  $field = $entity->get($field_name);
+  function _update_field_first_value($entity = NULL, $value = NULL) {
+    $field_name = 'field_queslibr_footeranswer';
+    $field = $entity->get($field_name);
 
-  $field_values = $field->getValue();
-  $field_values[0]['value'] = $value;
-  $field->setValue($field_values);
-  $entity->save();
-}
+    $field_values = $field->getValue();
+
+    if (isset($field_values[0]['value']) && $field_values[0]['value']) {
+    }
+    else {
+      $field_values[0]['value'] = $value;
+      $field->setValue($field_values);
+      $entity->save();
+    }
+
+    return;
+  }
 
 /**
  *
