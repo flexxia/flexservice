@@ -151,14 +151,18 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function getRaidoQuestionLegendText($question_term = NULL, $meeting_nodes = array()) {
     $output = [];
 
+    $question_scale = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_scale');
+
+    $chartLegend = $this->atom->getRaidoQuestionLegend($question_term);
+
     $chartData = \Drupal::service('ngdata.node.evaluation')
       ->getRaidoQuestionData($question_term, $meeting_nodes);
-    $chartLegend = $this->atom->getRaidoQuestionLegend($question_term);
 
     if ($chartData && is_array($chartData)) {
       foreach ($chartData as $key => $row) {
         $row_text = '';
-        $row_text .= isset($chartLegend[$key]) ? $chartLegend[$key] : NULL;
+        $row_text .= isset($chartLegend[$key]) ? $chartLegend[$key] : $question_scale - $key;
         $row_text .= '(' . $chartData[$key] . ')';
 
         $output[] = $row_text;
