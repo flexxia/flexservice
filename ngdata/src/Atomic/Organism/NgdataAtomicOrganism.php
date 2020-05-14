@@ -517,6 +517,33 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function getLegendTotalEventsDiseaseState($meeting_nodes = array(), $diseasestate_tid = NULL) {
+    $legend_text = [];
+
+    $chartData = \Drupal::service('ngdata.node.meeting')
+      ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+        ->meetingNodesByDiseaseState($meeting_nodes, $diseasestate_tid));
+
+    $chartLabel = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('DiseaseState')['label'];
+
+    if ($chartData && is_array($chartData)) {
+      foreach ($chartData as $key => $row) {
+        $legend_text[] = $chartLabel[$key] . '(' . $chartData[$key] . ')';
+      }
+    }
+
+    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, FALSE);
+    $legends = \Drupal::getContainer()
+      ->get('flexinfo.chart.service')
+      ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
+
+    return $legends;
+  }
+
+  /**
+   *
+   */
   public function legendTotalEventsByEventType($meeting_nodes = array(), $by_event = TRUE) {
     $legend_text = [];
 
