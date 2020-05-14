@@ -129,4 +129,21 @@ class NgdataNodeMeeting extends NgdataNode {
     return $output;
   }
 
+  /**
+   *
+   */
+  public function meetingNodesByDiseaseState($meeting_nodes = array(), $entity_id = NULL) {
+    $output = [];
+
+    $diseasestate_tids = \Drupal::service('ngdata.term')->getTermListByVocabulary('diseasestate')['tid'];
+
+    foreach ($diseasestate_tids as $key => $diseasestate_tid) {
+      $output[] = \Drupal::getContainer()
+        ->get('flexinfo.querynode.service')
+        ->meetingNodesByDiseasestate($meeting_nodes, array($diseasestate_tid));
+    }
+
+    return $output;
+  }
+
 }
