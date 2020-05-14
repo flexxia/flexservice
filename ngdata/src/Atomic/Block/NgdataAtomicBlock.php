@@ -135,6 +135,33 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   *
+   */
+  public function blockChartjsTotalEventsByDiseaseState($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+    $output = $this->blockChartjs("pie");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Disease State", FALSE, $bg_color_class);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermListByVocabulary('diseasestate')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => \Drupal::service('ngdata.node.meeting')
+        ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
+          ->meetingNodesByDiseaseState($meeting_nodes)
+      ),
+      "backgroundColor" => array_values(\Drupal::service('baseinfo.setting.service')
+        ->colorPlatePieChartOne(NULL, TRUE))
+    ]];
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsDiseaseState($meeting_nodes);
+
+    return $output;
+  }
+
+  /**
    * bar chart
    */
   public function blockChartTotalEventsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
