@@ -34,7 +34,13 @@ class NgdataTerm extends NgdataEntity implements NgdataTermInterface {
 
     if (is_array($terms)) {
       foreach ($terms as $key => $term) {
-        $output['label'][] = $term->getName();
+        if ($term->getDescription()) {
+          $output['label'][] = strip_tags($term->getDescription());
+        }
+        else {
+          $output['label'][] = $term->getName();
+        }
+
         $output['tid'][] = $term->id();
       }
     }
