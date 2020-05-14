@@ -511,6 +511,11 @@ class FlexinfoTermService {
           ->get('flexinfo.field.service')
           ->getFieldFirstTargetIdTermEntity($theraparea_entity, 'field_theraparea_businessunit');
       }
+      else {
+        $output = \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_businessunit');
+      }
     }
 
     return $output;
