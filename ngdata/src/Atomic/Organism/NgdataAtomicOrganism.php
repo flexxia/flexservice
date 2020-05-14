@@ -401,6 +401,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
   /**
    * @return string
+   * only show filtered BU legend
+   *
    * filter below string
    <div style="margin-top:110px;" class="legend-square-wrapper margin-left-12 width-pt-100 font-size-14">
      <div class="clear-both height-32 text-center fn-render-legend-square">
