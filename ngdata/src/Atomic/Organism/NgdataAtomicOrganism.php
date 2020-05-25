@@ -89,7 +89,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    */
   public function basicMiddleChart($chart_type = "pie", $middle_class = "col-md-6", $right_class = "col-md-6") {
     $output = array(
-      "class" => "min-height-320",
+      "class" => "min-height-320 padding-top-20 margin-bottom-20",
       "middleLeft" => [
         "value" => ""
       ],
@@ -379,6 +379,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
         ->meetingNodesByBU($meeting_nodes)
       )
     );
+
     $chartLabel = \Drupal::service('ngdata.term')
       ->getTermListByVocabulary('businessunit')['label'];
 
@@ -401,8 +402,6 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
   /**
    * @return string
-   * only show filtered BU legend
-   *
    * filter below string
    <div style="margin-top:110px;" class="legend-square-wrapper margin-left-12 width-pt-100 font-size-14">
      <div class="clear-both height-32 text-center fn-render-legend-square">

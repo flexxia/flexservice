@@ -106,7 +106,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
     $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Business Unit", FALSE, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermListByVocabulary('businessunit')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.meeting')
@@ -117,7 +117,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->colorPlatePieChartOne(NULL, TRUE))
     ]];
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByBU($meeting_nodes);
 
     return $output;
@@ -144,7 +144,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
     $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events By Disease State", FALSE, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermListByVocabulary('diseasestate')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.meeting')
@@ -155,7 +155,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->colorPlatePieChartOne(NULL, TRUE))
     ]];
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsDiseaseState($meeting_nodes);
 
     return $output;
@@ -176,7 +176,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'Country', 'field_meeting_country'))
     );
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
       ->getTermListByVocabulary('country')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
@@ -206,7 +206,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->meetingNodesByEventType($meeting_nodes))
     );
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
       ->getTermListByVocabulary('eventtype')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
@@ -236,7 +236,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'FundingSource', 'field_meeting_fundingsource'))
     );
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
       ->getTermListByVocabulary('fundingsource')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
@@ -261,7 +261,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
     $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Therapeutic Area");
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-6";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermTherapeuticAreaListByBu($entity_id)['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.meeting')
@@ -271,7 +271,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, TRUE))
     ]];
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByTherapeuticArea($meeting_nodes, $entity_id);
 
     return $output;
@@ -290,7 +290,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
       "datasets" => $datasets_data,
@@ -298,7 +298,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes);
 
     return $output;
@@ -322,14 +322,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['top']['styleClass'] = "bg-0f69af color-fff height-60 padding-15 padding-left-14";
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getQuarterNameAbb(),
       "datasets" => $datasets_data,
     ];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes);
 
     return $output;
@@ -348,14 +348,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
       "datasets" => $datasets_data_0,
     ];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_0);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
 
     return $output;
@@ -375,14 +375,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByEventType($meeting_nodes, FALSE, $step = 3);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getQuarterNameAbb(),
       "datasets" => $datasets_data_1,
     ];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
 
     return $output;
@@ -401,14 +401,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByMonthByFundingSource($meeting_nodes, FALSE);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
       "datasets" => $datasets_data_0,
     ];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_0);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByFundingSource($meeting_nodes, FALSE);
 
     return $output;
@@ -427,7 +427,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByMonth($meeting_nodes, TRUE, $step);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
       "datasets" => array(
@@ -457,7 +457,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByMonth($meeting_nodes, FALSE, $step);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getMonthNameAbb(),
       "datasets" => array(
@@ -487,7 +487,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByProvince($meeting_nodes, TRUE);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
       "datasets" => array(
@@ -517,7 +517,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
       ->chartLineDataByProvince($meeting_nodes, FALSE);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
       "datasets" => array(
@@ -548,14 +548,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByProvinceByEventType($meeting_nodes, TRUE);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
       "datasets" => $datasets_data_1,
     ];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, TRUE);
 
     return $output;
@@ -575,14 +575,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data_1 = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEventsByProvinceByEventType($meeting_nodes, FALSE);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-8";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => \Drupal::getContainer()->get('flexinfo.setting.service')->getProvinceDescriptions(),
       "datasets" => $datasets_data_1,
     ];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')->chartStackBarOption($datasets_data_1);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
 
     return $output;
@@ -593,7 +593,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function blockChartjsWithoutLegendMetricQuestion($meeting_nodes = array(), $question_tid = NULL, $chart_type = "bar", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
     $output = $this->blockChartjsMetricQuestionSwitch($meeting_nodes, $question_tid, $chart_type, $color_box_palette, $bg_color_class);
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
 
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = [];
 
@@ -619,7 +619,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->get('flexinfo.chart.service')
         ->getChartTitleByQuestion($question_term), $color_box_palette, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-12 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = $labels;
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => $data,
@@ -634,7 +634,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       "calculateLabel" => FALSE,
     ];
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center";
 
     $output['blockContent'][0]['tabData']['bottom']["value"] = $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
 
@@ -659,7 +659,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->get('flexinfo.chart.service')
         ->getChartTitleByQuestion($question_term), $color_box_palette, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-12 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => $question_relatedtype,
       "datasets" => $datasets_data,
@@ -703,7 +703,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->get('flexinfo.chart.service')
         ->getChartTitleByQuestion($question_term), $color_box_palette, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12 margin-top-12 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = $question_relatedtype;
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => $data,
@@ -711,7 +711,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->getRaidoQuestionColors($question_term, TRUE)
     ]];
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center";
 
     $output['blockContent'][0]['tabData']['bottom']["value"] = $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
 
@@ -774,7 +774,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       "calculateLabel" => FALSE,
     ];
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "margin-top-24 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = $this->atom->getRaidoQuestionLegend($question_term);
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => $datasets_data,
@@ -874,13 +874,13 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClass'] = "col-md-6 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7 margin-top-12 margin-bottom-20";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["renderLabel"] = 'Percentage';
     $output['blockContent'][0]["chartjsPluginsOptions"] = [
       "calculateTooltip" => TRUE,
       "calculateLabel" => TRUE,
     ];
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center min-height-320";
 
     /**
      * interface placeholder

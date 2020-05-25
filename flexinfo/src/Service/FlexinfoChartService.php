@@ -1490,7 +1490,7 @@ class FlexinfoChartService {
       $legend_margin_top = 12 + 14 * (10 - $legend_amount);
     }
 
-    $legends = '<div style="margin-top:'. $legend_margin_top .'px;" class="legend-square-wrapper margin-left-12 width-pt-100 ' . $legends_class . '">';
+    $legends = '<div class="legend-square-wrapper padding-bottom-20 margin-left-12 width-pt-100 ' . $legends_class . '">';
 
     foreach ($legend_text as $key => $value) {
       $bg_color_class = NULL;
@@ -1515,7 +1515,7 @@ class FlexinfoChartService {
    * @param
    */
   public function renderLegendSquareColorKeyPlusOne($legend_text = array(), $legend_color = array(), $max_length = NULL, $legends_class = 'font-size-12') {
-    $legends = '<div class="legends-square-wrapper padding-top-24 margin-top-24 margin-left-12 width-pt-100 ' . $legends_class . '">';
+    $legends = '<div class="legends-square-wrapper padding-bottom-20 margin-left-12 width-pt-100 ' . $legends_class . '">';
 
     if (is_array($legend_text)) {
       foreach ($legend_text as $key => $value) {
