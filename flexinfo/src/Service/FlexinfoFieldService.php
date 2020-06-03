@@ -249,6 +249,31 @@ class FlexinfoFieldService {
   }
 
   /**
+   * @return field array values
+   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllValues();
+   */
+  public function getFieldAllValuesByLanguage($entity = NULL, $field_name = NULL, $language = NULL) {
+    $output = array();
+
+    $language_id = \Drupal::service('flexinfo.setting.service')->getMeetingLanguageIdByPath();
+
+    if ($entity && is_object($entity)) {
+      if($entity->hasTranslation($language_id)) {
+        $field_value_array = $entity->getTranslation($language_id)->get($field_name)->getValue();
+      }
+      else {
+        $field_value_array = $entity->get($field_name)->getValue();
+      }
+
+      foreach ($field_value_array as $row) {
+        $output[] = $row['value'];
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    * @return field single value
    \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstBooleanValue();
    */
