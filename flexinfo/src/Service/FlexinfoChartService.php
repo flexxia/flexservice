@@ -1418,22 +1418,10 @@ class FlexinfoChartService {
       if ($question_term->getName()) {
         $output = $question_term->getName();
 
-        $path_args = \Drupal::service('flexinfo.setting.service')
-         ->getCurrentPathArgs();
-        if (strtolower($path_args[2]) == 'meeting') {
+        $language_id = \Drupal::service('flexinfo.setting.service')->getMeetingLanguageIdByPath();
 
-          if (isset($path_args[4])) {
-            $meeting_entity = \Drupal::entityTypeManager()
-              ->getStorage('node')
-              ->load($path_args[4]);
-
-            $language_id =  \Drupal::service('flexinfo.field.service')
-              ->getFieldFirstTargetId($meeting_entity, 'field_meeting_language');
-
-            if($question_term->hasTranslation($language_id)) {
-              $output = $question_term->getTranslation($language_id)->getName();
-            }
-          }
+        if($question_term->hasTranslation($language_id)) {
+          $output = $question_term->getTranslation($language_id)->getName();
         }
       }
     }
