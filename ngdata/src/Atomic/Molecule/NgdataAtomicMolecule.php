@@ -250,7 +250,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
     $legend_color = \Drupal::service('ngdata.term.question')
       ->getRaidoQuestionColors($question_term);
-    $output = \Drupal::getContainer()->get('flexinfo.chart.service')->renderLegendSquare($legend_text, $legend_color);
+    $output = \Drupal::service('flexinfo.chart.service')
+      ->renderLegendSquare($legend_text, $legend_color);
 
     return $output;
   }
