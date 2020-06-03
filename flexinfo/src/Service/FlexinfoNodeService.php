@@ -520,6 +520,28 @@ class FlexinfoNodeService {
   }
 
   /**
+   * @return string
+   */
+  public function getMeetingLanguageId() {
+    $output = NULL;
+
+    $path_args = \Drupal::service('flexinfo.setting.service')
+     ->getCurrentPathArgs();
+    if (strtolower($path_args[2]) == 'meeting') {
+      if (isset($path_args[4])) {
+        $meeting_entity = \Drupal::entityTypeManager()
+          ->getStorage('node')
+          ->load($path_args[4]);
+
+        $output = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetId($meeting_entity, 'field_meeting_language');
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    * @return $status
    *  upcoming   -- before meeting time
    *  evaluated  -- after meeting time && meeting evaluation number > 0
