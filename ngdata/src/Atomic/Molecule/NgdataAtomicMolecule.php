@@ -313,8 +313,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
 
     foreach ($nodes as $node) {
-      $program_entity = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $program_entity = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
@@ -365,8 +364,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByBundle('meeting');
 
     foreach ($nodes as $node) {
-      $program_entity = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $program_entity = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
 
       $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
@@ -442,15 +440,13 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
   /**
    * @return array
-    $meeting_nids = \Drupal::getContainer()
-      ->get('flexinfo.querynode.service')
+    $meeting_nids = \Drupal::service('flexinfo.querynode.service')
       ->queryNidsByBundle('meeting');
    */
   public function tableDataByTermQuestion($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $meeting_nodes = \Drupal::getContainer()
-      ->get('flexinfo.querynode.service')
+    $meeting_nodes = \Drupal::service('flexinfo.querynode.service')
       ->nodesByBundle('meeting');
 
     // get all evaluation form tid array base on meeting nid
@@ -458,18 +454,15 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     foreach ($meeting_nodes as $meeting_node) {
 
       $meeting_evaluationform_tids[$meeting_node->id()] = array(
-        'evaluation_num' => \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        'evaluation_num' => \Drupal::service('flexinfo.field.service')
           ->getFieldFirstValue($meeting_node, 'field_meeting_evaluationnum'),
-        'form_tid' => \Drupal::getContainer()
-        ->get('flexinfo.node.service')
-        ->getMeetingEvaluationformTid($meeting_node)
+        'form_tid' => \Drupal::service('flexinfo.node.service')
+          ->getMeetingEvaluationformTid($meeting_node)
       );
     }
 
     //
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
     // $start = rand(10, (count($terms) - 5));
@@ -478,8 +471,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     if (is_array($terms)) {
       foreach ($terms as $term) {
 
-        $evaluationform_tids_by_question = \Drupal::getContainer()
-          ->get('flexinfo.queryterm.service')
+        $evaluationform_tids_by_question = \Drupal::service('flexinfo.queryterm.service')
           ->wrapperTermTidsByField('evaluationform', 'field_evaluationform_questionset', $term->id());
 
         $evaluation_result = 0;
@@ -548,8 +540,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       // first loop get top 10 Program
       $top_program_trees = array();
       foreach ($program_trees as $key => $term) {
-        $meeting_nodes_by_current_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_current_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
 
         if (count($meeting_nodes_by_current_term) > 0) {
@@ -576,8 +567,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       foreach ($top_program_trees as $key => $top_program) {
         $term = $top_program['term'];
 
-        $meeting_nodes_by_current_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_current_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
 
         if (count($meeting_nodes_by_current_term) > 0) {
@@ -645,8 +635,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       // first loop get top 10 Program
       $top_program_trees = array();
       foreach ($program_trees as $key => $term) {
-        $meeting_nodes_by_current_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_current_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
 
         if (count($meeting_nodes_by_current_term) > 0) {
@@ -673,12 +662,10 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       foreach ($top_program_trees as $key => $top_program) {
         $term = $top_program['term'];
 
-        $meeting_nodes_by_current_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_current_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($term->tid), 'IN');
 
-        $bu_term = \Drupal::getContainer()
-          ->get('flexinfo.term.service')
+        $bu_term = \Drupal::service('flexinfo.term.service')
           ->getBuTermFromProgramTid($term->tid);
 
         if (count($meeting_nodes_by_current_term) > 0) {
@@ -735,8 +722,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTopSpeaker($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134) {
     $output = array();
 
-    $speaker_users = \Drupal::getContainer()
-      ->get('flexinfo.queryuser.service')
+    $speaker_users = \Drupal::service('flexinfo.queryuser.service')
       ->wrapperUsersByRoleName('speaker');
 
     if (is_array($speaker_users)) {
@@ -744,8 +730,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       // first loop get top 10 user
       $top_speaker_users = array();
       foreach ($speaker_users as $key => $user) {
-        $meeting_nodes_by_current_user = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_current_user = \Drupal::service('flexinfo.querynode.service')
           ->meetingNodesBySpeakerUids($meeting_nodes, array($user->id()));
 
         $num_meeting_nodes = count($meeting_nodes_by_current_user);
@@ -816,8 +801,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTopSpeakerTemplate2($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134) {
     $output = array();
 
-    $speaker_users = \Drupal::getContainer()
-      ->get('flexinfo.queryuser.service')
+    $speaker_users = \Drupal::service('flexinfo.queryuser.service')
       ->wrapperUsersByRoleName('speaker');
 
     if (is_array($speaker_users)) {
@@ -825,8 +809,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       // first loop get top 10 user
       $top_speaker_users = array();
       foreach ($speaker_users as $key => $user) {
-        $meeting_nodes_by_current_user = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_current_user = \Drupal::service('flexinfo.querynode.service')
           ->meetingNodesBySpeakerUids($meeting_nodes, array($user->id()));
 
         $num_meeting_nodes = count($meeting_nodes_by_current_user);
@@ -976,8 +959,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByCustomUserForAdminSection() {
     $output = array();
 
-    $uids = \Drupal::getContainer()
-      ->get('flexinfo.queryuser.service')
+    $uids = \Drupal::service('flexinfo.queryuser.service')
       ->queryUidsByStatus(1);
 
     if ($uids && is_array($uids)) {
@@ -1027,8 +1009,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    * @return array
    */
   public function tableDataByCustomTermByQestion() {
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
     $evaluation_terms = \Drupal::getContainer()->get('flexinfo.term.service')->getFullTermsFromVidName($vid = 'evaluationform');
@@ -1053,12 +1034,10 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    *
    */
   public function tableDataByCustomTermEvaluationForm() {
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('evaluationform');
 
-    $program_terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $program_terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('program');
 
     foreach ($terms as $term) {
@@ -1087,8 +1066,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    *
    */
   public function tableDataByCustomTermBusinessunit() {
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('businessunit');
 
     foreach ($terms as $term) {
@@ -1106,8 +1084,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    *
    */
   public function tableDataByCustomTermTherapeuticarea() {
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('therapeuticarea');
 
     foreach ($terms as $term) {
@@ -1126,20 +1103,17 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    *
    */
   public function tableDataByCustomTermQuestionEvaluationForm() {
-    $terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
-    $evaluation_terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $evaluation_terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName($vid = 'evaluationform');
 
     foreach ($terms as $term) {
       $evaluationform_num = 0;
       $evaluationform_terms = array();
       foreach ($evaluation_terms as $key => $evaluation_term) {
-        $question_tids = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $question_tids = \Drupal::service('flexinfo.field.service')
           ->getFieldAllTargetIds($evaluation_term, 'field_evaluationform_questionset');
 
         if (in_array($term->id(), $question_tids)) {
