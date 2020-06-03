@@ -512,8 +512,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'Name' => $term->getName(),
           'Evaluation' => $evaluation_result,
           'Answer' => $answer_result,
-          'Percentage' => \Drupal::getContainer()
-            ->get('flexinfo.calc.service')
+          'Percentage' => \Drupal::service('flexinfo.calc.service')
             ->getPercentageDecimal($answer_result, $evaluation_result) . '%',
         );
       }
