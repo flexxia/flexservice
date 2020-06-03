@@ -989,15 +989,17 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByCustomTermByProgram() {
     $output = array();
 
-    $program_terms = \Drupal::service('flexinfo.term.service')->getFullTermsFromVidName('program');
+    $program_terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName('program');
     if (is_array($program_terms)) {
       foreach ($program_terms as $key => $term) {
-        $theraparea_term = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($term, 'field_program_theraparea');
+        $theraparea_term = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermEntity($term, 'field_program_theraparea');
 
         $output[] = array(
           'Name' => $term->getName(),
           'BU' => \Drupal::service('flexinfo.field.service')
-          ->getFieldFirstTargetIdTermName($theraparea_term, 'field_theraparea_businessunit'),
+            ->getFieldFirstTargetIdTermName($theraparea_term, 'field_theraparea_businessunit'),
           'TA' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($theraparea_term, 'name'),
           'Edit' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
         );
@@ -1014,7 +1016,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
-    $evaluation_terms = \Drupal::service('flexinfo.term.service')->getFullTermsFromVidName($vid = 'evaluationform');
+    $evaluation_terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName($vid = 'evaluationform');
 
     if (is_array($terms)) {
 
@@ -1022,8 +1025,10 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
         $output[] = array(
           'NAME' => $term->getName(),
-          'FieldType' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($term, 'field_queslibr_fieldtype'),
-          'QuestionType' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($term, 'field_queslibr_questiontype'),
+          'FieldType' => \Drupal::service('flexinfo.field.service')
+            ->getFieldFirstTargetIdTermName($term, 'field_queslibr_fieldtype'),
+          'QuestionType' => \Drupal::service('flexinfo.field.service')
+            ->getFieldFirstTargetIdTermName($term, 'field_queslibr_questiontype'),
           'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
         );
       }
@@ -1046,7 +1051,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $program_num = 0;
       foreach ($program_terms as $program_term) {
-        $evaluation_tids = \Drupal::service('flexinfo.field.service')->getFieldAllTargetIds($program_term, 'field_program_evaluationform');
+        $evaluation_tids = \Drupal::service('flexinfo.field.service')
+          ->getFieldAllTargetIds($program_term, 'field_program_evaluationform');
         if (in_array($term->id(), $evaluation_tids)) {
           $program_num ++;
         }
@@ -1093,8 +1099,10 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $output[] = array(
         'NAME' => $term->getName(),
         'DESCRIPTION' => $term->getDescription(),
-        'BU' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($term, 'field_theraparea_businessunit'),
-        'EDIT' => \Drupal::service('flexinfo.term.service')->getTermEditLink($term->id()),
+        'BU' => \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermName($term, 'field_theraparea_businessunit'),
+        'EDIT' => \Drupal::service('flexinfo.term.service')
+          ->getTermEditLink($term->id()),
       );
     }
 
