@@ -56,7 +56,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field single for any type
-     \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue();
+     \Drupal::service('flexinfo.field.service')->getFieldSingleValue();
    */
   public function getFieldSingleValue($entity_type = NULL, $entity = NULL, $field_name = NULL) {
     $output = '';
@@ -78,13 +78,13 @@ class FlexinfoFieldService {
         $target_id = $this->getFieldFirstTargetId($entity, $field_name);
 
         if ($field->getSetting('target_type') == 'taxonomy_term') {
-          $output = \Drupal::getContainer()->get('flexinfo.term.service')->getNameByTid($target_id);
+          $output = \Drupal::service('flexinfo.term.service')->getNameByTid($target_id);
         }
         elseif ($field->getSetting('target_type') == 'node') {
           $output = $target_id;
         }
         elseif ($field->getSetting('target_type') == 'user') {
-          $output = \Drupal::getContainer()->get('flexinfo.user.service')->getUserNameByUid($target_id);
+          $output = \Drupal::service('flexinfo.user.service')->getUserNameByUid($target_id);
         }
       }
       else {
@@ -104,7 +104,7 @@ class FlexinfoFieldService {
 
   /**
    * @return array result value together for some entity array
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($entitys, 'field_pool_answerint');
+   \Drupal::service('flexinfo.field.service')->getFieldAnswerIntArray($entitys, 'field_pool_answerint');
    */
   public function getFieldAnswerIntArray($entity_array = array(), $field_name = NULL) {
     $output = array();
@@ -130,7 +130,7 @@ class FlexinfoFieldService {
 
   /**
    * @return array result value together for some entity array
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerTermArray($entitys, 'field_pool_answerterm');
+   \Drupal::service('flexinfo.field.service')->getFieldAnswerTermArray($entitys, 'field_pool_answerterm');
    */
   public function getFieldAnswerTermArray($entity_array = array(), $field_name = NULL) {
     $output = array();
@@ -146,7 +146,7 @@ class FlexinfoFieldService {
 
   /**
    * @return array result value together for some entity array
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($entitys, 'field_pool_answertext');
+   \Drupal::service('flexinfo.field.service')->getFieldAnswerIntArray($entitys, 'field_pool_answertext');
    */
   public function getFieldAnswerTextArray($entity_array = array(), $field_name = NULL) {
     $output = array();
@@ -162,7 +162,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field array "target_id"
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIds($entity, $field_name);
+   \Drupal::service('flexinfo.field.service')->getFieldAllTargetIds($entity, $field_name);
    */
   public function getFieldAllTargetIds($entity = NULL, $field_name = NULL) {
     $output = array();
@@ -179,7 +179,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field array "target_id"
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIdsEntitys($entity, $field_name, 'taxonomy_term');
+   \Drupal::service('flexinfo.field.service')->getFieldAllTargetIdsEntitys($entity, $field_name, 'taxonomy_term');
    */
   public function getFieldAllTargetIdsEntitys($entity = NULL, $field_name = NULL, $entity_type = 'taxonomy_term') {
     $entitys = array();
@@ -233,7 +233,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllValues();
+   \Drupal::service('flexinfo.field.service')->getFieldAllValues();
    */
   public function getFieldAllValues($entity = NULL, $field_name = NULL) {
     $output = array();
@@ -250,7 +250,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllValues();
+   \Drupal::service('flexinfo.field.service')->getFieldAllValues();
    */
   public function getFieldAllValuesByLanguage($entity = NULL, $field_name = NULL, $language = NULL) {
     $output = array();
@@ -275,7 +275,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field single value
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstBooleanValue();
+   \Drupal::service('flexinfo.field.service')->getFieldFirstBooleanValue();
    */
   public function getFieldFirstBooleanValue($entity = NULL, $field_name = NULL) {
     $output = NULL;
@@ -295,7 +295,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field single "target_id"
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId();
+   \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId();
    */
   public function getFieldFirstTargetId($entity = NULL, $field_name = NULL) {
     $output = NULL;
@@ -361,7 +361,7 @@ class FlexinfoFieldService {
    */
   public function getFieldFirstTargetIdTermName($entity = NULL, $field_name = NULL) {
     $target_id = $this->getFieldFirstTargetId($entity, $field_name);
-    $output = \Drupal::getContainer()->get('flexinfo.term.service')->getNameByTid($target_id);
+    $output = \Drupal::service('flexinfo.term.service')->getNameByTid($target_id);
 
     return $output;
   }
@@ -377,18 +377,18 @@ class FlexinfoFieldService {
 
   /**
    * @return field single "target_id"
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId();
+   \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId();
    */
   public function getFieldFirstTargetIdUserName($entity = NULL, $field_name = NULL) {
     $target_id = $this->getFieldFirstTargetId($entity, $field_name);
-    $output = \Drupal::getContainer()->get('flexinfo.user.service')->getUserNameByUid($target_id);
+    $output = \Drupal::service('flexinfo.user.service')->getUserNameByUid($target_id);
 
     return $output;
   }
 
   /**
    * @return field single value
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue();
+   \Drupal::service('flexinfo.field.service')->getFieldFirstValue();
    */
   public function getFieldFirstValue($entity = NULL, $field_name = NULL) {
     $output = NULL;
@@ -400,12 +400,12 @@ class FlexinfoFieldService {
 
   /**
    * @return field single value
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue();
+   \Drupal::service('flexinfo.field.service')->getFieldFirstValue();
    */
   public function getFieldFirstValueDateFormat($entity = NULL, $field_name = NULL, $type = 'html_date') {
     $timestamp = $this->getFieldFirstValueDateTimestamp($entity, $field_name);
 
-    $output = \Drupal::getContainer()->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($timestamp, $type);
+    $output = \Drupal::service('flexinfo.setting.service')->convertTimeStampToHtmlDate($timestamp, $type);
 
     return $output;
   }
@@ -453,7 +453,7 @@ class FlexinfoFieldService {
    */
   /**
    * @return field standard_type
-     \Drupal::getContainer()->get('flexinfo.field.service')->getFieldStandardType();
+     \Drupal::service('flexinfo.field.service')->getFieldStandardType();
 
    * other
    * 'datetime'
@@ -484,7 +484,7 @@ class FlexinfoFieldService {
   /**
    * @param $bundle is Vid - Vocabulary Name
    * @return array, only include custom field
-   \Drupal::getContainer()->get('flexinfo.field.service')->getFieldsCollectionByEntityBundle();
+   \Drupal::service('flexinfo.field.service')->getFieldsCollectionByEntityBundle();
    */
   public function getFieldsCollectionByEntityBundle($entity_type = NULL, $bundle = NULL) {
     $output = array();
@@ -564,7 +564,7 @@ class FlexinfoFieldService {
       );
    *
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldFirstValueWithSubfieldCondition();
+   \Drupal::service('flexinfo.field.service')->getReactsetFieldFirstValueWithSubfieldCondition();
    */
   public function getReactsetFieldAllValueWithSubfieldCondition($entity = NULL, $field_name = 'field_evaluation_reactset', $subfield = NULL, $subfield_condition_array = array()) {
     $output = NULL;
@@ -596,7 +596,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldFirstValue();
+   \Drupal::service('flexinfo.field.service')->getReactsetFieldFirstValue();
    */
   public function getReactsetFieldFirstValue($entity = NULL, $field_name = 'field_evaluation_reactset', $subfield = NULL, $question_tid) {
     $output = NULL;
@@ -617,7 +617,7 @@ class FlexinfoFieldService {
 
   /**
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldFirstValueCollection();
+   \Drupal::service('flexinfo.field.service')->getReactsetFieldFirstValueCollection();
    */
   public function getReactsetFieldFirstValueCollection($entity_array = array(), $field_name = 'field_evaluation_reactset', $subfield = NULL, $question_tid) {
     $output = array();
@@ -660,7 +660,7 @@ class FlexinfoFieldService {
       );
    *
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldFirstValueWithSubfieldCondition();
+   \Drupal::service('flexinfo.field.service')->getReactsetFieldFirstValueWithSubfieldCondition();
    */
   public function getReactsetFieldFirstValueWithSubfieldCondition($entity = NULL, $field_name = 'field_evaluation_reactset', $subfield = NULL, $subfield_condition_array = array()) {
     $output = NULL;
@@ -702,7 +702,7 @@ class FlexinfoFieldService {
       );
    *
    * @return field array values
-   \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldFirstValueWithSubfieldCondition();
+   \Drupal::service('flexinfo.field.service')->getReactsetFieldFirstValueWithSubfieldCondition();
    */
   public function getReactsetFieldFirstValueCollectionWithSubfieldCondition($entity_array = array(), $field_name = 'field_evaluation_reactset', $subfield = NULL, $subfield_condition_array = array()) {
     $output = array();
@@ -748,8 +748,8 @@ class FlexinfoFieldService {
    *  $entity_type = 'taxonomy_term'
    *  $field_name = 'field_page_city';
 
-   \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('taxonomy_term', $entity, 'field_form_questionset', $values);
-   \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('node', $entity, 'field_page_city', $values);
+   \Drupal::service('flexinfo.field.service')->updateFieldValue('taxonomy_term', $entity, 'field_form_questionset', $values);
+   \Drupal::service('flexinfo.field.service')->updateFieldValue('node', $entity, 'field_page_city', $values);
    */
   public function updateFieldValue($entity_type = 'node', $entity = NULL, $field_name = NULL, $new_field_values = array()) {
     $field = $entity->get($field_name);
@@ -811,7 +811,7 @@ class FlexinfoFieldService {
    *  $entity_type = 'taxonomy_term'
    *  $field_name = 'field_page_city';
 
-   \Drupal::getContainer()->get('flexinfo.field.service')->updateTermEvaluationFormQuestionSetValue('taxonomy_term');
+   \Drupal::service('flexinfo.field.service')->updateTermEvaluationFormQuestionSetValue('taxonomy_term');
    */
   public function updateTermEvaluationFormQuestionSetValue($entity_type = 'taxonomy_term', $field_name = 'field_evaluationform_questionset') {
     $vid = 'evaluationform';
@@ -820,7 +820,7 @@ class FlexinfoFieldService {
     $new_question_tid = 5621;    // replace $search_question_tid to $new_question_tid 3006
     $additional_question_tid = 5622;   // 2843
 
-    $query_container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+    $query_container = \Drupal::service('flexinfo.queryterm.service');
     $query = $query_container->queryTidsByBundle($vid);
     $group = $query_container->groupStandardByFieldValue($query, 'field_evaluationform_questionset', $search_question_tid);
     $query->condition($group);
@@ -850,7 +850,7 @@ class FlexinfoFieldService {
           );
         }
 
-        \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('taxonomy_term', $entity, $field_name, $new_field_values);
+        \Drupal::service('flexinfo.field.service')->updateFieldValue('taxonomy_term', $entity, $field_name, $new_field_values);
       }
     }
   }
@@ -868,7 +868,7 @@ class FlexinfoFieldService {
 
     $new_question_answer = 2;    // replace $search_question_answer to $new_question_answer
 
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $query_container = \Drupal::service('flexinfo.querynode.service');
     $query = $query_container->queryNidsByBundle('evaluation');
     $group = $query_container->groupStandardByFieldValue($query, 'field_evaluation_meetingnid', $meeting_nid);
     $query->condition($group);
@@ -893,7 +893,7 @@ class FlexinfoFieldService {
       );
       $reasctset_values[] = $new_question_answer;
 
-      \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue($entity_type, $entity, $field_name, $reasctset_values);
+      \Drupal::service('flexinfo.field.service')->updateFieldValue($entity_type, $entity, $field_name, $reasctset_values);
 
       // dpm('Update evaluation to new answer - ' . $entity->id());
 
@@ -904,14 +904,14 @@ class FlexinfoFieldService {
    * @todo
    * change evaluation question answer batch
    * update field_evaluation_reactset answer value
-   \Drupal::getContainer()->get('flexinfo.field.service')->updateNodeEvaluationQuestionAnswerValue();
+   \Drupal::service('flexinfo.field.service')->updateNodeEvaluationQuestionAnswerValue();
    */
   public function updateNodeEvaluationQuestionAnswerValue($entity_type = 'node', $field_name = 'field_evaluation_reactset') {
     $search_question_tid = 3013;
     $search_question_answer = 5;
     $new_question_answer = 2;    // replace $search_question_answer to $new_question_answer
 
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $query_container = \Drupal::service('flexinfo.querynode.service');
     $query = $query_container->queryNidsByBundle('evaluation');
 
     $group = $query_container->groupStandardByFieldValue($query, 'field_evaluation_meetingnid', 43985);
@@ -939,7 +939,7 @@ class FlexinfoFieldService {
           if (isset($reasctset_values[$column_key]['question_tid'])) {
             if ($reasctset_values[$column_key]['question_tid'] == $search_question_tid) {
               $reasctset_values[$column_key]['question_answer'] = $new_question_answer;
-              \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue($entity_type, $entity, $field_name, $reasctset_values);
+              \Drupal::service('flexinfo.field.service')->updateFieldValue($entity_type, $entity, $field_name, $reasctset_values);
 
               dpm('Update evaluation to new answer - ' . $entity->id());
             }
