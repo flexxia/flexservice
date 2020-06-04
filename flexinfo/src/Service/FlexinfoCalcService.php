@@ -9,6 +9,7 @@ namespace Drupal\flexinfo\Service;
 
 /**
  * An example Service container.
+   \Drupal::service('flexinfo.calc.service')->demo($pool_data);
  */
 class FlexinfoCalcService {
 
@@ -22,7 +23,6 @@ class FlexinfoCalcService {
       [4] => 2410
     )
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->arrayAverageByCount($pool_data);
    */
   public function arrayAverageByCount($pool_data = array(), $decimals = 2) {
     $output = 0;
@@ -44,10 +44,10 @@ class FlexinfoCalcService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->arrayAverageByMeetingNodes($meeting_nodes, $question_tid);
+   \Drupal::service('flexinfo.calc.service')->arrayAverageByMeetingNodes($meeting_nodes, $question_tid);
    */
   public function arrayAverageByMeetingNodes($meeting_nodes = array(), $question_tid = NULL, $decimals = 2) {
-    $pool_data = \Drupal::getContainer()->get('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, $question_tid);
+    $pool_data = \Drupal::service('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, $question_tid);
     $output = $this->arrayAverageByCount($pool_data, $decimals);
 
     return $output;
@@ -64,11 +64,11 @@ class FlexinfoCalcService {
    * Total = Promoters + Passives + Detractors;
    * NPS =  (Promoters - Detractors) / Total;
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->calcNtsScoreByMeetingNodes();
+   \Drupal::service('flexinfo.calc.service')->calcNtsScoreByMeetingNodes();
    */
   public function calcNtsScoreByMeetingNodes($meeting_nodes = array(), $plus_sign = TRUE) {
     // How would you rate the overall quality of the Educational program
-    $pool_data_2734 = \Drupal::getContainer()->get('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, 2734);
+    $pool_data_2734 = \Drupal::service('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, 2734);
 
     $nps = $this->calcNTSScore($pool_data_2734);
     return $nps;
@@ -85,7 +85,7 @@ class FlexinfoCalcService {
    * Total = Promoters + Passives + Detractors;
    * NPS =  (Promoters - Detractors) / Total;
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->calcNTSScore($pool_data);
+   \Drupal::service('flexinfo.calc.service')->calcNTSScore($pool_data);
    */
   public function calcNTSScore($pool_data = array(), $plus_sign = TRUE) {
     foreach (range(0, 4) as $key => $value) {
@@ -121,7 +121,7 @@ class FlexinfoCalcService {
 
   /**
    * avoid number 2 is zero or null
-   \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentage();
+   \Drupal::service('flexinfo.calc.service')->getPercentage();
    */
   public function getPercentage($num1 = NULL, $num2 = NULL) {
     $output = 0;
@@ -135,7 +135,7 @@ class FlexinfoCalcService {
 
   /**
    * avoid number 2 is zero or null
-   \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal()
+   \Drupal::service('flexinfo.calc.service')->getPercentageDecimal()
    */
   public function getPercentageDecimal($num1 = NULL, $num2 = NULL, $decimals = 2) {
     $result = $this->getPercentage($num1, $num2);
@@ -146,7 +146,7 @@ class FlexinfoCalcService {
 
   /**
    * @return
-   \Drupal::getContainer()->get('flexinfo.calc.service')->getSumFromNodes();
+   \Drupal::service('flexinfo.calc.service')->getSumFromNodes();
    * count nodes number or count sum for specify field total
    */
   public function getSumFromNodes($entity_array = array(), $count_field = NULL) {
@@ -157,7 +157,7 @@ class FlexinfoCalcService {
     }
     else {
       $output = array_sum(
-        \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueCollection($entity_array, $count_field)
+        \Drupal::service('flexinfo.field.service')->getFieldFirstValueCollection($entity_array, $count_field)
       );
     }
 
@@ -203,10 +203,10 @@ class FlexinfoCalcService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->percentage5or4ByMeetingNodes($meeting_nodes, $question_tid);
+   \Drupal::service('flexinfo.calc.service')->percentage5or4ByMeetingNodes($meeting_nodes, $question_tid);
    */
   public function percentage5or4ByMeetingNodes($meeting_nodes = array(), $question_tid = NULL, $decimals = 2) {
-    $pool_data = \Drupal::getContainer()->get('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, $question_tid);
+    $pool_data = \Drupal::service('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, $question_tid);
 
     $output = $this->percentage5or4ByAnswerInt($pool_data, $decimals);
     return $output;
@@ -214,7 +214,7 @@ class FlexinfoCalcService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->removeArrayEmptyElements();
+   \Drupal::service('flexinfo.calc.service')->removeArrayEmptyElements();
    */
   public function removeArrayEmptyElements($param_array) {
     $output = array_filter($param_array);
@@ -224,7 +224,7 @@ class FlexinfoCalcService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.calc.service')->sum5or4ByAnswerInt();
+   \Drupal::service('flexinfo.calc.service')->sum5or4ByAnswerInt();
    */
   public function sum5or4ByAnswerInt($pool_data = array()) {
     $sum = 0;
