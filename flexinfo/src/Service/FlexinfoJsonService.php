@@ -16,7 +16,7 @@ class FlexinfoJsonService {
    * @see use fetchConvertJsonToArrayFromInternalPath() or fetchConvertJsonToArrayFromUrl()
    *
    * @return array, terms entity
-   \Drupal::getContainer()->get('flexinfo.json.service')->fetchConvertJsonToArray();
+    \Drupal::service('flexinfo.json.service')->demo();
 
    * @notice
      In JSON file, every last array can't include comma sign

@@ -1418,7 +1418,7 @@ class FlexinfoChartService {
       if ($question_term->getName()) {
         $output = $question_term->getName();
 
-        $language_id = \Drupal::service('flexinfo.setting.service')->getMeetingLanguageIdByPath();
+        $language_id = \Drupal::service('flexinfo.node.service')->getMeetingLanguageIdByPath();
 
         if($question_term->hasTranslation($language_id)) {
           $output = $question_term->getTranslation($language_id)->getName();

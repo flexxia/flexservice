@@ -255,7 +255,7 @@ class FlexinfoFieldService {
   public function getFieldAllValuesByLanguage($entity = NULL, $field_name = NULL, $language = NULL) {
     $output = array();
 
-    $language_id = \Drupal::service('flexinfo.setting.service')->getMeetingLanguageIdByPath();
+    $language_id = \Drupal::service('flexinfo.node.service')->getMeetingLanguageIdByPath();
 
     if ($entity && is_object($entity)) {
       if($entity->hasTranslation($language_id)) {

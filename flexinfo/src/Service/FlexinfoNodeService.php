@@ -11,6 +11,7 @@ use Drupal\Core\Url;
 
 /**
  * An example Service container.
+ * \Drupal::service('flexinfo.node.service')->demo();
  */
 class FlexinfoNodeService {
 
@@ -522,7 +523,7 @@ class FlexinfoNodeService {
   /**
    * @return string
    */
-  public function getMeetingLanguageId() {
+  public function getMeetingLanguageIdByPath() {
     $output = NULL;
 
     $path_args = \Drupal::service('flexinfo.setting.service')
