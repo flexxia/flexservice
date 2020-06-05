@@ -194,7 +194,7 @@ class NgdataChartChartjs extends NgdataChart {
         $data = [];
         foreach ($question_relatedtype as $row) {
           $data[] = \Drupal::service('ngdata.node.evaluation')
-            ->getQuestionAnswerByQuestionTidByReferValue($meeting_nodes, $question_term->id(), ($i + 1), 'refer_other', $row);
+            ->getNumberOfQuestionAnswerByQuestionTidByReferValue($meeting_nodes, $question_term->id(), ($i + 1), 'refer_other', $row);
         }
 
         if ($question_scale > 8) {
@@ -209,6 +209,37 @@ class NgdataChartChartjs extends NgdataChart {
         );
       }
     }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function chartBarDataByEvaluationByPrePostByQuestionsWithCorrectAnswer($question_term = NULL, $meeting_nodes = array(), $question_relatedtype) {
+    $output = array();
+
+    if ($question_relatedtype) {
+      foreach ($question_relatedtype as $row) {
+        $data[] = \Drupal::service('ngdata.node.evaluation')
+          ->getNumberOfEvaluationByQuestionCorrectAnswerByReferValue(
+            $meeting_nodes,
+            $question_term->id(),
+            'refer_other',
+            $row
+          );
+      }
+    }
+
+    $colors = array_values(\Drupal::service('baseinfo.setting.service')
+      ->colorPlatePieChartOne(NULL, TRUE));
+    $output[0] = array(
+      "backgroundColor" => $colors,
+      "borderColor" => $colors,
+      "pointColor" => $colors,
+      "borderWidth" => 1,
+      "data" => $data,
+    );
 
     return $output;
   }

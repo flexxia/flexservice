@@ -644,7 +644,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function getBlockChartByPrePostQuestionForStackedBarMultipleHorizontal($question_term = NULL, $meeting_nodes = array(), $chart_type = "horizontalBar", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+  public function getBlockChartByPrePostQuestionForStackedBarMultipleHorizontalColumn12($question_term = NULL, $meeting_nodes = array(), $chart_type = "horizontalBar", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
 
     $question_relatedtype = \Drupal::service('flexinfo.field.service')
       ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
@@ -653,13 +653,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $datasets_data = \Drupal::service('ngdata.chart.chartjs')
       ->chartBarDataByEvaluationByPrePostByQuestions($meeting_nodes, $question_term);
 
-    $output['blockClass'] = "col-md-6 margin-top-12";
+    $output['blockClass'] = "col-md-12 margin-top-12";
     $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
     $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(\Drupal::getContainer()
         ->get('flexinfo.chart.service')
         ->getChartTitleByQuestion($question_term), $color_box_palette, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-12";
+    // middleMiddle
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-6";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"] = [
       "labels" => $question_relatedtype,
       "datasets" => $datasets_data,
@@ -668,10 +669,21 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
       ->chartStackBarHorizontalBarOption($datasets_data);
 
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 margin-top-12";
+    // middleRight
+    $output['blockContent'][0]['tabData']['middle']['middleRight'] = \Drupal::service('ngdata.atomic.organism')
+      ->basicMiddleRightChart('bar', "col-md-6 margin-top-12 margin-bottom-20");
 
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["data"] = [
+      "labels" => $question_relatedtype,
+      "datasets" => \Drupal::service('ngdata.chart.chartjs')
+        ->chartBarDataByEvaluationByPrePostByQuestionsWithCorrectAnswer(
+          $question_term, $meeting_nodes, $question_relatedtype),
+    ];
+
+    // bottom
     $output['blockContent'][0]['tabData']['bottom']["value"] = $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
 
+    // top
     $output['blockContent'][0]['tabData']['top']["styleClass"] = "col-xs-12";
     $output['blockContent'][0]['tabData']['top']["value"] = $this->organism->getRaidoQuestionLegendHorizontal($question_term, $meeting_nodes);
 
@@ -691,7 +703,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $correct_answer = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_answer');
       foreach ($question_relatedtype as $row) {
         $data[] = \Drupal::service('ngdata.node.evaluation')
-          ->getQuestionAnswerByQuestionTidByReferValue($meeting_nodes, $question_term->id(), $correct_answer, 'refer_other', $row);
+          ->getNumberOfQuestionAnswerByQuestionTidByReferValue($meeting_nodes, $question_term->id(), $correct_answer, 'refer_other', $row);
       }
     }
 
@@ -740,8 +752,8 @@ class NgdataAtomicBlock extends NgdataAtomic {
       case 'Stacked Bar Chart Multiple':
         break;
 
-      case 'Stacked Bar Chart Multiple Horizontal':
-        $output = $this->getBlockChartByPrePostQuestionForStackedBarMultipleHorizontal($question_term, $meeting_nodes);
+      case 'PrePost Multiple Stacked Horizontal Bar Chart Column12':
+        $output = $this->getBlockChartByPrePostQuestionForStackedBarMultipleHorizontalColumn12($question_term, $meeting_nodes);
         break;
 
 

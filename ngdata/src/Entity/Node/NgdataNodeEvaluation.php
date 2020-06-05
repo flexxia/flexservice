@@ -51,13 +51,16 @@ class NgdataNodeEvaluation extends NgdataNode {
 
   /**
    * @param $refer_field = 'refer_uid'/'refer_tid'/'refer_other'
+   * @return integer number of Answer
+   * @see old name getQuestionAnswerByQuestionTidByReferValue() => new name getNumberOfQuestionAnswerByQuestionTidByReferValue()
    */
-  public function getQuestionAnswerByQuestionTidByReferValue($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL, $refer_field = 'refer_uid', $refer_value = NULL) {
+  public function getNumberOfQuestionAnswerByQuestionTidByReferValue($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL, $refer_field = 'refer_uid', $refer_value = NULL) {
+    $output = 0;
+
     $evaluation_nodes = \Drupal::getContainer()
       ->get('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
-    $output = 0;
     if ($evaluation_nodes && is_array($evaluation_nodes)) {
       foreach ($evaluation_nodes as $evaluation_node) {
         $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
@@ -108,15 +111,24 @@ class NgdataNodeEvaluation extends NgdataNode {
   public function getNumberOfEvaluationByQuestionCorrectAnswerByReferValue($meeting_nodes = array(), $correct_answer_question_tid = NULL, $refer_field = 'refer_uid', $refer_value = NULL) {
     $output = 0;
 
-    $correct_answer_question_term = \Drupal::entityTypeManager()
+    $question_term = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
       ->load($correct_answer_question_tid);
 
     $correct_answer = \Drupal::getContainer()
       ->get('flexinfo.field.service')
-      ->getFieldFirstValue($correct_answer_question_term, 'field_queslibr_answer');
+      ->getFieldFirstValue($question_term, 'field_queslibr_answer');
 
-    $output = $this->getQuestionAnswerByQuestionTidByReferValue(
+    // if not set correct_answer, use last one
+    if (!$correct_answer) {
+      $question_scale = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstValue($question_term, 'field_queslibr_scale');
+      if ($question_scale) {
+        $correct_answer = $question_scale;
+      }
+    }
+
+    $output = $this->getNumberOfQuestionAnswerByQuestionTidByReferValue(
       $meeting_nodes,
       $correct_answer_question_tid,
       $correct_answer,
