@@ -94,7 +94,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
     $FlexpageEventLayout = new FlexpageEventLayout();
     $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
 
-    $output = \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($key_value, $sum_data, 0);
+    $output = \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($key_value, $sum_data, 0);
     $output .= '%';
 
     return $output;
@@ -130,13 +130,38 @@ class NgdataAtomicAtom extends NgdataAtomic {
   }
 
   /**
-   *
+   * @see $footeranswer It could be "CorrectAnswerImporveByRelatedtype", First" or "Last", or any integer value
    */
   public function renderChartBottomFooterAnswerValue($question_term = NULL, $meeting_nodes = array()) {
+    $output = '';
+
     $footeranswer = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_footeranswer');
 
-    if ($footeranswer) {
+    if ($footeranswer == 'CorrectAnswerImporveByRelatedtype') {
+      $question_relatedtype = \Drupal::service('flexinfo.field.service')
+        ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
+
+      if ($question_relatedtype) {
+        $data = array();
+        foreach ($question_relatedtype as $row) {
+          $data[] = \Drupal::service('ngdata.node.evaluation')
+            ->getNumberOfEvaluationByQuestionCorrectAnswerByReferValue(
+              $meeting_nodes,
+              $question_term->id(),
+              'refer_other',
+              $row
+            );
+        }
+
+        $FlexpageEventLayout = new FlexpageEventLayout();
+        $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
+        $output = \Drupal::service('flexinfo.calc.service')
+          ->getPercentageDecimal(($data[1] - $data[0]), $sum_data, 0);
+        $output .= '%';
+      }
+    }
+    else if ($footeranswer) {
       $output = $this->renderChartBottomFooterByKeyValuePercentage($question_term, $meeting_nodes, $footeranswer);
     }
     else {
