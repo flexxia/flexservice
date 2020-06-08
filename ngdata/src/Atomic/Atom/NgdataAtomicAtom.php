@@ -102,7 +102,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
   }
 
   /**
-   *
+   * @param $key It could be "First" or "Last", or any integer value
    */
   public function renderChartBottomFooterBySpecifyKeyValuePercentage($question_term = NULL, $meeting_nodes = array(), $key = 'Last') {
     $output = 0;
