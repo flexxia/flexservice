@@ -185,6 +185,12 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
     $FlexpageEventLayout = new FlexpageEventLayout();
 
+    $lower_right_text = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_chartfooter');
+    if (!$lower_right_text) {
+      $lower_right_text = 'Best Answer';
+    }
+
     $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
       $output .= $this->atom->getBottomHtmlCell(
         count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
@@ -192,7 +198,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       );
       $output .= $this->atom->getBottomHtmlCell(
         $this->atom->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
-        \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_chartfooter')
+        $lower_right_text
       );
     $output .= '</div>';
 
