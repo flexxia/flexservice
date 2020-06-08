@@ -111,9 +111,11 @@ class NgdataAtomicAtom extends NgdataAtomic {
       case 'First':
         $question_answer = 1;
         break;
+
+      // $question_answer = $question_scale;
       case 'Last':
-        $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
-        $question_answer = $question_scale;
+        $question_answer = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstValue($question_term, 'field_queslibr_scale');
         break;
 
       // when $key is number, instead of string
