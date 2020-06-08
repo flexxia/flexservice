@@ -182,20 +182,21 @@ class FlexinfoChartService {
     $chart_data = array();
     if ($pool_data && $chart_label) {
       $datasets = array();
+      $data_set_num = count($pool_data[0]);
 
       if (is_array($pool_data)) {
-        for ($i = 4; $i > -1; $i--) {
+        for ($i = $data_set_num; $i > 0; $i--) {
           $data = array();
           foreach ($pool_data as $key => $row) {
-            if (isset($row[$i])) {
-              $data[] = $row[$i];
+            if (isset($row[$i - 1])) {
+              $data[] = $row[$i - 1];
             }
             else {
               $data[] = 0;
             }
           }
           $datasets[] = array(
-            "fillColor" => \Drupal::service('flexinfo.setting.service')->{$color_plate}($i + 2, TRUE),
+            "fillColor" => \Drupal::service('flexinfo.setting.service')->{$color_plate}(5 - $i + 1, TRUE),
             "strokeColor" => "#ffffff",
             "pointColor" => "#05d23e",
             "pointStrokeColor" => "#fff",
