@@ -75,8 +75,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
     $FlexpageEventLayout = new FlexpageEventLayout();
     $chartAllData = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
 
-    $mean_number = \Drupal::getContainer()
-      ->get('flexinfo.calc.service')
+    $mean_number = \Drupal::service('flexinfo.calc.service')
       ->getPercentageDecimal(array_sum($chartAllData), count($chartAllData), 0);
 
     $output = $mean_number / 100;
@@ -132,8 +131,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
    *
    */
   public function renderChartBottomFooterAnswerValue($question_term = NULL, $meeting_nodes = array()) {
-    $footeranswer = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $footeranswer = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_footeranswer');
 
     if ($footeranswer) {
@@ -150,8 +148,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
    *
    */
   public function getRaidoQuestionLegend($question_term = NULL) {
-    $output = \Drupal::getContainer()
-      ->get('baseinfo.chart.service')
+    $output = \Drupal::service('baseinfo.chart.service')
       ->getChartLegendFromLegendTextField($question_term);
     $output = array_reverse($output);
 
@@ -162,8 +159,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
    *
    */
   public function getSelectkeyQuestionLabel($question_term = NULL) {
-    $output = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $output = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIdsTermNames($question_term, 'field_queslibr_selectkeyanswer');
 
     return $output;
