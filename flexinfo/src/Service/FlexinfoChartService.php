@@ -196,7 +196,7 @@ class FlexinfoChartService {
             }
           }
           $datasets[] = array(
-            "fillColor" => \Drupal::service('flexinfo.setting.service')->{$color_plate}(5 - $i + 1, TRUE),
+            "fillColor" => \Drupal::service('flexinfo.setting.service')->{$color_plate}($i + 1, TRUE),
             "strokeColor" => "#ffffff",
             "pointColor" => "#05d23e",
             "pointStrokeColor" => "#fff",
@@ -231,7 +231,7 @@ class FlexinfoChartService {
     if ($pool_data && $chart_label) {
 
       foreach ($pool_data as $key => $row) {
-        $fillColor[] = \Drupal::service('flexinfo.setting.service')->{$color_plate}(5 - $key + 1, TRUE);
+        $fillColor[] = \Drupal::service('flexinfo.setting.service')->{$color_plate}($key + 1, TRUE);
 
         $pool_data_convert[$key] = $pool_data[4 - $key];
         $chart_label_convert[$key] = $chart_label[4 - $key];
@@ -275,7 +275,7 @@ class FlexinfoChartService {
 
         if ($chart_legend && is_array($chart_legend)) {
           foreach ($chart_legend as $key => $value) {
-            $legends .= '<span class="fa fa-circle color-' . \Drupal::service('flexinfo.setting.service')->{$color_plate}(5 - $key + 1) . ' margin-left-12">';
+            $legends .= '<span class="fa fa-circle color-' . \Drupal::service('flexinfo.setting.service')->{$color_plate}($key + 1) . ' margin-left-12">';
             $legends .= '</span>';
             $legends .= '<span class="legend-text margin-left-6">';
               $legends .= isset($chart_legend[$key]) ? $chart_legend[$key] : 0;
