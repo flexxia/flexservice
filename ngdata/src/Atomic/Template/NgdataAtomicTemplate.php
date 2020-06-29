@@ -63,10 +63,14 @@ class NgdataAtomicTemplate extends NgdataAtomic {
 
     $output['blockClass'] = "block-html-clear-both-wrapper clear-both";
     $output['blockClass'] = "block-html-clear-both-wrapper clear-both col-xs-12";
-    $output['blockClass'] = "block-html-clear-both-wrapper";
+    $output['blockClass'] = "block-html-clear-both-wrapper clear-both";
 
     $output['blockHeader'] = '<div style="clear:both; height:1px;">666</div>';
     $output['blockHeader'] = '<span style="height:1px;"></span>';
+
+    $output['blockId'] = '';
+    $output['blockIcon'] = '';
+    $output['blockContent'] = '';
 
     return $output;
   }

@@ -132,7 +132,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    */
   public function tileBlockHeader($num, $tile_name = NULL, $css_class = NULL) {
     $output = "";
-    $output .= '<div class="line-height-1 height-84 padding-12' . $css_class . '">';
+    $output .= '<div class="line-height-1 height-90 padding-12' . $css_class . '">';
       $output .= '<div class="font-size-20 margin-top-6">';
         $output .= $num;
       $output .= "</div>";
