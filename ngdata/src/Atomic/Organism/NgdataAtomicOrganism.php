@@ -770,7 +770,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   public function htmlSectionBasicTableTemplate($header = NULL, $thead = NULL, $tbody = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $table = $this->molecule->getBlockHeader($header, $color_box_palette, $bg_color_class);
     $table .= '<div class="html-basic-table-wrapper">';
-      $table .= '<table class="table">';
+      $table .= '<table class="table margin-bottom-0">';
         $table .= '<thead>';
           $table .= '<tr>';
             $table .= $thead;
