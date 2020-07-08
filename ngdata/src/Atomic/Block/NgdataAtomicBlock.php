@@ -980,7 +980,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $comments = '<div class="block-comment-wrapper clear-both margin-0 margin-top-12">';
         $comments .= $this->organism->blockHeaderHtmlQuestionTitle($textfield_question_term);
         if (isset($question_answers) && count($question_answers) > 0) {
-          $comments .= '<div class="panel-body bg-ffffff font-size-12 margin-left-12">';
+          $comments .= '<div class="panel-body padding-bottom-2 bg-ffffff font-size-12 margin-left-12">';
             foreach ($question_answers as $key => $row) {
               $comments .= '<li>' . $row . '</li>';
             }
@@ -988,8 +988,8 @@ class NgdataAtomicBlock extends NgdataAtomic {
         }
       $comments .= '</div">';
 
-      $output = $this->organism->basicSection("htmlSnippt", "float-right margin-top-24 margin-right-16");
-      $output['blockClass'] = "col-xs-12 margin-top-12 margin-bottom-12 block-comment-wrapper";
+      $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
+      $output['blockClass'] = "col-xs-12 margin-top-12 block-comment-wrapper";
       $output['blockHeader'] = $comments;
     }
 
@@ -1003,7 +1003,9 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = array();
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
-    $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100 margin-bottom-12";
+
+    // $output['blockIcon'] = '';
+    $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
     $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
     $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
 
@@ -1017,9 +1019,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = array();
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
-    $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100 margin-bottom-12";
+
+    // $output['blockIcon'] = '';
+    $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
     $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
     $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
+
 
     return $output;
   }
@@ -1041,7 +1046,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlBasicTableByQuestion($meeting_nodes = array(), $question_tid = NULL, $title = '') {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
-    $output['blockClass'] = "col-xs-12 margin-top-24";
+    $output['blockClass'] = "col-xs-12 margin-top-12";
     $output['blockHeader'] = $this->template->renderHtmlBasicTableByQuestion($meeting_nodes, $question_tid, $title);
 
     return $output;
@@ -1052,7 +1057,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlBasicTableTopProgram($meeting_nodes = array(), $block_class = "col-md-6", $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
-    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-24 " . $block_class;
+    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-12 " . $block_class;
     $output['blockHeader'] = $this->template->renderHtmlBasicTableTopProgram($meeting_nodes, $color_box_palette, $bg_color_class);
 
     return $output;
@@ -1063,7 +1068,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL, $block_class = "col-md-6", $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
-    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-24 " . $block_class;
+    $output['blockClass'] = "col-xs-12 col-sm-12 margin-top-12 " . $block_class;
     $output['blockHeader'] = $this->template->renderHtmlBasicTableTopSpeaker($meeting_nodes, $limit_row, $question_tid, $color_box_palette, $bg_color_class);
 
     return $output;
@@ -1074,7 +1079,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlSnippet($content = NULL, $type = "htmlSnippt", $save_png_icon_style = "float-right margin-top-12 margin-right-16") {
     $output = \Drupal::service('ngdata.atomic.organism')->basicSection($type, $save_png_icon_style);
-    $output['blockClass'] = "col-xs-12 margin-top-24";
+    $output['blockClass'] = "col-xs-12 margin-top-12";
     $output['blockHeader'] = $content;
 
     return $output;

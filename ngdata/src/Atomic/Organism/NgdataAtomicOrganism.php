@@ -330,8 +330,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
     $table = NULL;
     if ($pool_data_sum) {
-      $table .= '<div class="panel-body bg-ffffff font-size-12 margin-left-12">';
-        $table .= '<table class="table table-hover">';
+      $table .= '<div class="panel-body padding-bottom-2 bg-ffffff font-size-12 margin-left-12">';
+        $table .= '<table class="table table-hover margin-bottom-0">';
           $table .= '<thead class="font-bold">';
             $table .= '<tr>';
               $table .= '<th>';
@@ -386,8 +386,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
     $table = NULL;
     if ($pool_data && count($pool_data) > 1) {
-      $table .= '<div class="panel-body bg-ffffff font-size-12 margin-left-12">';
-        $table .= '<table class="table table-hover">';
+      $table .= '<div class="panel-body padding-bottom-2 bg-ffffff font-size-12 margin-left-12">';
+        $table .= '<table class="table table-hover margin-bottom-0">';
           $table .= '<thead class="font-bold">';
             $table .= '<tr>';
               $table .= '<th>';

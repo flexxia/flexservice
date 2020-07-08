@@ -83,7 +83,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $output .= '</span>';
       }
 
-      $output .= '<span class="margin-left-14 line-height-1-2 font-size-16 display-block position-relative top-pt-50 left-pt-50 transform-pt-n-50-n-50">';
+      $output .= '<span class="margin-right-56 line-height-1-2 font-size-16 display-block position-relative top-pt-50 left-pt-48 transform-pt-n-50-n-50">';
         $output .= $title;
       $output .= '</span>';
     $output .= '</div>';
