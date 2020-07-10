@@ -139,7 +139,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   /**
    *
    */
-  public function customNodeMeetingPageContent($entity_id, $start, $end) {
+  public function customNodeMeetingPageContent($entity_id, $start, $end, $table_data_template_name = 'tableDataByCustomNodeByMeeting') {
     $output = [];
 
     $create_new_meeting_link = \Drupal::l(
@@ -152,7 +152,7 @@ class NgdataAtomicPage extends NgdataAtomic {
     </span>';
 
     $output[] = $this->block->getBlockHtmlSnippet($svg . $create_new_meeting_link);
-    $output[] = $this->template->blockTableTemplate(ucfirst($entity_id), $this->organism->tableContentCustomNodeMeeting($entity_id, $start, $end));
+    $output[] = $this->template->blockTableTemplate(ucfirst($entity_id), $this->organism->tableContentCustomNodeMeeting($entity_id, $start, $end, $table_data_template_name));
 
     return $output;
   }

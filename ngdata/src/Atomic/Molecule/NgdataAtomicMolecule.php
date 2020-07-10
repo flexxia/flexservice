@@ -962,6 +962,37 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
+  public function tableDataByCustomNodeByMeetingShowProductEntity($entity_id, $start, $end) {
+    $output = array();
+
+    $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
+
+    foreach ($nodes as $node) {
+      $program_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
+
+      $output[] = array(
+        'Name' => $program_entity ? $program_entity->getName() : '',
+        'Date' => \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+        'Create' => \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'html_date'),
+        'Product' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($program_entity, 'field_program_product'),
+        'Province' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_province'),
+        'City' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_city'),
+        'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
+        'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
+        // \Drupal::l('Add', Url::fromUserInput('/manageinfo/node/evaluation/add/form/' . $node->id())),
+        // \Drupal::l('Summary', Url::fromUserInput('/manageinfo/summaryevaluation/form/' . $node->id())),
+        'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
+        'Add' => \Drupal::l('Add', Url::fromUserInput('/ngpage/evaluation/form/' . $node->id())),
+        'Summary' => \Drupal::l('Add', Url::fromUserInput('/ngpage/summaryevaluation/basicform/' . $node->id())),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
+   */
   public function tableDataByCustomUserForAdminSection() {
     $output = array();
 

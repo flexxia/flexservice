@@ -863,8 +863,8 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function tableContentCustomNodeMeeting($entity_id, $start, $end) {
-    $tableData = $this->molecule->tableDataByCustomNodeByMeeting($entity_id, $start, $end);
+  public function tableContentCustomNodeMeeting($entity_id, $start, $end, $table_data_template_name = 'tableDataByCustomNodeByMeeting') {
+    $tableData = $this->molecule->{$table_data_template_name}($entity_id, $start, $end);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
 
     $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
