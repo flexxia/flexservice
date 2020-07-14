@@ -268,7 +268,7 @@ class FlexinfoUserService {
     $link = NULL;
 
     if ($uid) {
-      $url = Url::fromUserInput('/flexform/entityedit/user/' . $uid);
+      $url = Url::fromUserInput('/user/' . $uid . '/Edit');
       $link = \Drupal::l(t($link_text), $url);
     }
 
