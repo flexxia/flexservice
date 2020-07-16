@@ -31,6 +31,7 @@ sudo php -d memory_limit=4096M /usr/local/bin/composer remove flexxia/flexservic
 
 composer show flexxia/flexservice
 
+sudo composer config -g repo.packagist composer https://packagist.org
 
 /**
  *
