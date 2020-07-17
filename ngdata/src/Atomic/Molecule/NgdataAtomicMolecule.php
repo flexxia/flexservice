@@ -940,7 +940,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
       $theraparea_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_theraparea');
 
-      $output[] = array(
+      $result_row = array(
         'Name' => $program_entity ? $program_entity->getName() : '',
         'Date' => \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
         'Create' => \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'html_date'),
@@ -955,6 +955,14 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Add' => \Drupal::l('Add', Url::fromUserInput('/ngpage/evaluation/form/' . $node->id())),
         'Summary' => \Drupal::l('Add', Url::fromUserInput('/ngpage/summaryevaluation/basicform/' . $node->id())),
       );
+
+      $row = $result_row;
+      $row['tableBodyData'] = $result_row;
+      $row['Edit'] = '';
+      $row['Add'] = '';
+      $row['Summary'] = '';
+
+      $output[] = $row;
     }
 
     return $output;
