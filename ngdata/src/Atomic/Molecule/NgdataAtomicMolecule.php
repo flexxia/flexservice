@@ -930,12 +930,12 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
-  public function tableDataByCustomNodeByMeeting($entity_id, $start, $end) {
+  public function tableDataByCustomNodeByMeeting($meeting_nodes, $entity_id, $start, $end) {
     $output = array();
 
-    $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
+    // $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
 
-    foreach ($nodes as $node) {
+    foreach ($meeting_nodes as $node) {
       $program_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
 
       $theraparea_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_theraparea');
@@ -971,12 +971,12 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
-  public function tableDataByCustomNodeByMeetingShowProductEntity($entity_id, $start, $end) {
+  public function tableDataByCustomNodeByMeetingShowProductEntity($meeting_nodes, $entity_id, $start, $end) {
     $output = array();
 
-    $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
+    // $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
 
-    foreach ($nodes as $node) {
+    foreach ($meeting_nodes as $node) {
       $program_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
 
       $output[] = array(
