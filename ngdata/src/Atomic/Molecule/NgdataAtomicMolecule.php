@@ -718,6 +718,78 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
+  public function htmlBasicTableDataByTopSpeaker($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134) {
+    $output = array();
+
+    $speaker_users = \Drupal::service('flexinfo.queryuser.service')
+      ->wrapperUsersByRoleName('speaker');
+
+    if (is_array($speaker_users)) {
+
+      // first loop get top 10 user
+      $top_speaker_users = array();
+      foreach ($speaker_users as $key => $user) {
+        $meeting_nodes_by_current_user = \Drupal::service('flexinfo.querynode.service')
+          ->meetingNodesBySpeakerUids($meeting_nodes, array($user->id()));
+
+        $num_meeting_nodes = count($meeting_nodes_by_current_user);
+
+        if ($num_meeting_nodes > 0) {
+          $top_speaker_users[] = array(
+            'num_meeting_nodes' => $num_meeting_nodes,
+            'user' => $user,
+            'nodes_by_current_user' => $meeting_nodes_by_current_user,
+          );
+
+          $sort_value[] = $num_meeting_nodes;
+        }
+      }
+
+      // cut table off to specify number
+      if ($limit_row) {
+        if (count($top_speaker_users) > $limit_row) {
+          $top_speaker_users = array_slice($top_speaker_users, 0, $limit_row);
+        }
+      }
+
+      /** - - - - - - second loop for top 10 - - - - - - - -  - - - - - - - - - - - - - - -  */
+      $ModalTabSpeaker = new ModalTabSpeaker();
+
+      foreach ($top_speaker_users as $user_array) {
+        $user = $user_array['user'];
+
+        $meeting_nodes_by_current_user = $user_array['nodes_by_current_user'];
+        $num_meeting_nodes = $user_array['num_meeting_nodes'];
+
+        if ($num_meeting_nodes > 0) {
+          $signature_total = array_sum(
+            \Drupal::service('flexinfo.field.service')
+              ->getFieldFirstValueCollection($meeting_nodes_by_current_user, 'field_meeting_signature')
+          );
+
+          $speaker_name_link = $ModalTabSpeaker->getHtmlModalContent($user);
+
+          $rating = \Drupal::service('ngdata.term.question')
+            ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user);
+
+          $row = array(
+            'Speaker' => $speaker_name_link,
+            'Events' => $num_meeting_nodes,
+            'Reach' => $signature_total,
+            'Rating' => $rating,
+          );
+
+          $output[] = $row;
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
+   */
   public function tableDataByTopSpeaker($meeting_nodes = array(), $limit_row = NULL, $question_tid = 134) {
     $output = array();
 
