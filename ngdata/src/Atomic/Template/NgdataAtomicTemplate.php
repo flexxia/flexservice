@@ -211,7 +211,7 @@ class NgdataAtomicTemplate extends NgdataAtomic {
    *
    */
   public function renderHtmlBasicTableTopSpeaker($meeting_nodes = array(), $limit_row = 10, $question_tid = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
-    $tableData = $this->molecule->tableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid);
+    $tableData = $this->molecule->htmlBasicTableDataByTopSpeaker($meeting_nodes, $limit_row, $question_tid);
 
     $table = $this->renderHtmlBasicTableTemplate('Top Speakers', $tableData, $color_box_palette, $bg_color_class);
 
