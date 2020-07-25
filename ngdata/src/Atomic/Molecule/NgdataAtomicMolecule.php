@@ -596,19 +596,16 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             $program_html .= '</span>';
           $program_html .= '</div>';
 
-          $row = array(
+          $result_row = array(
             'Program' => $program_html,
             'Events' => count($meeting_nodes_by_current_term),
             'Reach' => $signature_total,
             'Responses' => $evaluation_nums,
           );
 
-          $row['exportData'] = array(
-            'Program' => $term->name,
-            'Events' => count($meeting_nodes_by_current_term),
-            'Reach' => $signature_total,
-            'Responses' => $evaluation_nums,
-          );
+          $row = $result_row;
+          $row['tableBodyData'] = $result_row;
+          $row['Program'] = $term->name;
 
           $output[] = $row;
         }
