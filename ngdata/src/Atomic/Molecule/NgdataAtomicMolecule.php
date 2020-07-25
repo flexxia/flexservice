@@ -337,7 +337,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $responses = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
 
-        $row = array(
+        $result_row = array(
           'Date' => $date,
           'Program Name' => $program_name,
           'Province' => $province,
@@ -347,14 +347,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'View' => \Drupal::l('View', $internal_url),
         );
 
-        $row['exportData'] = array(
-          'Date' => $date,
-          'Program Name' => $program_name,
-          'Province' => $province,
-          'Speaker' => $speaker,
-          'Reach' => $reach,
-          'Responses' => $responses,
-        );
+        $row = $result_row;
+        $row['tableBodyData'] = $result_row;
+        $row['View'] = '';
 
         $output[] = $row;
       }
