@@ -307,7 +307,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function blockChartjsMeetingsByQuarter($meeting_nodes, $bg_color_class = 'bg-7dba00', $step = 1) {
+  public function blockChartjsMeetingsByQuarter($meeting_nodes, $bg_color_class = 'bg-7dba00', $step = 3) {
     $output = \Drupal::service('ngdata.atomic.block')
       ->blockChartjsMeetingsByMonth($meeting_nodes, $bg_color_class, $step);
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('flexinfo.setting.service')
@@ -376,7 +376,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function blockChartjsHcpReachByQuarter($meeting_nodes, $bg_color_class = 'bg-7dba00', $step = 1) {
+  public function blockChartjsHcpReachByQuarter($meeting_nodes, $bg_color_class = 'bg-7dba00', $step = 3) {
     $output = \Drupal::service('ngdata.atomic.block')
       ->blockChartjsHcpReachByMonth($meeting_nodes, $bg_color_class, $step);
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('flexinfo.setting.service')
