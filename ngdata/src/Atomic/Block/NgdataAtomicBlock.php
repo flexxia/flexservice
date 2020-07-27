@@ -305,6 +305,18 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   *
+   */
+  public function blockChartjsMeetingsByQuarter($meeting_nodes, $bg_color_class = 'bg-7dba00', $step = 1) {
+    $output = \Drupal::service('ngdata.atomic.block')
+      ->blockChartjsMeetingsByMonth($meeting_nodes, $bg_color_class, $step);
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('flexinfo.setting.service')
+      ->getQuarterNameAbb();
+
+    return $output;
+  }
+
+  /**
    * @internal stackbar chart X-axis is Quarter,
    */
   public function blockChartjsMeetingsByQuarterByEventType($meeting_nodes = array()) {
@@ -357,6 +369,18 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-4 display-flex justify-content-center align-items-center min-height-320";
     $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->legendTotalEventsByEventType($meeting_nodes, FALSE);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartjsHcpReachByQuarter($meeting_nodes, $bg_color_class = 'bg-7dba00', $step = 1) {
+    $output = \Drupal::service('ngdata.atomic.block')
+      ->blockChartjsHcpReachByMonth($meeting_nodes, $bg_color_class, $step);
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('flexinfo.setting.service')
+      ->getQuarterNameAbb();
 
     return $output;
   }
