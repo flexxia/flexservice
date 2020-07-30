@@ -1011,7 +1011,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           $rating = \Drupal::service('ngdata.term.question')
             ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user);
 
-          $row = array(
+          $result_row = array(
             'Speaker' => $speaker_name_link,
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
@@ -1019,13 +1019,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Rating' => $rating,
           );
 
-          $row['exportData'] = array(
-            'Speaker' => $user->getUserName(),
-            'Events' => $num_meeting_nodes,
-            'Reach' => $signature_total,
-            'Responses' => $evaluation_nums,
-            'Rating' => $rating,
-          );
+          $row = $result_row;
+          $row['tableBodyData'] = $result_row;
+          $row['Speaker'] = $user->getUserName();
 
           $output[] = $row;
         }
