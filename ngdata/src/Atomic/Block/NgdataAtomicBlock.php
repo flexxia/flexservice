@@ -1025,13 +1025,17 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlTableByRadioQuestionMultipleByReferUid($question_term = NULL, $meeting_nodes = array()) {
     $output = array();
+    $table_body = NULL;
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
+    $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
 
-    // $output['blockIcon'] = '';
-    $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
-    $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
-    $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
+    if (isset($table_body) && count($table_body) > 0) {
+      // $output['blockIcon'] = '';
+      $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
+      $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
+      $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
+    }
 
     return $output;
   }
@@ -1041,9 +1045,9 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlTableBySelectKeyAnswerQuestion($question_term = NULL, $meeting_nodes = array()) {
     $output = array();
+    $table_body = NULL;
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
-
     $table_body = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
 
     if (isset($table_body) && count($table_body) > 0) {
