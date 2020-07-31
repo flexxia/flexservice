@@ -1001,16 +1001,16 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $question_answers = \Drupal::service('ngdata.term.question')
         ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
-      $comments = '<div class="block-comment-wrapper clear-both margin-0 margin-top-12">';
-        $comments .= $this->organism->blockHeaderHtmlQuestionTitle($textfield_question_term);
-        if (isset($question_answers) && count($question_answers) > 0) {
+      if (isset($question_answers) && count($question_answers) > 0) {
+        $comments = '<div class="block-comment-wrapper clear-both margin-0 margin-top-12">';
+          $comments .= $this->organism->blockHeaderHtmlQuestionTitle($textfield_question_term);
           $comments .= '<div class="panel-body padding-bottom-2 bg-ffffff font-size-12 margin-left-12">';
             foreach ($question_answers as $key => $row) {
               $comments .= '<li>' . $row . '</li>';
             }
           $comments .= '</div">';
-        }
-      $comments .= '</div">';
+        $comments .= '</div">';
+      }
 
       $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
       $output['blockClass'] = "col-xs-12 margin-top-12 block-comment-wrapper";
@@ -1044,11 +1044,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
 
-    // $output['blockIcon'] = '';
-    $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
-    $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
-    $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
+    $table_body = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
 
+    if (isset($table_body) && count($table_body) > 0) {
+      // $output['blockIcon'] = '';
+      $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
+      $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
+      $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
+    }
 
     return $output;
   }
