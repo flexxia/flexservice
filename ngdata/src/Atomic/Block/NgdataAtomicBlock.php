@@ -998,10 +998,13 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = array();
 
     if ($textfield_question_term) {
+      $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
+
       $question_answers = \Drupal::service('ngdata.term.question')
         ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
       if (isset($question_answers) && count($question_answers) > 0) {
+        $output['blockClass'] = "col-xs-12 margin-top-12 block-comment-wrapper";
         $comments = '<div class="block-comment-wrapper clear-both margin-0 margin-top-12">';
           $comments .= $this->organism->blockHeaderHtmlQuestionTitle($textfield_question_term);
           $comments .= '<div class="panel-body padding-bottom-2 bg-ffffff font-size-12 margin-left-12">';
@@ -1011,9 +1014,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
           $comments .= '</div">';
         $comments .= '</div">';
       }
+      else {
+        $output['blockClass'] = "col-xs-12 block-comment-wrapper";
+      }
 
-      $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
-      $output['blockClass'] = "col-xs-12 margin-top-12 block-comment-wrapper";
       $output['blockHeader'] = $comments;
     }
 
@@ -1035,7 +1039,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
       $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
-    }
+  }
+  else {
+    $output['blockClass'] = "col-xs-12 block-comment-wrapper";
+  }
 
     return $output;
   }
@@ -1055,6 +1062,9 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
       $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
+    }
+    else {
+      $output['blockClass'] = "col-xs-12 block-comment-wrapper";
     }
 
     return $output;
