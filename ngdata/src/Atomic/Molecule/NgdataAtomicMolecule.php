@@ -299,8 +299,10 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     foreach ($tbody_data as $row) {
       $tbody_html .= '<tr>';
       foreach ($row as $key => $value) {
-        if ($value == 'exportData' || $value == 'tableBodyData') {
-          continue;
+        if (gettype($value) == 'string') {
+          if ($value == 'exportData' || $value == 'tableBodyData') {
+            continue;
+          }
         }
         $tbody_html .= '<td>';
           $tbody_html .= $value;
