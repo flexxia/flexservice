@@ -1015,7 +1015,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         $comments .= '</div">';
       }
       else {
-        $output['blockClass'] = "col-xs-12 block-comment-wrapper";
+        $output['blockClass'] = "col-xs-12 margin-top-4 block-comment-wrapper";
       }
 
       $output['blockHeader'] = $comments;
@@ -1041,7 +1041,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
   }
   else {
-    $output['blockClass'] = "col-xs-12 block-comment-wrapper";
+    $output['blockClass'] = "col-xs-12 margin-top-4 block-comment-wrapper";
   }
 
     return $output;
@@ -1064,7 +1064,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
     }
     else {
-      $output['blockClass'] = "col-xs-12 block-comment-wrapper";
+      $output['blockClass'] = "col-xs-12 margin-top-4 block-comment-wrapper";
     }
 
     return $output;
