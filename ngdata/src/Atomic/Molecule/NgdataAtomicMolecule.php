@@ -299,10 +299,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     foreach ($tbody_data as $row) {
       $tbody_html .= '<tr>';
       foreach ($row as $key => $value) {
-        if (gettype($value) == 'string') {
-          if ($value == 'exportData' || $value == 'tableBodyData') {
-            continue;
-          }
+        if ($value == 'exportData' || $value == 'tableBodyData') {
+          continue;
         }
         $tbody_html .= '<td>';
           $tbody_html .= $value;
@@ -404,6 +402,73 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'Responses' => $responses,
           'Status' => \Drupal::service('flexinfo.node.service')->getMeetingStatus($node),
         );
+
+        $output[] = $row;
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
+   * @deprecated 'exportData'
+     $row = array(
+       'Date' => $date,
+       'Program' => $program_name,
+       'City' => $city,
+       'Speaker' => $speaker,
+       'HCP Reach' => $reach,
+       'Responses' => $responses,
+       'Status' => $this->atom->getMeetingStatusIconHtml($node),
+       'View' => \Drupal::l('View', $internal_url),
+     );
+
+     $row['exportData'] = array(
+       'Date' => $date,
+       'Program Name' => $program_name,
+       'City' => $city,
+       'Speaker' => $speaker,
+       'HCP Reach' => $reach,
+       'Responses' => $responses,
+       'Status' => \Drupal::service('flexinfo.node.service')->getMeetingStatus($node),
+     );
+   */
+  public function tableDataByEventStatus($meeting_nodes = array(), $limit_row = NULL) {
+    $output = array();
+
+    if (is_array($meeting_nodes)) {
+      foreach ($meeting_nodes as $node) {
+        $program_entity = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
+
+        $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
+
+        $date = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstValueDateFormat($node, 'field_meeting_date');
+        $program_name = $program_entity ? $program_entity->getName() : '';
+        $province = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermName($node, 'field_meeting_province');
+        $city = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermName($node, 'field_meeting_city');
+        $rep = \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdUserName($node, 'field_meeting_representative');
+
+        $result_row = array(
+          'Date' => $date,
+          'Program' => $program_name,
+          'Province' => $province,
+          'City' => $city,
+          'Rep' => $rep,
+          'Status' => $this->atom->getMeetingStatusIconHtml($node),
+          'View' => \Drupal::l('View', $internal_url),
+        );
+
+        $row = $result_row;
+        $row['tableBodyData'] = $result_row;
+        $row['Status'] = \Drupal::service('flexinfo.node.service')
+          ->getMeetingStatus($node);
+        $row['View'] = '';
 
         $output[] = $row;
       }
@@ -1013,7 +1078,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           $rating = \Drupal::service('ngdata.term.question')
             ->getRaidoQuestionTidStatsAverage($question_tid, $meeting_nodes_by_current_user);
 
-          $result_row = array(
+          $row = array(
             'Speaker' => $speaker_name_link,
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
@@ -1021,9 +1086,13 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             'Rating' => $rating,
           );
 
-          $row = $result_row;
-          $row['tableBodyData'] = $result_row;
-          $row['Speaker'] = $user->getUserName();
+          $row['exportData'] = array(
+            'Speaker' => $user->getUserName(),
+            'Events' => $num_meeting_nodes,
+            'Reach' => $signature_total,
+            'Responses' => $evaluation_nums,
+            'Rating' => $rating,
+          );
 
           $output[] = $row;
         }
