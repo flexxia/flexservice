@@ -49,7 +49,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
     );
 
     $answer_set = [];
-    $all_question_terms = $this->_getQuestionTermsByNid($entity_id);
+    $all_question_terms = $this->_getQuestionTermsByMeetingNid($entity_id);
     if ($all_question_terms) {
       foreach ($all_question_terms as $tid => $question_term) {
         $question_scale = \Drupal::getContainer()
@@ -60,6 +60,10 @@ class NgpageSummaryEvaluationForm extends FormBase {
           ->get('flexinfo.field.service')
           ->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_fieldtype');
 
+        $related_field = \Drupal::getContainer()
+          ->get('flexinfo.field.service')
+          ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
+
         $form['reactset']['question_item_' . $tid] = array(
           '#type' => 'label',
           '#title' => $question_term->getName(),
@@ -68,13 +72,47 @@ class NgpageSummaryEvaluationForm extends FormBase {
         );
 
         if ($question_fieldtype == 'radios') {
-          for ($i = 1; $i < ($question_scale + 1); $i++) {
-            $form['reactset']['question_answer_radios_'. $tid . '_' . $i] = array(
-              '#type' => 'number',
-              '#title' => $i,
-            );
 
-            $answer_set['radios'][$tid][] = $i;
+          $boolean_duplicate_question = FALSE;
+          if ($related_field == 'field_meeting_speaker') {
+            $meeting_entity = \Drupal::entityTypeManager()->getStorage('node')->load($entity_id);
+
+            $speaker_users = \Drupal::getContainer()
+              ->get('flexinfo.field.service')
+              ->getFieldAllTargetIdsEntitys($meeting_entity, 'field_meeting_speaker', 'user');
+
+            if ($speaker_users && count($speaker_users) > 1) {
+              $boolean_duplicate_question = TRUE;
+
+              foreach ($speaker_users as $speaker_user) {
+                $form['reactset']['question_item_' . $tid . $speaker_user->id()] = array(
+                  '#type' => 'label',
+                  '#title' => $question_term->getName() . ' - ' . $speaker_user->getUsername(),
+                  '#prefix' => '<div class="clear-both h5 font-size-16">',
+                  '#suffix' => '</div>',
+                );
+
+                for ($i = 1; $i < ($question_scale + 1); $i++) {
+                  $form['reactset']['question_answer_radios_'. $tid . '_' . $i . '_' . 'refer_uid' . '_' .$speaker_user->id()] = array(
+                    '#type' => 'number',
+                    '#title' => $i,
+                  );
+
+                  $answer_set['radios'][$tid][] = $i;
+                }
+              }
+            }
+          }
+
+          if (!$boolean_duplicate_question) {
+            for ($i = 1; $i < ($question_scale + 1); $i++) {
+              $form['reactset']['question_answer_radios_'. $tid . '_' . $i] = array(
+                '#type' => 'number',
+                '#title' => $i,
+              );
+
+              $answer_set['radios'][$tid][] = $i;
+            }
           }
         }
         elseif ($question_fieldtype == 'selectkey') {
@@ -152,20 +190,27 @@ class NgpageSummaryEvaluationForm extends FormBase {
     if ($reactset_values) {
 
       // $key is like 'question_answer_radios_2096_1'
+      // or
+      // $key is like 'question_answer_radios_2096_1_refer_uid_267'
       foreach ($reactset_values as $key => $row) {
         if ($row) {
           $result_array = explode("_", $key);
           if ($result_array && isset($result_array[3])) {
+            $answer_key = $result_array[3];
+            if (isset($result_array[7])) {
+              $answer_key = $result_array[3] . '_' . $result_array[6] . '_' . $result_array[7];
+            }
+
             if ($result_array[2] == 'radios' || $result_array[2] == 'selectkey') {
               for ($i = 0; $i < $row; $i++) {
-                $answer_set[$result_array[3]][] = $result_array[4];
+                $answer_set[$answer_key][] = $result_array[4];
               }
             }
             elseif ($result_array[2] == 'textfield') {
               $textfield_row = explode("&&&", $row);
               if ($textfield_row) {
                 foreach ($textfield_row as $comment) {
-                  $answer_set[$result_array[3]][] = $comment;
+                  $answer_set[$answer_key][] = $comment;
                 }
               }
             }
@@ -190,10 +235,25 @@ class NgpageSummaryEvaluationForm extends FormBase {
       $output = NULL;
       foreach ($answer_set as $key => $value) {
         if (isset($value[$i])) {
-          $output[] = [
-            'question_tid' => $key,
+          $answer_tid = $key;
+
+          if (strpos($key, '_') !== false) {
+            $answer_key_array = explode("_", $key);
+            $answer_tid = $answer_key_array[0];
+          }
+
+          $answer_row = [
+            'question_tid' => $answer_tid,
             'question_answer' => $value[$i]
           ];
+
+          if (isset($answer_key_array[2])) {
+            if ($answer_key_array[1] == 'uid') {
+              $answer_row['refer_uid'] = $answer_key_array[2];
+            }
+          }
+
+          $output[] = $answer_row;
         }
       }
 
@@ -238,7 +298,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
   /**
    *
    */
-  public function _getQuestionTermsByNid($entity_id = NULL) {
+  public function _getQuestionTermsByMeetingNid($entity_id = NULL) {
     $output = [];
 
     $meeting_entity = \Drupal::entityTypeManager()->getStorage('node')->load($entity_id);
