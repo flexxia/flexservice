@@ -13,7 +13,6 @@ class NgdataFormField {
    */
   public function getFieldBasicProperty($question_term = NULL, $fieldName, $fieldTitle) {
     $output = array(
-      // 'fieldName' => $fieldName,
       'fieldId' => $fieldName,
       'fieldLabel' => $fieldTitle,
       'fieldClass' => array(),
@@ -114,7 +113,6 @@ class NgdataFormField {
       'fieldLabel' => $fieldLabel,
       'fieldDate' => NULL,
       'fieldTime' => NULL,
-
       'updateStatus' => 0
     );
 
@@ -135,12 +133,10 @@ class NgdataFormField {
     }
 
     $output['fieldLabel'] = $fieldTitle;
-
     $output['inputType'] = "radio";
     $output['displayType'] = "dropdown";
 
     $output['options'] = array();
-
     $output['question_tid'] = "";
     $output['fieldShow'] = TRUE;
     $output['returnType'] = "target_id";
@@ -191,7 +187,6 @@ class NgdataFormField {
       'minimumStep' => NULL,
       'minimumValue' => NULL,
       'maximumValue' => NULL,
-
       'returnType' => "value",
       'updateStatus' => 0
     );
