@@ -959,6 +959,18 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function tableContentCustomTermQuestionEvaluationFormShowSeparatPages() {
+    $tableData = $this->molecule->tableDataByCustomTermQuestionEvaluationFormShowSeparatPages();
+    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
+
+    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function tableContentStandardterm($entity_id, $start, $end) {
     $tableData = $this->molecule->tableDataByStandardterm($entity_id, $start, $end);
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);

@@ -1283,8 +1283,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
-    $evaluation_terms = \Drupal::service('flexinfo.term.service')
-      ->getFullTermsFromVidName($vid = 'evaluationform');
+    // $evaluation_terms = \Drupal::service('flexinfo.term.service')
+    //   ->getFullTermsFromVidName($vid = 'evaluationform');
 
     if (is_array($terms)) {
 
@@ -1412,6 +1412,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $output[] = array(
         'NAME' => $term->getName(),
         'EvalNum' => $this->tablePopUpTemplate($evaluationform_num, $evaluationform_data, $term->id()),
+        'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableDataByCustomTermQuestionEvaluationFormShowSeparatPages() {
+    $terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName('questionlibrary');
+
+    foreach ($terms as $term) {
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'EvalForms' => \Drupal::l(t('View'), Url::fromUserInput("/ngpage/questionevalforms/" . $term->id())),
         'EDIT' => \Drupal::l(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
       );
     }

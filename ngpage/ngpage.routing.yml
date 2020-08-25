@@ -8,6 +8,15 @@ ngpage.ngpage_controller_hello:
     _permission: 'access content'
 
 #
+ngpage.ngpage_question_evalforms:
+  path: '/ngpage/questionevalforms/{entity_id}'
+  defaults:
+    _controller: '\Drupal\ngpage\Controller\NgpageController::questionEvaluationForms'
+    _title: 'NgpageController'
+  requirements:
+    _permission: 'access content'
+
+#
 ngpage.summaryevaluation.form:
   path: '/ngpage/summaryevaluation/basicform/{entity_id}'
   defaults:

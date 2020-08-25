@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 use Drupal\ngjson\Content\NgjsonExportDataContent;
+use Drupal\ngjson\Content\NgjsonObjectContent;
 
 /**
  * Class NgpageController.
@@ -25,6 +26,26 @@ class NgpageController extends ControllerBase {
     $markup = $this->t('Implement method: hello with parameter(s): ') . $name;
     $markup .= '<div>';
       $markup .= '<span type="button" class="close bootstrap-modal-button" data-dismiss="modal" aria-hidden="true">Hello Html Pape</span>';
+    $markup .= '</div>';
+
+    $build = array(
+      '#type' => 'markup',
+      '#markup' => $markup,
+    );
+
+    return $build;
+  }
+
+  /**
+   *
+   * @return string
+   */
+  public function questionEvaluationForms($entity_id) {
+    $NgjsonObjectContent = new NgjsonObjectContent();
+    $getEvaluationforms = $NgjsonObjectContent->questionEvaluationformsPageContent($entity_id);
+
+    $markup = '<div class="margin-left-12">';
+        $markup .= $getEvaluationforms;
     $markup .= '</div>';
 
     $build = array(
