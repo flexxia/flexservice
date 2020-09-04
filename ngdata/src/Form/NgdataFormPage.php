@@ -295,7 +295,9 @@ class NgdataFormPage {
                     $meeting_node,
                     $question_term->getName() . ' - ' . $relatedtype,
                     array(
-                      'refer_other' => $relatedtype,
+                      'returnValue' => array(
+                        'refer_other' => $relatedtype,
+                      )
                     )
                   );
                 }
