@@ -777,6 +777,30 @@ class FlexpageEventLayout extends ControllerBase {
   /**
    *
    */
+  public function getQuestionAnswerAllDataWithReferOther($meeting_nodes = array(), $question_tid = NULL) {
+    $evaluation_nodes = \Drupal::getContainer()
+      ->get('baseinfo.querynode.service')
+      ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
+
+    $output = array();
+    if ($evaluation_nodes && is_array($evaluation_nodes)) {
+      foreach ($evaluation_nodes as $evaluation_node) {
+        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
+
+        foreach ($result as $row) {
+          if ($row['question_tid'] == $question_tid && $row['question_answer']) {
+            $output[$row['refer_tid']][] = $row['question_answer'];
+          }
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getTextfieldQuestionComments($textfield_question_tids = array(), $meeting_nodes = array()) {
     $output = array();
 
