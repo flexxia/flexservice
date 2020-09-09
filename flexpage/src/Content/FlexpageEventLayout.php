@@ -789,7 +789,7 @@ class FlexpageEventLayout extends ControllerBase {
 
         foreach ($result as $row) {
           if ($row['question_tid'] == $question_tid && $row['question_answer']) {
-            $output[$row['refer_tid']][] = $row['question_answer'];
+            $output[$row['refer_other']][] = $row['question_answer'];
           }
         }
       }
