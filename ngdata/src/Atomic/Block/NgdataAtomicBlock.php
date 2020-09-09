@@ -1034,7 +1034,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
     $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferTid($question_term, $meeting_nodes);
 
-    if (isset($table_body) && count($table_body) > 0) {
+    if ($table_body) {
       // $output['blockIcon'] = '';
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
@@ -1057,7 +1057,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
     $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
 
-    if (isset($table_body) && count($table_body) > 0) {
+    if ($table_body) {
       // $output['blockIcon'] = '';
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
@@ -1080,7 +1080,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
     $table_body = $this->organism->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
 
-    if (isset($table_body) && count($table_body) > 0) {
+    if ($table_body) {
       // $output['blockIcon'] = '';
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
