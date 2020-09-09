@@ -1029,10 +1029,19 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockHtmlTableByRadioQuestionMultipleByReferTid($question_term = NULL, $meeting_nodes = array()) {
     $output = array();
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getBlockHtmlTableByRadioQuestionMultipleByReferUid($question_term = NULL, $meeting_nodes = array()) {
+    $output = array();
     $table_body = NULL;
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
-    $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferTid($question_term, $meeting_nodes);
+    $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
 
     if ($table_body) {
       // $output['blockIcon'] = '';
@@ -1050,12 +1059,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
-  public function getBlockHtmlTableByRadioQuestionMultipleByReferUid($question_term = NULL, $meeting_nodes = array()) {
+  public function getBlockHtmlTableByRadioQuestionMultipleByReferOther($question_term = NULL, $meeting_nodes = array()) {
     $output = array();
     $table_body = NULL;
 
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
-    $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
+    $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferTid($question_term, $meeting_nodes);
 
     if ($table_body) {
       // $output['blockIcon'] = '';

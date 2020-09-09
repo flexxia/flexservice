@@ -381,8 +381,17 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    *
    */
   public function getHtmlTableByMultipleQuestionByReferTid($question_term = NULL, $meeting_nodes = array()) {
+    $table = NULL;
+
+    return $table;
+  }
+
+  /**
+   *
+   */
+  public function getHtmlTableByMultipleQuestionByReferUid($question_term = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
-    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithReferTid($meeting_nodes, $question_term->id());
+    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithReferUid($meeting_nodes, $question_term->id());
 
     $table = NULL;
     if ($pool_data && count($pool_data) > 1) {
@@ -445,9 +454,9 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function getHtmlTableByMultipleQuestionByReferUid($question_term = NULL, $meeting_nodes = array()) {
+  public function getHtmlTableByMultipleQuestionByReferOther($question_term = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
-    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithReferUid($meeting_nodes, $question_term->id());
+    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithReferOther($meeting_nodes, $question_term->id());
 
     $table = NULL;
     if ($pool_data && count($pool_data) > 1) {

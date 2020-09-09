@@ -95,21 +95,6 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
   public function getBlockGroupByRadioQuestionMultipleByReferTid($question_tids = array(), $meeting_nodes = array()) {
     $output = array();
 
-    if (is_array($question_tids) && $question_tids) {
-      $question_terms = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadMultiple($question_tids);
-
-      foreach ($question_terms as $question_term) {
-        $question_relatedfield = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
-          ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
-        if ($question_relatedfield == 'field_queslibr_relatedtype') {
-          $output[] = $this->block->getBlockHtmlTableByRadioQuestionMultipleByReferTid($question_term, $meeting_nodes);
-        }
-      }
-    }
-
     return $output;
   }
 
