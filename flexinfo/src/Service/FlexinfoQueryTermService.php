@@ -184,6 +184,71 @@ class FlexinfoQueryTermService extends ControllerBase {
     return $tids;
   }
 
+  /**
+   *
+   */
+  public function wrapperMultipleQuestionTidsFromEvaluationformForMeetingSpeaker($evaluationform_term = NULL) {
+    $radios_tid = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getTidByTermName($term_name = 'radios', $vocabulary_name = 'fieldtype');
+
+    $question_tids_current_form = \Drupal::getContainer()
+      ->get('flexinfo.field.service')
+      ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
+
+    //
+    $query_container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+    $query = $query_container->queryTidsByBundle('questionlibrary');
+
+    // filter by tids
+    $group = $query_container->groupStandardByFieldValue($query, 'tid', $question_tids_current_form, 'IN');
+    $query->condition($group);
+
+    $group = $query_container->groupStandardByFieldValue($query, 'field_queslibr_fieldtype', $radios_tid);
+    $query->condition($group);
+
+    $group = $query_container->groupStandardByFieldValue($query, 'field_queslibr_relatedfield', 'field_meeting_speaker');
+    $query->condition($group);
+
+    $output = $query_container->runQueryWithGroup($query);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function wrapperMultipleQuestionTidsFromEvaluationformForRelatedtype($evaluationform_term = NULL) {
+    $radios_tid = \Drupal::getContainer()
+      ->get('flexinfo.term.service')
+      ->getTidByTermName($term_name = 'radios', $vocabulary_name = 'fieldtype');
+
+    $question_tids_current_form = \Drupal::getContainer()
+      ->get('flexinfo.field.service')
+      ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
+
+    //
+    $query_container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+    $query = $query_container->queryTidsByBundle('questionlibrary');
+
+    // filter by tids
+    $group = $query_container->groupStandardByFieldValue($query, 'tid', $question_tids_current_form, 'IN');
+    $query->condition($group);
+
+    $group = $query_container->groupStandardByFieldValue($query, 'field_queslibr_fieldtype', $radios_tid);
+    $query->condition($group);
+
+    $group = $query_container->groupStandardByFieldValue($query, 'field_queslibr_relatedfield', 'field_queslibr_relatedtype');
+    $query->condition($group);
+
+    $group = $query_container->groupStandardByFieldValue($query, 'field_queslibr_relatedtype', NULL, 'IS NOT NULL');
+    $query->condition($group);
+
+    $output = $query_container->runQueryWithGroup($query);
+
+    return $output;
+  }
+
   /** - - - - - - other - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
   /**
