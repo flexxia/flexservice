@@ -480,32 +480,26 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
           foreach ($pool_data as $key => $row) {
             if ($key) {
-              $user = \Drupal::entityTypeManager()
-                ->getStorage('user')
-                ->load($key);
+              $count_values = array_count_values($row);
 
-              if ($user) {
-                $count_values = array_count_values($row);
+              $table .= '<tbody>';
+                $table .= '<tr>';
+                  $table .= '<th class="font-weight-normal">';
+                    $table .= $key;
+                  $table .= '</th>';
+                  $table .= '<th class="font-weight-normal">';
+                    $table .= count($row);
+                  $table .= '</th>';
+                  for ($i = 5; $i > 0; $i--) {
+                    $cell_value = isset($count_values[$i]) ? $count_values[$i] : 0;
 
-                $table .= '<tbody>';
-                  $table .= '<tr>';
                     $table .= '<th class="font-weight-normal">';
-                      $table .= $user->getDisplayName();
+                      $table .= $cell_value;
+                      $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                     $table .= '</th>';
-                    $table .= '<th class="font-weight-normal">';
-                      $table .= count($row);
-                    $table .= '</th>';
-                    for ($i = 5; $i > 0; $i--) {
-                      $cell_value = isset($count_values[$i]) ? $count_values[$i] : 0;
-
-                      $table .= '<th class="font-weight-normal">';
-                        $table .= $cell_value;
-                        $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
-                      $table .= '</th>';
-                    }
-                  $table .= '</tr>';
-                $table .= '</tbody>';
-              }
+                  }
+                $table .= '</tr>';
+              $table .= '</tbody>';
             }
           }
 
