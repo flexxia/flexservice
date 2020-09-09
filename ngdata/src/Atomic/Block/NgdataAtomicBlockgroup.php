@@ -140,6 +140,25 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
   /**
    *
    */
+  public function getBlockGroupByRadioQuestionMultipleByReferOther($question_tids = array(), $meeting_nodes = array()) {
+    $output = array();
+
+    if (is_array($question_tids) && $question_tids) {
+      $question_terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadMultiple($question_tids);
+
+      foreach ($question_terms as $question_term) {
+        $output[] = $this->block->getBlockHtmlTableByRadioQuestionMultipleByReferOther($question_term, $meeting_nodes);
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function blockGroupForProgramSnapshot($entity_id, $meeting_nodes) {
     $program_entity = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
