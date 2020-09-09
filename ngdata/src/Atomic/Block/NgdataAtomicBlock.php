@@ -1039,10 +1039,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
       $output['blockContent'][0]['tabData']['top']['value'] = $table_body;
-  }
-  else {
-    $output['blockClass'] = "col-xs-12 margin-top-4 block-comment-wrapper";
-  }
+    }
+    else {
+      $output['blockClass'] = "col-xs-12 margin-top-4 block-comment-wrapper";
+    }
 
     return $output;
   }
