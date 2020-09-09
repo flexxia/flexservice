@@ -105,7 +105,7 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
           ->get('flexinfo.field.service')
           ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
         if ($question_relatedfield == 'field_queslibr_relatedtype') {
-          $output[] = $this->block->getBlockHtmlTableByRadioQuestionMultipleByReferUid($question_term, $meeting_nodes);
+          $output[] = $this->block->getBlockHtmlTableByRadioQuestionMultipleByReferTid($question_term, $meeting_nodes);
         }
       }
     }
