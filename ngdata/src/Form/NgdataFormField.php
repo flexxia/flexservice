@@ -148,6 +148,32 @@ class NgdataFormField {
   }
 
   /**
+   * @param $fieldCategory can be hierarchyFather, specificAnswer, filterFather or filterChildren
+   * @param $parentTid is needed for child to use filter
+   */
+  public function getMultiSelectTemplate($question_term, $fieldName = NULL, $fieldTitle = NULL, $options = array(), $fieldType = NULL) {
+    $output = $this->getFieldBasicProperty($question_term, $fieldName, $fieldTitle);
+
+    if(!$fieldType) {
+      $fieldType = 'select';
+    }
+
+    $output['fieldLabel'] = $fieldTitle;
+    $output['inputType'] = "multiselect";
+    $output['displayType'] = "multiselect";
+
+    $output['options'] = array();
+    $output['question_tid'] = "";
+    $output['fieldShow'] = TRUE;
+    $output['returnType'] = "target_id";
+
+    $output = $this->setFieldProperty($output, $options);
+    $output = $this->overrideParentTid($output);
+
+    return $output;
+  }
+
+  /**
    *
    */
   public function getSelectForReactSet($question_term, $fieldName = NULL, $fieldTitle = NULL, $options = array(), $fieldType = NULL) {
@@ -169,7 +195,7 @@ class NgdataFormField {
    *
    */
   public function getMultiSelectForReactSet($question_term, $fieldName = NULL, $fieldTitle = NULL, $options = array(), $fieldType = 'multiSelect') {
-    $output = $this->getMultiSelect($question_term, $fieldName, $fieldTitle, $options, $fieldType);
+    $output = $this->getMultiSelectTemplate($question_term, $fieldName, $fieldTitle, $options, $fieldType);
     $output["isReactSet"] = TRUE;
 
     return $output;
