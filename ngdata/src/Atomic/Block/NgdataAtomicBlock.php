@@ -268,7 +268,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
           ->meetingNodesByTherapeuticArea($meeting_nodes, $entity_id)
       ),
-      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, TRUE))
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateStackedBarChartByScale10(NULL, TRUE))
     ]];
 
     $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center min-height-320";
@@ -996,6 +996,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
    */
   public function getBlockCommentByQuestion($meeting_nodes = array(), $textfield_question_term = NULL) {
     $output = array();
+    $comments = NULL;
 
     if ($textfield_question_term) {
       $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
@@ -1003,7 +1004,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
       $question_answers = \Drupal::service('ngdata.term.question')
         ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
-      if (isset($question_answers) && count($question_answers) > 0) {
+      if (isset($question_answers) && $question_answers !== NULL) {
         $output['blockClass'] = "col-xs-12 margin-top-12 block-comment-wrapper";
         $comments = '<div class="block-comment-wrapper clear-both margin-0 margin-top-12">';
           $comments .= $this->organism->blockHeaderHtmlQuestionTitle($textfield_question_term);
@@ -1043,7 +1044,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
     $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferUid($question_term, $meeting_nodes);
 
-    if ($table_body) {
+    if (isset($table_body) && $table_body !== NULL) {
       // $output['blockIcon'] = '';
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
@@ -1066,7 +1067,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output = $this->organism->basicSection("htmlSnippt", "float-right margin-bottom-n-24 margin-right-16");
     $table_body = $this->organism->getHtmlTableByMultipleQuestionByReferOther($question_term, $meeting_nodes);
 
-    if ($table_body) {
+    if (isset($table_body) && $table_body !== NULL) {
       // $output['blockIcon'] = '';
       $output['blockClass'] = "col-xs-12 margin-top-12 min-height-100";
       $output['blockHeader'] = $this->organism->blockHeaderHtmlQuestionTitle($question_term);
