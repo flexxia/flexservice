@@ -252,9 +252,20 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * @deprecated
+   * @see blockChartTotalEventsByTherapeuticAreaByBuTids()
    * @param $entity_id is current businessunit tid
    */
   public function blockChartTotalEventsByTherapeuticArea($meeting_nodes = array(), $entity_id = NULL) {
+    $output = $this->blockChartTotalEventsByTherapeuticAreaByBuTids($meeting_nodes, [$entity_id]);
+
+    return $output;
+  }
+
+  /**
+   * @param $entity_id is current businessunit tid
+   */
+  public function blockChartTotalEventsByTherapeuticAreaByBuTids($meeting_nodes = array(), $bu_tids = []) {
     $output = $this->blockChartjs("pie");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
@@ -262,17 +273,17 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Therapeutic Area");
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermTherapeuticAreaListByBu($entity_id)['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermTherapeuticAreaListByBuTids($bu_tids)['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.meeting')
         ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
-          ->meetingNodesByTherapeuticArea($meeting_nodes, $entity_id)
+          ->meetingNodesByTherapeuticAreaByBuTids($meeting_nodes, $bu_tids)
       ),
       "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateStackedBarChartByScale10(NULL, TRUE))
     ]];
 
     $output['blockContent'][0]['tabData']['middle']['middleRight']["styleClass"] = "col-sm-12 col-md-5 display-flex justify-content-center align-items-center min-height-320";
-    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByTherapeuticArea($meeting_nodes, $entity_id);
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->organism->getLegendTotalEventsByTherapeuticAreaByBuTids($meeting_nodes, $bu_tids);
 
     return $output;
   }
