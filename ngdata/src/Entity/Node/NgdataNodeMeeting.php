@@ -113,13 +113,24 @@ class NgdataNodeMeeting extends NgdataNode {
   }
 
   /**
-   *
+   * @deprecated
+   * @see meetingNodesByTherapeuticAreaByBuTids()
    */
   public function meetingNodesByTherapeuticArea($meeting_nodes = array(), $entity_id = NULL) {
+    $output = $this->meetingNodesByTherapeuticAreaByBuTids($meeting_nodes, $bu_tids);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function meetingNodesByTherapeuticAreaByBuTids($meeting_nodes = array(), $bu_tids = []) {
     $output = [];
 
     $therap_tids = \Drupal::service('ngdata.term')
-      ->getTermTherapeuticAreaListByBu($entity_id)['tid'];
+      ->getTermTherapeuticAreaListByBuTids($bu_tids)['tid'];
+
     foreach ($therap_tids as $key => $therap_tid) {
       $output[] = \Drupal::getContainer()
         ->get('flexinfo.querynode.service')
