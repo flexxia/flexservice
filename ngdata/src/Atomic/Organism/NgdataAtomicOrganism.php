@@ -705,7 +705,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   public function getLegendTotalEventsByTherapeuticArea($meeting_nodes = array(), $businessunit_tid = NULL) {
     $output = $this->getLegendTotalEventsByTherapeuticAreaByBuTids($meeting_nodes, [$businessunit_tid]);
 
-    return $legends;
+    return $output;
   }
 
   /**
