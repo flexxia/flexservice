@@ -51,9 +51,21 @@ class NgdataTerm extends NgdataEntity implements NgdataTermInterface {
   /**
    * @return Array data
    * @param $businessunit_tid is current businessunit tid
+   * @deprecated
+   * @see getTermTherapeuticAreaListByBuTids()
    */
   public function getTermTherapeuticAreaListByBu($businessunit_tid = NULL) {
-    $output = array();
+    $output = $this->getTermTherapeuticAreaListByBuTids([$businessunit_tid]);
+
+    return $output;
+  }
+
+  /**
+   * @return Array data
+   * @param $businessunit_tid is current businessunit tid
+   */
+  public function getTermTherapeuticAreaListByBuTids($businessunit_tids = []) {
+    $output = [];
     $output['label'] = array();
     $output['tid'] = array();
 
@@ -66,7 +78,7 @@ class NgdataTerm extends NgdataEntity implements NgdataTermInterface {
           ->get('flexinfo.field.service')
           ->getFieldFirstTargetId($term, 'field_theraparea_businessunit');
 
-        if ($bu_tid == $businessunit_tid) {
+        if (in_array($bu_tid, $businessunit_tids)) {
           $output['label'][] = $term->getName();
           $output['tid'][] = $term->id();
         }
