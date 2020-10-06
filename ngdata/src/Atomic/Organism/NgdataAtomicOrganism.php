@@ -699,23 +699,33 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   }
 
   /**
-   *
+   * @deprecated
+   * @see getLegendTotalEventsByTherapeuticAreaByBuTids()
    */
   public function getLegendTotalEventsByTherapeuticArea($meeting_nodes = array(), $businessunit_tid = NULL) {
+    $output = $this->getLegendTotalEventsByTherapeuticAreaByBuTids($meeting_nodes, [$businessunit_tid]);
+
+    return $legends;
+  }
+
+  /**
+   *
+   */
+  public function getLegendTotalEventsByTherapeuticAreaByBuTids($meeting_nodes = array(), $bu_tids = []) {
     $legend_text = [];
 
     $chartData = \Drupal::service('ngdata.node.meeting')
       ->countMeetingNodesArray(\Drupal::service('ngdata.node.meeting')
-        ->meetingNodesByTherapeuticArea($meeting_nodes, $businessunit_tid));
+        ->meetingNodesByTherapeuticAreaByBuTids($meeting_nodes, $bu_tids));
     $chartLabel = \Drupal::service('ngdata.term')
-      ->getTermTherapeuticAreaListByBu($businessunit_tid)['label'];
+      ->getTermTherapeuticAreaListByBuTids($bu_tids)['label'];
     if ($chartData && is_array($chartData)) {
       foreach ($chartData as $key => $row) {
         $legend_text[] = $chartLabel[$key] . '(' . $chartData[$key] . ')';
       }
     }
 
-    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, FALSE);
+    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateStackedBarChartByScale10(NULL, FALSE);
     $legends = \Drupal::getContainer()
       ->get('flexinfo.chart.service')
       ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
