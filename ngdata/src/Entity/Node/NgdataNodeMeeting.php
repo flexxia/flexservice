@@ -117,7 +117,7 @@ class NgdataNodeMeeting extends NgdataNode {
    * @see meetingNodesByTherapeuticAreaByBuTids()
    */
   public function meetingNodesByTherapeuticArea($meeting_nodes = array(), $entity_id = NULL) {
-    $output = $this->meetingNodesByTherapeuticAreaByBuTids($meeting_nodes, $bu_tids);
+    $output = $this->meetingNodesByTherapeuticAreaByBuTids($meeting_nodes, [$entity_id]);
 
     return $output;
   }
