@@ -54,17 +54,7 @@ class FlexinfoCalcService {
   }
 
   /**
-   * @return NPS/NTS-- Net Promoter Score
-   * NPS formula
-   *
-   * For First Question of Evaluation
-   * Promoters  =  number of (score 5)
-   * Passives   =  number of (score 3-4)
-   * Detractors =  number of (score 1-2)
-   * Total = Promoters + Passives + Detractors;
-   * NPS =  (Promoters - Detractors) / Total;
-   *
-   \Drupal::service('flexinfo.calc.service')->calcNtsScoreByMeetingNodes();
+   * @return NPS/NTS-- Net Promoter Score for 1- 5
    */
   public function calcNtsScoreByMeetingNodes($meeting_nodes = array(), $plus_sign = TRUE) {
     // How would you rate the overall quality of the Educational program
@@ -75,7 +65,7 @@ class FlexinfoCalcService {
   }
 
   /**
-   * @return NPS/NTS-- Net Promoter Score
+   * @return NPS/NTS-- Net Promoter Score for 1- 5
    * NPS formula
    *
    * For First Question of Evaluation
@@ -99,6 +89,45 @@ class FlexinfoCalcService {
     $detractors =  $pool_data[1] + $pool_data[0];
 
     $total = array_sum($pool_data);
+
+    $nps = 0;
+    if ($total != 0) {
+      $nps = ($promoters - $detractors) / $total;
+    }
+
+    // format NPS score
+    if (is_numeric($nps)) {
+      $nps = round($nps, 2) * 100;
+      if ($plus_sign) {
+        if ($nps > 0) {
+          // add "+" sign before Positive integer number
+          $nps = '+' . $nps;
+        }
+      }
+    }
+
+    return $nps;
+  }
+
+  /**
+   * @return NPS/NTS-- Net Promoter Score for 1- 10
+   * NPS formula  for 1- 10
+   *
+   * For First Question of Evaluation
+   * Promoters  =  number of (score 9, 10)
+   * not count  =  number of (score 7, 8)
+   * Detractors =  number of (score 1-6)
+   * Total = Promoters + Passives + Detractors;
+   * NPS =  (Promoters - Detractors) / Total;
+   *
+   * $question_data = \Drupal::service('ngdata.node.evaluation')
+           ->getRaidoQuestionData($question_term, $meeting_nodes);
+   */
+  public function calcNTSScoreScale10($question_data = array(), $plus_sign = TRUE) {
+    $promoters  =  $question_data[0] + $question_data[1];
+    $detractors =  $question_data[4] + $question_data[5] + $question_data[6] + $question_data[7] + $question_data[8] + $question_data[9];
+
+    $total = array_sum($question_data);
 
     $nps = 0;
     if ($total != 0) {
