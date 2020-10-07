@@ -265,14 +265,14 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * @param $entity_id is current businessunit tid
    */
-  public function blockChartTotalEventsByTherapeuticAreaByBuTids($meeting_nodes = array(), $bu_tids = []) {
+  public function blockChartTotalEventsByTherapeuticAreaByBuTids($meeting_nodes = array(), $bu_tids = [], $color_box_palette = FALSE, $bg_color_class = 'bg-009ddf') {
     $output = $this->blockChartjs("pie");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Therapeutic Area");
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Total Events by Therapeutic Area", $color_box_palette, $bg_color_class);
 
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-7";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-xs-12 col-md-7 margin-top-12";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')->getTermTherapeuticAreaListByBuTids($bu_tids)['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.meeting')
