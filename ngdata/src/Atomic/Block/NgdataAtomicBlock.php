@@ -540,6 +540,34 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * @internal stackbar chart X-axis is Month,
+   */
+  public function blockChartjsAverageNpsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-009ddf') {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By Funding Source", FALSE, $bg_color_class);
+
+    $datasets_data_0 = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByAverageNpsByMonthByFundingSource($meeting_nodes, FALSE);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('fundingsource')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      // "borderColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+      // "borderWidth" => 1
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
    * @internal bar chart, bar chart is array($data) of stackbar chart
    */
   public function blockChartjsHcpReachByProvince($meeting_nodes = array(), $bg_color_class = 'bg-e61e50') {
