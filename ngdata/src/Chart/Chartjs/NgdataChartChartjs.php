@@ -478,16 +478,16 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByCountry($meeting_nodes = array()) {
+  public function chartPieDataByAverageNpsByCountry($meeting_nodes = array(), $question_tid = 120) {
     $output = [];
 
-    $meeting_nodes_by_fundingSource = array_values(\Drupal::service('ngdata.node.meeting')
+    $meeting_nodes_by_term = array_values(\Drupal::service('ngdata.node.meeting')
       ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'country', 'field_meeting_country'));
 
     $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
 
-    if ($question_term && $meeting_nodes_by_fundingSource) {
-      foreach ($meeting_nodes_by_fundingSource as $key => $row) {
+    if ($question_term && $meeting_nodes_by_term) {
+      foreach ($meeting_nodes_by_term as $key => $row) {
         $question_data = \Drupal::service('ngdata.node.evaluation')
            ->getRaidoQuestionData($question_term, $row);
 
