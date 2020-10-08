@@ -542,7 +542,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * bar chart
    */
-  public function blockChartjsAverageNpsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f') {
+  public function blockChartjsAverageNpsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f', $question_tid = 120) {
     $output = $this->blockChartjs("bar");
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
@@ -550,11 +550,11 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By Country", FALSE, $bg_color_class);
 
     $datasets_data = \Drupal::service('ngdata.chart.chartjs')
-      ->chartPieDataByAverageNpsByFundingSource($meeting_nodes);
+      ->chartPieDataByAverageNpsByCountry($meeting_nodes, $question_tid);
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
-      ->getTermListByVocabulary('fundingsource')['label'];
+      ->getTermListByVocabulary('country')['label'];
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => $datasets_data,
       "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
