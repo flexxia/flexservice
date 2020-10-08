@@ -478,7 +478,30 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByMonthByFundingSource($meeting_nodes = array(), $question_tid = 120) {
+  public function chartPieDataByAverageNpsByCountry($meeting_nodes = array()) {
+    $output = [];
+
+    $meeting_nodes_by_fundingSource = array_values(\Drupal::service('ngdata.node.meeting')
+      ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'country', 'field_meeting_country'));
+
+    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
+
+    if ($question_term && $meeting_nodes_by_fundingSource) {
+      foreach ($meeting_nodes_by_fundingSource as $key => $row) {
+        $question_data = \Drupal::service('ngdata.node.evaluation')
+           ->getRaidoQuestionData($question_term, $row);
+
+        $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function chartPieDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120) {
     $output = [];
 
     $meeting_nodes_by_fundingSource = array_values(\Drupal::service('ngdata.node.meeting')
