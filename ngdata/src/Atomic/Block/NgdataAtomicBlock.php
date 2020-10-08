@@ -542,6 +542,32 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    * bar chart
    */
+  public function blockChartjsAverageNpsByBusinessUnit($meeting_nodes = array(), $bg_color_class = 'bg-149b5f', $question_tid = 120) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By BU", FALSE, $bg_color_class);
+
+    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
+      ->chartPieDataByAverageNpsByBusinessUnit($meeting_nodes, $question_tid);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('businessunit')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
+   * bar chart
+   */
   public function blockChartjsAverageNpsByCountry($meeting_nodes = array(), $bg_color_class = 'bg-149b5f', $question_tid = 120) {
     $output = $this->blockChartjs("bar");
 
@@ -566,7 +592,33 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
-   * @internal stackbar chart X-axis is Month,
+   *
+   */
+  public function chartPieDataByAverageNpsByEventType($meeting_nodes = array(), $bg_color_class = 'bg-009ddf', $question_tid = 120) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By Funding Source", FALSE, $bg_color_class);
+
+    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
+      ->chartPieDataByAverageNpsByEventType($meeting_nodes, $question_tid);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('eventtype')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
+
+  /**
+   *
    */
   public function blockChartjsAverageNpsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-009ddf', $question_tid = 120) {
     $output = $this->blockChartjs("bar");
@@ -591,6 +643,31 @@ class NgdataAtomicBlock extends NgdataAtomic {
     return $output;
   }
 
+  /**
+   *
+   */
+  public function blockChartjsAverageNpsByTherapeuticArea($meeting_nodes = array(), $bg_color_class = 'bg-009ddf', $question_tid = 120) {
+    $output = $this->blockChartjs("bar");
+
+    $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
+    $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By TA", FALSE, $bg_color_class);
+
+    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
+      ->chartPieDataByAverageNpsByTherapeuticArea($meeting_nodes, $question_tid);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary('therapeuticarea')['label'];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => $datasets_data,
+      "backgroundColor" => array_values(\Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE)),
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarOption($datasets_data);
+
+    return $output;
+  }
 
   /**
    * @internal bar chart, bar chart is array($data) of stackbar chart
