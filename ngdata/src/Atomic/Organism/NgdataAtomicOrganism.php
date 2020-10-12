@@ -635,40 +635,40 @@ class NgdataAtomicOrganism extends NgdataAtomic {
    *
    <div style="margin-top:110px;" class="legend-square-wrapper margin-left-12 width-pt-100 font-size-14"><div class="clear-both height-32 text-center fn-render-legend-square"><span class="legend-square bg-0093d0"></span><span class="float-left legend-text">Immunology(0)</span></div><div class="clear-both height-32 text-center fn-render-legend-square"><span class="legend-square bg-002596"></span><span class="float-left legend-text">Oncology(0)</span></div><div class="clear-both height-32 text-center fn-render-legend-square"><span class="legend-square bg-ff9933"></span><span class="float-left legend-text">Specialty(1)</span></div></div>
    */
-   public function getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes = array()) {
-     $output = $this->getLegendTotalEventsByBU($meeting_nodes);
+  public function getLegendTotalEventsByBUWithLegendRelevant($meeting_nodes = array()) {
+    $output = $this->getLegendTotalEventsByBU($meeting_nodes);
 
-     $user_default_businessunit_tids = \Drupal::service('user.data')
-       ->get('navinfo', \Drupal::currentUser()->id(), 'default_term_businessunit');
-     if ($user_default_businessunit_tids) {
+    $user_default_businessunit_tids = \Drupal::service('user.data')
+      ->get('navinfo', \Drupal::currentUser()->id(), 'default_term_businessunit');
+    if ($user_default_businessunit_tids) {
 
-       $trees = \Drupal::entityTypeManager()
-         ->getStorage('taxonomy_term')
-         ->loadTree('businessunit', 0);
+      $trees = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadTree('businessunit', 0);
 
-       $temp_match = [];
-       foreach ($trees as $key => $term) {
-         $preg_string = '/<div class="clear-both.+' . $term->name . '\(\w*\)<\/span><\/div>/';
+      $temp_match = [];
+      foreach ($trees as $key => $term) {
+        $preg_string = '/<div class="clear-both.+' . $term->name . '\(\w*\)<\/span><\/div>/';
 
-         if (in_array($term->tid, $user_default_businessunit_tids)) {
-           preg_match($preg_string, $output, $matches);
-           $temp_match["temp_match_" . $key] = $matches[0];
-           $output = preg_replace($preg_string, "temp_match_" . $key, $output);
-         }
-         else {
-           $output = preg_replace($preg_string, "", $output);
-         }
-       }
+        if (in_array($term->tid, $user_default_businessunit_tids)) {
+          preg_match($preg_string, $output, $matches);
+          $temp_match["temp_match_" . $key] = $matches[0];
+          $output = preg_replace($preg_string, "temp_match_" . $key, $output);
+        }
+        else {
+          $output = preg_replace($preg_string, "", $output);
+        }
+      }
 
-       if ($temp_match) {
-         foreach ($temp_match as $temp_match_key => $row) {
-           $output = str_replace($temp_match_key, $row, $output);
-         }
-       }
-     }
+      if ($temp_match) {
+        foreach ($temp_match as $temp_match_key => $row) {
+          $output = str_replace($temp_match_key, $row, $output);
+        }
+      }
+    }
 
-     return $output;
-   }
+    return $output;
+  }
 
   /**
    *
@@ -691,6 +691,28 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
     $legend_color = \Drupal::service('flexinfo.setting.service')
       ->colorPlateOutputKeyByPaletteName('colorPlatePieChartOne', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
+
+    $output = \Drupal::service('ngdata.atomic.atom')
+      ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getLegendHorizontalByVid($vid = '', $chart_palette = 'colorPlatePieChartOne') {
+    $chartLabel = \Drupal::service('ngdata.term')
+      ->getTermListByVocabulary($vid)['label'];
+
+    $legend_text = array();
+
+    foreach ($chartLabel as $key => $row) {
+      $legend_text[] = $row;
+    }
+
+    $legend_color = \Drupal::service('flexinfo.setting.service')
+      ->colorPlateOutputKeyByPaletteName($chart_palette, $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
 
     $output = \Drupal::service('ngdata.atomic.atom')
       ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');

@@ -163,6 +163,41 @@ class NgdataChartChartjs extends NgdataChart {
   }
 
   /**
+   *
+   */
+  public function chartScatterOption() {
+    $output = [
+      "legend" => [
+        "display" => FALSE,
+      ],
+      "scaleShowValues" => TRUE,
+      "scales" => [
+        "xAxes" => [[
+          "type" => "time",
+          "time" => [
+            "unit" => "month",
+            "displayFormat" => [
+              "month" => "MM YYYY",
+            ]
+          ],
+          "ticks" => [
+            "autoSkip" => FALSE,
+          ],
+          "position" => "bottom",
+        ]],
+        "yAxes" => [[
+          "type" => "linear",
+          "ticks" => [
+            "beginAtZero" => TRUE,
+          ],
+        ]],
+      ],
+    ];
+
+    return $output;
+  }
+
+  /**
    * @return
     $output[] = array(
       "backgroundColor" => "#f24b99",
@@ -586,6 +621,61 @@ class NgdataChartChartjs extends NgdataChart {
            ->getRaidoQuestionData($question_term, $row);
 
         $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function chartScatterDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120) {
+    $output = [];
+
+    $question_term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($question_tid);
+
+    $colors = array_values(\Drupal::service('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE));
+
+    $term_list = \Drupal::service('ngdata.term')->getTermListByVocabulary('fundingsource');
+
+    $term_colors = [];
+    foreach ($term_list['tid'] as $key => $tid) {
+      if (isset($colors[$key])) {
+        $term_colors[$tid] = $colors[$key];
+      }
+    }
+
+    if ($meeting_nodes) {
+      foreach ($meeting_nodes as $key => $meeting_node) {
+        $question_data = \Drupal::service('ngdata.node.evaluation')
+          ->getRaidoQuestionData($question_term, array($meeting_node));
+
+        if (array_sum($question_data) > 0) {
+          $funding_source_tid = \Drupal::service('flexinfo.field.service')
+            ->getFieldFirstTargetId($meeting_node, 'field_meeting_fundingsource');
+
+          $color = '';
+          if (isset($term_colors[$funding_source_tid])) {
+            $color = $term_colors[$funding_source_tid];
+          }
+          $output[] = [
+            "label" => \Drupal::service('flexinfo.field.service')
+              ->getFieldFirstTargetIdTermName($meeting_node, 'field_meeting_program'),
+            "pointBackgroundColor" => $color,
+            "borderColor" => $color,
+            "data" => [
+              [
+                "x" => \Drupal::service('flexinfo.field.service')
+                  ->getFieldFirstValueDateFormat($meeting_node, 'field_meeting_date', 'html_month'),
+                "y" => \Drupal::service('flexinfo.calc.service')
+                  ->calcNTSScoreScale10($question_data, FALSE),
+              ],
+            ]
+          ];
+        }
       }
     }
 
