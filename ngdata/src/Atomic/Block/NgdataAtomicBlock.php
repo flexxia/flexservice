@@ -599,7 +599,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockClass'] = $this->template->blockChartCssSet()['blockClass'];
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
-    $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By Funding Source", FALSE, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By Event Type", FALSE, $bg_color_class);
 
     $datasets_data = \Drupal::service('ngdata.chart.chartjs')
       ->chartPieDataByAverageNpsByEventType($meeting_nodes, $question_tid);
