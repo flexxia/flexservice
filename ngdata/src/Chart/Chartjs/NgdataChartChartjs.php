@@ -613,6 +613,10 @@ class NgdataChartChartjs extends NgdataChart {
   public function chartScatterDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
 
+    $question_term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($question_tid);
+
     $colors = array_values(\Drupal::service('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE));
 
     $term_list = \Drupal::service('ngdata.term')->getTermListByVocabulary('fundingsource');
@@ -646,8 +650,8 @@ class NgdataChartChartjs extends NgdataChart {
               [
                 "x" => \Drupal::service('flexinfo.field.service')
                   ->getFieldFirstValueDateFormat($meeting_node, 'field_meeting_date', 'html_month'),
-                "y" => \Drupal::service('ngdata.term.question')
-                  ->getRaidoQuestionsTidNTSScoreScale10($question_tid, array($meeting_node), $plus_sign),
+                "y" => \Drupal::service('flexinfo.calc.service')
+                  ->calcNTSScoreScale10($question_data, FALSE),
               ],
             ]
           ];
