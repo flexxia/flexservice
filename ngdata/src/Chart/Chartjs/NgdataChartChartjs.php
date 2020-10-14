@@ -513,20 +513,16 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByCountry($meeting_nodes = array(), $question_tid = 120) {
+  public function chartPieDataByAverageNpsByCountry($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
 
     $meeting_nodes_by_term = array_values(\Drupal::service('ngdata.node.meeting')
       ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'country', 'field_meeting_country'));
 
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    if ($question_term && $meeting_nodes_by_term) {
+    if ($question_tid && $meeting_nodes_by_term) {
       foreach ($meeting_nodes_by_term as $key => $row) {
-        $question_data = \Drupal::service('ngdata.node.evaluation')
-           ->getRaidoQuestionData($question_term, $row);
-
-        $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+        $output[] = \Drupal::service('ngdata.term.question')
+          ->getRaidoQuestionsTidNTSScoreScale10($question_tid, $row, $plus_sign);
       }
     }
 
@@ -536,20 +532,16 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByBusinessUnit($meeting_nodes = array(), $question_tid = 120) {
+  public function chartPieDataByAverageNpsByBusinessUnit($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
 
     $meeting_nodes_by_term = array_values(\Drupal::service('ngdata.node.meeting')
       ->meetingNodesByBU($meeting_nodes));
 
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    if ($question_term && $meeting_nodes_by_term) {
+    if ($question_tid && $meeting_nodes_by_term) {
       foreach ($meeting_nodes_by_term as $key => $row) {
-        $question_data = \Drupal::service('ngdata.node.evaluation')
-           ->getRaidoQuestionData($question_term, $row);
-
-        $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+        $output[] = \Drupal::service('ngdata.term.question')
+          ->getRaidoQuestionsTidNTSScoreScale10($question_tid, $row, $plus_sign);
       }
     }
 
@@ -559,20 +551,16 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByEventType($meeting_nodes = array(), $question_tid = 120) {
+  public function chartPieDataByAverageNpsByEventType($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
 
     $meeting_nodes_by_term = array_values(\Drupal::service('ngdata.node.meeting')
       ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'eventtype', 'field_meeting_eventtype'));
 
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    if ($question_term && $meeting_nodes_by_term) {
+    if ($question_tid && $meeting_nodes_by_term) {
       foreach ($meeting_nodes_by_term as $key => $row) {
-        $question_data = \Drupal::service('ngdata.node.evaluation')
-           ->getRaidoQuestionData($question_term, $row);
-
-        $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+        $output[] = \Drupal::service('ngdata.term.question')
+          ->getRaidoQuestionsTidNTSScoreScale10($question_tid, $row, $plus_sign);
       }
     }
 
@@ -582,20 +570,16 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120) {
+  public function chartPieDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
 
     $meeting_nodes_by_term = array_values(\Drupal::service('ngdata.node.meeting')
       ->meetingNodesByStandardTermWithNodeField($meeting_nodes, 'fundingsource', 'field_meeting_fundingsource'));
 
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    if ($question_term && $meeting_nodes_by_term) {
+    if ($question_tid && $meeting_nodes_by_term) {
       foreach ($meeting_nodes_by_term as $key => $row) {
-        $question_data = \Drupal::service('ngdata.node.evaluation')
-           ->getRaidoQuestionData($question_term, $row);
-
-        $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+        $output[] = \Drupal::service('ngdata.term.question')
+          ->getRaidoQuestionsTidNTSScoreScale10($question_tid, $row, $plus_sign);
       }
     }
 
@@ -605,7 +589,7 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartPieDataByAverageNpsByTherapeuticArea($meeting_nodes = array(), $question_tid = 120) {
+  public function chartPieDataByAverageNpsByTherapeuticArea($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
 
     $bu_tids = \Drupal::service('ngdata.term')->getTermListByVocabulary('businessunit')['tid'];
@@ -613,14 +597,10 @@ class NgdataChartChartjs extends NgdataChart {
     $meeting_nodes_by_term = array_values(\Drupal::service('ngdata.node.meeting')
       ->meetingNodesByTherapeuticAreaByBuTids($meeting_nodes, $bu_tids));
 
-    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
-
-    if ($question_term && $meeting_nodes_by_term) {
+    if ($question_tid && $meeting_nodes_by_term) {
       foreach ($meeting_nodes_by_term as $key => $row) {
-        $question_data = \Drupal::service('ngdata.node.evaluation')
-           ->getRaidoQuestionData($question_term, $row);
-
-        $output[] = \Drupal::service('flexinfo.calc.service')->calcNTSScoreScale10($question_data, FALSE);
+        $output[] = \Drupal::service('ngdata.term.question')
+          ->getRaidoQuestionsTidNTSScoreScale10($question_tid, $row, $plus_sign);
       }
     }
 
@@ -630,12 +610,8 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
-  public function chartScatterDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120) {
+  public function chartScatterDataByAverageNpsByFundingSource($meeting_nodes = array(), $question_tid = 120, $plus_sign = FALSE) {
     $output = [];
-
-    $question_term = \Drupal::entityTypeManager()
-      ->getStorage('taxonomy_term')
-      ->load($question_tid);
 
     $colors = array_values(\Drupal::service('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE));
 
@@ -670,8 +646,8 @@ class NgdataChartChartjs extends NgdataChart {
               [
                 "x" => \Drupal::service('flexinfo.field.service')
                   ->getFieldFirstValueDateFormat($meeting_node, 'field_meeting_date', 'html_month'),
-                "y" => \Drupal::service('flexinfo.calc.service')
-                  ->calcNTSScoreScale10($question_data, FALSE),
+                "y" => \Drupal::service('ngdata.term.question')
+                  ->getRaidoQuestionsTidNTSScoreScale10($question_tid, array($meeting_node), $plus_sign),
               ],
             ]
           ];
