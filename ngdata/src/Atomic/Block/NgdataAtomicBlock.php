@@ -618,7 +618,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
-   *
+   * @see bar chart single color
+      override
+      $num_data = count($output['blockContent'][0]['tabData']['middle']['middleMiddle']['data']['datasets'][0]['backgroundColor']);
+      $output['blockContent'][0]['tabData']['middle']['middleMiddle']['data']['datasets'][0]['backgroundColor'] = array_fill(0, $num_data, "#2fa9e0");
    */
   public function blockChartjsAverageNpsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-009ddf', $question_tid = 120) {
     $output = $this->blockChartjs("bar");
