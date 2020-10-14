@@ -778,14 +778,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockClassSub'] = $this->template->blockChartCssSet()['blockClassSub'];
     $output['blockHeader'] = $this->molecule->getBlockHeader("Average NPS By Funding Source", FALSE, $bg_color_class);
 
-
     $output['blockContent'][0]['chartjsPluginsOptions']['calculateLabel'] = FALSE;
     $output['blockContent'][0]['chartjsPluginsOptions']['calculateTooltip'] = FALSE;
     $output['blockContent'][0]['chartjsPluginsOptions']['dispalyTooltipLabelValue'] = TRUE;
 
     $output['blockContent'][0]['tabData']['top']['styleClass'] = "color-fff height-60 padding-15 padding-left-14 bg-009ddf";
     $output['blockContent'][0]['tabData']['top']['value'] = $this->organism->getLegendHorizontalByVid('fundingsource');
-
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["renderLabel"] = "percentage";
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-11";
@@ -795,7 +793,6 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["options"] = \Drupal::service('ngdata.chart.chartjs')
       ->chartScatterOption();
-
 
     return $output;
   }

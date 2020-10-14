@@ -617,7 +617,7 @@ class NgdataChartChartjs extends NgdataChart {
       ->getStorage('taxonomy_term')
       ->load($question_tid);
 
-    $colors = array_values(\Drupal::service('baseinfo.setting.service')->colorPlateLineChartOne(NULL, TRUE));
+    $colors = array_values(\Drupal::service('baseinfo.setting.service')->colorPlatePieChartOne(NULL, TRUE));
 
     $term_list = \Drupal::service('ngdata.term')->getTermListByVocabulary('fundingsource');
 
