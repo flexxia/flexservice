@@ -160,6 +160,32 @@ class NgdataTermQuestion extends NgdataTerm {
   /**
    *
    */
+  public function getRaidoQuestionsTidNTSScoreScale10($question_tid = NULL, $meeting_nodes = array(), $plus_sign = TRUE) {
+    $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
+
+    $output = $this->getRaidoQuestionsTermNTSScoreScale10($question_term, $meeting_nodes, $plus_sign);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getRaidoQuestionsTermNTSScoreScale10($question_term = NULL, $meeting_nodes = array(), $plus_sign = TRUE) {
+    $output = 0;
+
+    $question_data = \Drupal::service('ngdata.node.evaluation')
+      ->getRaidoQuestionData($question_term, $meeting_nodes);
+
+    $output = \Drupal::service('flexinfo.calc.service')
+      ->calcNTSScoreScale10($question_data, $plus_sign);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getRaidoQuestionCorrectAnswerData($question_term = NULL, $meeting_nodes = array(), $type_tid = NULL) {
     $output = $this->getQuestionAnswerByQuestionTidWithEvaluationType($meeting_nodes, $question_term->id(), 5, $type_tid);
     return $output;
