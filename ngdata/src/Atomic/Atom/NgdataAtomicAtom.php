@@ -44,34 +44,9 @@ class NgdataAtomicAtom extends NgdataAtomic {
   }
 
   /**
-   * Horizontal is float
-   */
-  public function renderLegendSquareHorizontal($legend_text = array(), $legend_color = array(), $max_length = NULL) {
-    $legends = '<div class="legend-square-wrapper margin-left-12 margin-top-24 font-size-12 width-pt-100">';
-
-    foreach ($legend_text as $key => $value) {
-      $bg_color_class = NULL;
-      if (isset($legend_color[$key])) {
-        $bg_color_class = 'bg-' . $legend_color[$key];
-      }
-
-      $legends .= '<div class="height-32 text-center float-left">';
-        $legends .= '<span class="legend-square ' . $bg_color_class . '">';
-        $legends .= '</span>';
-        $legends .= '<span class="float-left legend-text">';
-          $legends .= $value;
-        $legends .= '</span>';
-      $legends .= '</div>';
-    }
-    $legends .= '</div>';
-
-    return $legends;
-  }
-
-  /**
    *
    */
-  public function renderChartBottomFooterAverageNumber($question_term = NULL, $meeting_nodes = array()) {
+  public function getChartBottomFooterForAverageNumber($question_term = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
     $chartAllData = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
 
@@ -86,10 +61,75 @@ class NgdataAtomicAtom extends NgdataAtomic {
   /**
    *
    */
-  public function renderChartBottomFooterByKeyValuePercentage($question_term = NULL, $meeting_nodes = array(), $key = 'Last') {
+  public function getChartBottomFooterForCorrectAnswerImporveByRelatedtype($question_term = NULL, $meeting_nodes = array()) {
     $output = 0;
 
-    $key_value = $this->renderChartBottomFooterBySpecifyKeyValuePercentage($question_term, $meeting_nodes, $key);
+    $question_relatedtype = \Drupal::service('flexinfo.field.service')
+      ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
+
+    if ($question_relatedtype) {
+      $data = array();
+      foreach ($question_relatedtype as $row) {
+        $data[] = \Drupal::service('ngdata.node.evaluation')
+          ->getNumberOfEvaluationByQuestionCorrectAnswerByReferValue(
+            $meeting_nodes,
+            $question_term->id(),
+            'refer_other',
+            $row
+          );
+      }
+
+      $FlexpageEventLayout = new FlexpageEventLayout();
+      $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
+      $output = \Drupal::service('flexinfo.calc.service')
+        ->getPercentageDecimal(($data[1] - $data[0]), $sum_data, 0);
+      $output .= '%';
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getChartBottomFooterForNTS($question_term = NULL, $meeting_nodes = array()) {
+    $output = 0;
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getChartBottomFooterForKeyValuesPercentage($question_term = NULL, $meeting_nodes = array()) {
+    $output = 0;
+
+    $footeranswers = \Drupal::service('flexinfo.field.service')
+      ->getFieldAllValues($question_term, 'field_queslibr_footeranswer');
+
+    if ($footeranswers && is_array($footeranswers)) {
+      foreach ($footeranswers as $key => $row) {
+        $key_value = $this->getChartBottomFooterBySpecifyKeyValue($question_term, $meeting_nodes, $row);
+
+        $FlexpageEventLayout = new FlexpageEventLayout();
+        $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
+
+        $output += \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($key_value, $sum_data, 0);
+      }
+      $output .= '%';
+    }
+
+    return $output;
+  }
+
+  /**
+   * @deprecated
+   * @see $this->getChartBottomFooterForKeyValuesPercentage()
+   */
+  public function getChartBottomFooterForKeyValuePercentage($question_term = NULL, $meeting_nodes = array(), $key = 'Last') {
+    $output = 0;
+
+    $key_value = $this->getChartBottomFooterBySpecifyKeyValue($question_term, $meeting_nodes, $key);
 
     $FlexpageEventLayout = new FlexpageEventLayout();
     $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
@@ -103,7 +143,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
   /**
    * @param $key It could be "First" or "Last", or any integer value
    */
-  public function renderChartBottomFooterBySpecifyKeyValuePercentage($question_term = NULL, $meeting_nodes = array(), $key = 'Last') {
+  public function getChartBottomFooterBySpecifyKeyValue($question_term = NULL, $meeting_nodes = array(), $key = 'Last') {
     $output = 0;
 
     $FlexpageEventLayout = new FlexpageEventLayout();
@@ -130,7 +170,32 @@ class NgdataAtomicAtom extends NgdataAtomic {
   }
 
   /**
-   * @see $footeranswer It could be "CorrectAnswerImporveByRelatedtype", First" or "Last", or any integer value
+   * Horizontal is float
+   */
+  public function renderLegendSquareHorizontal($legend_text = array(), $legend_color = array(), $max_length = NULL) {
+    $legends = '<div class="legend-square-wrapper margin-left-12 margin-top-24 font-size-12 width-pt-100">';
+
+    foreach ($legend_text as $key => $value) {
+      $bg_color_class = NULL;
+      if (isset($legend_color[$key])) {
+        $bg_color_class = 'bg-' . $legend_color[$key];
+      }
+
+      $legends .= '<div class="height-32 text-center float-left">';
+        $legends .= '<span class="legend-square ' . $bg_color_class . '">';
+        $legends .= '</span>';
+        $legends .= '<span class="float-left legend-text">';
+          $legends .= $value;
+        $legends .= '</span>';
+      $legends .= '</div>';
+    }
+    $legends .= '</div>';
+
+    return $legends;
+  }
+
+  /**
+   * @see $footeranswer, Leave empty is "Average". Options could be "First" or "Last", or any integer value, or "CorrectAnswerImporveByRelatedtype".
    */
   public function renderChartBottomFooterAnswerValue($question_term = NULL, $meeting_nodes = array()) {
     $output = '';
@@ -139,33 +204,16 @@ class NgdataAtomicAtom extends NgdataAtomic {
       ->getFieldFirstValue($question_term, 'field_queslibr_footeranswer');
 
     if ($footeranswer == 'CorrectAnswerImporveByRelatedtype') {
-      $question_relatedtype = \Drupal::service('flexinfo.field.service')
-        ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
-
-      if ($question_relatedtype) {
-        $data = array();
-        foreach ($question_relatedtype as $row) {
-          $data[] = \Drupal::service('ngdata.node.evaluation')
-            ->getNumberOfEvaluationByQuestionCorrectAnswerByReferValue(
-              $meeting_nodes,
-              $question_term->id(),
-              'refer_other',
-              $row
-            );
-        }
-
-        $FlexpageEventLayout = new FlexpageEventLayout();
-        $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
-        $output = \Drupal::service('flexinfo.calc.service')
-          ->getPercentageDecimal(($data[1] - $data[0]), $sum_data, 0);
-        $output .= '%';
-      }
+      $output = $this->getChartBottomFooterForCorrectAnswerImporveByRelatedtype($question_term, $meeting_nodes, $footeranswer);
+    }
+    if ($footeranswer == 'NTS') {
+      $output = $this->getChartBottomFooterForNTS($question_term, $meeting_nodes, $footeranswer);
     }
     else if ($footeranswer) {
-      $output = $this->renderChartBottomFooterByKeyValuePercentage($question_term, $meeting_nodes, $footeranswer);
+      $output = $this->getChartBottomFooterForKeyValuesPercentage($question_term, $meeting_nodes);
     }
     else {
-      $output = $this->renderChartBottomFooterAverageNumber($question_term, $meeting_nodes);
+      $output = $this->getChartBottomFooterForAverageNumber($question_term, $meeting_nodes);
     }
 
     return $output;
