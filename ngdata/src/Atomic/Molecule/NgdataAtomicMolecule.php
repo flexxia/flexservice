@@ -1225,6 +1225,48 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    * @return array
    */
+  public function tableDataByCustomNodeByMeetingShowSummaryEval($meeting_nodes, $entity_id, $start, $end) {
+    $output = array();
+
+    // $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
+
+    foreach ($meeting_nodes as $node) {
+      $program_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
+
+      $theraparea_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_theraparea');
+
+      $result_row = array(
+        'Name' => $program_entity ? $program_entity->getName() : '',
+        'Date' => \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date'),
+        'Create' => \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'html_date'),
+        'BU' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($theraparea_entity, 'field_theraparea_businessunit'),
+        'Province' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_province'),
+        'City' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_city'),
+        'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
+        'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
+        // \Drupal::l('Add', Url::fromUserInput('/manageinfo/node/evaluation/add/form/' . $node->id())),
+        // \Drupal::l('Summary', Url::fromUserInput('/manageinfo/summaryevaluation/form/' . $node->id())),
+        'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
+        'Add' => \Drupal::l('Add', Url::fromUserInput('/ngpage/evaluation/form/' . $node->id())),
+        'Summary' => \Drupal::l('Add', Url::fromUserInput('/ngpage/summaryevaluation/basicform/' . $node->id())),
+        'Summary Eval' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_summaryevaluation'),
+      );
+
+      $row = $result_row;
+      $row['tableBodyData'] = $result_row;
+      $row['Edit'] = '';
+      $row['Add'] = '';
+      $row['Summary'] = '';
+
+      $output[] = $row;
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return array
+   */
   public function tableDataByCustomUserForAdminSection() {
     $output = array();
 
