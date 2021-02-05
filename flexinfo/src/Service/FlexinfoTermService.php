@@ -241,6 +241,29 @@ class FlexinfoTermService {
   }
 
   /**
+   * Utility: find term by name and vid.
+   * @param null $name
+   *  Term name
+   * @param null $vid
+   *  Term vid
+   * @return int
+   *  Term id or 0 if none.
+   */
+  protected function getTidByNameOption2($name = NULL, $vid = NULL) {
+    $properties = [];
+    if (!empty($name)) {
+      $properties['name'] = $name;
+    }
+    if (!empty($vid)) {
+      $properties['vid'] = $vid;
+    }
+    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    $term = reset($terms);
+
+    return !empty($term) ? $term->id() : 0;
+  }
+
+  /**
    * @return array, term tids
    \Drupal::service('flexinfo.term.service')->getTidsFromFullTerms($terms);
    */
