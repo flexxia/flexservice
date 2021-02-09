@@ -1,0 +1,1630 @@
+{
+  "fixedSection": [
+    {
+      "blockId": 43156016,
+      "class": "col-md-3",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-344a5f color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "Total Events"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 5
+          }
+        }
+      }
+    },
+    {
+      "blockId": 573903219,
+      "class": "col-md-3",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-2fa9e0 color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "Total HCP Reach"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 69
+          }
+        }
+      }
+    },
+    {
+      "blockId": 882188372,
+      "class": "col-md-3",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-f24b99 color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "Evaluation Received"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 166
+          }
+        }
+      }
+    },
+    {
+      "blockId": 1922241810,
+      "class": "col-md-3",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-99dc3b color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "\u003Ca href=\u0022\/dashpage\/eventevaluations\/snapshot\/2996\u0022\u003ESpeaker Evaluations\u003C\/a\u003E"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 5
+          }
+        }
+      }
+    }
+  ],
+  "contentSection": [
+    {
+      "blockId": 1229549577,
+      "class": "col-md-12",
+      "type": "multiTabs",
+      "blockClasses": "",
+      "top": {
+        "enable": true,
+        "value": "Total Event Breakdown"
+      },
+      "middle": {
+        "enable": true,
+        "value": [
+          {
+            "blockId": 151071024,
+            "class": "col-md-12",
+            "title": "MONTH",
+            "type": "chart",
+            "top": {
+              "enable": true,
+              "value": null
+            },
+            "middle": {
+              "enable": true,
+              "middleTop": null,
+              "middleMiddle": {
+                "middleMiddleLeftClass": "",
+                "middleMiddleLeft": "",
+                "middleMiddleMiddleClass": "",
+                "middleMiddleMiddle": {
+                  "chartId": 1732811126,
+                  "chartClass": "col-md-6 opacity-05",
+                  "chartType": "Line",
+                  "chartTitle": "Line Chart",
+                  "chartData": {
+                    "labels": [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec"
+                    ],
+                    "datasets": [
+                      {
+                        "fillColor": "#2fa9e0",
+                        "strokeColor": "#56bfb5",
+                        "pointColor": "#56bfb5",
+                        "pointStrokeColor": "#fff",
+                        "data": [
+                          0,
+                          0,
+                          0,
+                          0,
+                          2,
+                          0,
+                          0,
+                          0,
+                          2,
+                          0,
+                          1,
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "chartOptions": {
+                    "animation": true,
+                    "animationSteps": 50,
+                    "annotateClassName": "my11001799tooltip",
+                    "annotateDisplay": true,
+                    "annotateLabel": "\u003C%=v3%\u003E",
+                    "datasetFill": false,
+                    "datasetStrokeWidth": 2,
+                    "inGraphDataBordersXSpace": 12,
+                    "inGraphDataBordersYSpace": 7,
+                    "inGraphDataFontColor": "#000",
+                    "inGraphDataFontSize": 15,
+                    "inGraphDataFontStyle": "normal normal",
+                    "inGraphDataPaddingY": 5,
+                    "inGraphDataShow": true,
+                    "inGraphDataTmpl": "\u003C%=Math.round(v3)%\u003E",
+                    "maxLegendCols": 1,
+                    "responsive": true,
+                    "responsiveMaxHeight": 480,
+                    "responsiveMinHeight": 280,
+                    "spaceBottom": 10,
+                    "spaceTop": 20,
+                    "legend": false,
+                    "legendBlockSize": 14,
+                    "legendBorders": false,
+                    "legendFontColor": "#000",
+                    "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                    "legendPosX": 4,
+                    "legendPosY": -2,
+                    "legendSpaceAfterText": 0,
+                    "legendSpaceBeforeText": 10,
+                    "legendSpaceBetweenBoxAndText": 9,
+                    "legendSpaceBetweenTextHorizontal": 15,
+                    "legendSpaceBetweenTextVertical": 28,
+                    "legendSpaceLeftText": 18,
+                    "barValueSpacing": 20,
+                    "bezierCurveTension": 0.2,
+                    "graphMin": 0,
+                    "pointDotRadius": 6,
+                    "percentageInnerCutout": 99,
+                    "scaleFontSize": 14,
+                    "yAxisLabel": "Number of Events",
+                    "yAxisMinimumInterval": 20,
+                    "yScaleLabelsMinimumWidth": 40
+                  }
+                },
+                "middleMiddleRightClass": "",
+                "middleMiddleRight": ""
+              },
+              "middleBottom": null
+            },
+            "bottom": {
+              "enable": true,
+              "value": null
+            }
+          },
+          {
+            "blockId": 1634209811,
+            "class": "col-md-12",
+            "title": "QUARTERLY",
+            "type": "chart",
+            "top": {
+              "enable": true,
+              "value": null
+            },
+            "middle": {
+              "enable": true,
+              "middleTop": null,
+              "middleMiddle": {
+                "middleMiddleLeftClass": "",
+                "middleMiddleLeft": "",
+                "middleMiddleMiddleClass": "",
+                "middleMiddleMiddle": {
+                  "chartId": 1225288017,
+                  "chartType": "Bar",
+                  "chartClass": "",
+                  "chartTitle": "Identify and address only render on getBlockMultiContainer",
+                  "chartData": {
+                    "labels": [
+                      "Q1",
+                      "Q2",
+                      "Q3",
+                      "Q4"
+                    ],
+                    "datasets": [
+                      {
+                        "fillColor": "#56bfb5",
+                        "strokeColor": "#ffffff",
+                        "pointColor": "#05d23e",
+                        "pointStrokeColor": "#fff",
+                        "data": [
+                          0,
+                          2,
+                          2,
+                          1
+                        ]
+                      }
+                    ]
+                  },
+                  "chartOptions": {
+                    "animation": true,
+                    "animationSteps": 50,
+                    "annotateClassName": "my11001799tooltip",
+                    "annotateDisplay": true,
+                    "annotateLabel": "\u003C%=Math.round(100*(v3\/grandtotal)) + \u0022%\u0022%\u003E",
+                    "datasetFill": false,
+                    "datasetStrokeWidth": 2,
+                    "inGraphDataBordersXSpace": 12,
+                    "inGraphDataBordersYSpace": 7,
+                    "inGraphDataFontColor": "#000",
+                    "inGraphDataFontSize": 15,
+                    "inGraphDataFontStyle": "normal normal",
+                    "inGraphDataPaddingY": 5,
+                    "inGraphDataShow": true,
+                    "inGraphDataTmpl": "\u003C%=(v3 \u003C 1) ? \u0022\u0022  : v3%\u003E",
+                    "maxLegendCols": 5,
+                    "responsive": true,
+                    "responsiveMaxHeight": 480,
+                    "responsiveMinHeight": 280,
+                    "spaceBottom": 10,
+                    "spaceTop": 30,
+                    "legend": false,
+                    "legendBlockSize": 14,
+                    "legendBorders": false,
+                    "legendFontColor": "#000",
+                    "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                    "legendPosX": 2,
+                    "legendPosY": 0,
+                    "legendSpaceAfterText": 0,
+                    "legendSpaceBeforeText": 10,
+                    "legendSpaceBetweenBoxAndText": 9,
+                    "legendSpaceBetweenTextHorizontal": 15,
+                    "legendSpaceBetweenTextVertical": 28,
+                    "legendSpaceLeftText": 18,
+                    "barValueSpacing": 40,
+                    "barBorderRadius": 5,
+                    "barStrokeWidth": 2,
+                    "graphMin": 0,
+                    "pointDotRadius": 6,
+                    "scaleFontSize": 14,
+                    "yAxisMinimumInterval": 10,
+                    "yScaleLabelsMinimumWidth": 40
+                  }
+                },
+                "middleMiddleRightClass": "",
+                "middleMiddleRight": ""
+              },
+              "middleBottom": null
+            },
+            "bottom": {
+              "enable": true,
+              "value": null
+            }
+          },
+          {
+            "blockId": 1446383655,
+            "class": "col-md-12",
+            "title": "PROVINCE",
+            "type": "chart",
+            "top": {
+              "enable": true,
+              "value": null
+            },
+            "middle": {
+              "enable": true,
+              "middleTop": null,
+              "middleMiddle": {
+                "middleMiddleLeftClass": "",
+                "middleMiddleLeft": "",
+                "middleMiddleMiddleClass": "",
+                "middleMiddleMiddle": {
+                  "chartId": 2231931220,
+                  "chartType": "Bar",
+                  "chartClass": "",
+                  "chartTitle": "Identify and address only render on getBlockMultiContainer",
+                  "chartData": {
+                    "labels": [
+                      "AB",
+                      "BC",
+                      "MB",
+                      "NB",
+                      "NL",
+                      "NS",
+                      "ON",
+                      "PEI",
+                      "QC",
+                      "SK"
+                    ],
+                    "datasets": [
+                      {
+                        "fillColor": "#56bfb5",
+                        "strokeColor": "#ffffff",
+                        "pointColor": "#05d23e",
+                        "pointStrokeColor": "#fff",
+                        "data": [
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          5,
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "chartOptions": {
+                    "animation": true,
+                    "animationSteps": 50,
+                    "annotateClassName": "my11001799tooltip",
+                    "annotateDisplay": true,
+                    "annotateLabel": "\u003C%=Math.round(100*(v3\/grandtotal)) + \u0022%\u0022%\u003E",
+                    "datasetFill": false,
+                    "datasetStrokeWidth": 2,
+                    "inGraphDataBordersXSpace": 12,
+                    "inGraphDataBordersYSpace": 7,
+                    "inGraphDataFontColor": "#000",
+                    "inGraphDataFontSize": 15,
+                    "inGraphDataFontStyle": "normal normal",
+                    "inGraphDataPaddingY": 5,
+                    "inGraphDataShow": true,
+                    "inGraphDataTmpl": "\u003C%=(v3 \u003C 1) ? \u0022\u0022  : v3%\u003E",
+                    "maxLegendCols": 5,
+                    "responsive": true,
+                    "responsiveMaxHeight": 480,
+                    "responsiveMinHeight": 280,
+                    "spaceBottom": 10,
+                    "spaceTop": 30,
+                    "legend": false,
+                    "legendBlockSize": 14,
+                    "legendBorders": false,
+                    "legendFontColor": "#000",
+                    "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                    "legendPosX": 2,
+                    "legendPosY": 0,
+                    "legendSpaceAfterText": 0,
+                    "legendSpaceBeforeText": 10,
+                    "legendSpaceBetweenBoxAndText": 9,
+                    "legendSpaceBetweenTextHorizontal": 15,
+                    "legendSpaceBetweenTextVertical": 28,
+                    "legendSpaceLeftText": 18,
+                    "barValueSpacing": 16,
+                    "barBorderRadius": 5,
+                    "barStrokeWidth": 2,
+                    "graphMin": 0,
+                    "pointDotRadius": 6,
+                    "scaleFontSize": 14,
+                    "yAxisMinimumInterval": 10,
+                    "yScaleLabelsMinimumWidth": 40
+                  }
+                },
+                "middleMiddleRightClass": "",
+                "middleMiddleRight": ""
+              },
+              "middleBottom": null
+            },
+            "bottom": {
+              "enable": true,
+              "value": null
+            }
+          },
+          {
+            "blockId": 826759265,
+            "class": "col-md-12",
+            "title": "DELIVERABLE TYPE",
+            "type": "chart",
+            "top": {
+              "enable": true,
+              "value": null
+            },
+            "middle": {
+              "enable": true,
+              "middleTop": null,
+              "middleMiddle": {
+                "middleMiddleLeftClass": "",
+                "middleMiddleLeft": "",
+                "middleMiddleMiddleClass": "",
+                "middleMiddleMiddle": {
+                  "chartId": 2456308065,
+                  "chartType": "Bar",
+                  "chartClass": "",
+                  "chartTitle": "Identify and address only render on getBlockMultiContainer",
+                  "chartData": {
+                    "labels": [
+                      "Ad Boards",
+                      "Independent Sponsorships",
+                      "Meeting To Educate",
+                      "Scientific Exchange Meetings"
+                    ],
+                    "datasets": [
+                      {
+                        "fillColor": "#56bfb5",
+                        "strokeColor": "#ffffff",
+                        "pointColor": "#05d23e",
+                        "pointStrokeColor": "#fff",
+                        "data": [
+                          0,
+                          0,
+                          5,
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "chartOptions": {
+                    "animation": true,
+                    "animationSteps": 50,
+                    "annotateClassName": "my11001799tooltip",
+                    "annotateDisplay": true,
+                    "annotateLabel": "\u003C%=Math.round(100*(v3\/grandtotal)) + \u0022%\u0022%\u003E",
+                    "datasetFill": false,
+                    "datasetStrokeWidth": 2,
+                    "inGraphDataBordersXSpace": 12,
+                    "inGraphDataBordersYSpace": 7,
+                    "inGraphDataFontColor": "#000",
+                    "inGraphDataFontSize": 15,
+                    "inGraphDataFontStyle": "normal normal",
+                    "inGraphDataPaddingY": 5,
+                    "inGraphDataShow": true,
+                    "inGraphDataTmpl": "\u003C%=(v3 \u003C 1) ? \u0022\u0022  : v3%\u003E",
+                    "maxLegendCols": 5,
+                    "responsive": true,
+                    "responsiveMaxHeight": 480,
+                    "responsiveMinHeight": 280,
+                    "spaceBottom": 10,
+                    "spaceTop": 30,
+                    "legend": false,
+                    "legendBlockSize": 14,
+                    "legendBorders": false,
+                    "legendFontColor": "#000",
+                    "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                    "legendPosX": 2,
+                    "legendPosY": 0,
+                    "legendSpaceAfterText": 0,
+                    "legendSpaceBeforeText": 10,
+                    "legendSpaceBetweenBoxAndText": 9,
+                    "legendSpaceBetweenTextHorizontal": 15,
+                    "legendSpaceBetweenTextVertical": 28,
+                    "legendSpaceLeftText": 18,
+                    "barValueSpacing": 40,
+                    "barBorderRadius": 5,
+                    "barStrokeWidth": 2,
+                    "graphMin": 0,
+                    "pointDotRadius": 6,
+                    "scaleFontSize": 14,
+                    "yAxisMinimumInterval": 10,
+                    "yScaleLabelsMinimumWidth": 40
+                  }
+                },
+                "middleMiddleRightClass": "",
+                "middleMiddleRight": ""
+              },
+              "middleBottom": null
+            },
+            "bottom": {
+              "enable": true,
+              "value": null
+            }
+          }
+        ]
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 637540617,
+      "class": "col-md-6",
+      "blockClasses": "height-400 overflow-hidden position-relative",
+      "type": "chart",
+      "top": {
+        "enable": true,
+        "value": "Likelihood of Recommending Program"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "col-md-8",
+          "middleMiddleMiddle": {
+            "chartId": 1935745623,
+            "chartType": "Pie",
+            "chartClass": "col-md-6 opacity-05",
+            "chartTitle": "Identify and address only render on getBlockMultiContainer",
+            "chartData": [
+              {
+                "value": 99,
+                "color": "#2fa9e0",
+                "title": "1(12)"
+              },
+              {
+                "value": 60,
+                "color": "#f24b99",
+                "title": "1(12)"
+              },
+              {
+                "value": 5,
+                "color": "#99dc3b",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#56bfb5",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#5577fd",
+                "title": "1(12)"
+              }
+            ],
+            "chartOptions": {
+              "animation": true,
+              "animationSteps": 50,
+              "annotateClassName": "my11001799tooltip",
+              "annotateDisplay": true,
+              "annotateLabel": "\u003C%=v2%\u003E",
+              "datasetFill": false,
+              "datasetStrokeWidth": 2,
+              "inGraphDataBordersXSpace": 12,
+              "inGraphDataBordersYSpace": 7,
+              "inGraphDataFontColor": "#ffffff",
+              "inGraphDataFontSize": 15,
+              "inGraphDataFontStyle": "normal normal",
+              "inGraphDataPaddingY": 5,
+              "inGraphDataShow": true,
+              "inGraphDataTmpl": "\u003C%=Math.round(v6 \u003C 5) ? \u0022\u0022 : Math.round(v6) + \u0022%\u0022%\u003E",
+              "maxLegendCols": 5,
+              "responsive": true,
+              "responsiveMaxHeight": 334,
+              "responsiveMinHeight": 280,
+              "spaceBottom": 10,
+              "spaceTop": 20,
+              "legend": false,
+              "legendBlockSize": 14,
+              "legendBorders": false,
+              "legendFontColor": "#000",
+              "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+              "legendPosX": 2,
+              "legendPosY": 0,
+              "legendSpaceAfterText": 0,
+              "legendSpaceBeforeText": 10,
+              "legendSpaceBetweenBoxAndText": 9,
+              "legendSpaceBetweenTextHorizontal": 15,
+              "legendSpaceBetweenTextVertical": 28,
+              "legendSpaceLeftText": 18,
+              "barValueSpacing": 0,
+              "bezierCurveTension": 0.1,
+              "inGraphDataAlign": "center",
+              "inGraphDataAnglePosition": 2,
+              "inGraphDataPaddingRadius": 25,
+              "inGraphDataRadiusPosition": 2,
+              "percentageInnerCutout": 99,
+              "pointDotRadius": 6,
+              "title": "",
+              "yAxisMinimumInterval": 20
+            }
+          },
+          "middleMiddleRightClass": "col-md-4",
+          "middleMiddleRight": "\u003Cdiv class=\u0022padding-top-64 margin-left-12 width-pt-100\u0022\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-2fa9e0\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E5 (99)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-f24b99\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E4 (60)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-99dc3b\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E3 (5)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-56bfb5\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E2 (0)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-5577fd\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E1 (0)\u003C\/span\u003E\u003C\/div\u003E\u003C\/div\u003E"
+        },
+        "middleBottom": "\u003Cdiv class=\u0022col-md-12 text-center position-absolute bottom-n-1 padding-0\u0022\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E164\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ERESPONSES\u003C\/div\u003E\u003C\/div\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E97%\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003EVery Good or Excellent\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 1451585798,
+      "class": "col-md-6",
+      "blockClasses": "height-400 overflow-hidden position-relative",
+      "type": "chart",
+      "top": {
+        "enable": true,
+        "value": "Overall Satisfaction"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "col-md-8",
+          "middleMiddleMiddle": {
+            "chartId": 560372068,
+            "chartType": "Pie",
+            "chartClass": "col-md-6 opacity-05",
+            "chartTitle": "Identify and address only render on getBlockMultiContainer",
+            "chartData": [
+              {
+                "value": 57,
+                "color": "#2fa9e0",
+                "title": "1(12)"
+              },
+              {
+                "value": 52,
+                "color": "#f24b99",
+                "title": "1(12)"
+              },
+              {
+                "value": 12,
+                "color": "#99dc3b",
+                "title": "1(12)"
+              },
+              {
+                "value": 2,
+                "color": "#56bfb5",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#5577fd",
+                "title": "1(12)"
+              }
+            ],
+            "chartOptions": {
+              "animation": true,
+              "animationSteps": 50,
+              "annotateClassName": "my11001799tooltip",
+              "annotateDisplay": true,
+              "annotateLabel": "\u003C%=v2%\u003E",
+              "datasetFill": false,
+              "datasetStrokeWidth": 2,
+              "inGraphDataBordersXSpace": 12,
+              "inGraphDataBordersYSpace": 7,
+              "inGraphDataFontColor": "#ffffff",
+              "inGraphDataFontSize": 15,
+              "inGraphDataFontStyle": "normal normal",
+              "inGraphDataPaddingY": 5,
+              "inGraphDataShow": true,
+              "inGraphDataTmpl": "\u003C%=Math.round(v6 \u003C 5) ? \u0022\u0022 : Math.round(v6) + \u0022%\u0022%\u003E",
+              "maxLegendCols": 5,
+              "responsive": true,
+              "responsiveMaxHeight": 334,
+              "responsiveMinHeight": 280,
+              "spaceBottom": 10,
+              "spaceTop": 20,
+              "legend": false,
+              "legendBlockSize": 14,
+              "legendBorders": false,
+              "legendFontColor": "#000",
+              "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+              "legendPosX": 2,
+              "legendPosY": 0,
+              "legendSpaceAfterText": 0,
+              "legendSpaceBeforeText": 10,
+              "legendSpaceBetweenBoxAndText": 9,
+              "legendSpaceBetweenTextHorizontal": 15,
+              "legendSpaceBetweenTextVertical": 28,
+              "legendSpaceLeftText": 18,
+              "barValueSpacing": 0,
+              "bezierCurveTension": 0.1,
+              "inGraphDataAlign": "center",
+              "inGraphDataAnglePosition": 2,
+              "inGraphDataPaddingRadius": 25,
+              "inGraphDataRadiusPosition": 2,
+              "percentageInnerCutout": 99,
+              "pointDotRadius": 6,
+              "title": "",
+              "yAxisMinimumInterval": 20
+            }
+          },
+          "middleMiddleRightClass": "col-md-4",
+          "middleMiddleRight": "\u003Cdiv class=\u0022padding-top-64 margin-left-12 width-pt-100\u0022\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-2fa9e0\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E5 (57)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-f24b99\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E4 (52)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-99dc3b\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E3 (12)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-56bfb5\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E2 (2)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-5577fd\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E1 (0)\u003C\/span\u003E\u003C\/div\u003E\u003C\/div\u003E"
+        },
+        "middleBottom": "\u003Cdiv class=\u0022col-md-12 text-center position-absolute bottom-n-1 padding-0\u0022\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E+45\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ENTS\u003C\/div\u003E\u003C\/div\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E89%\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003EVery Good or Excellent\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 1956020992,
+      "class": "col-md-6",
+      "blockClasses": "height-400 overflow-hidden position-relative",
+      "type": "chart",
+      "top": {
+        "enable": true,
+        "value": "How effective was the speaker?"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "col-md-8",
+          "middleMiddleMiddle": {
+            "chartId": 1466983047,
+            "chartType": "Pie",
+            "chartClass": "col-md-6 opacity-05",
+            "chartTitle": "Identify and address only render on getBlockMultiContainer",
+            "chartData": [
+              {
+                "value": 105,
+                "color": "#2fa9e0",
+                "title": "1(12)"
+              },
+              {
+                "value": 48,
+                "color": "#f24b99",
+                "title": "1(12)"
+              },
+              {
+                "value": 13,
+                "color": "#99dc3b",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#56bfb5",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#5577fd",
+                "title": "1(12)"
+              }
+            ],
+            "chartOptions": {
+              "animation": true,
+              "animationSteps": 50,
+              "annotateClassName": "my11001799tooltip",
+              "annotateDisplay": true,
+              "annotateLabel": "\u003C%=v2%\u003E",
+              "datasetFill": false,
+              "datasetStrokeWidth": 2,
+              "inGraphDataBordersXSpace": 12,
+              "inGraphDataBordersYSpace": 7,
+              "inGraphDataFontColor": "#ffffff",
+              "inGraphDataFontSize": 15,
+              "inGraphDataFontStyle": "normal normal",
+              "inGraphDataPaddingY": 5,
+              "inGraphDataShow": true,
+              "inGraphDataTmpl": "\u003C%=Math.round(v6 \u003C 5) ? \u0022\u0022 : Math.round(v6) + \u0022%\u0022%\u003E",
+              "maxLegendCols": 5,
+              "responsive": true,
+              "responsiveMaxHeight": 334,
+              "responsiveMinHeight": 280,
+              "spaceBottom": 10,
+              "spaceTop": 20,
+              "legend": false,
+              "legendBlockSize": 14,
+              "legendBorders": false,
+              "legendFontColor": "#000",
+              "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+              "legendPosX": 2,
+              "legendPosY": 0,
+              "legendSpaceAfterText": 0,
+              "legendSpaceBeforeText": 10,
+              "legendSpaceBetweenBoxAndText": 9,
+              "legendSpaceBetweenTextHorizontal": 15,
+              "legendSpaceBetweenTextVertical": 28,
+              "legendSpaceLeftText": 18,
+              "barValueSpacing": 0,
+              "bezierCurveTension": 0.1,
+              "inGraphDataAlign": "center",
+              "inGraphDataAnglePosition": 2,
+              "inGraphDataPaddingRadius": 25,
+              "inGraphDataRadiusPosition": 2,
+              "percentageInnerCutout": 99,
+              "pointDotRadius": 6,
+              "title": "",
+              "yAxisMinimumInterval": 20
+            }
+          },
+          "middleMiddleRightClass": "col-md-4",
+          "middleMiddleRight": "\u003Cdiv class=\u0022padding-top-64 margin-left-12 width-pt-100\u0022\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-2fa9e0\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E5 (105)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-f24b99\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E4 (48)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-99dc3b\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E3 (13)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-56bfb5\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E2 (0)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-5577fd\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E1 (0)\u003C\/span\u003E\u003C\/div\u003E\u003C\/div\u003E"
+        },
+        "middleBottom": "\u003Cdiv class=\u0022col-md-12 text-center position-absolute bottom-n-1 padding-0\u0022\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E166\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ERESPONSES\u003C\/div\u003E\u003C\/div\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E92%\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003EVery Good or Excellent\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 286790704,
+      "class": "col-md-6",
+      "blockClasses": "height-400 overflow-hidden position-relative",
+      "type": "chart",
+      "top": {
+        "enable": true,
+        "value": "Likelihood of Clinical Change"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "col-md-8",
+          "middleMiddleMiddle": {
+            "chartId": 1450444564,
+            "chartType": "Pie",
+            "chartClass": "col-md-6 opacity-05",
+            "chartTitle": "Identify and address only render on getBlockMultiContainer",
+            "chartData": [
+              {
+                "value": 71,
+                "color": "#2fa9e0",
+                "title": "1(12)"
+              },
+              {
+                "value": 82,
+                "color": "#f24b99",
+                "title": "1(12)"
+              },
+              {
+                "value": 10,
+                "color": "#99dc3b",
+                "title": "1(12)"
+              },
+              {
+                "value": 1,
+                "color": "#56bfb5",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#5577fd",
+                "title": "1(12)"
+              }
+            ],
+            "chartOptions": {
+              "animation": true,
+              "animationSteps": 50,
+              "annotateClassName": "my11001799tooltip",
+              "annotateDisplay": true,
+              "annotateLabel": "\u003C%=v2%\u003E",
+              "datasetFill": false,
+              "datasetStrokeWidth": 2,
+              "inGraphDataBordersXSpace": 12,
+              "inGraphDataBordersYSpace": 7,
+              "inGraphDataFontColor": "#ffffff",
+              "inGraphDataFontSize": 15,
+              "inGraphDataFontStyle": "normal normal",
+              "inGraphDataPaddingY": 5,
+              "inGraphDataShow": true,
+              "inGraphDataTmpl": "\u003C%=Math.round(v6 \u003C 5) ? \u0022\u0022 : Math.round(v6) + \u0022%\u0022%\u003E",
+              "maxLegendCols": 5,
+              "responsive": true,
+              "responsiveMaxHeight": 334,
+              "responsiveMinHeight": 280,
+              "spaceBottom": 10,
+              "spaceTop": 20,
+              "legend": false,
+              "legendBlockSize": 14,
+              "legendBorders": false,
+              "legendFontColor": "#000",
+              "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+              "legendPosX": 2,
+              "legendPosY": 0,
+              "legendSpaceAfterText": 0,
+              "legendSpaceBeforeText": 10,
+              "legendSpaceBetweenBoxAndText": 9,
+              "legendSpaceBetweenTextHorizontal": 15,
+              "legendSpaceBetweenTextVertical": 28,
+              "legendSpaceLeftText": 18,
+              "barValueSpacing": 0,
+              "bezierCurveTension": 0.1,
+              "inGraphDataAlign": "center",
+              "inGraphDataAnglePosition": 2,
+              "inGraphDataPaddingRadius": 25,
+              "inGraphDataRadiusPosition": 2,
+              "percentageInnerCutout": 99,
+              "pointDotRadius": 6,
+              "title": "",
+              "yAxisMinimumInterval": 20
+            }
+          },
+          "middleMiddleRightClass": "col-md-4",
+          "middleMiddleRight": "\u003Cdiv class=\u0022padding-top-64 margin-left-12 width-pt-100\u0022\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-2fa9e0\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E5 (71)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-f24b99\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E4 (82)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-99dc3b\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E3 (10)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-56bfb5\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E2 (1)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-5577fd\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E1 (0)\u003C\/span\u003E\u003C\/div\u003E\u003C\/div\u003E"
+        },
+        "middleBottom": "\u003Cdiv class=\u0022col-md-12 text-center position-absolute bottom-n-1 padding-0\u0022\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E164\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ERESPONSES\u003C\/div\u003E\u003C\/div\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E93%\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003EVery Good or Excellent\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 1159006544,
+      "class": "col-md-6",
+      "blockClasses": "height-400 overflow-hidden position-relative",
+      "type": "chart",
+      "top": {
+        "enable": true,
+        "value": "Program Bias"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "",
+          "middleMiddleMiddle": {
+            "chartId": 828975208,
+            "chartType": "Doughnut",
+            "chartData": [
+              {
+                "value": 0,
+                "color": "#2fa9e0",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#f24b99",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#99dc3b",
+                "title": "1(12)"
+              },
+              {
+                "value": 159,
+                "color": "#56bfb5",
+                "title": "1(12)"
+              },
+              {
+                "value": 3,
+                "color": "#5577fd",
+                "title": "1(12)"
+              }
+            ],
+            "chartOptions": {
+              "animation": true,
+              "animationSteps": 50,
+              "annotateClassName": "my11001799tooltip",
+              "annotateDisplay": true,
+              "annotateLabel": "\u003C%=v2%\u003E",
+              "datasetFill": false,
+              "datasetStrokeWidth": 2,
+              "inGraphDataBordersXSpace": 12,
+              "inGraphDataBordersYSpace": 7,
+              "inGraphDataFontColor": "#000",
+              "inGraphDataFontSize": 15,
+              "inGraphDataFontStyle": "normal normal",
+              "inGraphDataPaddingY": 5,
+              "inGraphDataShow": false,
+              "inGraphDataTmpl": "\u003C%=v3%\u003E",
+              "maxLegendCols": 5,
+              "responsive": true,
+              "responsiveMaxHeight": 334,
+              "responsiveMinHeight": 280,
+              "spaceBottom": 10,
+              "spaceTop": 20,
+              "legend": false,
+              "legendBlockSize": 14,
+              "legendBorders": false,
+              "legendFontColor": "#000",
+              "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+              "legendPosX": 2,
+              "legendPosY": 0,
+              "legendSpaceAfterText": 0,
+              "legendSpaceBeforeText": 10,
+              "legendSpaceBetweenBoxAndText": 9,
+              "legendSpaceBetweenTextHorizontal": 15,
+              "legendSpaceBetweenTextVertical": 28,
+              "legendSpaceLeftText": 18,
+              "barValueSpacing": 20,
+              "bezierCurveTension": 0.1,
+              "crossText": [
+                "",
+                "No Bias",
+                "98%"
+              ],
+              "crossTextAlign": [
+                "center"
+              ],
+              "crossTextBaseline": [
+                "middle"
+              ],
+              "crossTextFontColor": [
+                "black"
+              ],
+              "crossTextFontSize": [
+                0,
+                30,
+                30
+              ],
+              "crossTextIter": [
+                "last"
+              ],
+              "crossTextOverlay": [
+                true
+              ],
+              "crossTextPosX": [
+                0,
+                0,
+                0
+              ],
+              "crossTextPosY": [
+                0,
+                20,
+                -30
+              ],
+              "crossTextRelativePosX": [
+                0,
+                2,
+                2
+              ],
+              "crossTextRelativePosY": [
+                0,
+                2,
+                2
+              ],
+              "percentageInnerCutout": 90,
+              "pointDotRadius": 6,
+              "yAxisMinimumInterval": 20
+            }
+          },
+          "middleMiddleRightClass": "",
+          "middleMiddleRight": ""
+        },
+        "middleBottom": "\u003Cdiv class=\u0022col-md-12 text-center position-absolute bottom-n-1 padding-0\u0022\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E162\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ERESPONSES\u003C\/div\u003E\u003C\/div\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E0%\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ENo Commercial Bias\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 1483875411,
+      "class": "col-md-6",
+      "blockClasses": "height-400 overflow-hidden position-relative",
+      "type": "chart",
+      "top": {
+        "enable": true,
+        "value": "Did Program Meet the Code of Ethics of the Quebec?"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "col-md-8",
+          "middleMiddleMiddle": {
+            "chartId": 2573751830,
+            "chartType": "Pie",
+            "chartClass": "col-md-6 opacity-05",
+            "chartTitle": "Identify and address only render on getBlockMultiContainer",
+            "chartData": [
+              {
+                "value": 0,
+                "color": "#2fa9e0",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#f24b99",
+                "title": "1(12)"
+              },
+              {
+                "value": 0,
+                "color": "#99dc3b",
+                "title": "1(12)"
+              },
+              {
+                "value": 1,
+                "color": "#56bfb5",
+                "title": "1(12)"
+              },
+              {
+                "value": 141,
+                "color": "#5577fd",
+                "title": "1(12)"
+              }
+            ],
+            "chartOptions": {
+              "animation": true,
+              "animationSteps": 50,
+              "annotateClassName": "my11001799tooltip",
+              "annotateDisplay": true,
+              "annotateLabel": "\u003C%=v2%\u003E",
+              "datasetFill": false,
+              "datasetStrokeWidth": 2,
+              "inGraphDataBordersXSpace": 12,
+              "inGraphDataBordersYSpace": 7,
+              "inGraphDataFontColor": "#ffffff",
+              "inGraphDataFontSize": 15,
+              "inGraphDataFontStyle": "normal normal",
+              "inGraphDataPaddingY": 5,
+              "inGraphDataShow": true,
+              "inGraphDataTmpl": "\u003C%=Math.round(v6 \u003C 5) ? \u0022\u0022 : Math.round(v6) + \u0022%\u0022%\u003E",
+              "maxLegendCols": 5,
+              "responsive": true,
+              "responsiveMaxHeight": 334,
+              "responsiveMinHeight": 280,
+              "spaceBottom": 10,
+              "spaceTop": 20,
+              "legend": false,
+              "legendBlockSize": 14,
+              "legendBorders": false,
+              "legendFontColor": "#000",
+              "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+              "legendPosX": 2,
+              "legendPosY": 0,
+              "legendSpaceAfterText": 0,
+              "legendSpaceBeforeText": 10,
+              "legendSpaceBetweenBoxAndText": 9,
+              "legendSpaceBetweenTextHorizontal": 15,
+              "legendSpaceBetweenTextVertical": 28,
+              "legendSpaceLeftText": 18,
+              "barValueSpacing": 0,
+              "bezierCurveTension": 0.1,
+              "inGraphDataAlign": "center",
+              "inGraphDataAnglePosition": 2,
+              "inGraphDataPaddingRadius": 25,
+              "inGraphDataRadiusPosition": 2,
+              "percentageInnerCutout": 99,
+              "pointDotRadius": 6,
+              "title": "",
+              "yAxisMinimumInterval": 20
+            }
+          },
+          "middleMiddleRightClass": "col-md-4",
+          "middleMiddleRight": "\u003Cdiv class=\u0022padding-top-64 margin-left-12 width-pt-100\u0022\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-56bfb5\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E2 (1)\u003C\/span\u003E\u003C\/div\u003E\u003Cdiv class=\u0022clear-both height-32 text-center\u0022\u003E\u003Cspan class=\u0022legend-square bg-5577fd\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022float-left legend-text\u0022\u003E1 (141)\u003C\/span\u003E\u003C\/div\u003E\u003C\/div\u003E"
+        },
+        "middleBottom": "\u003Cdiv class=\u0022col-md-12 text-center position-absolute bottom-n-1 padding-0\u0022\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E142\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003ERESPONSES\u003C\/div\u003E\u003C\/div\u003E\u003Cdiv class=\u0022col-md-6 height-66 border-1-eee border-bottom-none\u0022\u003E\u003Cdiv class=\u0022font-bold height-32 padding-top-6\u0022\u003E0%\u003C\/div\u003E\u003Cdiv class=\u0022font-size-10 text-center\u0022\u003EVery Good or Excellent\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      },
+      "bottom": {
+        "enable": true,
+        "value": null
+      }
+    },
+    {
+      "blockId": 1987209591,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "multiContainer",
+      "top": {
+        "enable": true,
+        "value": "Learning Objective"
+      },
+      "middle": {
+        "enable": true,
+        "middleTop": null,
+        "middleMiddle": {
+          "middleMiddleLeftClass": "",
+          "middleMiddleLeft": "",
+          "middleMiddleMiddleClass": "",
+          "middleMiddleMiddle": [
+            {
+              "blockId": 1112887376,
+              "class": "col-md-4",
+              "blockClasses": "height-400 overflow-hidden position-relative",
+              "type": "chart",
+              "top": {
+                "enable": true,
+                "value": null
+              },
+              "middle": {
+                "enable": true,
+                "middleTop": null,
+                "middleMiddle": {
+                  "middleMiddleLeftClass": "",
+                  "middleMiddleLeft": "",
+                  "middleMiddleMiddleClass": "",
+                  "middleMiddleMiddle": {
+                    "chartId": 1161261912,
+                    "chartType": "Bar",
+                    "chartClass": "",
+                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
+                    "chartData": {
+                      "labels": [
+                        5,
+                        4,
+                        3,
+                        2,
+                        1
+                      ],
+                      "datasets": [
+                        {
+                          "fillColor": [
+                            "#2fa9e0",
+                            "#f24b99",
+                            "#99dc3b",
+                            "#56bfb5",
+                            "#5577fd"
+                          ],
+                          "strokeColor": "#ffffff",
+                          "pointColor": "#05d23e",
+                          "pointStrokeColor": "#fff",
+                          "data": [
+                            45,
+                            95,
+                            19,
+                            3,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    "chartOptions": {
+                      "animation": true,
+                      "animationSteps": 50,
+                      "annotateClassName": "my11001799tooltip",
+                      "annotateDisplay": true,
+                      "annotateLabel": "\u003C%=Math.round(100*(v3\/grandtotal)) + \u0022%\u0022%\u003E",
+                      "datasetFill": false,
+                      "datasetStrokeWidth": 2,
+                      "inGraphDataBordersXSpace": 12,
+                      "inGraphDataBordersYSpace": 7,
+                      "inGraphDataFontColor": "#000",
+                      "inGraphDataFontSize": 15,
+                      "inGraphDataFontStyle": "normal normal",
+                      "inGraphDataPaddingY": 5,
+                      "inGraphDataShow": true,
+                      "inGraphDataTmpl": "\u003C%=(v3 \u003C 1) ? \u0022\u0022  : v3%\u003E",
+                      "maxLegendCols": 5,
+                      "responsive": true,
+                      "responsiveMaxHeight": 334,
+                      "responsiveMinHeight": 280,
+                      "spaceBottom": 10,
+                      "spaceTop": 30,
+                      "legend": false,
+                      "legendBlockSize": 14,
+                      "legendBorders": false,
+                      "legendFontColor": "#000",
+                      "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                      "legendPosX": 2,
+                      "legendPosY": 0,
+                      "legendSpaceAfterText": 0,
+                      "legendSpaceBeforeText": 10,
+                      "legendSpaceBetweenBoxAndText": 9,
+                      "legendSpaceBetweenTextHorizontal": 15,
+                      "legendSpaceBetweenTextVertical": 28,
+                      "legendSpaceLeftText": 18,
+                      "barValueSpacing": "10",
+                      "barBorderRadius": 5,
+                      "barStrokeWidth": 2,
+                      "graphMin": 0,
+                      "pointDotRadius": 6,
+                      "scaleFontSize": 14,
+                      "yAxisMinimumInterval": 10,
+                      "yScaleLabelsMinimumWidth": 40
+                    }
+                  },
+                  "middleMiddleRightClass": "",
+                  "middleMiddleRight": ""
+                },
+                "middleBottom": "\u003Cspan class=\u0022legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\u0022\u003EAppliquer les ajustements requis dans la gestion du diab\u00e8te\u003C\/span\u003E"
+              },
+              "bottom": {
+                "enable": true,
+                "value": null
+              }
+            },
+            {
+              "blockId": 874800519,
+              "class": "col-md-4",
+              "blockClasses": "height-400 overflow-hidden position-relative",
+              "type": "chart",
+              "top": {
+                "enable": true,
+                "value": null
+              },
+              "middle": {
+                "enable": true,
+                "middleTop": null,
+                "middleMiddle": {
+                  "middleMiddleLeftClass": "",
+                  "middleMiddleLeft": "",
+                  "middleMiddleMiddleClass": "",
+                  "middleMiddleMiddle": {
+                    "chartId": 134375056,
+                    "chartType": "Bar",
+                    "chartClass": "",
+                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
+                    "chartData": {
+                      "labels": [
+                        5,
+                        4,
+                        3,
+                        2,
+                        1
+                      ],
+                      "datasets": [
+                        {
+                          "fillColor": [
+                            "#2fa9e0",
+                            "#f24b99",
+                            "#99dc3b",
+                            "#56bfb5",
+                            "#5577fd"
+                          ],
+                          "strokeColor": "#ffffff",
+                          "pointColor": "#05d23e",
+                          "pointStrokeColor": "#fff",
+                          "data": [
+                            55,
+                            90,
+                            17,
+                            1,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    "chartOptions": {
+                      "animation": true,
+                      "animationSteps": 50,
+                      "annotateClassName": "my11001799tooltip",
+                      "annotateDisplay": true,
+                      "annotateLabel": "\u003C%=Math.round(100*(v3\/grandtotal)) + \u0022%\u0022%\u003E",
+                      "datasetFill": false,
+                      "datasetStrokeWidth": 2,
+                      "inGraphDataBordersXSpace": 12,
+                      "inGraphDataBordersYSpace": 7,
+                      "inGraphDataFontColor": "#000",
+                      "inGraphDataFontSize": 15,
+                      "inGraphDataFontStyle": "normal normal",
+                      "inGraphDataPaddingY": 5,
+                      "inGraphDataShow": true,
+                      "inGraphDataTmpl": "\u003C%=(v3 \u003C 1) ? \u0022\u0022  : v3%\u003E",
+                      "maxLegendCols": 5,
+                      "responsive": true,
+                      "responsiveMaxHeight": 334,
+                      "responsiveMinHeight": 280,
+                      "spaceBottom": 10,
+                      "spaceTop": 30,
+                      "legend": false,
+                      "legendBlockSize": 14,
+                      "legendBorders": false,
+                      "legendFontColor": "#000",
+                      "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                      "legendPosX": 2,
+                      "legendPosY": 0,
+                      "legendSpaceAfterText": 0,
+                      "legendSpaceBeforeText": 10,
+                      "legendSpaceBetweenBoxAndText": 9,
+                      "legendSpaceBetweenTextHorizontal": 15,
+                      "legendSpaceBetweenTextVertical": 28,
+                      "legendSpaceLeftText": 18,
+                      "barValueSpacing": "10",
+                      "barBorderRadius": 5,
+                      "barStrokeWidth": 2,
+                      "graphMin": 0,
+                      "pointDotRadius": 6,
+                      "scaleFontSize": 14,
+                      "yAxisMinimumInterval": 10,
+                      "yScaleLabelsMinimumWidth": 40
+                    }
+                  },
+                  "middleMiddleRightClass": "",
+                  "middleMiddleRight": ""
+                },
+                "middleBottom": "\u003Cspan class=\u0022legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\u0022\u003E\u00c9tablir la proc\u00e9dure de prise en charge du patient selon une approche m\u00e9thodique\u003C\/span\u003E"
+              },
+              "bottom": {
+                "enable": true,
+                "value": null
+              }
+            },
+            {
+              "blockId": 2171679600,
+              "class": "col-md-4",
+              "blockClasses": "height-400 overflow-hidden position-relative",
+              "type": "chart",
+              "top": {
+                "enable": true,
+                "value": null
+              },
+              "middle": {
+                "enable": true,
+                "middleTop": null,
+                "middleMiddle": {
+                  "middleMiddleLeftClass": "",
+                  "middleMiddleLeft": "",
+                  "middleMiddleMiddleClass": "",
+                  "middleMiddleMiddle": {
+                    "chartId": 2006283384,
+                    "chartType": "Bar",
+                    "chartClass": "",
+                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
+                    "chartData": {
+                      "labels": [
+                        5,
+                        4,
+                        3,
+                        2,
+                        1
+                      ],
+                      "datasets": [
+                        {
+                          "fillColor": [
+                            "#2fa9e0",
+                            "#f24b99",
+                            "#99dc3b",
+                            "#56bfb5",
+                            "#5577fd"
+                          ],
+                          "strokeColor": "#ffffff",
+                          "pointColor": "#05d23e",
+                          "pointStrokeColor": "#fff",
+                          "data": [
+                            50,
+                            92,
+                            19,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    "chartOptions": {
+                      "animation": true,
+                      "animationSteps": 50,
+                      "annotateClassName": "my11001799tooltip",
+                      "annotateDisplay": true,
+                      "annotateLabel": "\u003C%=Math.round(100*(v3\/grandtotal)) + \u0022%\u0022%\u003E",
+                      "datasetFill": false,
+                      "datasetStrokeWidth": 2,
+                      "inGraphDataBordersXSpace": 12,
+                      "inGraphDataBordersYSpace": 7,
+                      "inGraphDataFontColor": "#000",
+                      "inGraphDataFontSize": 15,
+                      "inGraphDataFontStyle": "normal normal",
+                      "inGraphDataPaddingY": 5,
+                      "inGraphDataShow": true,
+                      "inGraphDataTmpl": "\u003C%=(v3 \u003C 1) ? \u0022\u0022  : v3%\u003E",
+                      "maxLegendCols": 5,
+                      "responsive": true,
+                      "responsiveMaxHeight": 334,
+                      "responsiveMinHeight": 280,
+                      "spaceBottom": 10,
+                      "spaceTop": 30,
+                      "legend": false,
+                      "legendBlockSize": 14,
+                      "legendBorders": false,
+                      "legendFontColor": "#000",
+                      "legendFontFamily": "Roboto,\u0027Helvetica Neue\u0027,sans-serif",
+                      "legendPosX": 2,
+                      "legendPosY": 0,
+                      "legendSpaceAfterText": 0,
+                      "legendSpaceBeforeText": 10,
+                      "legendSpaceBetweenBoxAndText": 9,
+                      "legendSpaceBetweenTextHorizontal": 15,
+                      "legendSpaceBetweenTextVertical": 28,
+                      "legendSpaceLeftText": 18,
+                      "barValueSpacing": "10",
+                      "barBorderRadius": 5,
+                      "barStrokeWidth": 2,
+                      "graphMin": 0,
+                      "pointDotRadius": 6,
+                      "scaleFontSize": 14,
+                      "yAxisMinimumInterval": 10,
+                      "yScaleLabelsMinimumWidth": 40
+                    }
+                  },
+                  "middleMiddleRightClass": "",
+                  "middleMiddleRight": ""
+                },
+                "middleBottom": "\u003Cspan class=\u0022legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\u0022\u003EInt\u00e9grer la loi 41 dans le quotidien du suivi du patient diab\u00e9tique\u003C\/span\u003E"
+              },
+              "bottom": {
+                "enable": true,
+                "value": null
+              }
+            }
+          ],
+          "middleMiddleRightClass": "",
+          "middleMiddleRight": ""
+        },
+        "middleBottom": 6666
+      },
+      "bottom": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022row\u0022\u003E\u003Cdiv class=\u0022text-center margin-top-12 margin-bottom-6\u0022\u003E\u003Cdiv class=\u0022display-inline-block font-size-12 margin-left-n-12\u0022\u003E\u003Cspan class=\u0022fa fa-circle color-2fa9e0 margin-left-12\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022legend-text margin-left-6\u0022\u003E5 (150)\u003C\/span\u003E\u003Cspan class=\u0022fa fa-circle color-f24b99 margin-left-12\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022legend-text margin-left-6\u0022\u003E4 (277)\u003C\/span\u003E\u003Cspan class=\u0022fa fa-circle color-99dc3b margin-left-12\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022legend-text margin-left-6\u0022\u003E3 (55)\u003C\/span\u003E\u003Cspan class=\u0022fa fa-circle color-56bfb5 margin-left-12\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022legend-text margin-left-6\u0022\u003E2 (4)\u003C\/span\u003E\u003Cspan class=\u0022fa fa-circle color-5577fd margin-left-12\u0022\u003E\u003C\/span\u003E\u003Cspan class=\u0022legend-text margin-left-6\u0022\u003E1 (0)\u003C\/span\u003E\u003C\/div\u003E\u003C\/div\u003E\u003C\/div\u003E"
+      }
+    },
+    {
+      "blockId": 691245959,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "Please share any comments related to identification of disclosures, relevance of content to practice, or any other aspect of the program"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003ESuper\u003C\/li\u003E\u003Cli\u003ESu\u00ear\u003C\/li\u003E\u003Cli\u003EInt\u00e9ressant et motivant\u003C\/li\u003E\u003Cli\u003EJe crois que les commentaires sure les m\u00e9decins sont d\u00e9places et non pas lieu d\u0027\u00eatre\u003C\/li\u003E\u003Cli\u003EOK\u003C\/li\u003E\u003Cli\u003EPr\u00e9sentation claire et pr\u00e9cise, instructive, merci d\u0027avoir le guts et nous partager vos conseils\u003C\/li\u003E\u003Cli\u003EJ\u0027aimerais avoir les outils utilis\u00e8s par le pharmacien\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    },
+    {
+      "blockId": 292880772,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "Please share any remaining learning needs and\/or unanswered clinical questions you have:"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003EAjustement des Mx oraux en DB\u003C\/li\u003E\u003Cli\u003ELoi 41 moin concernant infirmi\u00e9res\u003C\/li\u003E\u003Cli\u003EApprofondu FSI\u003C\/li\u003E\u003Cli\u003EPasser plus de temps sur FC + ajustements insuline\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    },
+    {
+      "blockId": 2417513040,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "What could we have done to make this experience better for you?"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003Eseance pratique injection insuline\u003C\/li\u003E\u003Cli\u003ENon, parfait\u003C\/li\u003E\u003Cli\u003EMieux expliquer les r\u00e9clamations relies \u00e0 ces actes\u003C\/li\u003E\u003Cli\u003ENon, parfait\u003C\/li\u003E\u003Cli\u003EMieux expliquer les reclamation relies \u00e0 ces actes\u003C\/li\u003E\u003Cli\u003ERemettre les outils utilis\u00e9 sur place graphique plus gros\u003C\/li\u003E\u003Cli\u003ER\u00e8p\u00e9ter la formation\u003C\/li\u003E\u003Cli\u003EAllouer plus de temps\u003C\/li\u003E\u003Cli\u003EFournir des documents dont la grosseur des carat\u00e8res nous permet de lire (ex rapports de glyc\u00e8mie) Merci!\u003C\/li\u003E\u003Cli\u003EImages trop petites! difficile \u00e0 lire\u003C\/li\u003E\u003Cli\u003Eautre conf\u00e9rences\u003C\/li\u003E\u003Cli\u003EConf\u00e9rencier \u00e0 donn\u00e9 bcp de trucs tr\u00e9s pratiques, tr\u00e8s dynamique\u003C\/li\u003E\u003Cli\u003Ese journ\u00e9e\u003C\/li\u003E\u003Cli\u003EAvoir les r\u00e9ferences pour commander les formulaires non pr\u00e8sents dans la pr\u00e9sentation\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    },
+    {
+      "blockId": 2251363924,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "What did we do to make this a positive experience for you?"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003EConcr\u00eat +++ pour la pratique\u003C\/li\u003E\u003Cli\u003ERencontre pour ajustement de l\u0027insuline = rare\u003C\/li\u003E\u003Cli\u003ETr\u00e8s motivant\u003C\/li\u003E\u003Cli\u003EDonner le gout de simplifier plus\u003C\/li\u003E\u003Cli\u003E++ infos\u003C\/li\u003E\u003Cli\u003EConf\u00e9rencier conscient que c\u0027est du  educatif  que sa prend du temps qu\u0027il fait commencer petite est encourageant\u003C\/li\u003E\u003Cli\u003EEn organiser +\u003C\/li\u003E\u003Cli\u003EDiscours convivial et pratico-pratique\u003C\/li\u003E\u003Cli\u003EConference qui s\u2019applique tr\u00e8s bien \u00e0 notre r\u00e9alit\u00e9\u003C\/li\u003E\u003Cli\u003ER\u00e9pondu \u00e0 mes questions de la conf\u00e9rence pm#1\u003C\/li\u003E\u003Cli\u003ETr\u00e8s concret\u003C\/li\u003E\u003Cli\u003EBon sujet de conference\u003C\/li\u003E\u003Cli\u003ECahier qui permet aide\/support diapo\u003C\/li\u003E\u003Cli\u003EDocuments et ref. bien d\u00e9taill\u00e9es\u003C\/li\u003E\u003Cli\u003ETout\u003C\/li\u003E\u003Cli\u003EBon choix conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EPlusieurs outils fournis pour monter un tel projet\u003C\/li\u003E\u003Cli\u003EInt\u00e9ressant et motivant\u003C\/li\u003E\u003Cli\u003EPresentation dynamique mise en situation\u003C\/li\u003E\u003Cli\u003EVous avez choisi le bon conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EDynamique\u003C\/li\u003E\u003Cli\u003EExcellent conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EDynamique, organis\u00e9, structur\u00e9\u003C\/li\u003E\u003Cli\u003EPr\u00e9sentation dynamique mise en situation\u003C\/li\u003E\u003Cli\u003EVous avez choisi le bon conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EDynamique\u003C\/li\u003E\u003Cli\u003EExcellent conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EBone sujet de conference\u003C\/li\u003E\u003Cli\u003ECahier qui permet aide\/support diapo\u003C\/li\u003E\u003Cli\u003EDocuments et ref. bien d\u00e9tailles\u003C\/li\u003E\u003Cli\u003ETout\u003C\/li\u003E\u003Cli\u003EBon choix conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EPlusieurs outils fournis pour monter un tel projet\u003C\/li\u003E\u003Cli\u003EDynamique, organis\u00e9, structur\u00e9\u003C\/li\u003E\u003Cli\u003EBon contenu\u003C\/li\u003E\u003Cli\u003EBon conf\u00e9rencier, bonne nourriture, cas appliques\u003C\/li\u003E\u003Cli\u003EChoix des conf\u00e8rencieres\u003C\/li\u003E\u003Cli\u003ECas clinique\u003C\/li\u003E\u003Cli\u003ECas cliniques mieux pres\u00e9nter (clarit\u00e9)\u003C\/li\u003E\u003Cli\u003EPr\u00e9cision, clarit\u00e9\u003C\/li\u003E\u003Cli\u003EBeaucoup d\u0027exemples pratiques\u003C\/li\u003E\u003Cli\u003EConf\u00e9rencier tr\u00e8s motivant\u003C\/li\u003E\u003Cli\u003EPlusieurs bonnes r\u00e9f\u00e9rences + varie\u00e9s merci!\u003C\/li\u003E\u003Cli\u003EBeaucoup de fait clinique et pratique\u003C\/li\u003E\u003Cli\u003EL\u0027humour du conf\u00e9rencier permet d\u0027assimiler mieux la mati\u00e8re!\u003C\/li\u003E\u003Cli\u003EContenu tr\u00e8s pertinent, bcp de trucs tr\u00e8s pratiques\u003C\/li\u003E\u003Cli\u003ETr\u00e8s bon conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EQualit\u00e9 de l\u0027info, pratico pratique\u003C\/li\u003E\u003Cli\u003EMotivation et encouragements\u003C\/li\u003E\u003Cli\u003EHumour, personnalit\u00e9, experience\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    },
+    {
+      "blockId": 891503392,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "Did you perceive any degree of commercial bias in this program?"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003EAjustement des Mx oraux eu DB\u003C\/li\u003E\u003Cli\u003EFreestyle Insulinx\u003C\/li\u003E\u003Cli\u003EFreeStyle Insulinx\u003C\/li\u003E\u003Cli\u003EAbbott\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    },
+    {
+      "blockId": 1382499702,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "How effective was the speaker?"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003EBonne connaissance pratique du sujet. Beaucoup d\u0027ex de cas \u00e0 donner\u003C\/li\u003E\u003Cli\u003ERepond bien aux questions\u003C\/li\u003E\u003Cli\u003ELes photos d\u0027exemples de formulaire de suivi trop petit illisible\u003C\/li\u003E\u003Cli\u003ETr\u00e8s dynamique\u003C\/li\u003E\u003Cli\u003EInspirant de voir sa d\u00e9termination et son parcours\u003C\/li\u003E\u003Cli\u003ETr\u00e8s clair, beaucoup d\u0027exp\u00e9riences\u003C\/li\u003E\u003Cli\u003EExcellent conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EAim\u00e9, int\u00e9ressant\u003C\/li\u003E\u003Cli\u003EExcellent conf\u00e9rencier\u003C\/li\u003E\u003Cli\u003EInspirant de voir sa d\u00e9termination et son parcours\u003C\/li\u003E\u003Cli\u003ETr\u00e8s clair, beaucoup d\u2019exp\u00e9riences\u003C\/li\u003E\u003Cli\u003EAmim\u00e9, interessant\u003C\/li\u003E\u003Cli\u003ETr\u00e8s bien expliqu\u00e9, clair, ex concrets\u003C\/li\u003E\u003Cli\u003EParle trop negativement des MDs\u003C\/li\u003E\u003Cli\u003ETr\u00e9s dynamique et connaissances ++\u003C\/li\u003E\u003Cli\u003EEt tr\u00e9s int\u00e9ressant\u003C\/li\u003E\u003Cli\u003ETr\u00e9s bon conf\u00e9rencier, efficace\u003C\/li\u003E\u003Cli\u003ETr\u00e9s dynamique et accrocheur\u003C\/li\u003E\u003Cli\u003EBon communicateur et aisance sur le sujet, j\u0027ai bien aim\u00e9 les exemples (experiences de vie) dans sa pratique\u003C\/li\u003E\u003Cli\u003ETr\u00e9s bon orateur\u003C\/li\u003E\u003Cli\u003EBonne exp\u00e9rience\u003C\/li\u003E\u003Cli\u003EFranc, comp\u00e9tant +++\u003C\/li\u003E\u003Cli\u003EImpliqu\u00e9, stimulant\u003C\/li\u003E\u003Cli\u003EJ\u0027aime le fait qu\u0027il nous parle de son exp\u00e9rience clinique!\u003C\/li\u003E\u003Cli\u003ETr\u00e8s interessante\u003C\/li\u003E\u003Cli\u003EExperience admirable\u003C\/li\u003E\u003Cli\u003ESimplifie la matier\u00e8 et les ce marches + effectuer\u003C\/li\u003E\u003Cli\u003ESuper!\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    },
+    {
+      "blockId": 2015921798,
+      "class": "col-md-12",
+      "blockClasses": "",
+      "type": "htmlSnippet",
+      "top": {
+        "enable": true,
+        "value": "How likely is it that you will make a change to your clinical practice based on what you learned in this program?"
+      },
+      "middle": {
+        "enable": true,
+        "value": "\u003Cdiv class=\u0022panel-body bg-ffffff font-size-12 margin-left-12\u0022\u003E\u003Cli\u003EInstairer clinique de diab\u00e8te\u003C\/li\u003E\u003Cli\u003EDebuter par pt + facile (Lantus)\u003C\/li\u003E\u003Cli\u003EAm\u00e9liorer mes outils de travail\u003C\/li\u003E\u003Cli\u003EV\u00e9rifier les HbA1C avec cl\u00e9 DSQ chez patients las trop compliqu\u00e9s\u003C\/li\u003E\u003Cli\u003ECibler patient pouvant b\u00e9n\u00e9ficier ajustement\u003C\/li\u003E\u003Cli\u003ERegarder les graphiques avec les patients\u003C\/li\u003E\u003Cli\u003EPlus d\u00e9l\u00e9gu\u00e9s aux ATP\u003C\/li\u003E\u003Cli\u003E+de suivi a faire \u00e0 pt diab\u00e9tique d\u00e9finitivement\u003C\/li\u003E\u003Cli\u003EMe permetre de faire + d\u0027ajustement loi 41 + opinion\u003C\/li\u003E\u003Cli\u003ECharger le cas que je vois d\u00e9j\u00e0\u003C\/li\u003E\u003Cli\u003EPlus d\u0027implication dans les traitements\u003C\/li\u003E\u003Cli\u003EFaire plus d\u0027activit\u00e9 loi 41 en rapport avec diab\u00e8te\u003C\/li\u003E\u003Cli\u003EMettre ex\u00e9cute concr\u00e8tement commencer - clinique\u003C\/li\u003E\u003Cli\u003ECharger les cas que je vais d\u00e9j\u00e0\u003C\/li\u003E\u003Cli\u003EPlus d\u0027implications dans les traitements\u003C\/li\u003E\u003Cli\u003ERegarder les graphiques avec patients\u003C\/li\u003E\u003Cli\u003EPlus d\u00e9l\u00e9guer aux ATP\u003C\/li\u003E\u003Cli\u003E+de suivi a faire \u00e0 pt Diab\u00e9tiques d\u00e9finitivement\u003C\/li\u003E\u003Cli\u003EMe permettre de faire + d\u2019ajustement loi 41 + opinion\u003C\/li\u003E\u003Cli\u003EFaire plus d\u0027activit\u00e9 loi 41 en rapport avec diab\u00e8te\u003C\/li\u003E\u003Cli\u003EMettre ex\u00e9cute, commencer - clinique\u003C\/li\u003E\u003Cli\u003ECommencer une clinique pour aider mes patients\u003C\/li\u003E\u003Cli\u003EMotivation avec faire plus!\u003C\/li\u003E\u003Cli\u003EEssayer d\u0027avoir davantage de cible th\u00e9rapeutiques du md afin de pouvoir ajuster\u003C\/li\u003E\u003Cli\u003ESensibiliser mes pharmaciens et cr\u00e9er un + grand inter\u00e9t\u003C\/li\u003E\u003Cli\u003EUtilisation plus pouss\u00e9e de la loi 41 pour ajuster\u003C\/li\u003E\u003Cli\u003EImplanter clinique diab\u00e9tolgie\u003C\/li\u003E\u003Cli\u003EInitier la clinique diab\u00e9te \u00e0 notre pharmacie\u003C\/li\u003E\u003Cli\u003EApplication Loi 41 et opinion\u003C\/li\u003E\u003Cli\u003EPlus prise en charge du diab\u00e9te\u003C\/li\u003E\u003Cli\u003E+ suivi des clients\u003C\/li\u003E\u003Cli\u003ECommencer suivi de patient avec mon infirmiere\u003C\/li\u003E\u003Cli\u003EFacturer loi 41\u003C\/li\u003E\u003Cli\u003EAnn\u00e9ter de me fier seulement sur les inf. du GMF pan suivi du diab\u00e9te et m\u0027impliquer plus avec re pt\u003C\/li\u003E\u003Cli\u003ETr\u00e9s competent, information relevante\u003C\/li\u003E\u003Cli\u003EPr\u00e9parer formulaire de demande des cibles therapeutiques pour ajustement, s\u00e9l\u00e9ctionner outils d\u0027infos aux pts.\u003C\/li\u003E\u003Cli\u003EUtiliser d\u0027advantage les \u0022appli\u0022 sur Android\u003C\/li\u003E\u003Cli\u003EAm\u00e9liorer mes plans d\u0027inscription\u003C\/li\u003E\u003Cli\u003ELe prog. sera p-\u00ea un jour appliqu\u00e9 \u00e0 suivi, car d\u0027autres exchange s\u0027op\u00e8rent pr\u00e9sentement \u00e0 la pharmacie\u003C\/li\u003E\u003Cli\u003EPr\u00e9parer clinique diabete\u003C\/li\u003E\u003Cli\u003EUtiliser d\u0027avantage de mat\u00e8rials des compagnies\u003C\/li\u003E\u003Cli\u003EDonner les documents imag\u00e9s\u003C\/li\u003E\u003C\/div\u0022\u003E"
+      }
+    }
+  ]
+}

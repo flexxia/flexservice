@@ -1,0 +1,37 @@
+#
+genpdf.generate.meeting:
+  path: '/genpdf/meeting/page/{entity_id}'
+  defaults:
+    _controller: '\Drupal\genpdf\Controller\GenpdfController::generateMeetingPage'
+    _title: 'Generate Meeting PDF File'
+  requirements:
+    _permission: 'access content'
+
+#
+genpdf.generate.program:
+  path: '/genpdf/program/page/{entity_id}'
+  defaults:
+    _controller: '\Drupal\genpdf\Controller\GenpdfController::generateProgramPage'
+    _title: 'Generate Program PDF File'
+  requirements:
+    _permission: 'access content'
+
+#
+genpdf.download.pdffile:
+  path: '/genpdf/download/pdffile/{entity_id}'
+  defaults:
+    _controller: '\Drupal\genpdf\Controller\GenpdfController::downloadPdffile'
+    _title: 'Download Pdffile'
+  requirements:
+    _permission: 'access content'
+
+#
+genpdf.meeting.json:
+  path: '/genpdf/meeting/json/{entity_id}'
+  defaults:
+    _controller: '\Drupal\genpdf\Controller\GenpdfController::jsonMeeting'
+    _title: 'Generate Meeting PDF JSON'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE

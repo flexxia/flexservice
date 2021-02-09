@@ -1,0 +1,4 @@
+services:
+  # Defines a simple service of which requires no parameter for its constructor.
+  genpdf.service.pdfdraw:
+    class: Drupal\genpdf\Service\PDFDraw
