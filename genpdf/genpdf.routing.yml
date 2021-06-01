@@ -5,7 +5,7 @@ genpdf.generate.meeting:
     _controller: '\Drupal\genpdf\Controller\GenpdfController::generateMeetingPage'
     _title: 'Generate Meeting PDF File'
   requirements:
-    _permission: 'access content'
+    _permission: 'access content+guest access meeting pdf'
 
 #
 genpdf.generate.program:
