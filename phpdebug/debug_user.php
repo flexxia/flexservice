@@ -41,3 +41,33 @@ function _deleteUser() {
 
   $controller->delete($users);
 }
+
+function _runUpdateUserValue() {
+  $query = \Drupal::entityQuery('user');
+  $uids = $query->execute();
+  $users = user_load_multiple($uids);
+
+  $num = 1;
+  foreach ($users as $key => $user) {
+    dpm($user->id());
+    // Update email Id
+    // $user->setEmail($content['email']);
+
+    // Update username
+    // $user->setUsername($content['email']);
+
+    // Update password reset
+    // $user->setPassword($content['password']);
+
+    // user role
+    // $user->addRole('administrator');
+    // $user->removeRole('administrator');
+
+    // For User field
+    // $user->set("field_first_name", $firstName);
+    // $user->set("field_last_name", $lastName);
+
+    // $user->save();
+    $num++;
+  }
+}

@@ -51,3 +51,15 @@ function _runCreateTermsWithFieldsValue() {
     \Drupal::getContainer()->get('flexinfo.term.service')->entityCreateTermWithFieldsValue($term_name, $vid = 'selectkeyanswer', $fields_value);
   }
 }
+
+function _runUpdateTermsValue() {
+  $terms = \Drupal::service('flexinfo.term.service')->getFullTermsFromVidName("program");
+
+  $num = 1;
+  foreach ($terms as $key => $term) {
+    // $term->name->setValue('Program ' . $num);
+    $term->field_city_name->setValue("new value");
+    $term->Save();
+    $num++;
+  }
+}
