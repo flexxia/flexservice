@@ -54,6 +54,20 @@ class FactoryChartBlockData {
   public $textColorG = 255;
   public $textColorB = 255;
 
+  /**
+   * magic methods
+   */
+  public function __set($propertyName, $value) {
+    $this->$propertyName = $value;
+  }
+
+  /**
+   * magic methods
+   */
+  public function __get($propertyName) {
+    return $this->$propertyName;
+  }
+
   function getHeaderFillColorR() {
     return $this->headerFillColorR;
   }
