@@ -18,14 +18,32 @@ use Drupal\genpdf\Service\PDFDraw;
 class GenpdfDrawProgramTile {
 
   /**
-   *
+   * split ProgramTile($fixedSection) array to multiple chunk group, each group have 4 tiles as one row
    */
   function drawProgramTile($cx, $cy, $fixedSection, $pdf) {
+    $tile_row = [];
+
+    if ($fixedSection && count($fixedSection) > 4) {
+      $tile_row[] = array_slice($fixedSection, 0, 4);
+      $tile_row[] = array_slice($fixedSection, 4, count($fixedSection));
+    }
+    else {
+      $tile_row[] = $fixedSection;
+    }
+
+    foreach ($tile_row as $key => $value) {
+      $this->drawProgramTileOneRow($cx, $cy + ($key * 100), $value, $pdf);
+    }
+  }
+
+  /**
+   *
+   */
+  function drawProgramTileOneRow($cx, $cy, $fixedSection, $pdf) {
     $pdf->SetFont('Arial', '', 16);
     $pdf->SetTextColor(255,255,255);
 
     for ($i = 0; $i < count($fixedSection) ; $i++) {
-
       if (isset($fixedSection[$i]['value']['header']['value']['value'])) {
         $headerValue = strip_tags($fixedSection[$i]['value']['header']['value']['value']);
         $headerValueOne = $fixedSection[$i]['value']['header']['valueOne']['value'];
@@ -44,9 +62,9 @@ class GenpdfDrawProgramTile {
 
         $cx = $cx + 300;
       }
-
     }
   }
+
 }
 
 /**
