@@ -1,3 +1,7 @@
 guest access meeting pdf:
   title: 'Access the Meeting Pdf Page'
   description: 'Get permission to Meeting Pdf Page.'
+
+guest access program pdf:
+  title: 'Access the Program Pdf Page'
+  description: 'Get permission to Program Pdf Page.'

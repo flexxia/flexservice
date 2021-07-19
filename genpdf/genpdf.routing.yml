@@ -14,7 +14,7 @@ genpdf.generate.program:
     _controller: '\Drupal\genpdf\Controller\GenpdfController::generateProgramPage'
     _title: 'Generate Program PDF File'
   requirements:
-    _permission: 'access content'
+    _permission: 'access content+guest access program pdf'
 
 #
 genpdf.download.pdffile:
