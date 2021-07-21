@@ -56,7 +56,6 @@ class GenpdfDrawLayout {
     $pdf->Write(10, $title);
 
     if ($tileValue) {
-      // write tile
       for($i = 0; $i < count($tileValue); $i++) {
         $getTitleValue = $tileValue[$i];
         $tile[$i] = $getTitleValue['value'] . " : " . $getTitleValue['value_one'];
@@ -77,7 +76,7 @@ class GenpdfDrawLayout {
         $lines = floor($i / 4);
         $number_position = $i;
         if ($lines > 0) {
-          $number_position = $number_position - 4;
+          $number_position = $number_position - (4 * $lines);
         }
 
         $tile[$i] = $ShowHtmlSnippet->htmlTextFilter($tile[$i]);
@@ -107,8 +106,6 @@ class GenpdfDrawLayout {
         $pdf->SetXY($cxline[0], 28 * 3 + $cy);
         $pdf->Write(10, $restText);
       }
-
-
     }
   }
 
@@ -126,7 +123,6 @@ class GenpdfDrawLayout {
     $pdf->Write(10, $title);
 
     if ($tileValue) {
-      // write tile
       for($i = 0; $i < count($tileValue); $i++) {
         $getTitleValue = $tileValue[$i];
         $tile[$i] = $getTitleValue['value'] . " : " . $getTitleValue['value_one'];
@@ -147,7 +143,7 @@ class GenpdfDrawLayout {
         $lines = floor($i / 4);
         $number_position = $i;
         if ($lines > 0) {
-          $number_position = $number_position - 4;
+          $number_position = $number_position - (4 * $lines);
         }
 
         $tile[$i] = $ShowHtmlSnippet->htmlTextFilter($tile[$i]);
@@ -163,9 +159,6 @@ class GenpdfDrawLayout {
           $pdf->SetXY($cxline[$i % 4] + $number_position * 10, 37 * $lines + $cy * 2);
           $pdf->Write(10, $restText);
         }
-
-        // $pdf->SetXY($cxline[$i % 4] + $number_position * 10, 36 * $lines + $cy);
-        // $pdf->Write(10, $tile[$i]);
       }
     }
   }
