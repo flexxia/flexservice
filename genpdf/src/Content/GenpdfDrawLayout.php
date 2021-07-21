@@ -43,10 +43,9 @@ class GenpdfDrawLayout {
   }
 
   /**
-   *
+   * Draw meeting title with MultipleSpeakers
    */
   function drawTitleMultipleSpeakers($cx, $cy, $tileValue, $title, $pdf) {
-    // write title
     $pdf->SetXY(128, 16);
     $pdf->SetFont('Arial', '', 16);
     $pdf->SetTextColor(50, 178, 228);
@@ -110,10 +109,9 @@ class GenpdfDrawLayout {
   }
 
   /**
-   *
+   * Draw meeting title
    */
   function drawTitle($cx, $cy, $tileValue, $title, $pdf) {
-    // write title
     $pdf->SetXY(128, 16);
     $pdf->SetFont('Arial', '', 16);
     $pdf->SetTextColor(50, 178, 228);
