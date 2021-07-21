@@ -71,6 +71,7 @@ class GenpdfDrawLayout {
 
       $ShowHtmlSnippet = new GenpdfDrawHTMLSnippet();
 
+      // draw meeting tile without speaker
       for ($i = 0; $i < (count($tile) - 1); $i++) {
         $lines = floor($i / 4);
         $number_position = $i;
@@ -93,6 +94,7 @@ class GenpdfDrawLayout {
         }
       }
 
+      // draw meeting tile for multiple speaker
       $tile[count($tile) - 1] = $ShowHtmlSnippet->htmlTextFilter($tile[count($tile) - 1]);
       $firstLineText = Unicode::truncate($tile[count($tile) - 1], 186, $wordsafe = TRUE, $add_ellipsis = FALSE);
       $restText = str_replace($firstLineText, "", $tile[count($tile) - 1]);
