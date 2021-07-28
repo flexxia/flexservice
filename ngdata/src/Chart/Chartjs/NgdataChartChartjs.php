@@ -23,6 +23,27 @@ class NgdataChartChartjs extends NgdataChart {
   /**
    *
    */
+  public function chartPieOption() {
+    $output = [
+      "legend" => [
+        "display" => FALSE
+      ],
+      "plugins" => [
+        "labels" => [
+          // "render" => "value",
+          "fontColor" => "#fff",
+          "fontSize" => 13,
+          "position" => "border"
+        ]
+      ],
+    ];
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function chartBarOption($datasets_data = array()) {
     $output = [
       "legend" => [
