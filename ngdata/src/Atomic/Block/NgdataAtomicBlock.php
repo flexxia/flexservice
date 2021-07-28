@@ -841,6 +841,63 @@ class NgdataAtomicBlock extends NgdataAtomic {
   /**
    *
    */
+  public function getBlockChartByPrePostQuestionForPieChartColumn12($question_term = NULL, $meeting_nodes = array(), $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
+
+    $question_relatedtype = \Drupal::service('flexinfo.field.service')
+      ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
+
+    $output = $this->blockChartjs($chart_type);
+    $datasets_data = \Drupal::service('ngdata.chart.chartjs')
+      ->chartBarDataByEvaluationByPrePostByQuestions($meeting_nodes, $question_term);
+
+    $output['blockClass'] = "col-md-12 margin-top-12";
+    $output['blockClassSub'] = "col-md-12 block-box-shadow padding-left-0 padding-right-0";
+    $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(
+      \Drupal::service('flexinfo.chart.service')
+        ->getChartTitleByQuestion($question_term),
+      $color_box_palette,
+      $bg_color_class . " padding-left-12"
+    );
+
+    // middleMiddle
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-6 margin-top-24";
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]['labels'] = $this->atom->getRaidoQuestionLegend($question_term);
+
+    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
+      "data" => \Drupal::service('ngdata.node.evaluation')
+        ->getRaidoQuestionData($question_term, $meeting_nodes),
+      "backgroundColor" => \Drupal::service('ngdata.term.question')
+        ->getRaidoQuestionColors($question_term, TRUE)
+    ]];
+
+    // middleRight,
+    // second right chart
+    $output['blockContent'][0]['tabData']['middle']['middleRight'] = \Drupal::service('ngdata.atomic.organism')
+      ->basicMiddleRightChart('pie', "col-md-6 margin-top-2 margin-bottom-20");
+
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["data"]['labels'] = $this->atom->getRaidoQuestionLegend($question_term);
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["data"]["datasets"] = [[
+      "data" => \Drupal::service('ngdata.node.evaluation')
+        ->getRaidoQuestionData($question_term, $meeting_nodes),
+      "backgroundColor" => \Drupal::service('ngdata.term.question')
+        ->getRaidoQuestionColors($question_term, TRUE)
+    ]];
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["options"] = \Drupal::service('ngdata.chart.chartjs')
+      ->chartPieOption($datasets_data);
+
+    // bottom
+    $output['blockContent'][0]['tabData']['bottom']["value"] = $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
+
+    // top
+    $output['blockContent'][0]['tabData']['top']["styleClass"] = "col-xs-12";
+    $output['blockContent'][0]['tabData']['top']["value"] = $this->organism->getRaidoQuestionLegendHorizontal($question_term, $meeting_nodes);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getBlockChartByPrePostQuestionForStackedBarMultipleHorizontalColumn12($question_term = NULL, $meeting_nodes = array(), $chart_type = "horizontalBar", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
 
     $question_relatedtype = \Drupal::service('flexinfo.field.service')
@@ -951,6 +1008,10 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
       case 'PrePost Multiple Stacked Horizontal Bar Chart Column12':
         $output = $this->getBlockChartByPrePostQuestionForStackedBarMultipleHorizontalColumn12($question_term, $meeting_nodes);
+        break;
+
+      case 'PrePost Pie Chart Column12':
+        $output = $this->getBlockChartByPrePostQuestionForPieChartColumn12($question_term, $meeting_nodes);
         break;
 
 
