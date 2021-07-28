@@ -105,19 +105,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
             "backgroundColor" => []
           ]
         ],
-        "options" => [
-          "legend" => [
-            "display" => FALSE
-          ],
-          "plugins" => [
-            "labels" => [
-              // "render" => "value",
-              "fontColor" => "#fff",
-              "fontSize" => 13,
-              "position" => "border"
-            ]
-          ],
-        ]
+        "options" => \Drupal::service('ngdata.chart.chartjs')->chartPieOption(),
       ],
       "middleRight" => [
         "styleClass" => $right_class,
@@ -129,12 +117,13 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   }
 
   /**
-   * middleRight Chart
+   * middleRight Chart.
+   * Default is bar chart and bar chart options
    */
-  public function basicMiddleRightChart($chart_type = "pie", $middle_class = "col-md-6") {
+  public function basicMiddleRightChart($chart_type = "bar", $middle_class = "col-md-6") {
     $output = array(
       'showChart' => true,
-      'type' => 'bar',
+      'type' => $chart_type,
       'styleClass' => 'col-md-6 margin-top-24 margin-bottom-20',
       'data' => array(
         'datasets' => array(
@@ -163,55 +152,15 @@ class NgdataAtomicOrganism extends NgdataAtomic {
           2 => 'other',
         ),
       ),
-      'options' => array(
-        'layout' => array(
-          'padding' => array(
-            'top' => 30,
-          ),
-        ),
-        'legend' => array(
-          'display' => false,
-        ),
-        'maintainAspectRatio' => false,
-        'plugins' => array(
-          'labels' => array(
-            'fontColor' => '#000000',
-            'fontSize' => 14,
-            'render' => 'value',
-          ),
-        ),
-        'responsive' => false,
-        'scales' => array(
-          'xAxes' => array(
-            0 => array(
-              'gridLines' => array(
-                'color' => '#f1f1f1',
-              ),
-              'stacked' => true,
-              'ticks' => array(
-                'fontSize' => 14,
-              ),
-            ),
-          ),
-          'yAxes' => array(
-            0 => array(
-              'gridLines' => array(
-                'color' => '#f1f1f1',
-              ),
-              'stacked' => true,
-              'ticks' => array(
-                'fontSize' => 14,
-                // 'max' => 400,
-              ),
-            ),
-          ),
-        ),
-      ),
+      'options' => \Drupal::service('ngdata.chart.chartjs')->chartBarOption(),
     );
 
     return $output;
   }
 
+  /**
+   * @deprecated maybe.
+   */
   public function basicMiddleRightChart1($chart_type = "pie", $middle_class = "col-md-6") {
     $output = array(
       "middleRight" => [
