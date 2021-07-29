@@ -50,6 +50,41 @@ class NgdataNodeEvaluation extends NgdataNode {
   }
 
   /**
+   *
+   */
+  public function getRaidoQuestionDataWithReferOther($question_term = NULL, $meeting_nodes = array(), $refer_value = NULL) {
+    $output = array();
+
+    $FlexpageEventLayout = new FlexpageEventLayout();
+
+    $question_scale = \Drupal::getContainer()
+      ->get('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_scale');
+
+    $question_answer_all_data = $FlexpageEventLayout
+      ->getQuestionAnswerAllDataWithReferOther($meeting_nodes, $question_term->id());
+
+    $answer_count_values = [];
+    if ($refer_value && isset($question_answer_all_data[$refer_value])) {
+      $answer_count_values = array_count_values($question_answer_all_data[$refer_value]);
+    }
+
+    if ($question_scale) {
+      for ($i = 0; $i < $question_scale; $i++) {
+        $output[$question_scale - $i - 1] = 0;
+        if (isset($answer_count_values[$i + 1])) {
+          $output[$question_scale - $i - 1] = $answer_count_values[$i + 1];
+        }
+      }
+    }
+
+    // sort array by low to high
+    ksort($output);
+
+    return $output;
+  }
+
+  /**
    * @param $refer_field = 'refer_uid'/'refer_tid'/'refer_other'
    * @return integer number of Answer
    * @see old name getQuestionAnswerByQuestionTidByReferValue() => new name getNumberOfQuestionAnswerByQuestionTidByReferValue()
