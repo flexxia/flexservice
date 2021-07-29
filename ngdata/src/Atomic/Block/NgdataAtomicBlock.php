@@ -865,7 +865,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.evaluation')
-        ->getRaidoQuestionData($question_term, $meeting_nodes),
+        ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Pre'),
       "backgroundColor" => \Drupal::service('ngdata.term.question')
         ->getRaidoQuestionColors($question_term, TRUE)
     ]];
@@ -878,7 +878,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockContent'][0]['tabData']['middle']['middleRight']["data"]['labels'] = $this->atom->getRaidoQuestionLegend($question_term);
     $output['blockContent'][0]['tabData']['middle']['middleRight']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.evaluation')
-        ->getRaidoQuestionData($question_term, $meeting_nodes),
+        ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Post'),
       "backgroundColor" => \Drupal::service('ngdata.term.question')
         ->getRaidoQuestionColors($question_term, TRUE)
     ]];
