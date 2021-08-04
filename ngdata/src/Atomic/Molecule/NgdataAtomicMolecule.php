@@ -180,6 +180,38 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    *
    */
+  public function getRaidoQuestionLegendTextWithReferOther($question_term = NULL, $meeting_nodes = array(), $refer_value = NULL) {
+    $output = [];
+
+    $question_scale = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_scale');
+
+    $chartLegend = $this->atom->getRaidoQuestionLegend($question_term);
+
+    $chartData = \Drupal::service('ngdata.node.evaluation')
+      ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, $refer_value);
+
+    if ($chartData && is_array($chartData)) {
+      foreach ($chartData as $key => $row) {
+        $row_text = '';
+        $row_text .= isset($chartLegend[$key]) ? $chartLegend[$key] : $question_scale - $key;
+        $row_text .= '(' . $chartData[$key] . ')';
+
+        $output[] = $row_text;
+      }
+    }
+
+    if (\Drupal::service('ngdata.term.question')
+      ->getChartLegendSortOrderValueByQuestionTerm($question_term) == 'Ascend') {
+      krsort($output);
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getRaidoQuestionBottom($question_term = NULL, $meeting_nodes = array()) {
     $output = '';
 
