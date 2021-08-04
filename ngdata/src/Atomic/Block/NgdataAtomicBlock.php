@@ -768,7 +768,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     return $output;
   }
 
-    /**
+  /**
    *
    */
   public function blockChartjsScatterAverageNpsByFundingSource($meeting_nodes = array(), $bg_color_class = 'bg-009ddf', $question_tid = 120) {
@@ -824,7 +824,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
         ->getRaidoQuestionColors($question_term, TRUE)
     ]];
 
-    //add chartjs tooltip and label
+    // add chartjs tooltip and label
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["renderLabel"] = 'Percentage';
     $output['blockContent'][0]["chartjsPluginsOptions"] = [
       "calculateTooltip" => TRUE,
@@ -861,7 +861,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
 
     // middleMiddle
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["styleClass"] = "col-md-6 margin-top-24";
-    $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]['labels'] = $this->atom->getRaidoQuestionLegend($question_term);
+    // $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]['labels'] = $this->atom->getRaidoQuestionLegend($question_term);
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
       "data" => \Drupal::service('ngdata.node.evaluation')
@@ -885,12 +885,28 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $output['blockContent'][0]['tabData']['middle']['middleRight']["options"] = \Drupal::service('ngdata.chart.chartjs')
       ->chartPieOption($datasets_data);
 
-    // bottom
-    $output['blockContent'][0]['tabData']['bottom']["value"] = $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
+    $output['blockContent'][0]['tabData']['middle']['middleRight']["value"] = $this->molecule->getRaidoQuestionHtmlLegend($question_term, $meeting_nodes);
 
     // top
     $output['blockContent'][0]['tabData']['top']["styleClass"] = "col-xs-12";
-    $output['blockContent'][0]['tabData']['top']["value"] = $this->organism->getRaidoQuestionLegendHorizontal($question_term, $meeting_nodes);
+    // $output['blockContent'][0]['tabData']['top']["value"] = $this->organism->getRaidoQuestionLegendHorizontal($question_term, $meeting_nodes);
+
+    // bottom
+    $bottom_value = "";
+    $bottom_value .= '<div class="text-center width-pt-50 display-inline-block">';
+      $bottom_value .= '<div class="display-inline-block">';
+        $bottom_value .= $this->organism->getRaidoQuestionLegendHorizontalWithReferOther($question_term, $meeting_nodes, "Pre");
+      $bottom_value .= '</div>';
+    $bottom_value .= '</div>';
+    $bottom_value .= '<div class="text-center width-pt-50 display-inline-block">';
+      $bottom_value .= '<div class="display-inline-block">';
+        $bottom_value .= $this->organism->getRaidoQuestionLegendHorizontalWithReferOther($question_term, $meeting_nodes, "Post");
+      $bottom_value .= '</div>';
+    $bottom_value .= '</div>';
+    $bottom_value .= '<div class="clear-both">';
+    $bottom_value .= '</div>';
+    $bottom_value .= $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
+    $output['blockContent'][0]['tabData']['bottom']["value"] = $bottom_value;
 
     return $output;
   }
