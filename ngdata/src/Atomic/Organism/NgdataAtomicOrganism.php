@@ -269,6 +269,18 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function getRaidoQuestionLegendHorizontalWithReferOther($question_term = NULL, $meeting_nodes = array(), $refer_value = NULL) {
+    $output = $this->atom->renderLegendSquareHorizontal(
+      $this->molecule->getRaidoQuestionLegendTextWithReferOther($question_term, $meeting_nodes, $refer_value),
+      \Drupal::service('ngdata.term.question')->getRaidoQuestionColors($question_term)
+    );
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getHtmlTableBySelectKeyAnswerQuestion($question_term = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
 
