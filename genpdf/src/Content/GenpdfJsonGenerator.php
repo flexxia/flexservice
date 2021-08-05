@@ -229,9 +229,7 @@ class GenpdfJsonGenerator extends ControllerBase {
               ->getRaidoQuestionData($question_term, $meeting_nodes));
           }
 
-          $color_palette = array();
-          // $color_palette = $this->getEventChartColorPalette($question_scale);
-
+          $color_palette = $this->getEventChartColorPalette($question_scale);
           if (\Drupal::service('ngdata.term.question')
             ->getRaidoQuestionColors($question_term, TRUE)) {
 
@@ -243,9 +241,6 @@ class GenpdfJsonGenerator extends ControllerBase {
                 $color_palette = $this->getEventChartColorPalette($question_scale);
               }
             }
-          }
-          else {
-            $color_palette = $this->getEventChartColorPalette($question_scale);
           }
 
           $data_legend = array();
@@ -277,12 +272,17 @@ class GenpdfJsonGenerator extends ControllerBase {
 
           if ($chart_type_name) {
             $chartClass = $chart_type_name;
-          } else {
+          }
+          else {
             $chartClass = 'Pie Chart';
           }
 
+          //
+          $chart_data = [];
+          $chart_data['data'] = \Drupal::getContainer()
+            ->get('flexinfo.chart.service')
+            ->{$chart_render_method}($pool_data, $pool_label, NULL, $question_term, $color_palette, $data_legend);
           if ($chart_type_name == 'Stacked Bar Chart Multiple Horizontal') {
-
             // RIGHT chart character
             // $rightChartClass = 'Stacked Bar Chart Multiple Horizontal';
             // $styleWidth = 'col-12';
@@ -296,12 +296,12 @@ class GenpdfJsonGenerator extends ControllerBase {
             // RIGHT chart character
             $chart_data['rightChartData'] = NULL;
           }
-          else {
-            $chart_data['data'] = \Drupal::getContainer()
-              ->get('flexinfo.chart.service')
-              ->{$chart_render_method}($pool_data, $pool_label, NULL, $question_term, $color_palette, $data_legend);
+          elseif ($chart_type_name == 'PrePost Pie Chart Column12') {
+            // Two chart in one section Column12
+            $styleWidth = 'col-12';
           }
 
+          //
           $chart_data['block'] = array(
             'type'  => 'chart',
             'class' => $chartClass,
