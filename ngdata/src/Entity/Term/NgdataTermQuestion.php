@@ -4,8 +4,7 @@ namespace Drupal\ngdata\Entity\Term;
 
 /**
  * Class NgdataTermQuestion.
-
-  \Drupal::service('ngdata.term.question')->demo();
+ * \Drupal::service('ngdata.term.question')->demo();.
  */
 class NgdataTermQuestion extends NgdataTerm {
 
