@@ -37,11 +37,12 @@ class NgdataTermQuestion extends NgdataTerm {
    *
    */
   public function getQuestionAnswerAllData($meeting_nodes = array(), $question_tid = NULL) {
+    $output = [];
+
     $evaluation_nodes = \Drupal::getContainer()
       ->get('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
-    $output = array();
     if ($evaluation_nodes && is_array($evaluation_nodes)) {
       foreach ($evaluation_nodes as $evaluation_node) {
         $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
