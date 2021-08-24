@@ -703,25 +703,11 @@ class FlexpageEventLayout extends ControllerBase {
   }
 
   /**
-   *
+   * @deprecated
    */
   public function getQuestionAnswerAllData($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluation_nodes = \Drupal::getContainer()
-      ->get('baseinfo.querynode.service')
-      ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
-
-    $output = array();
-    if ($evaluation_nodes && is_array($evaluation_nodes)) {
-      foreach ($evaluation_nodes as $evaluation_node) {
-        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
-
-        foreach ($result as $row) {
-          if ($row['question_tid'] == $question_tid && $row['question_answer']) {
-            $output[] = $row['question_answer'];
-          }
-        }
-      }
-    }
+    $output = \Drupal::service('ngdata.term.question')
+      ->getQuestionAnswerAllData($meeting_nodes, $question_tid);
 
     return $output;
   }
