@@ -30,7 +30,7 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
   }
 
   /**
-   *
+   * @param $row_break_num is deprecated.
    */
   public function getBlockGroupByRadioQuestion($meeting_nodes = array(), $question_tids = array(), $row_break_num = 0) {
     $output = array();
@@ -43,11 +43,17 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
       foreach ($question_terms as $question_term) {
         $output[] = $this->block->getBlockChartByRadioQuestion($question_term, $meeting_nodes);
 
-        if ( ($row_break_num + 1) % 2 === 0 ) {
-          $output[] = $this->template->blockHtmlClearBoth();
+        // Check last element of output array.
+        // Instead using $row_break_num,
+        $last_one = end($output);
+        if (strpos($last_one['blockClass'], 'col-md-6') !== FALSE) {
+          $output_length = count($output);
+          if ($output_length > 1) {
+            if (strpos($output[$output_length - 2]['blockClass'], 'col-md-6') !== FALSE) {
+              $output[] = $this->template->blockHtmlClearBoth();
+            }
+          }
         }
-
-        $row_break_num++;
       }
     }
 
