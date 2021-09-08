@@ -315,7 +315,11 @@ class FlexinfoSettingService {
   }
 
   /**
+   * Increase by 1 all keys
    *
+   * 可以考虑用
+   * array_unshift($arr, null);
+   * unset($arr[0]);
    */
   public function colorPlateOutputKeyPlusOne($plate_array = array(), $color_key = NULL, $pound_sign = FALSE, $default = NULL) {
     $color_array = $this->colorPlateOutput($plate_array, $color_key, $pound_sign, $default);
