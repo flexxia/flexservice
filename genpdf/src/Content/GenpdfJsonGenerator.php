@@ -45,8 +45,7 @@ class GenpdfJsonGenerator extends ControllerBase {
       ->getStorage('taxonomy_term')
       ->load($entity_id);
 
-    $evaluationform_tid = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $evaluationform_tid = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetId($program_entity, 'field_program_evaluationform');
 
     $evaluationform_term = \Drupal::entityTypeManager()
@@ -66,8 +65,7 @@ class GenpdfJsonGenerator extends ControllerBase {
       ->getStorage('node')
       ->load($entity_id);
 
-    $evaluationform_term = \Drupal::getContainer()
-      ->get('flexinfo.node.service')
+    $evaluationform_term = \Drupal::service('flexinfo.node.service')
       ->getMeetingEvaluationformTerm($node);
 
     $output = $this->eventsData(array($node), $evaluationform_term);
@@ -88,8 +86,7 @@ class GenpdfJsonGenerator extends ControllerBase {
       return $output;
     }
 
-    $question_tids = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_tids = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
     $output['meeting'] = $this->blockEventInfo($meeting_nodes[0]);
@@ -116,8 +113,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     $DashpageObjectContent = new DashpageObjectContent();
 
     $output = array(
-      'programName' => \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      'programName' => \Drupal::service('flexinfo.field.service')
         ->getFieldFirstTargetIdTermName($meeting_node, 'field_meeting_program'),
       'tileSection' => $DashpageObjectContent->blockTileMeetingValue($meeting_node),
     );
@@ -131,8 +127,7 @@ class GenpdfJsonGenerator extends ControllerBase {
   public function getTermNameByFliedMachineName($term, $field_name) {
     $objective_name = NULL;
 
-    $objective_goal_term = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $objective_goal_term = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetIdToEntity($term, 'taxonomy_term', $field_name);
 
     if ($objective_goal_term) {
@@ -143,43 +138,22 @@ class GenpdfJsonGenerator extends ControllerBase {
   }
 
   /**
-   *
+   * @param $chart_render_method like "renderChartPieDataSet".
+   * $chart_render_method = \Drupal::service('flexinfo.chart.service')
+   *   ->getChartTypeRenderFunctionByQuestion($question_term);
    */
-  public function getEventChartColorPalette($question_scale) {
-    $color_palette = array(
-      '1' => 'f24b99',
-      '2' => 'f3c848',
-      '3' => 'c6c6c6',
-      '4' => '05d23e',
-      '5' => '2fa9e0',
-      '6' => 'bfbfbf',
-      '7' => 'd6006e',
-    );
+  public function getBlockEventsChartData($pool_data = array(), $chart_label = array(), $max_length = NULL, $question_term = NULL, $color_plate = array(), $data_legend = array(), $chart_render_method = "renderChartNewPieDataSet") {
+    $output = array();
 
-    if ($question_scale == 3) {
-      $color_palette = array(
-        '3' => 'f24b99',
-        '2' => '05d23e',
-        '1' => '2fa9e0',
-      );
+    // reverse order
+    if ($pool_data) {
+      $pool_data = array_reverse($pool_data);
     }
 
-    if ($question_scale == 10) {
-      $color_palette = array(
-        '9' => '2fa9e0',
-        '8' => '0099ff',
-        '7' => '05d23e',
-        '6' => '009900',
-        '5' => 'c6c6c6',
-        '4' => 'f7d417',   // 5
-        '3' => 'ff9933',
-        '2' => 'ff66ff',
-        '1' => 'ff66cc',
-        '0' => 'f24b99',
-      );
-    }
+    $output = \Drupal::service('flexinfo.chart.service')
+      ->{$chart_render_method}($pool_data, $chart_label, $max_length, $question_term, $color_plate, $data_legend);
 
-    return $color_palette;
+    return $output;
   }
 
   /**
@@ -188,31 +162,32 @@ class GenpdfJsonGenerator extends ControllerBase {
   public function blockEventsChart($meeting_nodes = array(), $evaluationform_term = NULL, $question_tids = array()) {
     $output = array();
 
-    $filter_tids = \Drupal::getContainer()->get('baseinfo.queryterm.service')->wrapperQuestionTidsOnlyRadios($question_tids, FALSE);
+    $filter_tids = \Drupal::service('baseinfo.queryterm.service')
+      ->wrapperQuestionTidsOnlyRadios($question_tids, FALSE);
 
     $question_tids = array_intersect($question_tids, $filter_tids);
 
     if (is_array($question_tids) && $question_tids) {
-      $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids);
+      $question_terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadMultiple($question_tids);
       foreach ($question_terms as $question_term) {
         if (isset($question_term)) {
 
           // radios is 2493
           $question_tid  = $question_term->id();
-          $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+          $question_scale = \Drupal::service('flexinfo.field.service')
+            ->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
-          // $chart_render_method like "renderChartPieDataSet"
-          // $chart_render_method = \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTypeRenderFunctionByQuestion($question_term);
-          $chart_render_method = "renderChartNewPieDataSet";
+          $chart_type_name = \Drupal::service('flexinfo.field.service')
+            ->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_charttype');
 
-          $chart_type_id = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_charttype');
-
-          $chart_type_name = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_charttype');
-
+          // $pool_label
+          $pool_label = [];
           $pre_question_answer = [];
           $post_question_answer = [];
-          $pool_data = [];
-          $pool_label = [];
+
+
           for ($i = 0; $i < $question_scale; $i++) {
             if ($chart_type_name == 'Stacked Bar Chart Multiple Horizontal') {
               $pre_question_answer[$i] = $this->filterPrePostQuestionData($meeting_nodes, $question_tid, ($i), 'Pre');
@@ -221,28 +196,21 @@ class GenpdfJsonGenerator extends ControllerBase {
             $pool_label[$i + 1] = $i + 1;
           }
 
-          // new
-          if (\Drupal::service('ngdata.node.evaluation')
-            ->getRaidoQuestionData($question_term, $meeting_nodes)) {
+          // $pool_data
+          $pool_data = \Drupal::service('ngdata.node.evaluation')
+            ->getRaidoQuestionData($question_term, $meeting_nodes);
 
-            $pool_data = array_reverse(\Drupal::service('ngdata.node.evaluation')
-              ->getRaidoQuestionData($question_term, $meeting_nodes));
-          }
-
-          $color_palette = $this->getEventChartColorPalette($question_scale);
-          if (\Drupal::service('ngdata.term.question')
-            ->getRaidoQuestionColors($question_term, TRUE)) {
-
+          // $color_palette
+          $color_palette = \Drupal::service('ngdata.term.question')
+            ->getRaidoQuestionColors($question_term, TRUE);
+          if ($color_palette) {
             $color_palette = array_reverse(\Drupal::service('ngdata.term.question')
               ->getRaidoQuestionColors($question_term, TRUE));
-
-            if ($question_scale > 5) {
-              if (count($color_palette) < 6) {
-                $color_palette = $this->getEventChartColorPalette($question_scale);
-              }
-            }
           }
+          $color_palette = \Drupal::service('flexinfo.setting.service')
+            ->colorPlateOutputKeyPlusOne($color_palette);
 
+          // $data_legend
           $data_legend = array();
           if (\Drupal::service('ngdata.atomic.atom')
             ->getRaidoQuestionLegend($question_term)) {
@@ -258,45 +226,43 @@ class GenpdfJsonGenerator extends ControllerBase {
           }
           else {
             $data_legend = $this->defaultChartLegend($question_scale);
-            // $color_palette = $this->getEventChartColorPalette($question_scale);
           }
 
-          $temp_color_palette = array();
-          foreach ($color_palette as $key => $value) {
-            $temp_color_palette[$key + 1] = $value;
-          }
-          $color_palette = $temp_color_palette;
-
-          $rightChartClass = NULL;
-          $styleWidth = NULL;
-
+          // chartClass
+          $chartClass = 'Pie Chart';
           if ($chart_type_name) {
             $chartClass = $chart_type_name;
           }
-          else {
-            $chartClass = 'Pie Chart';
-          }
 
-          //
+          // $chart_data
           $chart_data = [];
-          $chart_data['data'] = \Drupal::getContainer()
-            ->get('flexinfo.chart.service')
-            ->{$chart_render_method}($pool_data, $pool_label, NULL, $question_term, $color_palette, $data_legend);
+          $chart_data['data'] = $this->getBlockEventsChartData($pool_data, $pool_label, NULL, $question_term, $color_palette, $data_legend);
+
           if ($chart_type_name == 'Stacked Bar Chart Multiple Horizontal') {
             // RIGHT chart character
-            // $rightChartClass = 'Stacked Bar Chart Multiple Horizontal';
             // $styleWidth = 'col-12';
             $chart_render_method = 'renderChartHorizontalStackedBarDataSet';
 
-            // $chartClass = $chart_type_name;
-            $chart_data['data'] = \Drupal::getContainer()
-              ->get('flexinfo.chart.service')
+            // do not reverse order
+            $chart_data['data'] = \Drupal::service('flexinfo.chart.service')
               ->{$chart_render_method}(array($pre_question_answer, $post_question_answer), array_reverse($data_legend));
 
             // RIGHT chart character
             $chart_data['rightChartData'] = NULL;
           }
           elseif ($chart_type_name == 'PrePost Pie Chart Column12') {
+            $chart_data['data'] = [];
+            $pool_data = \Drupal::service('ngdata.node.evaluation')
+              ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Pre');
+            $chart_data['data']['Pre'] = $this->getBlockEventsChartData($pool_data, $pool_label, NULL, $question_term, $color_palette, $data_legend);
+            $pool_data = \Drupal::service('ngdata.node.evaluation')
+              ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Post');
+            $chart_data['data']['Post'] = $this->getBlockEventsChartData($pool_data, $pool_label, NULL, $question_term, $color_palette, $data_legend);
+          }
+
+          //
+          $styleWidth = NULL;
+          if ($chart_type_name == 'PrePost Pie Chart Column12') {
             // Two chart in one section Column12
             $styleWidth = 'col-12';
           }
@@ -305,20 +271,19 @@ class GenpdfJsonGenerator extends ControllerBase {
           $chart_data['block'] = array(
             'type'  => 'chart',
             'class' => $chartClass,
-            'rightChartClass' => $rightChartClass,
+            'rightChartClass' => NULL,
             'styleWidth' => $styleWidth,
-            'title' => \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
-            'middle' => \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartBottomFooterValue($pool_data, $question_term, TRUE, TRUE),
+            'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+            'middle' => \Drupal::service('flexinfo.chart.service')->renderChartBottomFooterValue($pool_data, $question_term, TRUE, TRUE),
             'bottom' => array(
               array_sum($pool_data),
               t('RESPONSES'),
               \Drupal::service('ngdata.atomic.atom')->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
-              \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_chartfooter')
+              \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_chartfooter')
             ),
           );
 
           $output['question'][] = $chart_data;
-
         }
       }
     }
@@ -350,12 +315,12 @@ class GenpdfJsonGenerator extends ControllerBase {
     if (!$color_palette) {
       $color_palette_name = 'colorPlateFive';
       if (\Drupal::hasService('baseinfo.chart.service')) {
-        if(method_exists(\Drupal::getContainer()->get('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
-          $color_palette_name = \Drupal::getContainer()->get('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
+        if(method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
+          $color_palette_name = \Drupal::service('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
         }
       }
 
-      $color_palette = \Drupal::getContainer()->get('flexinfo.setting.service')->{$color_palette_name}();
+      $color_palette = \Drupal::service('flexinfo.setting.service')->{$color_palette_name}();
     }
 
     for ($i = 0; $i < count($pool_data); $i++) {
@@ -383,15 +348,14 @@ class GenpdfJsonGenerator extends ControllerBase {
    * Desperated
    */
   public function getEvaluationNids($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL) {
-    $meeting_nids = \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
+    $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
 
     // query container
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $query_container = \Drupal::service('flexinfo.querynode.service');
     $query = $query_container->queryNidsByBundle('evaluation');
 
     $group = $query_container->groupStandardByFieldValue($query, 'field_evaluation_meetingnid', $meeting_nids, 'IN');
     $query->condition($group);
-
 
     // $group = $query_container->groupStandardByFieldValue($query, 'field_evaluation_reactset.question_tid', $question_tid);
     // $query->condition($group);
@@ -408,7 +372,7 @@ class GenpdfJsonGenerator extends ControllerBase {
    *
    */
   public function filterQuestionData($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL) {
-    $evaluationNids = \Drupal::getContainer()->get('flexinfo.querynode.service')->wrapperEvaluationNidsByQuestion($meeting_nodes);
+    $evaluationNids = \Drupal::service('flexinfo.querynode.service')->wrapperEvaluationNidsByQuestion($meeting_nodes);
 
     $evaluation_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($evaluationNids);
 
@@ -434,7 +398,7 @@ class GenpdfJsonGenerator extends ControllerBase {
    *
    */
   public function filterPrePostQuestionData($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL, $question_pre_or_post = NULL) {
-    $evaluationNids = \Drupal::getContainer()->get('flexinfo.querynode.service')->wrapperEvaluationNidsByQuestion($meeting_nodes);
+    $evaluationNids = \Drupal::service('flexinfo.querynode.service')->wrapperEvaluationNidsByQuestion($meeting_nodes);
     $evaluation_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($evaluationNids);
 
     $output = 0;
@@ -487,12 +451,10 @@ class GenpdfJsonGenerator extends ControllerBase {
   public function blockEventsComments($meeting_nodes = array(), $evaluationform_term = NULL, $question_tids = array()) {
     $output = array();
 
-    $textfield_tid= \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $textfield_tid= \Drupal::service('flexinfo.term.service')
       ->getTidByTermName($term_name = 'textfield', $vocabulary_name = 'fieldtype');
 
-    $textfield_question_tids = \Drupal::getContainer()
-      ->get('flexinfo.queryterm.service')
+    $textfield_question_tids = \Drupal::service('flexinfo.queryterm.service')
       ->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $textfield_tid);
 
     $sort_tids = array_intersect($question_tids, $textfield_question_tids);
@@ -527,7 +489,7 @@ class GenpdfJsonGenerator extends ControllerBase {
 
       foreach ($textfield_question_terms as $textfield_question_term) {
 
-        // $pool_data = \Drupal::getContainer()->get('flexinfo.querynode.service')
+        // $pool_data = \Drupal::service('flexinfo.querynode.service')
         //   ->wrapperPoolAnswerTextDataByQuestionTid($meeting_nodes, $textfield_question_term->id());
         $pool_data = $this->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
@@ -559,7 +521,7 @@ class GenpdfJsonGenerator extends ControllerBase {
       'title' => $textfield_question_term->getName(),
     );
 
-    // $pool_datas = \Drupal::getContainer()->get('flexinfo.querynode.service')
+    // $pool_datas = \Drupal::service('flexinfo.querynode.service')
     //   ->wrapperPoolAnswerTextDataByQuestionTid($meeting_nodes, $textfield_question_term->id());
 
     $pool_data = $this->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
@@ -586,7 +548,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     $output['block'] = array(
       'type'  => 'comments',
       'class' => 'comments',
-      'title' => \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($comment_header),
+      'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($comment_header),
     );
 
     foreach ($comment_content as $key => $eachCommentAnswer) {
@@ -619,8 +581,7 @@ class GenpdfJsonGenerator extends ControllerBase {
   public function blockEventsTableForRelatedFieldQuestion($meeting_nodes = array(), $evaluationform_term = NULL, $question_tids = array()) {
     $output = array();
 
-    $question_tids = \Drupal::getContainer()
-      ->get('baseinfo.queryterm.service')
+    $question_tids = \Drupal::service('baseinfo.queryterm.service')
       ->wrapperMultipleQuestionTidsFromEvaluationform($evaluationform_term);
 
     $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids);
@@ -663,7 +624,7 @@ class GenpdfJsonGenerator extends ControllerBase {
             );
             for ($i = 5; $i > 0; $i--) {
               $cell_value = isset($count_values[$i]) ? $count_values[$i] : 0;
-              $cell_value .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+              $cell_value .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
               $result[] = $cell_value;
             }
 
@@ -675,7 +636,7 @@ class GenpdfJsonGenerator extends ControllerBase {
       $output['block'] = array(
         'type'  => 'table',
         'class' => 'table',
-        'title' => \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+        'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
       );
 
       $output['data']["thead"] = [
@@ -714,12 +675,10 @@ class GenpdfJsonGenerator extends ControllerBase {
 
     // old
 
-    $selectkey_tid= \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $selectkey_tid= \Drupal::service('flexinfo.term.service')
       ->getTidByTermName($term_name = 'selectkey', $vocabulary_name = 'fieldtype');
 
-    $question_tids = \Drupal::getContainer()
-      ->get('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $selectkey_tid);
+    $question_tids = \Drupal::service('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $selectkey_tid);
 
     // new need test
     // $filter_tids = \Drupal::getContainer()
@@ -752,7 +711,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     $output['block'] = array(
       'type'  => 'table',
       'class' => 'table',
-      'title' => \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+      'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
     );
 
     $all_answer_tids = $this->getSelectkeyQuestionAllAnswerTids($meeting_nodes, $question_term);
@@ -770,7 +729,7 @@ class GenpdfJsonGenerator extends ControllerBase {
         $result[] = array(
           $term->getName(),
           $count_answer_tids[$term->id()],
-          \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($count_answer_tids[$term->id()], $answer_tids_sum, 0) . '%',
+          \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($count_answer_tids[$term->id()], $answer_tids_sum, 0) . '%',
         );
       }
     }
@@ -803,16 +762,14 @@ class GenpdfJsonGenerator extends ControllerBase {
    *
    */
   public function getSelectkeyQuestionAllAnswerTids($meeting_nodes = array(), $question_term = NULL) {
-    $answer_tids = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $answer_tids = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIds($question_term, 'field_queslibr_selectkeyanswer');
 
 
     $evaluationNids = $this->getEvaluationNids($meeting_nodes);
     $evaluation_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($evaluationNids);
 
-    $answer_tids = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $answer_tids = \Drupal::service('flexinfo.field.service')
       ->getReactsetFieldAllValueCollection($evaluation_nodes, $field_name = 'field_evaluation_reactset', $subfield = 'question_answer', $question_term->id());
 
     return $answer_tids;
