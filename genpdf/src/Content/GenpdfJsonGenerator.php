@@ -240,7 +240,7 @@ class GenpdfJsonGenerator extends ControllerBase {
 
           if ($chart_type_name == 'Stacked Bar Chart Multiple Horizontal') {
             // RIGHT chart character
-            // $styleWidth = 'col-12';
+            // $styleWidth = 'col-md-12';
             $chart_render_method = 'renderChartHorizontalStackedBarDataSet';
 
             // do not reverse order
@@ -264,7 +264,7 @@ class GenpdfJsonGenerator extends ControllerBase {
           $styleWidth = NULL;
           if ($chart_type_name == 'PrePost Pie Chart Column12') {
             // Two chart in one section Column12
-            $styleWidth = 'col-12';
+            $styleWidth = 'col-md-12';
           }
 
           //
