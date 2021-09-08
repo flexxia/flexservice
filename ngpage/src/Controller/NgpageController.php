@@ -93,7 +93,7 @@ class NgpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function ngPrimengPage($section, $entity_id, $start, $end) {
-    $admin_tags = \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag();
+    $admin_tags = \Drupal::service('flexinfo.setting.service')->adminTag();
     array_push($admin_tags, 'app-root');
 
     $build = array(
@@ -134,8 +134,8 @@ class NgpageController extends ControllerBase {
    * use Symfony\Component\HttpFoundation\RedirectResponse;
    */
   public function standardMenuItem($section, $page_type, $entity_id) {
-    $start = \Drupal::getContainer()->get('flexinfo.setting.service')->userStartTime();
-    $end   = \Drupal::getContainer()->get('flexinfo.setting.service')->userEndTime();
+    $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end   = \Drupal::service('flexinfo.setting.service')->userEndTime();
 
     $uri = '/ngpage/' . $section . '/' . $page_type . '/' . $entity_id . '/' . $start . '/' . $end;
     $url = Url::fromUserInput($uri)->toString();
