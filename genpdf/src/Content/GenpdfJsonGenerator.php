@@ -82,7 +82,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     $evaluationform_term = \Drupal::service('flexinfo.node.service')
       ->getMeetingEvaluationformTerm($node);
 
-    $output = $this->eventsData(array($node), $evaluationform_term);
+    $output['pdfjson'] = $this->eventsData(array($node), $evaluationform_term);
 
     return $output;
   }
