@@ -97,7 +97,7 @@ class GenpdfController extends ControllerBase {
    */
   public function jsonMeeting($entity_id) {
     $GenpdfJsonGenerator = new GenpdfJsonGenerator();
-    $object_content_data['pdfjson'] = $GenpdfJsonGenerator->meetingJson($entity_id);
+    $object_content_data = $GenpdfJsonGenerator->meetingJson($entity_id);
 
     return new JsonResponse($object_content_data);
 
