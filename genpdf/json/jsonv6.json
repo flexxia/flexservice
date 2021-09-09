@@ -1,2412 +1,527 @@
 {
-  "tileSection": [
-    {
-      "blockId": 2536064147,
-      "class": "col-md-12",
-      "type": "htmlSnippet",
-      "value": [
+  "pdfjson": {
+    "meeting": {
+      "programName": "2020 Changing Minds - Thought-Provoking Discussions about Thought Disorders",
+      "tileSection": [
         {
-          "tileNumber": "Date",
-          "tileText": "2017-09-05"
+          "value": "Date",
+          "value_one": "2021-01-14"
         },
         {
-          "tileNumber": "Speaker",
-          "tileText": "David Sionit"
+          "value": "Speaker",
+          "value_one": "Rebecca Carrierre"
         },
         {
-          "tileNumber": "City",
-          "tileText": "Brampton"
+          "value": "City",
+          "value_one": "Webinar"
         },
         {
-          "tileNumber": "Participants",
-          "tileText": "27"
+          "value": "Participants",
+          "value_one": "6"
         },
         {
-          "tileNumber": "Venue",
-          "tileText": "Bramalea Retirement Residence"
+          "value": "Venue",
+          "value_one": null
         },
         {
-          "tileNumber": "Rep",
-          "tileText": "Kavita Ahuja"
+          "value": "Moderator",
+          "value_one": null
         },
         {
-          "tileNumber": "Province",
-          "tileText": "Ontario"
+          "value": "Province",
+          "value_one": "Ontario"
         },
         {
-          "tileNumber": "Evaluation Received",
-          "tileText": "16"
+          "value": "Evaluation Received",
+          "value_one": "6"
         }
-      ],
-      "title": "Simplify Diabetes Management: Addressing Top Clinical Questions"
-    }
-  ],
-  "fixedSection": [
-    {
-      "blockId": 43156016,
-      "class": "col-md-3",
-      "type": "widgetOne",
-      "value": {
-        "header": {
-          "class": "bg-344a5f color-fff",
-          "value": {
-            "class": "font-size-14",
-            "value": "Total Events"
-          },
-          "valueOne": {
-            "class": "font-size-12",
-            "value": 5
-          }
-        }
-      }
+      ]
     },
-    {
-      "blockId": 573903219,
-      "class": "col-md-3",
-      "type": "widgetOne",
-      "value": {
-        "header": {
-          "class": "bg-2fa9e0 color-fff",
-          "value": {
-            "class": "font-size-14",
-            "value": "Total HCP Reach"
-          },
-          "valueOne": {
-            "class": "font-size-12",
-            "value": 69
-          }
-        }
-      }
-    },
-    {
-      "blockId": 882188372,
-      "class": "col-md-3",
-      "type": "widgetOne",
-      "value": {
-        "header": {
-          "class": "bg-f24b99 color-fff",
-          "value": {
-            "class": "font-size-14",
-            "value": "Evaluation Received"
-          },
-          "valueOne": {
-            "class": "font-size-12",
-            "value": 166
-          }
-        }
-      }
-    },
-    {
-      "blockId": 1922241810,
-      "class": "col-md-3",
-      "type": "widgetOne",
-      "value": {
-        "header": {
-          "class": "bg-99dc3b color-fff",
-          "value": {
-            "class": "font-size-14",
-            "value": "Speaker Evaluations"
-          },
-          "valueOne": {
-            "class": "font-size-12",
-            "value": 5
-          }
-        }
-      }
-    }
-  ],
-  "contentSection": [
-    {
-      "blockId": 2039896329,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Likelihood of Recommending Program"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "col-md-8",
-          "middleMiddleMiddle": {
-            "chartId": 100868631,
-            "chartType": "Pie",
-            "chartClass": "col-md-6 opacity-05",
-            "chartTitle": "Identify and address only render on getBlockMultiContainer",
-            "chartData": [
-              {
-                "value": "7",
-                "color": "#2fa9e0",
-                "title": "1(12)"
-              },
-              {
-                "value": "8",
-                "color": "#f24b99",
-                "title": "1(12)"
-              },
-              {
-                "value": "1",
-                "color": "#99dc3b",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#ffffff",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": true,
-              "inGraphDataTmpl": "<%=Math.round(v6 < 5) ? \"\" : Math.round(v6) + \"%\"%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 0,
-              "bezierCurveTension": 0.1,
-              "inGraphDataAlign": "center",
-              "inGraphDataAnglePosition": 2,
-              "inGraphDataPaddingRadius": 25,
-              "inGraphDataRadiusPosition": 2,
-              "percentageInnerCutout": 99,
-              "pointDotRadius": 6,
-              "title": "",
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "col-md-4",
-          "middleMiddleRight": "<div class=\"padding-top-64 margin-left-12 width-pt-100\"><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-2fa9e0\"></span><span class=\"float-left legend-text\">5 (7)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-f24b99\"></span><span class=\"float-left legend-text\">4 (8)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-99dc3b\"></span><span class=\"float-left legend-text\">3 (1)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-56bfb5\"></span><span class=\"float-left legend-text\">2 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-5577fd\"></span><span class=\"float-left legend-text\">1 (0)</span></div></div>"
-        },
-        "middleBottom": "16,RESPONSES,94%,Very Good or Excellent"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 2516845443,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Overall Satisfaction"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "col-md-8",
-          "middleMiddleMiddle": {
-            "chartId": 2540703841,
-            "chartType": "Pie",
-            "chartClass": "col-md-6 opacity-05",
-            "chartTitle": "Identify and address only render on getBlockMultiContainer",
-            "chartData": [
-              {
-                "value": "3",
-                "color": "#2fa9e0",
-                "title": "1(12)"
-              },
-              {
-                "value": "11",
-                "color": "#f24b99",
-                "title": "1(12)"
-              },
-              {
-                "value": "2",
-                "color": "#99dc3b",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#ffffff",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": true,
-              "inGraphDataTmpl": "<%=Math.round(v6 < 5) ? \"\" : Math.round(v6) + \"%\"%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 0,
-              "bezierCurveTension": 0.1,
-              "inGraphDataAlign": "center",
-              "inGraphDataAnglePosition": 2,
-              "inGraphDataPaddingRadius": 25,
-              "inGraphDataRadiusPosition": 2,
-              "percentageInnerCutout": 99,
-              "pointDotRadius": 6,
-              "title": "",
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "col-md-4",
-          "middleMiddleRight": "<div class=\"padding-top-64 margin-left-12 width-pt-100\"><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-2fa9e0\"></span><span class=\"float-left legend-text\">5 (3)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-f24b99\"></span><span class=\"float-left legend-text\">4 (11)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-99dc3b\"></span><span class=\"float-left legend-text\">3 (2)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-56bfb5\"></span><span class=\"float-left legend-text\">2 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-5577fd\"></span><span class=\"float-left legend-text\">1 (0)</span></div></div>"
-        },
-        "middleBottom": "+19,NTS,88%,Very Good or Excellent"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 1399997699,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Program Enhanced Knowledge"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "col-md-8",
-          "middleMiddleMiddle": {
-            "chartId": 1230382392,
-            "chartType": "Pie",
-            "chartClass": "col-md-6 opacity-05",
-            "chartTitle": "Identify and address only render on getBlockMultiContainer",
-            "chartData": [
-              {
-                "value": "5",
-                "color": "#2fa9e0",
-                "title": "1(12)"
-              },
-              {
-                "value": "11",
-                "color": "#f24b99",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#99dc3b",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#ffffff",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": true,
-              "inGraphDataTmpl": "<%=Math.round(v6 < 5) ? \"\" : Math.round(v6) + \"%\"%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 0,
-              "bezierCurveTension": 0.1,
-              "inGraphDataAlign": "center",
-              "inGraphDataAnglePosition": 2,
-              "inGraphDataPaddingRadius": 25,
-              "inGraphDataRadiusPosition": 2,
-              "percentageInnerCutout": 99,
-              "pointDotRadius": 6,
-              "title": "",
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "col-md-4",
-          "middleMiddleRight": "<div class=\"padding-top-64 margin-left-12 width-pt-100\"><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-2fa9e0\"></span><span class=\"float-left legend-text\">5 (5)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-f24b99\"></span><span class=\"float-left legend-text\">4 (11)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-99dc3b\"></span><span class=\"float-left legend-text\">3 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-56bfb5\"></span><span class=\"float-left legend-text\">2 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-5577fd\"></span><span class=\"float-left legend-text\">1 (0)</span></div></div>"
-        },
-        "middleBottom": "16,RESPONSES,100%,Very Good or Excellent"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 2164405360,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "How effective was the speaker?"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "col-md-8",
-          "middleMiddleMiddle": {
-            "chartId": 1213741201,
-            "chartType": "Pie",
-            "chartClass": "col-md-6 opacity-05",
-            "chartTitle": "Identify and address only render on getBlockMultiContainer",
-            "chartData": [
-              {
-                "value": "8",
-                "color": "#2fa9e0",
-                "title": "1(12)"
-              },
-              {
-                "value": "7",
-                "color": "#f24b99",
-                "title": "1(12)"
-              },
-              {
-                "value": "1",
-                "color": "#99dc3b",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#ffffff",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": true,
-              "inGraphDataTmpl": "<%=Math.round(v6 < 5) ? \"\" : Math.round(v6) + \"%\"%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 0,
-              "bezierCurveTension": 0.1,
-              "inGraphDataAlign": "center",
-              "inGraphDataAnglePosition": 2,
-              "inGraphDataPaddingRadius": 25,
-              "inGraphDataRadiusPosition": 2,
-              "percentageInnerCutout": 99,
-              "pointDotRadius": 6,
-              "title": "",
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "col-md-4",
-          "middleMiddleRight": "<div class=\"padding-top-64 margin-left-12 width-pt-100\"><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-2fa9e0\"></span><span class=\"float-left legend-text\">5 (8)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-f24b99\"></span><span class=\"float-left legend-text\">4 (7)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-99dc3b\"></span><span class=\"float-left legend-text\">3 (1)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-56bfb5\"></span><span class=\"float-left legend-text\">2 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-5577fd\"></span><span class=\"float-left legend-text\">1 (0)</span></div></div>"
-        },
-        "middleBottom": "16,RESPONSES,94%,Very Good or Excellent"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 873538640,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Likelihood of Clinical Change"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "col-md-8",
-          "middleMiddleMiddle": {
-            "chartId": 611518226,
-            "chartType": "Pie",
-            "chartClass": "col-md-6 opacity-05",
-            "chartTitle": "Identify and address only render on getBlockMultiContainer",
-            "chartData": [
-              {
-                "value": "5",
-                "color": "#2fa9e0",
-                "title": "1(12)"
-              },
-              {
-                "value": "9",
-                "color": "#f24b99",
-                "title": "1(12)"
-              },
-              {
-                "value": "2",
-                "color": "#99dc3b",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "0",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#ffffff",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": true,
-              "inGraphDataTmpl": "<%=Math.round(v6 < 5) ? \"\" : Math.round(v6) + \"%\"%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 0,
-              "bezierCurveTension": 0.1,
-              "inGraphDataAlign": "center",
-              "inGraphDataAnglePosition": 2,
-              "inGraphDataPaddingRadius": 25,
-              "inGraphDataRadiusPosition": 2,
-              "percentageInnerCutout": 99,
-              "pointDotRadius": 6,
-              "title": "",
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "col-md-4",
-          "middleMiddleRight": "<div class=\"padding-top-64 margin-left-12 width-pt-100\"><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-2fa9e0\"></span><span class=\"float-left legend-text\">5 (5)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-f24b99\"></span><span class=\"float-left legend-text\">4 (9)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-99dc3b\"></span><span class=\"float-left legend-text\">3 (2)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-56bfb5\"></span><span class=\"float-left legend-text\">2 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-5577fd\"></span><span class=\"float-left legend-text\">1 (0)</span></div></div>"
-        },
-        "middleBottom": "16,RESPONSES,88%,Very Good or Excellent"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 1217421943,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Speaker Bias"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "chartId": 2555736073,
-            "chartType": "Doughnut",
-            "chartData": [
-              {
-                "value": "13",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "1",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#000",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": false,
-              "inGraphDataTmpl": "<%=v3%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 20,
-              "bezierCurveTension": 0.1,
-              "crossText": [
-                "",
-                "No Bias",
-                "93%"
-              ],
-              "crossTextAlign": [
-                "center"
-              ],
-              "crossTextBaseline": [
-                "middle"
-              ],
-              "crossTextFontColor": [
-                "black"
-              ],
-              "crossTextFontSize": [
-                0,
-                30,
-                30
-              ],
-              "crossTextIter": [
-                "last"
-              ],
-              "crossTextOverlay": [
-                true
-              ],
-              "crossTextPosX": [
-                0,
-                0,
-                0
-              ],
-              "crossTextPosY": [
-                0,
-                20,
-                -30
-              ],
-              "crossTextRelativePosX": [
-                0,
-                2,
-                2
-              ],
-              "crossTextRelativePosY": [
-                0,
-                2,
-                2
-              ],
-              "percentageInnerCutout": 90,
-              "pointDotRadius": 6,
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
-        },
-        "middleBottom": "14,RESPONSES,0%,No Speaker Bias"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 2000888729,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Program Bias"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "chartId": 2457928469,
-            "chartType": "Doughnut",
-            "chartData": [
-              {
-                "value": "0",
-                "color": "#99dc3b",
-                "title": "1(12)"
-              },
-              {
-                "value": "13",
-                "color": "#56bfb5",
-                "title": "1(12)"
-              },
-              {
-                "value": "1",
-                "color": "#5577fd",
-                "title": "1(12)"
-              }
-            ],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#000",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": false,
-              "inGraphDataTmpl": "<%=v3%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 20,
-              "bezierCurveTension": 0.1,
-              "crossText": [
-                "",
-                "No Bias",
-                "93%"
-              ],
-              "crossTextAlign": [
-                "center"
-              ],
-              "crossTextBaseline": [
-                "middle"
-              ],
-              "crossTextFontColor": [
-                "black"
-              ],
-              "crossTextFontSize": [
-                0,
-                30,
-                30
-              ],
-              "crossTextIter": [
-                "last"
-              ],
-              "crossTextOverlay": [
-                true
-              ],
-              "crossTextPosX": [
-                0,
-                0,
-                0
-              ],
-              "crossTextPosY": [
-                0,
-                20,
-                -30
-              ],
-              "crossTextRelativePosX": [
-                0,
-                2,
-                2
-              ],
-              "crossTextRelativePosY": [
-                0,
-                2,
-                2
-              ],
-              "percentageInnerCutout": 90,
-              "pointDotRadius": 6,
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
-        },
-        "middleBottom": "14,RESPONSES,0%,No Commercial Bias"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 1964315747,
-      "class": "col-md-6",
-      "blockClasses": "height-400 overflow-hidden position-relative",
-      "type": "chart",
-      "top": {
-        "enable": true,
-        "value": "Did Program Meet the Code of Ethics of the Quebec?"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "col-md-8",
-          "middleMiddleMiddle": {
-            "chartId": 2251773010,
-            "chartType": "Pie",
-            "chartClass": "col-md-6 opacity-05",
-            "chartTitle": "Identify and address only render on getBlockMultiContainer",
-            "chartData": [],
-            "chartOptions": {
-              "animation": true,
-              "animationSteps": 50,
-              "annotateClassName": "my11001799tooltip",
-              "annotateDisplay": true,
-              "annotateLabel": "<%=v2%>",
-              "datasetFill": false,
-              "datasetStrokeWidth": 2,
-              "inGraphDataBordersXSpace": 12,
-              "inGraphDataBordersYSpace": 7,
-              "inGraphDataFontColor": "#ffffff",
-              "inGraphDataFontSize": 15,
-              "inGraphDataFontStyle": "normal normal",
-              "inGraphDataPaddingY": 5,
-              "inGraphDataShow": true,
-              "inGraphDataTmpl": "<%=Math.round(v6 < 5) ? \"\" : Math.round(v6) + \"%\"%>",
-              "maxLegendCols": 5,
-              "responsive": true,
-              "responsiveMaxHeight": 334,
-              "responsiveMinHeight": 280,
-              "spaceBottom": 10,
-              "spaceTop": 20,
-              "legend": false,
-              "legendBlockSize": 14,
-              "legendBorders": false,
-              "legendFontColor": "#000",
-              "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-              "legendPosX": 2,
-              "legendPosY": 0,
-              "legendSpaceAfterText": 0,
-              "legendSpaceBeforeText": 10,
-              "legendSpaceBetweenBoxAndText": 9,
-              "legendSpaceBetweenTextHorizontal": 15,
-              "legendSpaceBetweenTextVertical": 28,
-              "legendSpaceLeftText": 18,
-              "barValueSpacing": 0,
-              "bezierCurveTension": 0.1,
-              "inGraphDataAlign": "center",
-              "inGraphDataAnglePosition": 2,
-              "inGraphDataPaddingRadius": 25,
-              "inGraphDataRadiusPosition": 2,
-              "percentageInnerCutout": 99,
-              "pointDotRadius": 6,
-              "title": "",
-              "yAxisMinimumInterval": 20
-            }
-          },
-          "middleMiddleRightClass": "col-md-4",
-          "middleMiddleRight": "<div class=\"padding-top-64 margin-left-12 width-pt-100\"><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-56bfb5\"></span><span class=\"float-left legend-text\">2 (0)</span></div><div class=\"clear-both height-32 text-center\"><span class=\"legend-square bg-5577fd\"></span><span class=\"float-left legend-text\">1 (0)</span></div></div>"
-        },
-        "middleBottom": "0,RESPONSES,0%,Very Good or Excellent"
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 2221955368,
-      "class": "col-md-12",
-      "blockClasses": "",
-      "type": "multiContainer",
-      "top": {
-        "enable": true,
-        "value": "Learning Objective"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": [
+    "chartSection": {
+      "question": [
+        {
+          "data": [
             {
-              "blockId": 35213830,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 824398646,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Implement individualized antihyperglycemic agent therapy according to CDA guidelines</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
+              "value": 4,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Very Comfortable "
             },
             {
-              "blockId": 696795682,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 1480721990,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Integrate a treat-to-target approach and adjust therapies as required in order to achieve glycemic targets in a timely fashion</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
+              "value": 2,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Comfortable"
             },
             {
-              "blockId": 1987134359,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 671514884,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Treat elderly patients as recommended in CDA guidelines</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
             },
             {
-              "blockId": 1177704338,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 659034200,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Screen, diagnose and treat neuropathy and nephropathy according to CDA guidelines</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Uncomfortable"
             },
             {
-              "blockId": 2035775782,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 1764192401,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": {
-                      "labels": [
-                        5,
-                        4,
-                        3,
-                        2,
-                        1
-                      ],
-                      "datasets": [
-                        {
-                          "fillColor": [
-                            "#2fa9e0",
-                            "#f24b99",
-                            "#99dc3b",
-                            "#56bfb5",
-                            "#5577fd"
-                          ],
-                          "strokeColor": "#ffffff",
-                          "pointColor": "#05d23e",
-                          "pointStrokeColor": "#fff",
-                          "data": [
-                            "6",
-                            "10",
-                            "0",
-                            "0",
-                            "0"
-                          ]
-                        }
-                      ]
-                    },
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Differentiate between the GLP-1RAs approved in Canada and compare them to oral agents or basal insulin</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 57681798,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 1428554883,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": {
-                      "labels": [
-                        5,
-                        4,
-                        3,
-                        2,
-                        1
-                      ],
-                      "datasets": [
-                        {
-                          "fillColor": [
-                            "#2fa9e0",
-                            "#f24b99",
-                            "#99dc3b",
-                            "#56bfb5",
-                            "#5577fd"
-                          ],
-                          "strokeColor": "#ffffff",
-                          "pointColor": "#05d23e",
-                          "pointStrokeColor": "#fff",
-                          "data": [
-                            "6",
-                            "9",
-                            "0",
-                            "0",
-                            "0"
-                          ]
-                        }
-                      ]
-                    },
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Integrate GLP-1RA therapy in combination with other antihyperglycemic agents into the pharmacotherapy algorithm for type 2 diabetes management</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 560560456,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 907434088,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": {
-                      "labels": [
-                        5,
-                        4,
-                        3,
-                        2,
-                        1
-                      ],
-                      "datasets": [
-                        {
-                          "fillColor": [
-                            "#2fa9e0",
-                            "#f24b99",
-                            "#99dc3b",
-                            "#56bfb5",
-                            "#5577fd"
-                          ],
-                          "strokeColor": "#ffffff",
-                          "pointColor": "#05d23e",
-                          "pointStrokeColor": "#fff",
-                          "data": [
-                            "5",
-                            "10",
-                            "0",
-                            "0",
-                            "0"
-                          ]
-                        }
-                      ]
-                    },
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Counsel patients on the adverse effects and cardiovascular outcomes of GLP-1RAs</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 626690,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 377045634,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Initiate insulin therapy in patients with type 2 diabetes and determine what to do with background antihyperglycemic agents</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 2506507409,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 2574517779,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Compare the newer basal and bolus insulins to the older insulins in Canada, including subsequent entry biologics</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 1410947152,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 1095995768,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Discuss the advantages and disadvantages of premixed insulins</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 1645218102,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 1921279525,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Counsel insulin-treated patients about sick day management</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
-            },
-            {
-              "blockId": 110659153,
-              "class": "col-md-4",
-              "blockClasses": "height-400 overflow-hidden position-relative",
-              "type": "chart",
-              "top": {
-                "enable": true,
-                "value": null
-              },
-              "middle": {
-                "enable": true,
-                "middleTop": null,
-                "middleMiddle": {
-                  "middleMiddleLeftClass": "",
-                  "middleMiddleLeft": "",
-                  "middleMiddleMiddleClass": "",
-                  "middleMiddleMiddle": {
-                    "chartId": 1442922611,
-                    "chartType": "Bar",
-                    "chartClass": "",
-                    "chartTitle": "Identify and address only render on getBlockMultiContainer",
-                    "chartData": [],
-                    "chartOptions": {
-                      "animation": true,
-                      "animationSteps": 50,
-                      "annotateClassName": "my11001799tooltip",
-                      "annotateDisplay": true,
-                      "annotateLabel": "<%=Math.round(100*(v3/grandtotal)) + \"%\"%>",
-                      "datasetFill": false,
-                      "datasetStrokeWidth": 2,
-                      "inGraphDataBordersXSpace": 12,
-                      "inGraphDataBordersYSpace": 7,
-                      "inGraphDataFontColor": "#000",
-                      "inGraphDataFontSize": 15,
-                      "inGraphDataFontStyle": "normal normal",
-                      "inGraphDataPaddingY": 5,
-                      "inGraphDataShow": true,
-                      "inGraphDataTmpl": "<%=(v3 < 1) ? \"\"  : v3%>",
-                      "maxLegendCols": 5,
-                      "responsive": true,
-                      "responsiveMaxHeight": 334,
-                      "responsiveMinHeight": 280,
-                      "spaceBottom": 10,
-                      "spaceTop": 30,
-                      "legend": false,
-                      "legendBlockSize": 14,
-                      "legendBorders": false,
-                      "legendFontColor": "#000",
-                      "legendFontFamily": "Roboto,'Helvetica Neue',sans-serif",
-                      "legendPosX": 2,
-                      "legendPosY": 0,
-                      "legendSpaceAfterText": 0,
-                      "legendSpaceBeforeText": 10,
-                      "legendSpaceBetweenBoxAndText": 9,
-                      "legendSpaceBetweenTextHorizontal": 15,
-                      "legendSpaceBetweenTextVertical": 28,
-                      "legendSpaceLeftText": 18,
-                      "barValueSpacing": "10",
-                      "barBorderRadius": 5,
-                      "barStrokeWidth": 2,
-                      "graphMin": 0,
-                      "pointDotRadius": 6,
-                      "scaleFontSize": 14,
-                      "yAxisMinimumInterval": 10,
-                      "yScaleLabelsMinimumWidth": 40
-                    }
-                  },
-                  "middleMiddleRightClass": "",
-                  "middleMiddleRight": ""
-                },
-                "middleBottom": "<span class=\"legend-text text-center float-left height-32 padding-left-24 padding-right-12 font-size-12\">Discuss the cardiovascular outcome data with insulin from randomized controlled trials</span>"
-              },
-              "bottom": {
-                "enable": true,
-                "value": null
-              }
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Very Uncomfortable"
             }
           ],
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "Share new data available for LAI antipsychotic medications indicated in the treatment of bipolar 1 disorder and schizophrenia",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "67%",
+              "VERY COMFORTABLE"
+            ]
+          }
         },
-        "middleBottom": 6666
-      },
-      "bottom": {
-        "enable": true,
-        "value": "<div class=\"row\"><div class=\"text-center margin-top-12 margin-bottom-6\"><div class=\"display-inline-block font-size-12 margin-left-n-12\"><span class=\"fa fa-circle color-2fa9e0 margin-left-12\"></span><span class=\"legend-text margin-left-6\">5 (17)</span><span class=\"fa fa-circle color-f24b99 margin-left-12\"></span><span class=\"legend-text margin-left-6\">4 (29)</span><span class=\"fa fa-circle color-99dc3b margin-left-12\"></span><span class=\"legend-text margin-left-6\">3 (0)</span><span class=\"fa fa-circle color-56bfb5 margin-left-12\"></span><span class=\"legend-text margin-left-6\">2 (0)</span><span class=\"fa fa-circle color-5577fd margin-left-12\"></span><span class=\"legend-text margin-left-6\">1 (0)</span></div></div></div>"
-      }
-    },
-    {
-      "blockId": 688486680,
-      "class": "col-md-12",
-      "blockClasses": "height-400 overflow-visible",
-      "type": "commonTable",
-      "top": {
-        "enable": true,
-        "value": "GENERAL TYPE 2 DIABETES MANAGEMENT/ORAL PHARMACOLOGICAL AGENTS"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "class": "font-size-12",
-            "tableSettings": {
-              "pagination": true,
-              "searchFilter": true,
-              "paginationType": "full_numbers",
-              "searchPlaceholder": "SEARCH"
+        {
+          "data": [
+            {
+              "value": 5,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Very Comfortable "
             },
-            "value": {
-              "thead": [
-                [
-                  "Name",
-                  "Pre",
-                  "Post"
-                ]
-              ],
-              "tbody": [
-                [
-                  "1.  The Canadian Diabetes Association (CDA) recommends the following as add-on therapy to metformin in patients with clinical cardiovascular disease (CVD) who have not yet achieved target glycated hemoglobin (A1C):",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "2.  Which of the following should be assessed at least annually in patients with type 2 diabetes:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "3.  In healthy elderly patients with type 2 diabetes, the CDA recommends the following A1C target:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "4.  Which of the following has been shown to delay the onset and/or progression of diabetic nephropathy:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "5.  Which of the following is recommended by the CDA for symptomatic relief of painful peripheral neuropathy:",
-                  "0 of 0",
-                  "0 of 0"
-                ]
-              ]
-            }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
-        },
-        "middleBottom": ""
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 1234781992,
-      "class": "col-md-12",
-      "blockClasses": "height-400 overflow-visible",
-      "type": "commonTable",
-      "top": {
-        "enable": true,
-        "value": "GLP-1 RECEPTOR AGONISTS"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "class": "font-size-12",
-            "tableSettings": {
-              "pagination": true,
-              "searchFilter": true,
-              "paginationType": "full_numbers",
-              "searchPlaceholder": "SEARCH"
+            {
+              "value": 1,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Comfortable"
             },
-            "value": {
-              "thead": [
-                [
-                  "Name",
-                  "Pre",
-                  "Post"
-                ]
-              ],
-              "tbody": [
-                [
-                  "1.  Nausea and vomiting associated with GLP-1RA therapy attenuate more slowly (i.e., weeks to many months) with the following:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "2.  Which of the following statements is TRUE:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "3.  Which of the following GLP-1RAs has been shown to be similar or superior to titrated insulin glargine for A1C lowering:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "4.  Which of the following antihyperglycemic agents has been shown in a large cardiovascular outcome trial (CVOT) to significantly reduce CV events in high-risk patients with type 2 diabetes:",
-                  "0 of 0",
-                  "0 of 0"
-                ]
-              ]
-            }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
-        },
-        "middleBottom": ""
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 335709844,
-      "class": "col-md-12",
-      "blockClasses": "height-400 overflow-visible",
-      "type": "commonTable",
-      "top": {
-        "enable": true,
-        "value": "INSULIN"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "class": "font-size-12",
-            "tableSettings": {
-              "pagination": true,
-              "searchFilter": true,
-              "paginationType": "full_numbers",
-              "searchPlaceholder": "SEARCH"
+            {
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
             },
-            "value": {
-              "thead": [
-                [
-                  "Name",
-                  "Pre",
-                  "Post"
-                ]
-              ],
-              "tbody": [
-                [
-                  "1.  In a patient with type 2 diabetes and symptomatic hyperglycemia with metabolic decompensation:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "2.  When a patient with type 2 diabetes is started on basal insulin therapy, the following background antihyperglycemic agents should be discontinued:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "3.  Which of the following insulins has a biosimilar version (subsequent entry biologic) commercially available in Canada?",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "4.  Which of the following antihyperglycemic agents should NOT be stopped on sick days:",
-                  "0 of 0",
-                  "0 of 0"
-                ],
-                [
-                  "5.  Insulin glargine has been found to:",
-                  "0 of 0",
-                  "0 of 0"
-                ]
-              ]
-            }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
-        },
-        "middleBottom": ""
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 891324754,
-      "class": "col-md-12",
-      "blockClasses": "height-400 overflow-visible",
-      "type": "commonTable",
-      "top": {
-        "enable": true,
-        "value": "Please indicate which CanMEDS FM roles you felt were addressed during this educational activity."
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "class": "font-size-12",
-            "tableSettings": {
-              "pagination": true,
-              "searchFilter": true,
-              "paginationType": "full_numbers",
-              "searchPlaceholder": "SEARCH"
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Uncomfortable"
             },
-            "value": {
-              "thead": [
-                [
-                  "Name",
-                  "Number",
-                  "Percentage"
-                ]
-              ],
-              "tbody": [
-                [
-                  "Collaborator",
-                  2,
-                  "9%"
-                ],
-                [
-                  "Family Medicine Expert",
-                  10,
-                  "45%"
-                ],
-                [
-                  "Health Advocate",
-                  2,
-                  "9%"
-                ],
-                [
-                  "Scholar",
-                  2,
-                  "9%"
-                ],
-                [
-                  "Communicator",
-                  3,
-                  "14%"
-                ],
-                [
-                  "Professional",
-                  2,
-                  "9%"
-                ],
-                [
-                  "Manager",
-                  1,
-                  "5%"
-                ]
-              ]
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Very Uncomfortable"
             }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "Evaluate the appropriate, effective and safe use of LAIs in patient with bipolar 1 disorder and schizophrenia",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "83%",
+              "VERY COMFORTABLE"
+            ]
+          }
         },
-        "middleBottom": ""
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
-    },
-    {
-      "blockId": 1649870949,
-      "class": "col-md-12",
-      "blockClasses": "height-400 overflow-visible",
-      "type": "commonTable",
-      "top": {
-        "enable": true,
-        "value": "What is your specialty?"
-      },
-      "middle": {
-        "enable": true,
-        "middleTop": null,
-        "middleMiddle": {
-          "middleMiddleLeftClass": "",
-          "middleMiddleLeft": "",
-          "middleMiddleMiddleClass": "",
-          "middleMiddleMiddle": {
-            "class": "font-size-12",
-            "tableSettings": {
-              "pagination": true,
-              "searchFilter": true,
-              "paginationType": "full_numbers",
-              "searchPlaceholder": "SEARCH"
+        {
+          "data": [
+            {
+              "value": 5,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Very Comfortable "
             },
-            "value": {
-              "thead": [
-                [
-                  "Name",
-                  "Number",
-                  "Percentage"
-                ]
-              ],
-              "tbody": [
-                [
-                  "Family Physician",
-                  14,
-                  "100%"
-                ]
-              ]
+            {
+              "value": 1,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Comfortable"
+            },
+            {
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
+            },
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Uncomfortable"
+            },
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Very Uncomfortable"
             }
-          },
-          "middleMiddleRightClass": "",
-          "middleMiddleRight": ""
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "Discuss the role of LAIs in early intervention, symptom control, relapse prevention and brain protection in these patients",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "83%",
+              "VERY COMFORTABLE"
+            ]
+          }
         },
-        "middleBottom": ""
-      },
-      "bottom": {
-        "enable": true,
-        "value": null
-      }
+        {
+          "data": [
+            {
+              "value": 4,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Strongly Agree"
+            },
+            {
+              "value": 2,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Agree"
+            },
+            {
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
+            },
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Disagree"
+            },
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Strongly Disagree"
+            }
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "The program met the stated objectives and my expectations",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "67%",
+              "STRONGLY AGREE"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "value": 4,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Strongly Agree"
+            },
+            {
+              "value": 1,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Agree"
+            },
+            {
+              "value": 1,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
+            },
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Disagree"
+            },
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Strongly Disagree"
+            }
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "The program enhanced my knowledge on the subject matter",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "67%",
+              "STRONGLY AGREE"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "value": 5,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Strongly Agree"
+            },
+            {
+              "value": 1,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Agree"
+            },
+            {
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
+            },
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Disagree"
+            },
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Strongly Disagree"
+            }
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "There was ample time for discussion and interaction",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "83%",
+              "STRONGLY AGREE"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "value": 5,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Strongly Agree"
+            },
+            {
+              "value": 1,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Agree"
+            },
+            {
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
+            },
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Disagree"
+            },
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Strongly Disagree"
+            }
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "The event was well organized (ex. invitations, location, etc)",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "83%",
+              "STRONGLY AGREE"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "value": 3,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "Strongly Agree"
+            },
+            {
+              "value": 3,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Agree"
+            },
+            {
+              "value": 0,
+              "color": "##589098",
+              "title": "1(12)",
+              "legend": "Neutral"
+            },
+            {
+              "value": 0,
+              "color": "##427136",
+              "title": "1(12)",
+              "legend": "Disagree"
+            },
+            {
+              "value": 0,
+              "color": "##c2b59b",
+              "title": "1(12)",
+              "legend": "Strongly Disagree"
+            }
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "I feel confident I can better communicate key information about LAIs in the clinical management of bipolar disorder and schizophrenia - After",
+            "middle": "0",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "50%",
+              "STRONGLY AGREE"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "value": 6,
+              "color": "##1f70af",
+              "title": "1(12)",
+              "legend": "No"
+            },
+            {
+              "value": 0,
+              "color": "##00b050",
+              "title": "1(12)",
+              "legend": "Yes"
+            }
+          ],
+          "block": {
+            "type": "chart",
+            "class": "Pie Chart",
+            "rightChartClass": null,
+            "styleWidth": null,
+            "title": "Did you perceive any degree of bias in any part of the presentation?",
+            "middle": "100",
+            "bottom": [
+              6,
+              "RESPONSES",
+              "100%",
+              "NO"
+            ]
+          }
+        }
+      ]
     },
-    {
-      "blockId": 2015914057,
-      "class": "col-md-12",
-      "blockClasses": "",
-      "type": "htmlSnippet",
-      "top": {
-        "enable": true,
-        "value": "Please share any remaining learning needs and/or unanswered clinical questions you have:"
-      },
-      "middle": {
-        "enable": true,
-        "value": [
-          "Irregardless is not a word."
-        ]
-      }
+    "commentSection": {
+      "question": [
+        {
+          "block": {
+            "type": "comments",
+            "class": "comments",
+            "title": "Module Presented:"
+          },
+          "data": [
+            "* QOL",
+            "* 5",
+            "* Changing Minds: Functional Recovery and QOL as the Goal of Treatment",
+            "* LAI Treatment",
+            "* Recovery and QoL as a goal of treatment"
+          ]
+        },
+        {
+          "block": {
+            "type": "comments",
+            "class": "comments",
+            "title": "What changes, if any, do you intend to make in your clinical practice as a result of today's program?"
+          },
+          "data": [
+            "* n/a",
+            "* Always recommend long acting injection especially for patient who noncompliant, it is always the best way to maintain their",
+            " stability and functioning.",
+            "* focus more in enhancing client's subjective and objective opinions regarding his or her level of satisfaction with their quality",
+            " of live",
+            "* Working on negative symptoms",
+            "* Sharing the benefit of improvement with overall symptoms of psychosis when using LAI over oral medication.",
+            "* cater more assessment time to exploring QoL measures"
+          ]
+        },
+        {
+          "block": {
+            "type": "comments",
+            "class": "comments",
+            "title": "Topic suggestions for future programs:"
+          },
+          "data": [
+            "* n/a",
+            "* To always get an update of the latest evidenced based study and trials of long acting medications.",
+            "* How to enhance engagement with client",
+            "* Mental Health and Youth",
+            "* More about Quality of Life information related to therapeutic interventions.",
+            "* effective pharmaceutical interventions for older adults, and those undergoing or post-menopausal"
+          ]
+        },
+        {
+          "block": {
+            "type": "comments",
+            "class": "comments",
+            "title": "Additional comments:"
+          },
+          "data": [
+            "* n/a",
+            "* Great presentation by Dr. Rebecca Carriere and thank you to Mr. Gerardo Lara for this invitation.",
+            "* well done!  Dr. Carriere",
+            "* Great presentation",
+            "* None",
+            "* I very much enjoyed this presentation!"
+          ]
+        }
+      ]
     },
-    {
-      "blockId": 1618150000,
-      "class": "col-md-12",
-      "blockClasses": "",
-      "type": "htmlSnippet",
-      "top": {
-        "enable": true,
-        "value": "What could we have done to make this experience better for you?"
-      },
-      "middle": {
-        "enable": true,
-        "value": [
-          "Warmer room"
-        ]
-      }
-    },
-    {
-      "blockId": 323313745,
-      "class": "col-md-12",
-      "blockClasses": "",
-      "type": "htmlSnippet",
-      "top": {
-        "enable": true,
-        "value": "What did we do to make this a positive experience for you?"
-      },
-      "middle": {
-        "enable": true,
-        "value": [
-          "Handouts"
-        ]
-      }
+    "tableSection": {
+      "question": []
     }
-  ]
+  }
 }
