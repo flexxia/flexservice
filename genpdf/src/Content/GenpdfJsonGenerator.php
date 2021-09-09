@@ -13,6 +13,7 @@ use Drupal\flexpage\Content\FlexpageBaseJson;
 use Drupal\flexpage\Content\FlexpageEventLayout;
 use Drupal\flexpage\Content\FlexpageJsonGenerator;
 use Drupal\flexpage\Content\FlexpageSampleDataGenerator;
+use Drupal\ngjson\Content\NgjsonObjectContent;
 
 use Drupal\dashpage\Content\DashpageObjectContent;
 use Drupal\taxonomy\Entity\Term;
@@ -40,7 +41,14 @@ class GenpdfJsonGenerator extends ControllerBase {
   /**
    *
    */
-  public function programJson($entity_id = NULL, $meeting_nodes = array()) {
+  public function programJson($entity_id = NULL) {
+    $output = [];
+
+    $FlexpageBaseJson = new FlexpageBaseJson();
+    $DashpageObjectContent = new DashpageObjectContent();
+
+    $meeting_nodes = $this->queryProgramNodes($entity_id);
+
     $program_entity = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
       ->load($entity_id);
@@ -52,14 +60,20 @@ class GenpdfJsonGenerator extends ControllerBase {
       ->getStorage('taxonomy_term')
       ->load($evaluationform_tid);
 
-    $output = $this->eventsData($meeting_nodes, $evaluationform_term);
+    $output['pdfjson'] = $this->eventsData($meeting_nodes, $evaluationform_term);
+
+    $output['fixedSection'] = $FlexpageBaseJson->generateTileStyleOne(
+      $DashpageObjectContent->pageTopFixedSectionData($meeting_nodes)
+    );
+
+    $output['programTitle'] = $program_entity->getName();
 
     return $output;
   }
 
   /**
-  *
-  */
+   *
+   */
   public function meetingJson($entity_id = NULL) {
     $node = \Drupal::entityTypeManager()
       ->getStorage('node')
@@ -71,6 +85,24 @@ class GenpdfJsonGenerator extends ControllerBase {
     $output = $this->eventsData(array($node), $evaluationform_term);
 
     return $output;
+  }
+
+  /**
+   *
+   */
+  public function queryProgramNodes($entity_id = NULL) {
+    $NgjsonObjectContent = new NgjsonObjectContent();
+
+    $program_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($entity_id);
+
+    $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::service('flexinfo.setting.service')->userEndTime();
+
+    $meeting_nodes = $NgjsonObjectContent->querySnapshotMeetingsNodes('program', $entity_id, $start, $end);
+    // indexes the array numerically.
+    $meeting_nodes = array_values($meeting_nodes);
+
+    return $meeting_nodes;
   }
 
   /**
@@ -89,7 +121,10 @@ class GenpdfJsonGenerator extends ControllerBase {
     $question_tids = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
-    $output['meeting'] = $this->blockEventInfo($meeting_nodes[0]);
+    $output['meeting'] = [];
+    if (isset($meeting_nodes[0])) {
+      $output['meeting'] = $this->blockEventInfo($meeting_nodes[0]);
+    }
 
     $output['chartSection']   = $this->blockEventsChart($meeting_nodes, $evaluationform_term, $question_tids);
 
