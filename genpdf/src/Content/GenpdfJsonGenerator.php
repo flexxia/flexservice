@@ -88,6 +88,18 @@ class GenpdfJsonGenerator extends ControllerBase {
   }
 
   /**
+   * @internal only for debug use
+   */
+  function getDebugMeetingJsonFromFileUrl() {
+    $file_url = '/modules/custom/flexservice/genpdf/json/jsonv6.json';
+
+    $output = \Drupal::service('flexinfo.json.service')
+      ->fetchConvertJsonToArray($file_url);
+
+    return $output;
+  }
+
+  /**
    *
    */
   public function queryProgramNodes($entity_id = NULL) {
