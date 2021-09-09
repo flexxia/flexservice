@@ -110,4 +110,22 @@ class GenpdfController extends ControllerBase {
     return $build;
   }
 
+  /**
+   *
+   */
+  public function jsonProgram($entity_id) {
+    $GenpdfJsonGenerator = new GenpdfJsonGenerator();
+    $object_content_data = $GenpdfJsonGenerator->programJson($entity_id);
+
+    return new JsonResponse($object_content_data);
+
+    // debug output as JSON format
+    $build = array(
+      '#type' => 'markup',
+      '#markup' => json_encode($object_content_data),
+    );
+
+    return $build;
+  }
+
 }
