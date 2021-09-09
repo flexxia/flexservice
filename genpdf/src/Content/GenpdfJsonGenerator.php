@@ -102,6 +102,16 @@ class GenpdfJsonGenerator extends ControllerBase {
   /**
    *
    */
+  function getPdfName($entity_id = NULL) {
+    $pdf_folder_path = 'sites/default/files/pdf/';
+    $output = $pdf_folder_path . date("Y_m_d_H_i_s") . ".pdf";
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function queryProgramNodes($entity_id = NULL) {
     $NgjsonObjectContent = new NgjsonObjectContent();
 
