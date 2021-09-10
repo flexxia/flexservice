@@ -307,11 +307,11 @@ class NgdataAtomicTemplate extends NgdataAtomic {
   }
 
   /**
-   * Only PDF link.
+   * Mail and PDF link.
    */
-  public function htmlTileProgramSharePdfLink($program_tid = NULL) {
-    $start = \Drupal::getContainer()->get('flexinfo.setting.service')->userStartTime();
-    $end = \Drupal::getContainer()->get('flexinfo.setting.service')->userEndTime();
+  public function htmlTileProgramShareMailPdfLink($program_tid = NULL, $mail_link = TRUE) {
+    $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::service('flexinfo.setting.service')->userEndTime();
 
     $app_root = \Drupal::hasService('app.root') ? \Drupal::root() : DRUPAL_ROOT;
     $host = \Drupal::request()->getHost();
@@ -334,6 +334,15 @@ class NgdataAtomicTemplate extends NgdataAtomic {
         $output .= '<span class="caret"></span>';
       $output .= '</button>';
       $output .= '<ul class="dropdown-menu" aria-labelledby="tile-program-share-link" class="color-00a9e0 bg-ffffff">';
+        if ($mail_link) {
+          $output .= '<li>';
+            $output .= '<span class="margin-left-12">';
+              $output .= '<a href="mailto:?subject=Share Link&amp;body=' . $this->molecule->getGuestShareProgramLink($program_tid) . '" class="color-000 text-decoration-none">';
+                $output .= 'Share Link';
+              $output .= '</a>';
+            $output .= '</span>';
+          $output .= '</li>';
+        }
         $output .= '<li>';
           $output .= '<span class="margin-left-12">';
             $output .= '<a href="' . $pdf_link . '" class="color-000 text-decoration-none">';
@@ -343,6 +352,15 @@ class NgdataAtomicTemplate extends NgdataAtomic {
         $output .= '</li>';
       $output .= '</ul>';
     $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   * Only PDF link.
+   */
+  public function htmlTileProgramSharePdfLink($program_tid = NULL) {
+    $output = $this->htmlTileProgramShareMailPdfLink($program_tid, FALSE);
 
     return $output;
   }
