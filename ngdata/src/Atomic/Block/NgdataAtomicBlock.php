@@ -45,6 +45,17 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * Only PDF link.
+   */
+  public function blockHtmlTileProgramSharePdfLink($program_tid) {
+    $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
+    $output['blockClass'] = "col-xs-12 margin-top-6";
+    $output['blockHeader'] = $this->template->htmlTileProgramSharePdfLink($program_tid);
+
+    return $output;
+  }
+
+  /**
    *
    */
   public function blockChartjs($chart_type = "pie", $middle_class = "col-md-6", $right_class = "col-md-6", $bg_color_class = 'bg-0f69af') {
