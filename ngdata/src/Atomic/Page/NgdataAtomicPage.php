@@ -73,6 +73,25 @@ class NgdataAtomicPage extends NgdataAtomic {
   }
 
   /**
+   * Only PDF link.
+   */
+  public function programPageContentWithSharePdfLink($meeting_nodes, $entity_id, $start, $end) {
+    $output = [];
+
+    $output[] = $this->template->blockHtmlProgramNameHeader($entity_id);
+    $output[] = $this->block->blockHtmlTileProgramSharePdfLink($entity_id);
+    $output = array_merge($output, $this->organism->tileSectionGroup($meeting_nodes, FALSE));
+
+    $output[] = $this->template->blockHtmlClearBoth();
+    $output = array_merge(
+      $output,
+      $this->blockgroup->blockGroupForProgramSnapshot($entity_id, $meeting_nodes)
+    );
+
+    return $output;
+  }
+
+  /**
    *
    */
   public function eventlistPageContent($meeting_nodes, $entity_id, $start, $end, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af', $table_data_template_name = 'tableDataByEventList') {
