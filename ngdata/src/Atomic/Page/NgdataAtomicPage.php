@@ -79,7 +79,9 @@ class NgdataAtomicPage extends NgdataAtomic {
     $output = [];
 
     $output[] = $this->template->blockHtmlProgramNameHeader($entity_id);
-    $output[] = $this->block->blockHtmlTileProgramShareMailPdfLink($entity_id);
+    if (\Drupal::currentUser()->isAuthenticated()) {
+      $output[] = $this->block->blockHtmlTileProgramShareMailPdfLink($entity_id);
+    }
     $output = array_merge($output, $this->organism->tileSectionGroup($meeting_nodes, FALSE));
 
     $output[] = $this->template->blockHtmlClearBoth();
@@ -98,7 +100,9 @@ class NgdataAtomicPage extends NgdataAtomic {
     $output = [];
 
     $output[] = $this->template->blockHtmlProgramNameHeader($entity_id);
-    $output[] = $this->block->blockHtmlTileProgramSharePdfLink($entity_id);
+    if (\Drupal::currentUser()->isAuthenticated()) {
+      $output[] = $this->block->blockHtmlTileProgramSharePdfLink($entity_id);
+    }
     $output = array_merge($output, $this->organism->tileSectionGroup($meeting_nodes, FALSE));
 
     $output[] = $this->template->blockHtmlClearBoth();
