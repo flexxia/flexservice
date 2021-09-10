@@ -73,6 +73,25 @@ class NgdataAtomicPage extends NgdataAtomic {
   }
 
   /**
+   * Mail and PDF link.
+   */
+  public function programPageContentWithShareMailPdfLink($meeting_nodes, $entity_id, $start, $end) {
+    $output = [];
+
+    $output[] = $this->template->blockHtmlProgramNameHeader($entity_id);
+    $output[] = $this->block->blockHtmlTileProgramShareMailPdfLink($entity_id);
+    $output = array_merge($output, $this->organism->tileSectionGroup($meeting_nodes, FALSE));
+
+    $output[] = $this->template->blockHtmlClearBoth();
+    $output = array_merge(
+      $output,
+      $this->blockgroup->blockGroupForProgramSnapshot($entity_id, $meeting_nodes)
+    );
+
+    return $output;
+  }
+
+  /**
    * Only PDF link.
    */
   public function programPageContentWithSharePdfLink($meeting_nodes, $entity_id, $start, $end) {
