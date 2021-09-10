@@ -45,6 +45,17 @@ class NgdataAtomicBlock extends NgdataAtomic {
   }
 
   /**
+   * Mail and PDF link.
+   */
+  public function blockHtmlTileProgramShareMailPdfLink($program_tid) {
+    $output = \Drupal::service('ngdata.atomic.organism')->basicSection();
+    $output['blockClass'] = "col-xs-12 margin-top-6";
+    $output['blockHeader'] = $this->template->htmlTileProgramShareMailPdfLink($program_tid);
+
+    return $output;
+  }
+
+  /**
    * Only PDF link.
    */
   public function blockHtmlTileProgramSharePdfLink($program_tid) {
