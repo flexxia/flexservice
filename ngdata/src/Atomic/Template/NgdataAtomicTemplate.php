@@ -306,4 +306,45 @@ class NgdataAtomicTemplate extends NgdataAtomic {
     return $output;
   }
 
+  /**
+   * Only PDF link.
+   */
+  public function htmlTileProgramSharePdfLink($program_tid = NULL) {
+    $start = \Drupal::getContainer()->get('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::getContainer()->get('flexinfo.setting.service')->userEndTime();
+
+    $app_root = \Drupal::hasService('app.root') ? \Drupal::root() : DRUPAL_ROOT;
+    $host = \Drupal::request()->getHost();
+    $site_path = 'sites';
+
+    $pdf_link = NULL;
+    if (file_exists($app_root . '/' . $site_path . '/default/settings.local.php')) {
+      $pdf_link .= base_path();
+    }
+    else {
+      $pdf_link .= 'https://';
+      $pdf_link .= \Drupal::request()->getHost() . '/';
+    }
+    $pdf_link .= 'genpdf/program/page/' . $program_tid;
+
+    $output = '';
+    $output .= '<div class="dropdown float-right">';
+      $output .= '<button class="btn btn-default bg-009ddf color-fff dropdown-toggle min-width-20 padding-10" type="button" id="tile-program-share-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">';
+        $output .= '<span class="margin-12">SHARE</span>';
+        $output .= '<span class="caret"></span>';
+      $output .= '</button>';
+      $output .= '<ul class="dropdown-menu" aria-labelledby="tile-program-share-link" class="color-00a9e0 bg-ffffff">';
+        $output .= '<li>';
+          $output .= '<span class="margin-left-12">';
+            $output .= '<a href="' . $pdf_link . '" class="color-000 text-decoration-none">';
+              $output .= 'Download PDF';
+            $output .= '</a>';
+          $output .= '</span>';
+        $output .= '</li>';
+      $output .= '</ul>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
 }
