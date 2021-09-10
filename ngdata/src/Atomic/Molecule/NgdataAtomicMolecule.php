@@ -56,6 +56,52 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    *
    */
+  public function getGuestShareMeetingLink($meeting_nid = NULL) {
+    $output = NULL;
+
+    $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::service('flexinfo.setting.service')->userEndTime();
+
+    $app_root = \Drupal::hasService('app.root') ? \Drupal::root() : DRUPAL_ROOT;
+    $site_path = 'sites';
+
+    if (file_exists($app_root . '/' . $site_path . '/default/settings.local.php')) {
+      $output .= \Drupal::request()->getHttpHost() . base_path();
+    }
+    else {
+      $output .= 'https://' . \Drupal::request()->getHost() . '/';
+    }
+    $output .= 'ngguest/meeting/page/' . $meeting_nid . '/' . $start . '/' . $end;
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getGuestShareProgramLink($program_tid = NULL) {
+    $output = NULL;
+
+    $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::service('flexinfo.setting.service')->userEndTime();
+
+    $app_root = \Drupal::hasService('app.root') ? \Drupal::root() : DRUPAL_ROOT;
+    $site_path = 'sites';
+
+    if (file_exists($app_root . '/' . $site_path . '/default/settings.local.php')) {
+      $output .= \Drupal::request()->getHttpHost() . base_path();
+    }
+    else {
+      $output .= 'https://' . \Drupal::request()->getHost() . '/';
+    }
+    $output .= 'ngguest/program/page/' . $program_tid . '/' . $start . '/' . $end;
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getBlockHeader($title = NULL, $color_box_palette = FALSE, $bg_color_class = 'bg-0f69af') {
     $output = "";
     $output .= '<div class="' . $bg_color_class . ' color-fff padding-15 height-60">';
