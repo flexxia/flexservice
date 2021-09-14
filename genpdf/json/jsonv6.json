@@ -42,19 +42,19 @@
         {
           "data": [
             {
-              "value": 4,
+              "value": 7,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Very Comfortable "
             },
             {
-              "value": 2,
+              "value": 5,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Comfortable"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##589098",
               "title": "1(12)",
               "legend": "Neutral"
@@ -66,7 +66,7 @@
               "legend": "Uncomfortable"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##c2b59b",
               "title": "1(12)",
               "legend": "Very Uncomfortable"
@@ -78,11 +78,11 @@
             "rightChartClass": null,
             "styleWidth": null,
             "title": "Share new data available for LAI antipsychotic medications indicated in the treatment of bipolar 1 disorder and schizophrenia",
-            "middle": "0",
+            "middle": "7",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "67%",
+              "50%",
               "VERY COMFORTABLE"
             ]
           }
@@ -90,19 +90,19 @@
         {
           "data": [
             {
-              "value": 5,
+              "value": 8,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Very Comfortable "
             },
             {
-              "value": 1,
+              "value": 4,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Comfortable"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##589098",
               "title": "1(12)",
               "legend": "Neutral"
@@ -114,7 +114,7 @@
               "legend": "Uncomfortable"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##c2b59b",
               "title": "1(12)",
               "legend": "Very Uncomfortable"
@@ -126,11 +126,11 @@
             "rightChartClass": null,
             "styleWidth": null,
             "title": "Evaluate the appropriate, effective and safe use of LAIs in patient with bipolar 1 disorder and schizophrenia",
-            "middle": "0",
+            "middle": "7",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "83%",
+              "57%",
               "VERY COMFORTABLE"
             ]
           }
@@ -138,19 +138,19 @@
         {
           "data": [
             {
-              "value": 5,
+              "value": 9,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Very Comfortable "
             },
             {
-              "value": 1,
+              "value": 3,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Comfortable"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##589098",
               "title": "1(12)",
               "legend": "Neutral"
@@ -162,7 +162,7 @@
               "legend": "Uncomfortable"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##c2b59b",
               "title": "1(12)",
               "legend": "Very Uncomfortable"
@@ -174,11 +174,11 @@
             "rightChartClass": null,
             "styleWidth": null,
             "title": "Discuss the role of LAIs in early intervention, symptom control, relapse prevention and brain protection in these patients",
-            "middle": "0",
+            "middle": "7",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "83%",
+              "64%",
               "VERY COMFORTABLE"
             ]
           }
@@ -186,13 +186,13 @@
         {
           "data": [
             {
-              "value": 4,
+              "value": 9,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Strongly Agree"
             },
             {
-              "value": 2,
+              "value": 4,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Agree"
@@ -204,7 +204,7 @@
               "legend": "Neutral"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##427136",
               "title": "1(12)",
               "legend": "Disagree"
@@ -224,9 +224,9 @@
             "title": "The program met the stated objectives and my expectations",
             "middle": "0",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "67%",
+              "64%",
               "STRONGLY AGREE"
             ]
           }
@@ -234,13 +234,13 @@
         {
           "data": [
             {
-              "value": 4,
+              "value": 10,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Strongly Agree"
             },
             {
-              "value": 1,
+              "value": 3,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Agree"
@@ -272,9 +272,9 @@
             "title": "The program enhanced my knowledge on the subject matter",
             "middle": "0",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "67%",
+              "71%",
               "STRONGLY AGREE"
             ]
           }
@@ -282,13 +282,13 @@
         {
           "data": [
             {
-              "value": 5,
+              "value": 10,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Strongly Agree"
             },
             {
-              "value": 1,
+              "value": 4,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Agree"
@@ -320,9 +320,9 @@
             "title": "There was ample time for discussion and interaction",
             "middle": "0",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "83%",
+              "71%",
               "STRONGLY AGREE"
             ]
           }
@@ -330,13 +330,13 @@
         {
           "data": [
             {
-              "value": 5,
+              "value": 11,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Strongly Agree"
             },
             {
-              "value": 1,
+              "value": 3,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Agree"
@@ -368,9 +368,9 @@
             "title": "The event was well organized (ex. invitations, location, etc)",
             "middle": "0",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
-              "83%",
+              "79%",
               "STRONGLY AGREE"
             ]
           }
@@ -378,13 +378,13 @@
         {
           "data": [
             {
-              "value": 3,
+              "value": 7,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "Strongly Agree"
             },
             {
-              "value": 3,
+              "value": 6,
               "color": "##00b050",
               "title": "1(12)",
               "legend": "Agree"
@@ -402,7 +402,7 @@
               "legend": "Disagree"
             },
             {
-              "value": 0,
+              "value": 1,
               "color": "##c2b59b",
               "title": "1(12)",
               "legend": "Strongly Disagree"
@@ -414,9 +414,9 @@
             "rightChartClass": null,
             "styleWidth": null,
             "title": "I feel confident I can better communicate key information about LAIs in the clinical management of bipolar disorder and schizophrenia - After",
-            "middle": "0",
+            "middle": "7",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
               "50%",
               "STRONGLY AGREE"
@@ -426,7 +426,7 @@
         {
           "data": [
             {
-              "value": 6,
+              "value": 14,
               "color": "##1f70af",
               "title": "1(12)",
               "legend": "No"
@@ -446,7 +446,7 @@
             "title": "Did you perceive any degree of bias in any part of the presentation?",
             "middle": "100",
             "bottom": [
-              6,
+              14,
               "RESPONSES",
               "100%",
               "NO"
@@ -468,7 +468,35 @@
             "* 5",
             "* Changing Minds: Functional Recovery and QOL as the Goal of Treatment",
             "* LAI Treatment",
-            "* Recovery and QoL as a goal of treatment"
+            "* Recovery and QoL as a goal of treatment",
+            "* Intervention in Acutely Ill Patients",
+            "* Changing Mind",
+            "* Changing Minds",
+            "* Changing Minds",
+            "* Changing Minds: Pharmacokinetics and Pharmacodynamics of LAIs",
+            "* Changing Minds",
+            "* Pharmacokinetics and Pharmacodynamis of LAIs",
+            "* QOL",
+            "* 5",
+            "* Changing Minds: Functional Recovery and QOL as the Goal of Treatment",
+            "* LAI Treatment",
+            "* Recovery and QoL as a goal of treatment",
+            "* Intervention in Acutely Ill Patients",
+            "* Changing Mind",
+            "* Changing Minds",
+            "* Changing Minds",
+            "* Changing Minds: Pharmacokinetics and Pharmacodynamics of LAIs",
+            "* Changing Minds",
+            "* Pharmacokinetics and Pharmacodynamis of LAIs",
+            "* Recovery and QoL as a goal of treatment",
+            "* Intervention in Acutely Ill Patients",
+            "* Changing Mind",
+            "* Changing Minds",
+            "* Changing Minds",
+            "* Changing Minds: Pharmacokinetics and Pharmacodynamics of LAIs",
+            "* Changing Minds",
+            "* Pharmacokinetics and Pharmacodynamis of LAIs",
+            "* Managing Gender Related Side Effects"
           ]
         },
         {
@@ -485,7 +513,15 @@
             " of live",
             "* Working on negative symptoms",
             "* Sharing the benefit of improvement with overall symptoms of psychosis when using LAI over oral medication.",
-            "* cater more assessment time to exploring QoL measures"
+            "* cater more assessment time to exploring QoL measures",
+            "* encouraging LAI sooner",
+            "* To continue to recommend long acting to patients for stability and preventing relapse.",
+            "* I will apply what I learned",
+            "* use LAIs and introduce them to the patients and their families",
+            "* none at this time",
+            "* Understand the difference between sites of injection on clinical outcome",
+            "* No",
+            "* None"
           ]
         },
         {
@@ -500,7 +536,15 @@
             "* How to enhance engagement with client",
             "* Mental Health and Youth",
             "* More about Quality of Life information related to therapeutic interventions.",
-            "* effective pharmaceutical interventions for older adults, and those undergoing or post-menopausal"
+            "* effective pharmaceutical interventions for older adults, and those undergoing or post-menopausal",
+            "* antipsychotic medication side effects!",
+            "* I would like to see more studies about long acting and metabolic effects.",
+            "* Outcomes of LAIs use",
+            "* comparison between LAIs",
+            "* other new drugs on the market",
+            "* Refreshers of the same",
+            "* Similar topics",
+            "* N/A"
           ]
         },
         {
@@ -515,7 +559,18 @@
             "* well done!  Dr. Carriere",
             "* Great presentation",
             "* None",
-            "* I very much enjoyed this presentation!"
+            "* I very much enjoyed this presentation!",
+            "* really well done presentation",
+            "* Excellent presentation and quite educational when it comes to emergency antipsychotic and long acting.",
+            "* Thanks it was excellent presentation",
+            "* very informative presentation",
+            "* great presentation",
+            "* Great presentation",
+            "* No",
+            "* (1 of 2)This was not an appropriate talk for me. The talk itself was interesting and well led - I would just ask that the title",
+            " and description be modified in future for clarity to the consumer and accuracy.  As a psychotherapist I was interested in...",
+            "* (2 of 2) Gender is different from sex and sex hormones.  I was shocked that the talk was focused on differences related to sex",
+            "-hormones.   Gender is someone's identity and has many implications for how we apply treatment, prescribe medications, discuss..."
           ]
         }
       ]
@@ -523,5 +578,80 @@
     "tableSection": {
       "question": []
     }
-  }
+  },
+  "fixedSection": [
+    {
+      "blockId": 2271577095,
+      "class": "col-md-3 col-xs-6",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-c2b59b color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "Total Events"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 5
+          }
+        }
+      }
+    },
+    {
+      "blockId": 2419130901,
+      "class": "col-md-3 col-xs-6",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-589098 color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "HCP Reached"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 14
+          }
+        }
+      }
+    },
+    {
+      "blockId": 1651004241,
+      "class": "col-md-3 col-xs-6",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-fdbe58 color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "Evaluations Received"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": 14
+          }
+        }
+      }
+    },
+    {
+      "blockId": 1714901601,
+      "class": "col-md-3 col-xs-6",
+      "type": "widgetOne",
+      "value": {
+        "header": {
+          "class": "bg-427136 color-fff",
+          "value": {
+            "class": "font-size-14",
+            "value": "HCP Response"
+          },
+          "valueOne": {
+            "class": "font-size-12",
+            "value": "100%"
+          }
+        }
+      }
+    }
+  ],
+  "programTitle": "2020 Changing Minds - Thought-Provoking Discussions about Thought Disorders"
 }
