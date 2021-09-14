@@ -18,27 +18,31 @@ use Drupal\genpdf\Service\PDFDraw;
 class GenpdfDrawHTMLSnippet {
 
   /**
-   * added a parameter commentRowHeight
+   * @param $max_line_number integer.
+   * Maually set max comments lines as 45.
    */
-  function drawHtmlSnippet($cx, $cy, $snippetContent, $pdf, $commentRowHeight, $frameSize = 600) {
+  function drawHtmlSnippet($cx, $cy, $snippetContent, $pdf, $comment_row_height, $max_line_number = 45) {
     $count_lines = 0;
 
     for ($i = 0; $i < count($snippetContent); $i++) {
-      //changed Y postion
+      // Changed Y postion.
       $pdf->SetTextColor(0, 0, 0);
       $pdf->SetFont('Arial', '', 16);
 
       $comments_text_filter = $this->htmlTextFilter($snippetContent[$i]);
       $string_line = $comments_text_filter;
 
-      $pdf->SetXY($cx + 20, $cy + $commentRowHeight * $count_lines);
+      $pdf->SetXY(
+        $cx + 20,
+        $cy + $comment_row_height * $count_lines
+      );
 
-      // replace special sign to standard one
+      // Replace special sign to standard one.
       $string_line = str_replace("…", "...", $string_line);
 
-      // added count lines and check if it is over 26 lines
+      // Added count lines and check if it is over 26 lines.
       $count_lines ++;
-      if ($count_lines > 26) {
+      if ($count_lines > $max_line_number) {
         $pdf->AddPage();
         $count_lines = 0;
         $pdf->SetXY($cx + 20, $cy - 24);
