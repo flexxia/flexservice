@@ -83,7 +83,7 @@ class NgdataTermQuestion extends NgdataTerm {
   }
 
   /**
-   *
+   * Using ReferUid as Output Key.
    */
   public function getQuestionAnswerAllDataWithReferUidWithEvaluationNid($meeting_nodes = array(), $question_tid = NULL) {
     $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
@@ -102,6 +102,36 @@ class NgdataTermQuestion extends NgdataTerm {
               'refer_uid' => $row['refer_uid'],
             ];
             $output[$row['refer_uid']][] = $answer;
+          }
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * Using EvaluationNid as Output Key.
+   */
+  public function getQuestionAnswerAllDataWithEvaluationNidWithReferUid($meeting_nodes = array(), $question_tid = NULL) {
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
+      ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
+
+    $output = array();
+    if ($evaluation_nodes && is_array($evaluation_nodes)) {
+      foreach ($evaluation_nodes as $evaluation_node) {
+        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
+
+        $evaluation_nid = $evaluation_node->id();
+
+        foreach ($result as $row) {
+          if ($row['question_tid'] == $question_tid && $row['question_answer']) {
+            $answer = [
+              'evaluation_nid' => $evaluation_nid,
+              'question_answer' => $row['question_answer'],
+              'refer_uid' => $row['refer_uid'],
+            ];
+            $output[$evaluation_nid][] = $answer;
           }
         }
       }
