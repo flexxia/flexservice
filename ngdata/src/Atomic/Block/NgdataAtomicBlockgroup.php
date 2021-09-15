@@ -46,11 +46,16 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
         // Check last element of output array.
         // Instead using $row_break_num,
         $last_one = end($output);
+
+        if (strpos($last_one['blockClass'], 'block-html-clear-both-wrapper') !== FALSE) {
+          continue;
+        }
+
         if (strpos($last_one['blockClass'], 'col-md-6') !== FALSE) {
           $output_length = count($output);
           if ($output_length > 1) {
             if (strpos($output[$output_length - 2]['blockClass'], 'col-md-6') !== FALSE) {
-              $output[] = $this->template->blockHtmlClearBoth();
+              // $output[] = $this->template->blockHtmlClearBoth();
             }
           }
         }
