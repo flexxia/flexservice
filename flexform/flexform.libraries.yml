@@ -9,3 +9,9 @@ entity_view:
   css:
     theme:
       css/entity_view.css: {}
+
+
+node_add_evaluation_form:
+  css:
+    theme:
+      css/node_add_evaluation_form.css: {}

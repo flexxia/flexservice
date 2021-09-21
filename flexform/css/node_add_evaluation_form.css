@@ -1,0 +1,61 @@
+.form-item input {
+  clear: both;
+}
+
+/**
+ * form-type-element
+ */
+.form-type-date > label,
+.form-type-number > label,
+.form-type-range > label,
+.form-type-range-slider > label,
+.form-type-select > label,
+.form-type-textfield > label {
+  font-size: 16px;
+  font-weight: normal;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.form-type-select .form-select {
+  width: 50%;
+}
+
+.form-item .form-type-select .select-wrapper:after {
+  display: none;
+}
+
+/**
+ *
+ */
+.form-type-item {
+  color: #009ddf;
+  margin-top: 48px;
+  font-size: 16px;
+}
+
+/**
+ * fieldgroup
+ */
+.fieldgroup.form-item {
+  margin-top: 48px;
+}
+
+.fieldgroup > legend {
+  border-bottom: none;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 12px;
+  margin-bottom: 2px;
+}
+
+.fieldgroup .form-checkboxes > .checkbox {
+  width: 50%;
+  float: left;
+  margin-top: 10px;
+}
+/* div + p只會影響到div之後的第一個p，不會影響到後續的p，*/
+/* div ~ p，則div後面的p都能夠有影響。*/
+.fieldgroup .form-checkboxes > .checkbox + .checkbox {
+  margin-top: 10px;
+}

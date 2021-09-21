@@ -16,7 +16,6 @@ flexform.entity.edit:
     _permission: 'access content'
     _role: 'authenticated'
 
-
 flexform.entity.view:
   path: '/flexform/entityview/{entity_type}/{entity_bundle}/{entity_id}'
   defaults:
@@ -25,3 +24,12 @@ flexform.entity.view:
   requirements:
     _permission: 'access content'
     _role: 'authenticated'
+
+#
+flexform.node.add.evaluation.form:
+  path: '/flexform/node/add/evaluation/form/{meeting_nid}'
+  defaults:
+    _form: '\Drupal\flexform\Form\FlexEvaluationForm'
+    _title: 'PredefinedEvaluationForm'
+  requirements:
+    _permission: 'access content'
