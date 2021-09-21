@@ -26,7 +26,7 @@ ngpage.summaryevaluation.form:
     _permission: 'access content'
     _role: 'authenticated'
 
-#
+# @deprecated.
 ngpage.primeng.form:
   path: '/ngpage/{section}/form/{entity_id}/{start}/{end}'
   defaults:
