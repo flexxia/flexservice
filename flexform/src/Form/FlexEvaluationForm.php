@@ -106,8 +106,9 @@ class FlexEvaluationForm extends FormBase {
       '#title' => $this->t('Questions Group'),
     ];
 
+    // Like $form['reactset'][$question_tid][$delta].
     foreach ($question_terms as $question_tid => $question_term) {
-      $form['reactset'][$question_tid] = $this->_getEvaluationQuestionElement($question_term);
+      $form['reactset'][$question_tid] = $this->_getEvaluationQuestionElement($question_term, $meeting_node);
     }
 
     // $form['save'] = [
@@ -181,33 +182,37 @@ class FlexEvaluationForm extends FormBase {
     // dpm($form_state['meeting_nid']);
 
     if ($reactset_values) {
-      foreach ($reactset_values as $key => $row) {
-        if ($row) {
-          if (is_array($row)) {
-            foreach ($row as $subrow) {
-              if ($subrow) {
-                $answer_row = [
-                  'question_tid' => $key,
-                  'question_answer' => $subrow,
-                  'refer_uid' => $form['reactset'][$key]['#refer_value']['refer_uid'],
-                  'refer_tid' => $form['reactset'][$key]['#refer_value']['refer_tid'],
-                  'refer_other' => $form['reactset'][$key]['#refer_value']['refer_other'],
-                ];
-                $output[] = $answer_row;
+      foreach ($reactset_values as $question_tid => $reactset_value_row) {
+        foreach ($reactset_value_row as $delta => $row) {
+          if ($row) {
+            if (is_array($row)) {
+              foreach ($row as $subkey => $subrow) {
+                if ($subrow) {
+                  $answer_row = [
+                    'question_tid' => $question_tid,
+                    'question_answer' => $subrow,
+                    'refer_uid' => $form['reactset'][$question_tid][$subkey]['#refer_value']['refer_uid'],
+                    'refer_tid' => $form['reactset'][$question_tid][$subkey]['#refer_value']['refer_tid'],
+                    'refer_other' => $form['reactset'][$question_tid][$subkey]['#refer_value']['refer_other'],
+                  ];
+                  $output[] = $answer_row;
+                }
               }
             }
-          }
-          else {
-            $answer_row = [
-              'question_tid' => $key,
-              'question_answer' => $row,
-              'refer_uid' => $form['reactset'][$key]['#refer_value']['refer_uid'],
-              'refer_tid' => $form['reactset'][$key]['#refer_value']['refer_tid'],
-              'refer_other' => $form['reactset'][$key]['#refer_value']['refer_other'],
-            ];
+            else {
+              if ($row && !empty($row)) {
+                $answer_row = [
+                  'question_tid' => $question_tid,
+                  'question_answer' => $row,
+                  'refer_uid' => $form['reactset'][$question_tid][$delta]['#refer_value']['refer_uid'],
+                  'refer_tid' => $form['reactset'][$question_tid][$delta]['#refer_value']['refer_tid'],
+                  'refer_other' => $form['reactset'][$question_tid][$delta]['#refer_value']['refer_other'],
+                ];
 
-            if ($answer_row) {
-              $output[] = $answer_row;
+                if ($answer_row) {
+                  $output[] = $answer_row;
+                }
+              }
             }
           }
         }
@@ -216,7 +221,6 @@ class FlexEvaluationForm extends FormBase {
 
     return $output;
   }
-
 
   /**
    *
@@ -241,18 +245,34 @@ class FlexEvaluationForm extends FormBase {
   /**
    * Number Integer question.
    */
-  public function _getEvaluationQuestionElement($question_term) {
+  public function _getEvaluationQuestionElement($question_term, $meeting_node = NULL) {
     $field_type = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_fieldtype');
 
+    $question_relatedfield = \Drupal::getContainer()
+      ->get('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
+
+    $speaker_users = [];
+    $meeting_relatedtypes = [];
+    if ($question_relatedfield == 'field_meeting_speaker') {
+      $speaker_users = \Drupal::service('flexinfo.field.service')
+        ->getFieldAllTargetIdsEntitys($meeting_node, 'field_meeting_speaker', 'user');
+    }
+    elseif ($question_relatedfield == 'field_queslibr_relatedtype') {
+      $meeting_relatedtypes = \Drupal::service('flexinfo.field.service')
+        ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
+    }
+
+    //
     if ($field_type == 'radios') {
-      $output = $this->_getElementNumberDropdown($question_term);
+      $output = $this->_getElementNumberDropdown($question_term, $speaker_users, $meeting_relatedtypes);
     }
     elseif ($field_type == 'selectkey') {
-      $output = $this->_getElementSelectkey($question_term);
+      $output = $this->_getElementSelectkey($question_term, $speaker_users, $meeting_relatedtypes);
     }
     elseif ($field_type == 'textfield') {
-      $output = $this->_getElementTextfield($question_term);
+      $output = $this->_getElementTextfield($question_term, $speaker_users, $meeting_relatedtypes);
     }
 
     return $output;
@@ -274,7 +294,39 @@ class FlexEvaluationForm extends FormBase {
   /**
    * @option Number Integer.
    */
-  public function _getElementNumberDropdown($question_term) {
+  public function _getElementNumberDropdown($question_term, $speaker_users = [], $meeting_relatedtypes = []) {
+    $output = [];
+    $basic_element = $this->_getElementNumberDropdownBasic($question_term);
+
+    if ($speaker_users) {
+      foreach ($speaker_users as $speaker_user) {
+        $row = $basic_element;
+        $row['#title'] .= " - - - " . $speaker_user->getUsername();
+        $row['#refer_value']['refer_uid'] = $speaker_user->id();
+
+        $output[] = $row;
+      }
+    }
+    elseif ($meeting_relatedtypes) {
+      foreach ($meeting_relatedtypes as $relatedtype) {
+        $row = $basic_element;
+        $row['#title'] .= " - - - " . $relatedtype;
+        $row['#refer_value']['refer_other'] = $relatedtype;
+
+        $output[] = $row;
+      }
+    }
+    else {
+      $output[] = $basic_element;
+    }
+
+    return $output;
+  }
+
+  /**
+   * @option Number Integer.
+   */
+  public function _getElementNumberDropdownBasic($question_term) {
     $question_scale = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
@@ -302,7 +354,19 @@ class FlexEvaluationForm extends FormBase {
   /**
    * Selectkey question.
    */
-  public function _getElementSelectkey($question_term) {
+  public function _getElementSelectkey($question_term, $speaker_users = [], $meeting_relatedtypes = []) {
+    $output = [];
+    $basic_element = $this->_getElementSelectkeyBasic($question_term);
+
+    $output[] = $basic_element;
+
+    return $output;
+  }
+
+  /**
+   * Selectkey question.
+   */
+  public function _getElementSelectkeyBasic($question_term, $speaker_users = [], $meeting_relatedtypes = []) {
     $all_answer_terms =\Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIdsEntitys($question_term, 'field_queslibr_selectkeyanswer');
 
@@ -332,23 +396,59 @@ class FlexEvaluationForm extends FormBase {
   }
 
   /**
-   * Selectkey question.
+   * Text question.
    */
-  public function _getElementTextfield($question_term) {
+  public function _getElementTextfield($question_term, $speaker_users = [], $meeting_relatedtypes = []) {
+    $output = [];
+    $basic_element = $this->_getElementTextfieldBasic($question_term);
+
+    if ($speaker_users) {
+      foreach ($speaker_users as $speaker_user) {
+        $row = $basic_element;
+        $row['#title'] .= " - - - " . $speaker_user->getUsername();
+        $row['#refer_value']['refer_uid'] = $speaker_user->id();
+
+        $output[] = $row;
+      }
+    }
+    elseif ($meeting_relatedtypes) {
+      foreach ($meeting_relatedtypes as $relatedtype) {
+        $row = $basic_element;
+        $row['#title'] .= " - - - " . $relatedtype;
+        $row['#refer_value']['refer_other'] = $relatedtype;
+
+        $output[] = $row;
+      }
+    }
+    else {
+      $output[] = $basic_element;
+    }
+
+    return $output;
+  }
+
+  /**
+   * Text question.
+   */
+  public function _getElementTextfieldBasic($question_term) {
     $output = [
       '#title' => $question_term->getName(),
       '#title_display' => 'before',
       '#type' => 'textfield',
+      '#size' => 60,
+      '#maxlength' => 255,
       '#refer_value' => [
         'refer_uid' => NULL,
         'refer_tid' => NULL,
         'refer_other' => NULL,
       ],
-      '#attributes' => [
-        'class' => ['new-demo-class'],
+      // pattern: A string for the native HTML5 pattern attribute.
+      // '#pattern' => 'some-prefix-[a-z]+',
+      // '#attributes' => [
+      //   'class' => ['new-demo-class'],
         // 'data-toggle' => ['tooltip'],
         // 'data-original-title' => ['tooltip text'],
-      ],
+      // ],
     ];
 
     return $output;
