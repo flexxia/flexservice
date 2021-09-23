@@ -68,10 +68,15 @@ class FlexEvaluationForm extends FormBase {
     $DashpageObjectContent = new DashpageObjectContent();
     $meeting_tile_html = $DashpageObjectContent->blockTileMeetingHtml($meeting_node, $meeting_share_link = FALSE, $meeting_snapshot_link = FALSE);
 
-    $form['form_info'] = [
+    $form['form_meeting_info'] = [
       '#type' => 'item',
       '#title' => $meeting_tile_html,
     ];
+    $form['form_evaluation_form_info'] = [
+      '#type' => 'item',
+      '#title' => $evaluation_form_entity->getName(),
+    ];
+
     $form['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Evaluation Title'),
@@ -191,9 +196,9 @@ class FlexEvaluationForm extends FormBase {
                   $answer_row = [
                     'question_tid' => $question_tid,
                     'question_answer' => $subrow,
-                    'refer_uid' => $form['reactset'][$question_tid][$subkey]['#refer_value']['refer_uid'],
-                    'refer_tid' => $form['reactset'][$question_tid][$subkey]['#refer_value']['refer_tid'],
-                    'refer_other' => $form['reactset'][$question_tid][$subkey]['#refer_value']['refer_other'],
+                    'refer_uid' => $form['reactset'][$question_tid][$delta]['#refer_value']['refer_uid'],
+                    'refer_tid' => $form['reactset'][$question_tid][$delta]['#refer_value']['refer_tid'],
+                    'refer_other' => $form['reactset'][$question_tid][$delta]['#refer_value']['refer_other'],
                   ];
                   $output[] = $answer_row;
                 }
@@ -265,6 +270,9 @@ class FlexEvaluationForm extends FormBase {
     }
 
     //
+    if ($field_type == 'customtext') {
+      $output = $this->_getElementItemCustomText($question_term);
+    }
     if ($field_type == 'radios') {
       $output = $this->_getElementNumberDropdown($question_term, $speaker_users, $meeting_relatedtypes);
     }
@@ -274,6 +282,19 @@ class FlexEvaluationForm extends FormBase {
     elseif ($field_type == 'textfield') {
       $output = $this->_getElementTextfield($question_term, $speaker_users, $meeting_relatedtypes);
     }
+
+    return $output;
+  }
+
+  /**
+   * @option CustomText.
+   */
+  public function _getElementItemCustomText($question_term) {
+    $output = [
+      '#title' => $question_term->getName(),
+      '#title_display' => 'before',
+      '#type' => 'item',
+    ];
 
     return $output;
   }
@@ -358,7 +379,27 @@ class FlexEvaluationForm extends FormBase {
     $output = [];
     $basic_element = $this->_getElementSelectkeyBasic($question_term);
 
-    $output[] = $basic_element;
+    if ($speaker_users) {
+      foreach ($speaker_users as $speaker_user) {
+        $row = $basic_element;
+        $row['#title'] .= " - - - " . $speaker_user->getUsername();
+        $row['#refer_value']['refer_uid'] = $speaker_user->id();
+
+        $output[] = $row;
+      }
+    }
+    elseif ($meeting_relatedtypes) {
+      foreach ($meeting_relatedtypes as $relatedtype) {
+        $row = $basic_element;
+        $row['#title'] .= " - - - " . $relatedtype;
+        $row['#refer_value']['refer_other'] = $relatedtype;
+
+        $output[] = $row;
+      }
+    }
+    else {
+      $output[] = $basic_element;
+    }
 
     return $output;
   }
