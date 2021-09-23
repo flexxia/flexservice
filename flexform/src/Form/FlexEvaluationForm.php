@@ -106,7 +106,7 @@ class FlexEvaluationForm extends FormBase {
       '#title' => $this->t('Questions Group'),
     ];
 
-    // Like $form['reactset'][$question_tid][$delta].
+    // $form['reactset'][$question_tid][$delta]
     foreach ($question_terms as $question_tid => $question_term) {
       $form['reactset'][$question_tid] = $this->_getEvaluationQuestionElement($question_term, $meeting_node);
     }
