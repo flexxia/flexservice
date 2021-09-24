@@ -11,6 +11,9 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 use Drupal\flexform\Content\FlexformContentGenerator;
 
 /**
@@ -81,6 +84,29 @@ class FlexformController extends ControllerBase {
           'flexform/entity_view',
         ),
       ),
+    );
+
+    return $build;
+  }
+
+  /**
+   *
+   */
+  public function summaryEvaluationAddForm($meeting_nid) {
+    $form = \Drupal::formBuilder()->getForm('Drupal\flexform\Form\FlexSummaryEvaluationForm', $meeting_nid);
+
+
+    //
+    // return new JsonResponse($form);
+
+    //
+    // $jsonData = json_encode($form, JSON_PRETTY_PRINT);
+
+    // or render
+    $build = array(
+      '#type' => 'markup',
+      '#markup' => render($form),
+      // '#markup' => str_replace("\n", "<br>", $jsonData),
     );
 
     return $build;

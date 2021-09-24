@@ -16,7 +16,7 @@ ngpage.ngpage_question_evalforms:
   requirements:
     _permission: 'access content'
 
-#
+# @deprecated.
 ngpage.summaryevaluation.form:
   path: '/ngpage/summaryevaluation/basicform/{entity_id}'
   defaults:

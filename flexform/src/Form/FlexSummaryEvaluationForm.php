@@ -1,18 +1,18 @@
 <?php
 /**
  * @file
- * Contains \Drupal\ngpage\Form\NgpageSummaryEvaluationForm.php.
+ * Contains \Drupal\flexform\Form\FlexformSummaryEvaluationForm.php.
  */
 
-namespace Drupal\ngpage\Form;
+namespace Drupal\flexform\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * @deprecated.
+ *
  */
-class NgpageSummaryEvaluationForm extends FormBase {
+class FlexSummaryEvaluationForm extends FormBase {
 
   /**
    * {@inheritdoc}.
@@ -269,7 +269,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
    * {@inheritdoc}
    */
   public function _entityCreateForm($form_state = NULL, $reactset = NULL) {
-    $field_array = $this->_generateSummaryEvaluationFieldsValue($form_state, $reactset);
+    $field_array = $this->_generateEvaluationFieldsValue($form_state, $reactset);
     \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
 
     return;
@@ -278,7 +278,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
   /**
    *
    */
-  public function _generateSummaryEvaluationFieldsValue($form_state = NULL, $reactset = NULL) {
+  public function _generateEvaluationFieldsValue($form_state = NULL, $reactset = NULL) {
     $entity_bundle = 'evaluation';
 
     $output = array(

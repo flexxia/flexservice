@@ -144,7 +144,7 @@ class NgpageController extends ControllerBase {
   }
 
   /**
-   *
+   * @deprecated.
    */
   public function summaryEvaluationForm($entity_id) {
     $form = \Drupal::formBuilder()->getForm('Drupal\ngpage\Form\NgpageSummaryEvaluationForm', $entity_id);
