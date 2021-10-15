@@ -5,15 +5,8 @@ namespace Drupal\flexform\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
-use Drupal\Component\Utility\Html;
-use Drupal\Core\Render\Element;
-use Drupal\Core\Url;
-use Drupal\taxonomy\Entity\Term;
-
-use Drupal\dashpage\Content\DashpageObjectContent;
-
 /**
- * Class FlexEvaluationForm.
+ * Flex Evaluation Form.
  */
 class FlexEvaluationForm extends FormBase {
 
@@ -41,9 +34,8 @@ class FlexEvaluationForm extends FormBase {
     return $form;
   }
 
-
   /**
-   * {@inheritdoc}
+   * Empty form.
    */
   public function generateEmptyValueForm(array $form, FormStateInterface $form_state) {
     $form['form_info'] = [
@@ -55,63 +47,33 @@ class FlexEvaluationForm extends FormBase {
   }
 
   /**
-   *
+   * Evaluation Form.
    */
   public function generateEvaluationForm(array $form, FormStateInterface $form_state, $meeting_node = NULL) {
-    $evaluation_form_entity = \Drupal::service('flexinfo.field.service')
-      ->getFieldFirstTargetIdTermEntity($meeting_node, 'field_meeting_evaluationform');
+    $question_terms = \Drupal::service('flexform.service.basic.info')
+      ->getQuestionTermsFromMeetingNode($meeting_node);
 
-    $question_terms = \Drupal::service('flexinfo.field.service')
-      ->getFieldAllTargetIdsEntitys($evaluation_form_entity, 'field_evaluationform_questionset');
+    $form['form_item_meeting_info'] = \Drupal::service('flexform.service.basic.info')
+      ->getElementMeetingInfo($meeting_node);
 
-    //
-    $DashpageObjectContent = new DashpageObjectContent();
-    $meeting_tile_html = $DashpageObjectContent->blockTileMeetingHtml($meeting_node, $meeting_share_link = FALSE, $meeting_snapshot_link = FALSE);
+    $form['form_item_evaluation_form_info'] = \Drupal::service('flexform.service.basic.info')
+      ->getElementEvaluationFormInfo($meeting_node);
 
-    $form['form_meeting_info'] = [
-      '#type' => 'item',
-      '#title' => $meeting_tile_html,
-    ];
-    $form['form_evaluation_form_info'] = [
-      '#type' => 'item',
-      '#title' => $evaluation_form_entity->getName(),
-    ];
+    $form['title'] = \Drupal::service('flexform.service.basic.info')
+      ->getElementTitle($meeting_node);
 
-    $form['title'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Evaluation Title'),
-      '#maxlength' => 255,
-      '#size' => 64,
-      '#default_value' => 'Evaluation for meeting ' . $meeting_node->id(),
-      '#required' => TRUE,
-    ];
-
-    $form['meeting_nid'] = [
-      '#title' => $this->t('Meeting Nid'),
-      '#type' => 'entity_autocomplete',
-      '#target_type' => 'node',
-      '#disabled' => TRUE,
-      '#default_value' => $meeting_node,
-      '#selection_handler' => 'default',
-      '#selection_settings' => [
-        'target_bundles' => ['meeting'],
-      ],
-      '#autocreate' => [
-        'bundle' => 'meeting',
-        'uid' => 1,
-      ],
-    ];
+    $form['meeting_nid'] = \Drupal::service('flexform.service.basic.info')
+      ->getElementMeetingNid($meeting_node);
 
     // When this is set to false, the submit method gets no results through getValues().
     $form['#tree'] = TRUE;
 
-    //
     $form['reactset'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Questions Group'),
     ];
 
-    // $form['reactset'][$question_tid][$delta]
+    // Like $form['reactset'][$question_tid][$delta].
     foreach ($question_terms as $question_tid => $question_term) {
       $form['reactset'][$question_tid] = $this->_getEvaluationQuestionElement($question_term, $meeting_node);
     }
@@ -171,27 +133,31 @@ class FlexEvaluationForm extends FormBase {
    * {@inheritdoc}
    */
   public function _createEvaluationNode($form, $form_state = NULL) {
-    $reactset = $this->_convertQuestionReactsetValue($form, $form_state);
+    $reactset = $this->_convertQuestionValueToReactsetFormat($form, $form_state);
     $field_array = $this->_generateEvaluationFieldsValue($form_state, $reactset);
     \Drupal::service('flexinfo.node.service')->entityCreateNode($field_array);
   }
 
   /**
-   *
+   * $answer_row format.
+   $answer_row = [
+     'question_tid' => $question_tid,
+     'question_answer' => $subrow,
+     'refer_uid' => NULL,
+     'refer_tid' => NULL,
+     'refer_other' => NULL,
+   ];
    */
-  public function _convertQuestionReactsetValue($form, $form_state = NULL) {
+  public function _convertQuestionValueToReactsetFormat($form, $form_state = NULL) {
     $output = [];
 
     $reactset_values = $form_state->getValue('reactset');
-    // dpm($reactset_values);
-    // dpm($form_state['meeting_nid']);
-
     if ($reactset_values) {
       foreach ($reactset_values as $question_tid => $reactset_value_row) {
         foreach ($reactset_value_row as $delta => $row) {
           if ($row) {
             if (is_array($row)) {
-              foreach ($row as $subkey => $subrow) {
+              foreach ($row as $subrow) {
                 if ($subrow) {
                   $answer_row = [
                     'question_tid' => $question_tid,
@@ -248,14 +214,13 @@ class FlexEvaluationForm extends FormBase {
   }
 
   /**
-   * Number Integer question.
+   * EvaluationQuestionElement.
    */
   public function _getEvaluationQuestionElement($question_term, $meeting_node = NULL) {
     $field_type = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_fieldtype');
 
-    $question_relatedfield = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_relatedfield =\Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
 
     $speaker_users = [];
@@ -269,9 +234,9 @@ class FlexEvaluationForm extends FormBase {
         ->getFieldAllValues($question_term, 'field_queslibr_relatedtype');
     }
 
-    //
     if ($field_type == 'customtext') {
-      $output = $this->_getElementItemCustomText($question_term);
+      $output = \Drupal::service('flexform.service.basic.info')
+      ->getElementCustomText($question_term);
     }
     if ($field_type == 'radios') {
       $output = $this->_getElementNumberDropdown($question_term, $speaker_users, $meeting_relatedtypes);
@@ -282,19 +247,6 @@ class FlexEvaluationForm extends FormBase {
     elseif ($field_type == 'textfield') {
       $output = $this->_getElementTextfield($question_term, $speaker_users, $meeting_relatedtypes);
     }
-
-    return $output;
-  }
-
-  /**
-   * @option CustomText.
-   */
-  public function _getElementItemCustomText($question_term) {
-    $output = [
-      '#title' => $question_term->getName(),
-      '#title_display' => 'before',
-      '#type' => 'item',
-    ];
 
     return $output;
   }
@@ -360,7 +312,7 @@ class FlexEvaluationForm extends FormBase {
       '#type' => 'select',
       '#title' => $question_term->getName(),
       '#options' => array_combine($range, $range),
-      "#empty_option"=> $this->t('- Select -'),
+      "#empty_option" => $this->t('- Select -'),
       '#default_value' => NULL,
       '#refer_value' => [
         'refer_uid' => NULL,
@@ -408,7 +360,7 @@ class FlexEvaluationForm extends FormBase {
    * Selectkey question.
    */
   public function _getElementSelectkeyBasic($question_term, $speaker_users = [], $meeting_relatedtypes = []) {
-    $all_answer_terms =\Drupal::service('flexinfo.field.service')
+    $all_answer_terms = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIdsEntitys($question_term, 'field_queslibr_selectkeyanswer');
 
     $options = [];
@@ -422,7 +374,7 @@ class FlexEvaluationForm extends FormBase {
       '#title' => $question_term->getName(),
       '#title_display' => 'before',
       '#type' => 'checkboxes',
-      "#empty_option"=> $this->t('- Select -'),
+      "#empty_option" => $this->t('- Select -'),
       '#multiple' => TRUE,
       '#options' => $options,
       '#question_fieldtype' => "selectkey",

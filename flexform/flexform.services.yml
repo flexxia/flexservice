@@ -1,0 +1,4 @@
+services:
+
+  flexform.service.basic.info:
+    class: Drupal\flexform\Service\FlexformBasicInfo

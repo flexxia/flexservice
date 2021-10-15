@@ -15,3 +15,8 @@ node_add_evaluation_form:
   css:
     theme:
       css/node_add_evaluation_form.css: {}
+
+node_add_summary_evaluation_form:
+  css:
+    theme:
+      css/node_add_summary_evaluation_form.css: {}

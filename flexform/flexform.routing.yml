@@ -25,7 +25,7 @@ flexform.entity.view:
     _permission: 'access content'
     _role: 'authenticated'
 
-# Form
+# Render Form directly.
 flexform.node.add.evaluation.form:
   path: '/flexform/node/add/evaluation/form/{meeting_nid}'
   defaults:
@@ -34,12 +34,22 @@ flexform.node.add.evaluation.form:
   requirements:
     _permission: 'access content'
 
-# Controller
+# Render Form by Controller.
 flexform.node.add.summaryevaluation.form:
   path: '/flexform/node/add/summaryevaluation/form/{meeting_nid}'
   defaults:
     _controller: '\Drupal\flexform\Controller\FlexformController::summaryEvaluationAddForm'
     _title: 'Predefined Summary Evaluation Form'
+  requirements:
+    _permission: 'access content'
+    _role: 'authenticated'
+
+# Render Form by Controller.
+flexform.debug.demo.form:
+  path: '/flexform/debug/demo/form'
+  defaults:
+    _controller: '\Drupal\flexform\Controller\FlexformController::debugDemoForm'
+    _title: 'Predefined Debug Demo Form'
   requirements:
     _permission: 'access content'
     _role: 'authenticated'

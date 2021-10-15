@@ -1,0 +1,10 @@
+.reactset-answerset-summary-wrapper .form-item > .panel-heading {
+  margin-top: 32px;
+}
+
+.reactset-answerset-summary-wrapper .reactset-element-number-dropdown-wrapper {
+  margin-top: 32px;
+}
+.reactset-answerset-summary-wrapper .reactset-element-number-dropdown-wrapper:first-child {
+  margin-top: 6px;
+}
