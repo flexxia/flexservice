@@ -580,7 +580,8 @@ class FlexSummaryEvaluationForm extends FormBase {
             else {
               // Number field and selectkey field.
               // Fill an array with values.
-              $ref_answers += array_fill(0, intval($answer_num), $answer_key);
+              $answer_array = array_fill(0, intval($answer_num), $answer_key);
+              $ref_answers = array_merge($ref_answers, $answer_array);
             }
           }
 
