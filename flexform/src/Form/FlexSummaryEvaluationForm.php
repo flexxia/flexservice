@@ -631,7 +631,6 @@ class FlexSummaryEvaluationForm extends FormBase {
       $output[] = $one_evaluation_answers;
     }
 
-    dpm($output);
     return $output;
   }
 
