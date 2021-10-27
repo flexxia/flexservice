@@ -1280,7 +1280,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
         'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
         'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
-        'Add' => \Drupal::l('Add', Url::fromUserInput('/ngpage/evaluation/form/' . $node->id())),
+        'Add' => \Drupal::l('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id())),
         'Summary' => \Drupal::l('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id())),
       );
 
@@ -1319,7 +1319,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
         'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
         'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
-        'Add' => \Drupal::l('Add', Url::fromUserInput('/ngpage/evaluation/form/' . $node->id())),
+        'Add' => \Drupal::l('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id())),
         'Summary' => \Drupal::l('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id())),
         'Summary Eval' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_summaryevaluation'),
       );
