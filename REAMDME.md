@@ -1,6 +1,4 @@
-/**
- *
- */
+<!--  -->
 sudo composer require flexxia/flexservice
 
 ### to add on composer.json for project
@@ -21,6 +19,8 @@ sudo composer require flexxia/flexservice
 ######################
 sudo composer require --dev flexxia/flexservice:dev-master
 
+sudo php -d memory_limit=-1 /Users/Dong/Documents/app/composer/1.10.19/composer.phar
+
  --ignore-platform-reqs
 
 sudo php -d memory_limit=4096M /usr/local/bin/composer require --dev "flexxia/flexservice:dev-master"
@@ -28,16 +28,17 @@ sudo php -d memory_limit=4096M /usr/local/bin/composer require "flexxia/flexserv
 
 
 ######################
+# Remove
 sudo composer remove flexxia/flexservice
-sudo php -d memory_limit=4096M /usr/local/bin/composer remove flexxia/flexservice
 
+
+######################
+# show on packagist
 composer show flexxia/flexservice
 
 sudo composer config -g repo.packagist composer https://packagist.org
 
-/**
- *
- */
+<!--  -->
 sudo rm -r web/modules/custom/flexservice/.git
 
 sudo git rm -r --cached web/modules/custom/flexservice/*
@@ -53,18 +54,16 @@ sudo git update-index --assume-unchanged web/modules/custom/flexservice/
 sudo git update-index --no-assume-unchanged web/modules/custom/flexservice/
 
 
-/**
- * .gitignore
- */
+<!--  -->
+# .gitignore
 # Do not Ignore flexservice folder
 ######################
 !web/modules/custom/flexservice/
 !web/modules/custom/flexservice**/*
 !web/modules/custom/flexservice/*
 
-/**
- *
- */
+
+<!--  -->
 sudo git rm --cached web/modules/custom/flexrepo
 sudo rm -rf .git/modules/web/modules/custom/flexrepo
 sudo rm -rf web/modules/custom/flexrepo
