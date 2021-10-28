@@ -115,8 +115,6 @@ class GenpdfJsonGenerator extends ControllerBase {
   public function queryProgramNodes($entity_id = NULL) {
     $NgjsonObjectContent = new NgjsonObjectContent();
 
-    $program_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($entity_id);
-
     $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
     $end = \Drupal::service('flexinfo.setting.service')->userEndTime();
 
