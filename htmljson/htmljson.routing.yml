@@ -1,0 +1,8 @@
+
+htmljson.standard.page:
+  path: '/htmljson/hello/{name}'
+  defaults:
+    _controller: '\Drupal\htmljson\Controller\DefaultController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

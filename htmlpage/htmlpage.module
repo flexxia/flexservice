@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains htmlpage.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function htmlpage_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the htmlpage module.
+    case 'help.page.htmlpage':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function htmlpage_theme() {
+  return [
+    'htmlpage' => [
+      'render element' => 'children',
+    ],
+  ];
+}

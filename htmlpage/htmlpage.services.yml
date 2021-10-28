@@ -1,0 +1,28 @@
+services:
+  # Atomic
+  htmlpage.atomic:
+    class: Drupal\htmlpage\Atomic\HtmlpageAtomic
+  htmlpage.atomic.atom:
+    class: Drupal\htmlpage\Atomic\Atom\HtmlpageAtomicAtom
+    arguments: []
+  htmlpage.atomic.molecule:
+    class: Drupal\htmlpage\Atomic\Molecule\HtmlpageAtomicMolecule
+    arguments: []
+  htmlpage.atomic.organism:
+    class: Drupal\htmlpage\Atomic\Organism\HtmlpageAtomicOrganism
+    arguments: []
+  htmlpage.atomic.template:
+    class: Drupal\htmlpage\Atomic\Template\HtmlpageAtomicTemplate
+    arguments: []
+  htmlpage.atomic.template.component:
+    class: Drupal\htmlpage\Atomic\Template\HtmlpageAtomicTemplateComponent
+    arguments: []
+  htmlpage.atomic.block:
+    class: Drupal\htmlpage\Atomic\Block\HtmlpageAtomicBlock
+    arguments: []
+  htmlpage.atomic.blockgroup:
+    class: Drupal\htmlpage\Atomic\Block\HtmlpageAtomicBlockgroup
+    arguments: []
+  htmlpage.atomic.page:
+    class: Drupal\htmlpage\Atomic\Page\HtmlpageAtomicPage
+    arguments: []
