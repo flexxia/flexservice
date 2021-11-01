@@ -17,13 +17,16 @@ sudo composer require flexxia/flexservice
 
 
 ######################
-sudo composer require --dev flexxia/flexservice:dev-master
+composer require --dev flexxia/flexservice:dev-master
 
-sudo php -d memory_limit=-1 /Users/Dong/Documents/app/composer/1.10.19/composer.phar
+sudo php -d memory_limit=-1 /Users/Dong/Documents/app/composer/1.10.19/composer.phar require --dev "flexxia/flexservice:dev-master"
 
+#
  --ignore-platform-reqs
 
 sudo php -d memory_limit=4096M /usr/local/bin/composer require --dev "flexxia/flexservice:dev-master"
+
+## 指定版本
 sudo php -d memory_limit=4096M /usr/local/bin/composer require "flexxia/flexservice dev-master#0d7d6c88"
 
 
@@ -39,6 +42,7 @@ composer show flexxia/flexservice
 sudo composer config -g repo.packagist composer https://packagist.org
 
 <!--  -->
+# 删除
 sudo rm -r web/modules/custom/flexservice/.git
 
 sudo git rm -r --cached web/modules/custom/flexservice/*
@@ -64,6 +68,7 @@ sudo git update-index --no-assume-unchanged web/modules/custom/flexservice/
 
 
 <!--  -->
+# @deprecated
 sudo git rm --cached web/modules/custom/flexrepo
 sudo rm -rf .git/modules/web/modules/custom/flexrepo
 sudo rm -rf web/modules/custom/flexrepo
