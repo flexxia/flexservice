@@ -16,7 +16,7 @@ sudo composer require flexxia/flexservice
 }
 
 # drush
-vendor/drush/drush/drush
+vendor/drush/drush/drush cr
 
 ######################
 composer require --dev flexxia/flexservice:dev-master
