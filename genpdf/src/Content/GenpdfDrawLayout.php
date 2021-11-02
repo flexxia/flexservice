@@ -43,74 +43,6 @@ class GenpdfDrawLayout {
   }
 
   /**
-   * Draw meeting title with MultipleSpeakers
-   */
-  function drawTitleMultipleSpeakers($cx, $cy, $tileValue, $title, $pdf) {
-    $pdf->SetXY(128, 16);
-    $pdf->SetFont('Arial', '', 16);
-    $pdf->SetTextColor(50, 178, 228);
-
-    $ShowHtmlSnippet = new GenpdfDrawHTMLSnippet();
-    $title = $ShowHtmlSnippet->htmlTextFilter($title);
-    $pdf->Write(10, $title);
-
-    if ($tileValue) {
-      for($i = 0; $i < count($tileValue); $i++) {
-        $getTitleValue = $tileValue[$i];
-        $tile[$i] = $getTitleValue['value'] . " : " . $getTitleValue['value_one'];
-      }
-
-      $pdf->SetFont('Arial', '', 14);
-      $pdf->SetTextColor(13, 51, 77);
-
-      $cxLineElement = $cx;
-      for ($i = 0; $i < 4; $i++) {
-        $cxline[$i] = $cxLineElement;
-        $cxLineElement = $cxLineElement + 300;
-      }
-
-      $ShowHtmlSnippet = new GenpdfDrawHTMLSnippet();
-
-      // draw meeting tile without speaker
-      for ($i = 0; $i < (count($tile) - 1); $i++) {
-        $lines = floor($i / 4);
-        $number_position = $i;
-        if ($lines > 0) {
-          $number_position = $number_position - (4 * $lines);
-        }
-
-        $tile[$i] = $ShowHtmlSnippet->htmlTextFilter($tile[$i]);
-
-        $firstLineText = Unicode::truncate($tile[$i], 40, $wordsafe = TRUE, $add_ellipsis = FALSE);
-        $restText = str_replace($firstLineText, "", $tile[$i]);
-
-        $pdf->SetXY($cxline[$i % 4] + $number_position * 10, 28 * $lines + $cy);
-        $pdf->Write(10, $firstLineText);
-
-        if ($restText != '') {
-          $restText = Unicode::truncate($restText, 40, $wordsafe = TRUE, $add_ellipsis = FALSE);
-          $pdf->SetXY($cxline[$i % 4] + $number_position * 10 + 6, 28 * ($lines + 0.5) + $cy);
-          $pdf->Write(10, $restText);
-        }
-      }
-
-      // draw meeting tile for multiple speaker
-      $tile[count($tile) - 1] = $ShowHtmlSnippet->htmlTextFilter($tile[count($tile) - 1]);
-      $firstLineText = Unicode::truncate($tile[count($tile) - 1], 186, $wordsafe = TRUE, $add_ellipsis = FALSE);
-      $restText = str_replace($firstLineText, "", $tile[count($tile) - 1]);
-
-      $pdf->SetXY($cxline[0], 28 * 2 + $cy);
-      $pdf->Write(10, $firstLineText);
-
-      if ($restText != '') {
-        $restText = Unicode::truncate($restText, 192, $wordsafe = TRUE, $add_ellipsis = FALSE);
-        $pdf->SetXY($cxline[0], 28 * 3 + $cy);
-        $pdf->Write(10, $restText);
-      }
-    }
-  }
-
-  /**
    * Draw meeting title
    */
   function drawTitle($cx, $cy, $tileValue, $title, $pdf) {
@@ -122,12 +54,9 @@ class GenpdfDrawLayout {
     $title = $ShowHtmlSnippet->htmlTextFilter($title);
     $pdf->Write(10, $title);
 
-    if ($tileValue) {
-      for($i = 0; $i < count($tileValue); $i++) {
-        $getTitleValue = $tileValue[$i];
-        $tile[$i] = $getTitleValue['value'] . " : " . $getTitleValue['value_one'];
-      }
+    $section_max_length = 40;
 
+    if ($tileValue) {
       $pdf->SetFont('Arial', '', 14);
       $pdf->SetTextColor(13, 51, 77);
 
@@ -139,25 +68,30 @@ class GenpdfDrawLayout {
 
       $ShowHtmlSnippet = new GenpdfDrawHTMLSnippet();
 
-      for ($i = 0; $i < count($tile) ; $i++) {
+      for ($i = 0; $i < count($tileValue); $i++) {
+
         $lines = floor($i / 4);
         $number_position = $i;
         if ($lines > 0) {
           $number_position = $number_position - (4 * $lines);
         }
 
-        $tile[$i] = $ShowHtmlSnippet->htmlTextFilter($tile[$i]);
+        if (isset($tileValue[$i]['pdf_col_length'])) {
+          $section_max_length = $tileValue[$i]['pdf_col_length'];
+        }
 
-        $firstLineText = Unicode::truncate($tile[$i], 40, $wordsafe = TRUE, $add_ellipsis = FALSE);
-        $restText = str_replace($firstLineText, "", $tile[$i]);
+        $tile_content_raw = $tileValue[$i]['value'] . " : " . $tileValue[$i]['value_one'];
+        $tile_content = $ShowHtmlSnippet->htmlTextFilter($tile_content_raw);
+        $tile_content_first_line = Unicode::truncate($tile_content, $section_max_length, $wordsafe = TRUE, $add_ellipsis = FALSE);
+        $tile_content_second_line = str_replace($tile_content_first_line, "", $tile_content);
 
-        $pdf->SetXY($cxline[$i % 4] + $number_position * 10, 36 * $lines + $cy);
-        $pdf->Write(10, $firstLineText);
+        $pdf->SetXY($cxline[$i % 4] + $number_position * 10, 32 * $lines + $cy);
+        $pdf->Write(10, $tile_content_first_line);
 
-        if ($restText != '') {
-          $restText = Unicode::truncate($restText, 40, $wordsafe = TRUE, $add_ellipsis = FALSE);
-          $pdf->SetXY($cxline[$i % 4] + $number_position * 10, 37 * $lines + $cy * 2);
-          $pdf->Write(10, $restText);
+        if ($tile_content_second_line != '') {
+          $tile_content_second_line = Unicode::truncate($tile_content_second_line, $section_max_length, $wordsafe = TRUE, $add_ellipsis = FALSE);
+          $pdf->SetXY($cxline[$i % 4] + $number_position * 10 + 6, 32 * ($lines + 0.6) + $cy);
+          $pdf->Write(10, $tile_content_second_line);
         }
       }
     }
