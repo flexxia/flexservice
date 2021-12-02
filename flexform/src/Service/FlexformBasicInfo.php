@@ -33,12 +33,15 @@ class FlexformBasicInfo extends ControllerBase {
    *
    */
   public function getElementEvaluationFormInfo($meeting_node = NULL) {
+    $output = [];
     $evaluation_form_entity = $this->getEvaluationFormEntityFromMeetingNode($meeting_node);
 
-    $output = [
-      '#type' => 'item',
-      '#title' => $evaluation_form_entity->getName($meeting_node),
-    ];
+    if ($evaluation_form_entity) {
+      $output = [
+        '#type' => 'item',
+        '#title' => $evaluation_form_entity->getName($meeting_node),
+      ];
+    }
 
     return $output;
   }
