@@ -1136,9 +1136,11 @@ class NgdataAtomicBlock extends NgdataAtomic {
   public function getBlockChartByRadioQuestionForPieDescendOrder($question_term = NULL, $meeting_nodes = array(), $chart_type = "pie", $color_box_palette = '', $bg_color_class = 'bg-0f69af') {
     $output = $this->getBlockChartByRadioQuestionForPieTemplate();
 
-    $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(\Drupal::getContainer()
-        ->get('flexinfo.chart.service')
-        ->getChartTitleByQuestion($question_term), $color_box_palette, $bg_color_class);
+    $output['blockHeader'] = $this->molecule->getBlockMeetingHeader(
+      \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+      $color_box_palette,
+      $bg_color_class
+    );
 
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["labels"] = $this->atom->getRaidoQuestionLegend($question_term);
     $output['blockContent'][0]['tabData']['middle']['middleMiddle']["data"]["datasets"] = [[
