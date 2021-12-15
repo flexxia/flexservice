@@ -144,12 +144,11 @@ class FlexinfoTermService {
     return $output;
   }
 
-
   /**
-   * @return array of term names with key Tid.
+   * @return array of term names.
    \Drupal::service('flexinfo.term.service')->getNamesWithTidKeyByTids($tids);
    */
-  public function getNamesWithTidKeyByTids($tids = array()) {
+  public function getNamesWithTidKeyByTids($tids = []) {
     $output = array();
 
     if ($tids) {
@@ -161,6 +160,24 @@ class FlexinfoTermService {
         foreach ($terms as $term) {
           $output[$term->id()] = $term->getName();
         }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @param $tids have Duplicate.
+   * @return Duplicate Term Names array.
+   */
+  public function getDuplicateNamesByTids($tids = []) {
+    $output = [];
+
+    if ($tids && is_array($tids)) {
+      $term_names = $this->getNamesWithTidKeyByTids($tids);
+
+      foreach ($tids as $tid) {
+        $output[] = $term_names[$tid];
       }
     }
 
