@@ -1,0 +1,27 @@
+#
+# /htmlpage/samplechart/page/all/111/222
+htmlpage.default.page.controller:
+  path: '/htmlpage/{section}/page/{entity_id}/{start_timestamp}/{end_timestamp}'
+  defaults:
+    _controller: '\Drupal\htmlpage\Controller\DefaultPageController::standardPage'
+    _title: 'Htmlpage'
+  requirements:
+    _permission: 'access content'
+
+# /htmlpage/samplechart/json/all/111/222
+htmlpage.default.json.controller:
+  path: '/htmlpage/{section}/json/{entity_id}/{start_timestamp}/{end_timestamp}'
+  defaults:
+    _controller: '\Drupal\htmlpage\Controller\DefaultJsonController::standardJson'
+    _title: 'Htmlpage Json'
+  requirements:
+    _permission: 'access content'
+
+#
+htmlpage.save.png.controller:
+  path: '/htmlpage/{section}/save_png/{entity_id}/{start_timestamp}/{end_timestamp}'
+  defaults:
+    _controller: '\Drupal\htmlpage\Controller\SavePngController::standardImage'
+    _title: 'Htmlpage Save Png'
+  requirements:
+    _permission: 'access content'

@@ -26,3 +26,33 @@ services:
   htmlpage.atomic.page:
     class: Drupal\htmlpage\Atomic\Page\HtmlpageAtomicPage
     arguments: []
+
+  #
+  htmlpage.chartjsonbase.chartjstemplate:
+    class: Drupal\htmlpage\ChartJsonBase\ChartjsTemplate
+  #
+  htmlpage.chartjsonbase.d3template:
+    class: Drupal\htmlpage\ChartJsonBase\D3Template
+  #
+  htmlpage.chartjsonbase.echartstemplate:
+    class: Drupal\htmlpage\ChartJsonBase\EChartsTemplate
+
+  #
+  htmlpage.charthtmltemplate.section.bootstraptable:
+    class: Drupal\htmlpage\ChartHtmlTemplate\BootstrapTableSection
+  #
+  htmlpage.charthtmltemplate.section.chartjs:
+    class: Drupal\htmlpage\ChartHtmlTemplate\ChartjsSection
+  #
+  htmlpage.charthtmltemplate.section.d3:
+    class: Drupal\htmlpage\ChartHtmlTemplate\D3Section
+  #
+  htmlpage.charthtmltemplate.section.echarts:
+    class: Drupal\htmlpage\ChartHtmlTemplate\EChartsSection
+  #
+  htmlpage.charthtmltemplate.section.map:
+    class: Drupal\htmlpage\ChartHtmlTemplate\MapSection
+
+  #
+  htmlpage.content.object.samplepage:
+    class: Drupal\htmlpage\Content\SamplepageObject

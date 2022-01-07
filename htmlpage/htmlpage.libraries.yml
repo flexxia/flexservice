@@ -1,0 +1,122 @@
+#
+axios:
+  version: 0.24.0
+  js:
+    /libraries/node_modules/axios/dist/axios.min.js: {}
+
+#
+bootstrap-table:
+  version: 1.19.1
+  css:
+    theme:
+      /libraries/node_modules/bootstrap-table/dist/bootstrap-table.min.css: {}
+  js:
+    /libraries/node_modules/bootstrap-table/dist/bootstrap-table.min.js: {}
+
+#
+chartjs:
+  version: 3.x
+  js:
+    /libraries/node_modules/chart.js/dist/chart.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.ajax
+    - core/drupalSettings
+#
+chartjs-plugin-datalabels:
+  version: 2.0.0
+  remote: https://github.com/chartjs/chartjs-plugin-datalabels
+  license:
+    name: MIT
+  js:
+    /libraries/node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js: {}
+  dependencies:
+    - htmlpage/chartjs
+
+# d3
+d3:
+  version: 7.1.1
+  remote: https://github.com/d3/d3
+  license:
+    name: ISC License
+  js:
+    /libraries/node_modules/d3/dist/d3.min.js: {}
+
+# ECharts
+echarts:
+  version: 5.2.2
+  remote: https://github.com/apache/echarts
+  license:
+    name: Apache-2.0 License
+  js:
+    /libraries/node_modules/echarts/dist/echarts.min.js: {}
+
+# file-saver
+# 暂时不用了.
+fileSaverJs:
+  version: 2.0.4
+  remote: https://github.com/eligrey/FileSaver.js/
+  license:
+    name: MIT
+  js:
+    /libraries/node_modules/file-saver/dist/FileSaver.min.js: {}
+
+
+# JQVMap
+jqvmap:
+  version: 1.5.1
+  remote: https://github.com/10bestdesign/jqvmap
+  license:
+    name: MIT
+  js:
+    /libraries/node_modules/jqvmap/dist/jquery.vmap.js: {}
+    /libraries/node_modules/jqvmap/dist/maps/jquery.vmap.canada.js: {}
+
+######
+  # custom
+######
+
+#
+block-chartjs:
+  version: 3.x
+  css:
+    theme:
+      css/htmlpage_chartjs_block.css: {}
+  js:
+    js/block_chartjs.js: {}
+  dependencies:
+    - htmlpage/axios
+    - htmlpage/chartjs
+    - htmlpage/chartjs-plugin-datalabels
+#
+block-d3:
+  version: 3.x
+  css:
+    theme:
+      css/htmlpage_d3_block.css: {}
+  js:
+    js/block_d3.js: {}
+  dependencies:
+    - htmlpage/d3
+#
+block-echarts:
+  version: 3.x
+  js:
+    js/block_echarts.js: {}
+  dependencies:
+    - htmlpage/echarts
+
+#
+block-jqvmap:
+  version: 3.x
+  js:
+    js/block_jqvmap.js: {}
+  dependencies:
+    - htmlpage/jqvmap
+
+#
+draw-canvas:
+  version: 3.x
+  js:
+    js/draw_canvas.js: {}

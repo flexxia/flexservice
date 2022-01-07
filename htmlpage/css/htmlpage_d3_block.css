@@ -1,0 +1,13 @@
+/**
+ * 设定坐标轴的样式和位置
+ */
+.htmlpage-d3-wrapper svg .axis path,
+.htmlpage-d3-wrapper svg .axis .tick line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+.htmlpage-d3-wrapper svg text {
+  font-family: sans-serif;
+}

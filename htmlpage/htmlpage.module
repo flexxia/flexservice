@@ -30,6 +30,9 @@ function htmlpage_theme() {
   return [
     'htmlpage' => [
       'render element' => 'children',
+      'variables' => [
+        'htmlpage_content' => NULL,
+      ],
     ],
   ];
 }
