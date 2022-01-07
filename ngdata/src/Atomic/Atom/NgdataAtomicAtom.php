@@ -47,8 +47,17 @@ class NgdataAtomicAtom extends NgdataAtomic {
    *
    */
   public function getChartBottomFooterForAverageNumber($question_term = NULL, $meeting_nodes = array()) {
+    $output = $this->getChartBottomFooterForAverageNumberByTid($question_term->id(), $meeting_nodes);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getChartBottomFooterForAverageNumberByTid($question_tid = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
-    $chartAllData = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
+    $chartAllData = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_tid);
 
     $mean_number = \Drupal::service('flexinfo.calc.service')
       ->getPercentageDecimal(array_sum($chartAllData), count($chartAllData), 0);
