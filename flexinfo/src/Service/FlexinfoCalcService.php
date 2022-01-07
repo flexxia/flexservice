@@ -14,57 +14,30 @@ namespace Drupal\flexinfo\Service;
 class FlexinfoCalcService {
 
   /**
-   * @param
-    Array (
-      [0] => 7
-      [1] => 78
-      [2] => 1094
-      [3] => 3678
-      [4] => 2410
-    )
-   *
+   * @deprecated
    */
   public function arrayAverageByCount($pool_data = array(), $decimals = 2) {
     $output = 0;
-
-    $sum = 0;
-    if (is_array($pool_data) && count($pool_data) > 0) {
-      foreach ($pool_data as $key => $value) {
-        $sum += ($key + 1) * $value;
-      }
-
-      if (array_sum($pool_data) > 0) {
-        $result = $sum / array_sum($pool_data);
-        $output = number_format((float)$result, $decimals, '.', '');
-      }
-    }
-
     return $output;
   }
 
   /**
-   *
-   \Drupal::service('flexinfo.calc.service')->arrayAverageByMeetingNodes($meeting_nodes, $question_tid);
+   * @deprecated
    */
   public function arrayAverageByMeetingNodes($meeting_nodes = array(), $question_tid = NULL, $decimals = 2) {
-    $pool_data = \Drupal::service('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, $question_tid);
-    $output = $this->arrayAverageByCount($pool_data, $decimals);
-
-    return $output;
+    return [];
   }
 
   /**
+   * @deprecated
    * @return NPS/NTS-- Net Promoter Score for 1- 5
    */
   public function calcNtsScoreByMeetingNodes($meeting_nodes = array(), $plus_sign = TRUE) {
-    // How would you rate the overall quality of the Educational program
-    $pool_data_2734 = \Drupal::service('flexinfo.querynode.service')->wrapperPoolAnswerIntDataByQuestionTid($meeting_nodes, 2734);
-
-    $nps = $this->calcNTSScore($pool_data_2734);
-    return $nps;
+    return 0;
   }
 
   /**
+   * @deprecated
    * @return NPS/NTS-- Net Promoter Score for 1- 5
    * NPS formula
    *
@@ -78,35 +51,7 @@ class FlexinfoCalcService {
    \Drupal::service('flexinfo.calc.service')->calcNTSScore($pool_data);
    */
   public function calcNTSScore($pool_data = array(), $plus_sign = TRUE) {
-    foreach (range(0, 4) as $key => $value) {
-      if (!isset($pool_data[$value])) {
-        $pool_data[$value] = 0;
-      }
-    }
-
-    $promoters  =  $pool_data[4];
-    $passives   =  $pool_data[3] + $pool_data[2];
-    $detractors =  $pool_data[1] + $pool_data[0];
-
-    $total = array_sum($pool_data);
-
-    $nps = 0;
-    if ($total != 0) {
-      $nps = ($promoters - $detractors) / $total;
-    }
-
-    // format NPS score
-    if (is_numeric($nps)) {
-      $nps = round($nps, 2) * 100;
-      if ($plus_sign) {
-        if ($nps > 0) {
-          // add "+" sign before Positive integer number
-          $nps = '+' . $nps;
-        }
-      }
-    }
-
-    return $nps;
+    return 0;
   }
 
   /**
@@ -203,17 +148,10 @@ class FlexinfoCalcService {
   }
 
   /**
-   * @return pool data by percentage instead of value
+   * @deprecated
    */
   public function percentagePoolDataByAnswerInt($pool_data = array(), $decimals = 2) {
     $output = array();
-    if ($pool_data && is_array($pool_data)) {
-      $sum = array_sum($pool_data);
-      foreach ($pool_data as $key => $value) {
-        $output[$key] = $this->getPercentageDecimal($value, $sum, $decimals);
-      }
-    }
-
     return $output;
   }
 
