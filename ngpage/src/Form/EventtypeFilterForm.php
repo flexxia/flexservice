@@ -66,7 +66,7 @@ class EventtypeFilterForm extends FormBase {
     );
 
     if (\Drupal::currentUser()->id() == 1) {
-      drupal_set_message(
+      \Drupal::messenger()->addMessage(
         $this->t('Your eventtype is @number', ['@number' => implode(", ", $filter_result)])
       );
     }

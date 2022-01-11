@@ -34,7 +34,7 @@ class FlexinfoNodeService {
 
     if (\Drupal::currentUser()->id() == 1) {
       if (isset($node->get('nid')->value)) {
-        drupal_set_message('create node - nid - ' . $node->get('nid')->value);
+        \Drupal::messenger()->addMessage('create node - nid - ' . $node->get('nid')->value);
       }
     }
   }

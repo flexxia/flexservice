@@ -106,7 +106,7 @@ class ProvinceFilterForm extends FormBase {
     \Drupal::service('user.data')->set('navinfo', \Drupal::currentUser()->id(), 'default_province', $filter_result);
 
     if (\Drupal::currentUser()->id() == 1) {
-      drupal_set_message($this->t('Your province is @number', ['@number' => implode(", ", $filter_result)]));
+      \Drupal::messenger()->addMessage($this->t('Your province is @number', ['@number' => implode(", ", $filter_result)]));
     }
   }
 

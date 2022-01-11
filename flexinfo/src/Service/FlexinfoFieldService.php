@@ -921,7 +921,7 @@ class FlexinfoFieldService {
 
     $evaluation_nids = $query_container->runQueryWithGroup($query);
 
-    drupal_set_message('totally have evaluation nid - ' . count($evaluation_nids));
+    \Drupal::messenger()->addMessage('totally have evaluation nid - ' . count($evaluation_nids));
 
     $entitys = \Drupal::entityTypeManager()->getStorage($entity_type)->loadMultiple($evaluation_nids);
     foreach ($entitys as $entity) {

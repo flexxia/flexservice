@@ -60,9 +60,9 @@ function _run_send_mail() {
 
   kint($result);
   if ($result['result'] == TRUE) {
-    drupal_set_message(t('Your message has been sent.'));
+    \Drupal::messenger()->addMessage(t('Your message has been sent.'));
   }
   else {
-    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+    \Drupal::messenger()->addMessage(t('There was a problem sending your message and it was not sent.'), 'error');
   }
 }

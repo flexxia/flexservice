@@ -39,7 +39,7 @@ function _query_meeting_nodes() {
   dpm($signature_total);
   dpm($evaluation_nums);
 
-dpm($meeting_nids);
+  dpm($meeting_nids);
   if (\Drupal::currentUser()->id() == 1) {
     Timer::stop($name);
     dpm('time_two ' . Timer::read($name) . 'ms');
@@ -63,7 +63,6 @@ function _query_pool_nodes() {
   $query->condition($group);
 
   if ($referuser_uid) {
-    // drupal_set_message('referuser_uid ' . $referuser_uid . ' on lilly_pool_nid ' . $lilly_entity_nid);
     $group = $query_container->groupStandardByFieldValue($query, 'field_pool_referuser', $referuser_uid);
     $query->condition($group);
   }

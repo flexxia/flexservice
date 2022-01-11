@@ -498,10 +498,6 @@ class FlexSummaryEvaluationForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // @code
-    // $mail_val = $form_state->getValue('email');
-    // drupal_set_message($this->t('email is @email', ['@email' => $mail_val]));
-    // @endcode
     $this->createSummaryEvaluationNode($form, $form_state);
   }
 
