@@ -36,13 +36,9 @@ function _query_meeting_nodes() {
     ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_evaluationnum')
   );
 
-  dpm($signature_total);
-  dpm($evaluation_nums);
-
-  dpm($meeting_nids);
   if (\Drupal::currentUser()->id() == 1) {
     Timer::stop($name);
-    dpm('time_two ' . Timer::read($name) . 'ms');
+    // dpm('time_two ' . Timer::read($name) . 'ms');
   }
 }
 
@@ -73,6 +69,5 @@ function _query_pool_nodes() {
   }
 
   $pool_nids = $query_container->runQueryWithGroup($query);
-dpm($pool_nids);
   return $pool_nids;
 }

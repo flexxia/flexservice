@@ -23,7 +23,7 @@ function _printMeetingNidsWhenHaveTwoSpeakers() {
   foreach ($nodes as $node) {
     $speaker_uids = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIds($node, 'field_meeting_speaker');
     if (count($speaker_uids) > 1) {
-      dpm($node->id() . ' -- ' . count($speaker_uids));
+      // dpm($node->id() . ' -- ' . count($speaker_uids));
     }
   }
 
@@ -32,7 +32,6 @@ function _printMeetingNidsWhenHaveTwoSpeakers() {
 function _getValue() {
   $entity = \Drupal::entityTypeManager()->getStorage('node')->load(41659);
   $reactset = $entity->get('field_evaluation_reactset')->getValue();
-  dpm($reactset);  // something
 }
 
 function _getUidByUserName($user_name = NULL) {
@@ -40,7 +39,6 @@ function _getUidByUserName($user_name = NULL) {
 
   if ($user_name) {
     $user = user_load_by_name($user_name);
-dpm($user);
     if (count($user) > 0) {
       // dpm($user->getUsername());
       // dpm($user->getAccountName());
@@ -88,7 +86,6 @@ function _get_taxonomy_term_tree() {
       $filter_tids[] = $term->id();
     }
   }
-dpm($filter_tids);
   // delete a vocabulary terms programmatically in Drupal 8
   if (21 > 50) {
     if (is_array($filter_tids)) {
@@ -99,13 +96,10 @@ dpm($filter_tids);
 
 function _get_term_tid($tid = NULL) {
   $term  = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-  dpm($term->get('name')->value);
-  dpm($term->get('tid')->value);
 }
 
 function _state_value($key = NULL) {
   $val = \Drupal::state()->get($key);
-  dpm($key . ' is :');
   // dpm($val);
 }
 
@@ -118,14 +112,9 @@ function _service_keyvalue($key = NULL) {
   $KeyValueFactory = \Drupal::keyValue('dino_variable');
   $val = $KeyValueFactory->get('roar_3');
 
-  dpm($val);
-
   $val = $KeyValueFactory->delete('roar_3');
 
-
-
   $val = $KeyValueFactory->get('roar_3');
-  dpm($val);
 }
 
 function _storage_load_node() {
@@ -134,9 +123,9 @@ function _storage_load_node() {
 
   $methods = get_class_methods($node);
   // dpm($methods);
-  dpm($node->get('title')->value);
-  dpm($node->get('body')->value);
-  dpm($node->get('field_tags')->value);
+  // dpm($node->get('title')->value);
+  // dpm($node->get('body')->value);
+  // dpm($node->get('field_tags')->value);
 }
 
 // use entityTypeManager;
@@ -197,23 +186,23 @@ function _edit_node($nid = NULL) {
 function _get_node($nid = NULL) {
   $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
   // Entity reference
-  dpm('// tid value - ');
-  dpm($node->get('field_page_tags')->target_id);
+  // dpm('// tid value - ');
+  // dpm($node->get('field_page_tags')->target_id);
 
-  dpm('// tids getValue() 0 - ');
-  dpm($node->get('field_page_tags')->getValue()[0]['target_id']);
+  // dpm('// tids getValue() 0 - ');
+  // dpm($node->get('field_page_tags')->getValue()[0]['target_id']);
 
-  dpm('// tids getValue() - ');
-  dpm($node->get('field_page_tags')->getValue());
+  // dpm('// tids getValue() - ');
+  // dpm($node->get('field_page_tags')->getValue());
 
-  dpm('<hr />');
+  // dpm('<hr />');
 
-  // Text (plain)
-  dpm('// city value - ');
-  dpm($node->get('field_page_city')->value);
+  // // Text (plain)
+  // dpm('// city value - ');
+  // dpm($node->get('field_page_city')->value);
 
-  dpm('// city getValue() - ');
-  dpm($node->get('field_page_city')->getValue());
+  // dpm('// city getValue() - ');
+  // dpm($node->get('field_page_city')->getValue());
 }
 
 /**
@@ -245,10 +234,10 @@ function _check_cache_exist() {
     $cache = \Drupal::cache()->get($cache_id);
 
     if ($cache) {
-      dpm('Cache works - ' . $cache_id);
+      // dpm('Cache works - ' . $cache_id);
     }
     else {
-      dpm('Cache not exist - ' . $cache_id);
+      // dpm('Cache not exist - ' . $cache_id);
     }
   }
 
@@ -264,7 +253,6 @@ function _run_cache_homepage() {
 
   $DashpageCacheContent = new DashpageCacheContent();
   $cache_page_url_array = $DashpageCacheContent->getPageCacheUrlArray();
-dpm($cache_page_url_array);
   // $BatchinfoController = new BatchinfoController();
   // $BatchinfoController->runGenerateCacheHomePage();
 }

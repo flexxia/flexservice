@@ -11,7 +11,6 @@ function _run_entity_export_user() {
   $output = _get_entity_users();
 
   $json = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json);
 }
 
 function _get_entity_users() {

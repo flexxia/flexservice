@@ -15,11 +15,5 @@ class FlexinfoVocabularyService {
 
   /**
    *
-
-   $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
-
-   $vocabulary = \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary')->load($vid);
-
-   dpm($vocabulary->id());
    */
 }

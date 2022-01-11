@@ -594,8 +594,6 @@ function _export_d7_node_pool() {
 
   $allow_pool_nids = $NodeQuery->poolNidsByMeetingNids($allow_meeting_nids);
 
-  dpm(count($allow_pool_nids));
-
   $pool_nodes = node_load_multiple($allow_pool_nids);
 
   foreach ($pool_nodes as $key => $node) {
@@ -631,7 +629,7 @@ function _export_d7_node_pool() {
           $pieces = explode("-", $question_key);
 
           if ($pieces[0] == 8) {
-            dpm('not right question_tid - for this - ' . $question_key . ' on pool - ' . $node->nid);
+            // dpm('not right question_tid - for this - ' . $question_key . ' on pool - ' . $node->nid);
           }
 
           $question_tid = $pieces[0];
@@ -646,7 +644,7 @@ function _export_d7_node_pool() {
             $output[$node->nid]['field_pool_answer'][$question_key]['field_pool_questionname'] = $question_term->name;
           }
           else {
-            dpm('not found question_tid - for this - ' . $question_key . ' on pool - ' . $node->nid);
+            // dpm('not found question_tid - for this - ' . $question_key . ' on pool - ' . $node->nid);
           }
 
           // user answer
@@ -656,7 +654,7 @@ function _export_d7_node_pool() {
               $output[$node->nid]['field_pool_answer'][$question_key]['field_pool_username'] = $user->name;
             }
             else {
-              dpm('not found user_uid - ' . $user_uid . ' for this - ' . $pieces[0] . ' on pool - ' . $node->nid);
+              // dpm('not found user_uid - ' . $user_uid . ' for this - ' . $pieces[0] . ' on pool - ' . $node->nid);
             }
           }
 
@@ -666,7 +664,7 @@ function _export_d7_node_pool() {
             $output[$node->nid]['field_pool_answer'][$question_key]['field_pool_questiontype'] = $type_term->name;
           }
           else {
-            dpm('not found question type tid - for this - ' . $question_key . ' on pool - ' . $node->nid);
+            // dpm('not found question type tid - for this - ' . $question_key . ' on pool - ' . $node->nid);
           }
 
           // answer
@@ -679,8 +677,7 @@ function _export_d7_node_pool() {
                   $output[$node->nid]['field_pool_answer'][$question_key]['answer'][] = $selectkey_term->name;
                 }
                 else {
-                  // dpm($value);
-                  dpm('not found selectkey value - ' . $value . ' on pool - ' . $node->nid);
+                  // dpm('not found selectkey value - ' . $value . ' on pool - ' . $node->nid);
                 }
               }
               else {
@@ -695,8 +692,6 @@ function _export_d7_node_pool() {
   }
 
   $json_data = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json_data);
-
 }
 
 /**

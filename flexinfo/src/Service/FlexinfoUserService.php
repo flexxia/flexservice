@@ -52,7 +52,7 @@ class FlexinfoUserService {
 
       if (\Drupal::currentUser()->id() == 1) {
         if ($uid) {
-          dpm('create user - ' . $user_info['name'] . ' - uid - ' . $uid);
+          // dpm('create user - ' . $user_info['name'] . ' - uid - ' . $uid);
         }
       }
 
@@ -120,7 +120,7 @@ class FlexinfoUserService {
       }
       else {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('not found this user email  - ' . $mail . ' - getUidByMail()');
+          // dpm('not found this user email  - ' . $mail . ' - getUidByMail()');
         }
       }
     }
@@ -141,7 +141,7 @@ class FlexinfoUserService {
       }
       else {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('not found this user name - ' . $user_name . ' - getUidByUserName()');
+          // dpm('not found this user name - ' . $user_name . ' - getUidByUserName()');
         }
       }
     }

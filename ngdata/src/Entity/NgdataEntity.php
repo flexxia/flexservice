@@ -54,12 +54,6 @@ class NgdataEntity implements NgdataEntityInterface {
 
   /**
    * @ingroup getEntityFromLoadEntityId()
-    $node = \Drupal::entityTypeManager()
-     ->getStorage('node')
-     ->load(772);
-    $cc = \Drupal::service('ngdata.node.meeting')
-            ->getEntityFromLoadTid('getMeetingEvaluationformTid', $node);
-    dpm($cc->id());
    */
   public function getEntityFromLoadTid($method_name = NULL, ...$args) {
     return $this->getEntityFromLoadEntityId('taxonomy_term', $method_name, ...$args);

@@ -36,11 +36,11 @@ function _run_batch_entity_create_meeting() {
 
   // print $cheat_sheet
   foreach ($cheat_sheet as $key => $value) {
-    dpm($key . ' => ' . $value . ",");
+    // dpm($key . ' => ' . $value . ",");
   }
 
   Timer::stop($name);
-  dpm(Timer::read($name) . 'ms');
+  // dpm(Timer::read($name) . 'ms');
 }
 
 function _entity_create_meeting($row = array(), $entity_bundle, $meeting_nid) {
@@ -91,13 +91,13 @@ function _entity_create_meeting($row = array(), $entity_bundle, $meeting_nid) {
               }
             }
             else {
-              dpm('no found this field type - ' . $field->getType());
+              // dpm('no found this field type - ' . $field->getType());
             }
           }
         }
       }
       else {
-        dpm('not found field type - nid - ' . $field_name);
+        // dpm('not found field type - nid - ' . $field_name);
       }
     }
   }

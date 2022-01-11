@@ -81,7 +81,7 @@ function _entity_create_user_save($user_info = array()) {
           }
         }
         else {
-          dpm('not found field type - for this field - ' . $field_name);
+          // dpm('not found field type - for this field - ' . $field_name);
         }
 
         $user->set($field_name, $user_field_value[$field_name]);
@@ -95,7 +95,7 @@ function _entity_create_user_save($user_info = array()) {
   // return user uid
   $uid = $user->id();
   if ($uid > 0) {
-    dpm('create entity user - ' . $user_info['name'] . ' - uid - ' . $uid);
+    // dpm('create entity user - ' . $user_info['name'] . ' - uid - ' . $uid);
   }
 
 }

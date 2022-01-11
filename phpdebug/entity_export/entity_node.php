@@ -12,7 +12,6 @@ function _run_entity_export_meeting() {
   $output = _get_entity_nodes();
 
   $json = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json);
 }
 
 function _get_entity_nodes() {
@@ -22,7 +21,6 @@ function _get_entity_nodes() {
 
   $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
   $meeting_nodes = $query_container->nodesByBundle('meeting');
-  dpm(count($meeting_nodes));
   $entity_type = 'node';
 
   foreach ($meeting_nodes as $key => $entity) {

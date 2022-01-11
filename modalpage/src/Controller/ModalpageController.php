@@ -28,8 +28,6 @@ class ModalpageController extends ControllerBase {
     $ModalContentGenerator = new ModalContentGenerator();
     $content = $ModalContentGenerator->standardModalPage($section, $entity_id);
 
-    dpm($content['all']['header']);
-
     $html_text = '';
     $html_text .= '<div>';
       $html_text .= '<h5>';

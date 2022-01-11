@@ -12,7 +12,6 @@
 function _getNodeByHttpClient($nid = 1507) {
   $internal_url = base_path() . 'node/' . $nid;
   $internal_url = 'http://localhost/mildder8/node/' . $nid;
-  dpm($internal_url);
 
   $response = \Drupal::httpClient()
     ->get($internal_url . '?_format=hal_json', [
@@ -20,12 +19,10 @@ function _getNodeByHttpClient($nid = 1507) {
     ]);
 
   $json_string = (string) $response->getBody();
-  dpm($json_string);
 }
 
 function _postNodeByHttpClient($nid = 1507) {
   $internal_url = 'http://localhost/mildder8/node/' . $nid;
-  dpm($internal_url);
 
   $serialized_entity = json_encode([
     'title' => [['value' => 'Example node title UPDATED']],
@@ -70,8 +67,6 @@ function _getNidsByTermField($tids = array()) {
     ->get('flexinfo.querynode.service')
     ->nodeNidsByStandardByFieldValue('meeting', 'field_meeting_program', $program_tids, 'IN');
 
-  dpm(count($nids));
-
   // delete a vocabulary terms programmatically in Drupal 8
   if (21 > 50) {
     if (is_array($nids)) {
@@ -88,14 +83,9 @@ function _getSignatureByNode($nids = array(30)) {
   $signatures = \Drupal::getContainer()->get('flexinfo.field.service')
       ->getFieldFirstValueCollection($nodes, 'field_meeting_signature');
 
-  dpm($signatures);
-
-
   foreach ($nodes as $key => $node) {
     $signature = \Drupal::getContainer()->get('flexinfo.field.service')
       ->getFieldFirstValue($node, 'field_meeting_signature');
-
-    dpm($node->id() . ' - - ' . $signature);
   }
 
 }
@@ -107,10 +97,6 @@ function _getPoolNidsByQuestionTid($tid = 3014) {
   $nids = \Drupal::getContainer()
     ->get('flexinfo.querynode.service')
     ->nodeNidsByStandardByFieldValue('pool', 'field_pool_questiontid', $tid);
-
-  dpm(count($nids));
-  dpm($nids);
-
 }
 
 /**
@@ -127,9 +113,6 @@ function _getPoolNidsByMeetingNid($nid) {
     ->get('flexinfo.querynode.service')
     ->nidsByBundle($node_bundle = 'repair');
 
-  dpm(count($nids));
-  dpm($nids);
-
   if ($nids) {
     entity_delete_multiple($entity_type = 'node', $nids);
   }
@@ -142,9 +125,6 @@ function _getEvaluationNidsByMeetingNid($nid) {
   $nids = \Drupal::getContainer()
     ->get('flexinfo.querynode.service')
     ->nodeNidsByStandardByFieldValue('evaluation', 'field_evaluation_meetingnid', $nid);
-
-  dpm(count($nids));
-  dpm($nids);
 }
 
 
@@ -162,8 +142,6 @@ function _updateMeetingNodesFieldValue() {
   $nids = \Drupal::getContainer()
     ->get('flexinfo.querynode.service')
     ->nodeNidsByStandardByFieldValue('meeting', 'field_meeting_programclass', 2471);
-  dpm(count($nids));
-  dpm(($nids));
 
   if (210 > 50) {
     if (is_array($nids)) {

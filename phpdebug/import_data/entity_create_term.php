@@ -45,7 +45,6 @@ function _run_batch_entity_create_terms() {
   $terms_array = \Drupal::getContainer()
     ->get('flexinfo.json.service')
     ->fetchConvertJsonToArrayFromInternalPath('/modules/custom/flexrepo/phpdebug/import_data/entity_create_term_json.json');
-  // dpm(count($terms_array));
 
   if (is_array($terms_array)) {
     foreach ($terms_array as $tid => $row) {
@@ -55,7 +54,6 @@ function _run_batch_entity_create_terms() {
         continue;
       }
 
-      dpm('import term - ' . $row['name']);
       // if (in_array($tid, $allow_term_tids)) {
       if (1 < 97) {
         // _entity_create_terms($row, $vocabulary);
@@ -64,7 +62,7 @@ function _run_batch_entity_create_terms() {
   }
 
   Timer::stop($name);
-  dpm(Timer::read($name) . 'ms');
+  // dpm(Timer::read($name) . 'ms');
 }
 
 function _entity_create_terms($row = array(), $vocabulary) {
@@ -102,12 +100,12 @@ function _entity_create_terms($row = array(), $vocabulary) {
             }
           }
           else {
-            dpm('no found this field type - ' . $field->getType());
+            // dpm('no found this field type - ' . $field->getType());
           }
         }
       }
       else {
-        dpm('not found field type - for this field - ' . $field_name);
+        // dpm('not found field type - for this field - ' . $field_name);
       }
 
     }
@@ -117,6 +115,6 @@ function _entity_create_terms($row = array(), $vocabulary) {
   $term->save();
 
   if (isset($term->get('tid')->value)) {
-    dpm('create entity term - ' . $term->get('name')->value . ' - tid - ' . $term->get('tid')->value);
+    // dpm('create entity term - ' . $term->get('name')->value . ' - tid - ' . $term->get('tid')->value);
   }
 }

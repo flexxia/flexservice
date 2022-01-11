@@ -9,12 +9,11 @@
 
 function _run_batch_entity_node_repair() {
   $nodes_info = json_decode(_entity_node_json_info(), true);
-  dpm('count --'  . count($nodes_info));
   if (is_array($nodes_info)) {
     foreach ($nodes_info as $key => $node_info) {
       if ($key > -1) {
         _entity_create_node_repair($node_info);
-        dpm('node create -- ' . $key);
+        // dpm('node create -- ' . $key);
       }
     }
   }

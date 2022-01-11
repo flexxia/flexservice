@@ -12,7 +12,6 @@ $account = reset($users);
 
 $account = \Drupal::entityTypeManager()->getStorage('user')->load(300);
 $cc = user_pass_reset_url($account);
-dpm($cc);
 
 // Mail one time login URL and instructions using current language.
 $mail = _user_mail_notify('password_reset', $account);

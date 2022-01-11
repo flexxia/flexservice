@@ -71,7 +71,6 @@ function _taxonomyGetTreeTidNames($vid = NULL) {
 
 
   $json_data = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json_data);
 
   // $file_name = '/Applications/AMPPS/www/bidash/modules/custom/phpdebug/import_data/entity_create_term_json.json';
 
@@ -124,7 +123,6 @@ function _getEvaluationFormTreeTidNames() {
   }
 
   $json_data = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json_data);
 }
 
 /**

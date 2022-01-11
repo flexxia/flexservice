@@ -68,13 +68,13 @@ class FlexinfoTermService {
                     }
                   }
                   else {
-                    dpm('no found this field type - ' . $field->getType());
+                    // dpm('no found this field type - ' . $field->getType());
                   }
                 }
               }
             }
             else {
-              dpm('not found field type - for this field - ' . $field_row['field_name']);
+              // dpm('not found field type - for this field - ' . $field_row['field_name']);
             }
           }
         }
@@ -86,7 +86,7 @@ class FlexinfoTermService {
           $tid = $term->get('tid')->value;
 
           if (\Drupal::currentUser()->id() == 1) {
-            dpm('create term -' . $term->get('name')->value . ' - tid - ' . $term->get('tid')->value);
+            // dpm('create term -' . $term->get('name')->value . ' - tid - ' . $term->get('tid')->value);
           }
         }
       }
@@ -268,13 +268,13 @@ class FlexinfoTermService {
 
       if (count($terms) > 1) {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('found this term_name - ' . $term_name . ' in vocabulary more than one - ' . implode(" ", array_keys($terms)) . ' $vocabulary is - ' . $vocabulary);
+          // dpm('found this term_name - ' . $term_name . ' in vocabulary more than one - ' . implode(" ", array_keys($terms)) . ' $vocabulary is - ' . $vocabulary);
         }
       }
     }
     else {
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('no found this term_name - ' . $term_name . ' - in vocabulary - ' . $vocabulary . ' on getTidByTermName()');
+        // dpm('no found this term_name - ' . $term_name . ' - in vocabulary - ' . $vocabulary . ' on getTidByTermName()');
       }
     }
 
@@ -463,7 +463,7 @@ class FlexinfoTermService {
 
     if (empty($output)) {
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('not found this city term_name - ' . $term_name . ' in vocabulary is - ' . $vocabulary . ' at getTidByCityNameAndProvinceTid()');
+        // dpm('not found this city term_name - ' . $term_name . ' in vocabulary is - ' . $vocabulary . ' at getTidByCityNameAndProvinceTid()');
       }
     }
 
@@ -531,7 +531,7 @@ class FlexinfoTermService {
     }
     else {
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('not found this question_name - ' . $term_name . ' in vocabulary is - ' . $vocabulary . ' at getTidByQuestionNameAndFieldTypeName()');
+        // dpm('not found this question_name - ' . $term_name . ' in vocabulary is - ' . $vocabulary . ' at getTidByQuestionNameAndFieldTypeName()');
       }
     }
 

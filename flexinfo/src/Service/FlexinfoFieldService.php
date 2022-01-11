@@ -25,7 +25,7 @@ class FlexinfoFieldService {
     else {
       $boolean = FALSE;
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('no found this field name for this entity bundle - ' . $bundle . ' for this field - ' . $field_name);
+        // dpm('no found this field name for this entity bundle - ' . $bundle . ' for this field - ' . $field_name);
       }
     }
 
@@ -47,7 +47,7 @@ class FlexinfoFieldService {
     }
     else {
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('no found this field name for this entity - ' . $field_name . ' - for - ' . $entity_id);
+        // dpm('no found this field name for this entity - ' . $field_name . ' - for - ' . $entity_id);
       }
     }
 
@@ -89,13 +89,13 @@ class FlexinfoFieldService {
       }
       else {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('no found this field type - ' . $field->getType());
+          // dpm('no found this field type - ' . $field->getType());
         }
       }
     }
     else {
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('not found field type - for this field - ' . $field_name);
+        // dpm('not found field type - for this field - ' . $field_name);
       }
     }
 
@@ -759,12 +759,12 @@ class FlexinfoFieldService {
 
       if ($result = SAVED_UPDATED) {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('successful update  - ' . $entity->id() . ' - updateFieldValue()');
+          // dpm('successful update  - ' . $entity->id() . ' - updateFieldValue()');
         }
       }
       else {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('fail to update  - ' . $entity->id() . ' - updateFieldValue()');
+          // dpm('fail to update  - ' . $entity->id() . ' - updateFieldValue()');
         }
       }
     }
@@ -795,12 +795,12 @@ class FlexinfoFieldService {
 
       if ($result = SAVED_UPDATED) {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('successful update  - ' . $entity->id() . ' - updateFieldValue()');
+          // dpm('successful update  - ' . $entity->id() . ' - updateFieldValue()');
         }
       }
       else {
         if (\Drupal::currentUser()->id() == 1) {
-          dpm('fail to update  - ' . $entity->id() . ' - updateFieldValue()');
+          // dpm('fail to update  - ' . $entity->id() . ' - updateFieldValue()');
         }
       }
     }
@@ -941,7 +941,7 @@ class FlexinfoFieldService {
               $reasctset_values[$column_key]['question_answer'] = $new_question_answer;
               \Drupal::service('flexinfo.field.service')->updateFieldValue($entity_type, $entity, $field_name, $reasctset_values);
 
-              dpm('Update evaluation to new answer - ' . $entity->id());
+              // dpm('Update evaluation to new answer - ' . $entity->id());
             }
           }
         }

@@ -19,10 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 function _run_entity_export_terms($vid = 'BusinessUnit') {
   $output = _get_entity_terms($vid);
 
-  // dpm(count(debug_backtrace());
-
   $json = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json);
 }
 
 function _get_entity_terms($vid = 'BusinessUnit') {

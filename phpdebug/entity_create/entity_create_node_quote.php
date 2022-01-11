@@ -10,12 +10,11 @@
 
 function _run_batch_entity_node_quote() {
   $nodes_info = json_decode(_entity_node_json_info(), true);
-  dpm('count --'  . count($nodes_info));
   if (is_array($nodes_info)) {
     foreach ($nodes_info as $key => $node_info) {
       if ($key > -1) {
         _entity_create_node_quote($node_info);
-        dpm('node create -- ' . $key);
+        // dpm('node create -- ' . $key);
       }
     }
   }
@@ -24,7 +23,6 @@ function _run_batch_entity_node_quote() {
 function _entity_create_node_quote($node_info) {
   $bundle_type = 'quote';
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-dpm(_timestamp_convert($node_info['field_quote_create_date']));
   $node = \Drupal\node\Entity\Node::create(array(
     'type' => $bundle_type,
     'title' => 'D7-' . 'Quote-' . $node_info['field_quote_client_name'] . '-' . _timestamp_convert($node_info['field_quote_create_date']),

@@ -57,7 +57,6 @@ function _load_user_print_info() {
   }
 
   $json_data = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json_data);
 }
 
 /**

@@ -83,8 +83,6 @@ function _export_d7_node_meeting() {
   }
 
   $json_data = json_encode($output, JSON_UNESCAPED_UNICODE);
-  dpm($json_data);
-
 }
 
 /**

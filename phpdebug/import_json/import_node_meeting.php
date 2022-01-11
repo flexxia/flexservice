@@ -27,9 +27,6 @@ function _run_create_meeting_from_json() {
     );
 
   $json_string = (string) $response->getBody();
-
-  dpm($json_string);
-
 }
 
 function _run_create_meeting_from_json2() {
@@ -37,7 +34,6 @@ function _run_create_meeting_from_json2() {
 
   $request = $client->request('GET', 'http://www.google.com');
 
-  dpm($request);
   // $request->getEmitter()->on('before', public function (GuzzleHttp\Event\BeforeEvent $e) {
   //     echo $e->getRequest()->getUrl() . PHP_EOL;
   // });

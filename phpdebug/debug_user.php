@@ -14,10 +14,6 @@ function _loadUser($target_id = NULL) {
 
   $user = \Drupal::entityTypeManager()->getStorage('user')->load($target_id);
 
-  ksm($user);
-
-  dpm($user->getLastLoginTime());
-  dpm(\Drupal::service('date.formatter')->format($user->getLastLoginTime(), 'html_datetime'));
 }
 
 
@@ -49,7 +45,6 @@ function _runUpdateUserValue() {
 
   $num = 1;
   foreach ($users as $key => $user) {
-    dpm($user->id());
     // Update email Id
     // $user->setEmail($content['email']);
 

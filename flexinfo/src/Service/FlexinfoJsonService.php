@@ -81,7 +81,7 @@ class FlexinfoJsonService {
       // throw the Exception or exit // or whatever :)
       exit($error);
       if (\Drupal::currentUser()->id() == 1) {
-        dpm('jsonValidate found some error - ' . $error);
+        // dpm('jsonValidate found some error - ' . $error);
       }
     }
   }
