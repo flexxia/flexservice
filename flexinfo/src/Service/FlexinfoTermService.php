@@ -6,6 +6,7 @@
  */
 namespace Drupal\flexinfo\Service;
 
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\taxonomy\Entity\Term;
 
@@ -401,7 +402,7 @@ class FlexinfoTermService {
 
     if ($vid) {
       $url = Url::fromUserInput('/admin/structure/taxonomy/manage/' . $vid . '/add');
-      $link = \Drupal::l(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url);
     }
 
     return $link;
@@ -415,7 +416,7 @@ class FlexinfoTermService {
 
     if ($tid) {
       $url = Url::fromUserInput('/taxonomy/term/' . $tid . '/edit');
-      $link = \Drupal::l(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url);
     }
 
     return $link;
@@ -429,7 +430,7 @@ class FlexinfoTermService {
 
     if ($tid) {
       $url = Url::fromUserInput('/taxonomy/term/' . $tid);
-      $link = \Drupal::l(t($view_text), $url);
+      $link = Link::fromTextAndUrl(t($view_text), $url);
     }
 
     return $link;

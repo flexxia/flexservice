@@ -8,6 +8,7 @@
 namespace Drupal\flexpage\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -65,7 +66,7 @@ class FlexpageHttpPageController extends ControllerBase {
 
       $markup .= '<div class="margin-0">';
         $markup .= '<span class="h6">';
-          $markup .=  \Drupal::l(t('Login'), Url::fromUserInput($uri));
+          $markup .=  Link::fromTextAndUrl(t('Login'), Url::fromUserInput($uri));
         $markup .= '</span>';
       $markup .= '</div>';
     }
@@ -94,7 +95,7 @@ class FlexpageHttpPageController extends ControllerBase {
 
         if (\Drupal::currentUser()->isAnonymous()) {
           $markup .= '<div class="">';
-            $markup .=  \Drupal::l(t('Login'), Url::fromUserInput($uri));
+            $markup .=  Link::fromTextAndUrl(t('Login'), Url::fromUserInput($uri));
           $markup .= '</div>';
         }
 

@@ -7,6 +7,7 @@
 namespace Drupal\flexinfo\Service;
 
 use Drupal\Component\Datetime;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 /**
@@ -86,7 +87,7 @@ class FlexinfoNodeService {
 
     if ($nid) {
       $url = Url::fromUserInput('/node/' . $nid . '/edit');
-      $link = \Drupal::l(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url);
     }
 
     return $link;
@@ -100,7 +101,7 @@ class FlexinfoNodeService {
 
     if ($nid) {
       $url = Url::fromUserInput('/node/' . $nid);
-      $link = \Drupal::l(t($view_text), $url);
+      $link = Link::fromTextAndUrl(t($view_text), $url);
     }
 
     return $link;

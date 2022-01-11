@@ -3,6 +3,7 @@
 namespace Drupal\ngdata\Entity\Node;
 
 use Drupal\ngdata\Entity\NgdataEntity;
+use Drupal\Core\Link;
 
 
 /**
@@ -67,7 +68,7 @@ class NgdataNode extends NgdataEntity implements NgdataNodeInterface {
 
     if ($nid) {
       $url = Url::fromUserInput('/node/' . $nid . '/edit');
-      $link = \Drupal::l(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url);
     }
 
     return $link;
@@ -81,7 +82,7 @@ class NgdataNode extends NgdataEntity implements NgdataNodeInterface {
 
     if ($nid) {
       $url = Url::fromUserInput('/node/' . $nid);
-      $link = \Drupal::l(t($view_text), $url);
+      $link = Link::fromTextAndUrl(t($view_text), $url);
     }
 
     return $link;

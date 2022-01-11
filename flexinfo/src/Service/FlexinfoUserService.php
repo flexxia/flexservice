@@ -6,6 +6,7 @@
  */
 namespace Drupal\flexinfo\Service;
 
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 /**
@@ -232,7 +233,7 @@ class FlexinfoUserService {
    */
   public function getUserAddLink($link_text = 'Add') {
     $url = Url::fromUserInput('/admin/people/create');
-    $link = \Drupal::l(t($link_text), $url);
+    $link = Link::fromTextAndUrl(t($link_text), $url);
 
     return $link;
   }
@@ -245,7 +246,7 @@ class FlexinfoUserService {
 
     if ($uid) {
       $url = Url::fromUserInput('/user/' . $uid . '/edit');
-      $link = \Drupal::l(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url);
     }
 
     return $link;
@@ -256,7 +257,7 @@ class FlexinfoUserService {
    */
   public function getUserAddLinkByFlexform($link_text = 'Add') {
     $url = Url::fromUserInput('/flexform/entityadd/user/user');
-    $link = \Drupal::l(t($link_text), $url);
+    $link = Link::fromTextAndUrl(t($link_text), $url);
 
     return $link;
   }
@@ -269,7 +270,7 @@ class FlexinfoUserService {
 
     if ($uid) {
       $url = Url::fromUserInput('/user/' . $uid . '/Edit');
-      $link = \Drupal::l(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url);
     }
 
     return $link;

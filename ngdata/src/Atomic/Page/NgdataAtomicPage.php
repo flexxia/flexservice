@@ -2,6 +2,7 @@
 
 namespace Drupal\ngdata\Atomic\Page;
 
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 use Drupal\ngdata\Atomic\NgdataAtomic;
@@ -184,7 +185,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customNodeMeetingPageContent($meeting_nodes, $entity_id, $start, $end, $table_data_template_name = 'tableDataByCustomNodeByMeeting') {
     $output = [];
 
-    $create_new_meeting_link = \Drupal::l(
+    $create_new_meeting_link = Link::fromTextAndUrl(
       'Add New Meeting',
       Url::fromUserInput('/node/add/meeting')
     );
@@ -205,7 +206,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermProgramPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New Program',
       Url::fromUserInput('/admin/structure/taxonomy/manage/program/add')
     );
@@ -226,7 +227,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermQuestionPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New Question',
       Url::fromUserInput('/admin/structure/taxonomy/manage/questionlibrary/add')
     );
@@ -247,7 +248,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermEvaluationFormPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New Evaluation Form',
       Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
     );
@@ -268,7 +269,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermBusinessunitPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New Business Unit',
       Url::fromUserInput('/admin/structure/taxonomy/manage/businessunit/add')
     );
@@ -289,7 +290,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermTherapeuticareaPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New Therapeutic Area',
       Url::fromUserInput('/admin/structure/taxonomy/manage/therapeuticarea/add')
     );
@@ -310,7 +311,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermQuestionEvaluationFormPageContent($entity_id, $start, $end) {
     $output = [];
 
-    // $create_new_term_link = \Drupal::l(
+    // $create_new_term_link = Link::fromTextAndUrl(
     //   'Add New Question / Evaluation',
     //   Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
     // );
@@ -331,7 +332,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function customTermQuestionEvaluationFormPageContentShowSeparatPages($entity_id, $start, $end) {
     $output = [];
 
-    // $create_new_term_link = \Drupal::l(
+    // $create_new_term_link = Link::fromTextAndUrl(
     //   'Add New Question / Evaluation',
     //   Url::fromUserInput('/admin/structure/taxonomy/manage/evaluationform/add')
     // );
@@ -361,7 +362,7 @@ class NgdataAtomicPage extends NgdataAtomic {
       $headerText = $entity_id;
     }
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New ' . ucfirst($headerText),
       Url::fromUserInput('/admin/structure/taxonomy/manage/' . $entity_id . '/add')
     );
@@ -382,7 +383,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function standarduserPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $create_new_term_link = \Drupal::l(
+    $create_new_term_link = Link::fromTextAndUrl(
       'Add New User',
       Url::fromUserInput('/admin/people/create')
     );
