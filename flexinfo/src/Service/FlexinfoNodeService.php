@@ -140,7 +140,7 @@ class FlexinfoNodeService {
 
             if (is_array($evaluation_nids)) {
 
-              $evaluation_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($evaluation_nids);
+              $evaluation_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($evaluation_nids);
               $refer_field_array = NULL;
               $refer_field = NULL;
               $refer_value = NULL;

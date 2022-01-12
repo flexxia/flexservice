@@ -67,7 +67,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
     $nids = $this->nidsByBundle($node_bundle);
 
     if ($nids) {
-      $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+      $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
     }
 
     return $nodes;
@@ -233,7 +233,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
    */
   public function nodesByStandardByFieldValue($node_bundle, $field_name, $field_value, $operator = NULL, $langcode = NULL) {
     $nids = $this->nodeNidsByStandardByFieldValue($node_bundle, $field_name, $field_value, $operator);
-    $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
 
     return $nodes;
   }
@@ -302,7 +302,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
     $query->condition($group);
 
     $filter_meeting_nids = $this->runQueryWithGroup($query);
-    $filter_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($filter_meeting_nids);
+    $filter_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($filter_meeting_nids);
 
     return $filter_nodes;
   }
@@ -376,7 +376,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
       $pool_nids = $query_container->runQueryWithGroup($query);
 
-      $pool_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($pool_nids);
+      $pool_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($pool_nids);
 
       $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, 'field_pool_answerint');
     }
@@ -399,7 +399,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
     $pool_nids = $query_container->runQueryWithGroup($query);
 
-    $pool_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($pool_nids);
+    $pool_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($pool_nids);
 
     $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, 'field_pool_answerint');
     return $pool_answer_data;
@@ -641,7 +641,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
 
     $pool_nids = $this->runQueryWithGroup($query);
-    // $pool_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($pool_nids);
+    // $pool_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($pool_nids);
 
     return $pool_nids;
   }

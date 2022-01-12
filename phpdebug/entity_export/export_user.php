@@ -20,7 +20,9 @@ function _get_entity_users() {
   $query = \Drupal::entityQuery('user');
   $uids = $query->execute();
 
-  $users = \Drupal::entityManager()->getStorage('user')->loadMultiple($uids);
+  $users = \Drupal::entityTypeManager()
+    ->getStorage('user')
+    ->loadMultiple($uids);
   if (is_array($users)) {
     foreach ($users as $user) {
       $value = [

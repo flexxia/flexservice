@@ -18,7 +18,7 @@ class FlexformContentGenerator {
    */
   public function entityAdd($entity_type, $entity_bundle) {
     if ($entity_type == 'node') {
-      $entity = \Drupal::entityManager()
+      $entity = \Drupal::entityTypeManager()
         ->getStorage('node')
         ->create(
           array('type' => $entity_bundle)    // node_type like "article"
@@ -29,14 +29,14 @@ class FlexformContentGenerator {
       $entity->set('title', "Entity Form Add " . $entity_bundle);
     }
     else if ($entity_type == 'taxonomy_term') {
-      $entity = \Drupal::entityManager()
+      $entity = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term')
         ->create(
           array('vid' => $entity_bundle)
         );
     }
     else if ($entity_type == 'user') {
-      $entity = \Drupal::entityManager()
+      $entity = \Drupal::entityTypeManager()
         ->getStorage('user')
         ->create();
     }
@@ -55,7 +55,7 @@ class FlexformContentGenerator {
     $entity = NULL;
 
     if ($entity_type == 'node' || $entity_type == 'taxonomy_term' || $entity_type == 'user') {
-      $entity = \Drupal::entityManager()->getStorage($entity_type)->load($entity_id);
+      $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id);
     }
 
     $entity_form = \Drupal::entityTypeManager()

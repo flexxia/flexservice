@@ -101,7 +101,9 @@ class FlexinfoTermService {
    */
   public function getFullTermsFromVidName($vid = NULL) {
     $tids = $this->getTidsFromVidName($vid);
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($tids);
+    $terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadMultiple($tids);
 
     return $terms;
   }
@@ -114,7 +116,9 @@ class FlexinfoTermService {
     $output = NULL;
 
     if ($tid) {
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+      $term = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->load($tid);
       if ($term) {
         $output = $term->get('name')->value;
       }
@@ -205,7 +209,9 @@ class FlexinfoTermService {
    \Drupal::service('flexinfo.term.service')->getTidsFromVidName($vid);
    */
   public function getNamesFromVidName($vid = NULL) {
-    $trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0);
+    $trees = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree($vid, 0);
     $tids = $this->getTidsFromTermTree($trees);
 
     return $tids;
@@ -220,7 +226,9 @@ class FlexinfoTermService {
 
     $tid = $this->getTidByTermName($term_name, $vocabulary);
     if ($tid) {
-      $output = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+      $output = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->load($tid);
     }
     return $output;
   }
@@ -248,7 +256,9 @@ class FlexinfoTermService {
     $terms = array();
 
     if (is_array($tids)) {
-      $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($tids);
+      $terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadMultiple($tids);
     }
 
     return $terms;
@@ -298,7 +308,9 @@ class FlexinfoTermService {
     if (!empty($vid)) {
       $properties['vid'] = $vid;
     }
-    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    $terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties($properties);
     $term = reset($terms);
 
     return !empty($term) ? $term->id() : 0;
@@ -340,7 +352,9 @@ class FlexinfoTermService {
    \Drupal::service('flexinfo.term.service')->getTidsFromVidName($vid);
    */
   public function getTidsFromVidName($vid = NULL) {
-    $trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0);
+    $trees = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree($vid, 0);
     $tids = $this->getTidsFromTermTree($trees);
 
     return $tids;

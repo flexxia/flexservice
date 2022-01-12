@@ -79,7 +79,9 @@ function _getNidsByTermField($tids = array()) {
  *
  */
 function _getSignatureByNode($nids = array(30)) {
-  $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+  $nodes = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadMultiple($nids);
   $signatures = \Drupal::getContainer()->get('flexinfo.field.service')
       ->getFieldFirstValueCollection($nodes, 'field_meeting_signature');
 
@@ -145,7 +147,9 @@ function _updateMeetingNodesFieldValue() {
 
   if (210 > 50) {
     if (is_array($nids)) {
-      $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+      $nodes = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->loadMultiple($nids);
 
       foreach ($nodes as $node) {
         if ($node->id() < 0) {

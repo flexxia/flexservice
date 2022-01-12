@@ -18,7 +18,9 @@ function _printMeetingNidsWhenHaveTwoSpeakers() {
   $query = $query_container->queryNidsByBundle('meeting');
   $meeting_nids = $query_container->runQueryWithGroup($query);
 
-  $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($meeting_nids);
+  $nodes = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadMultiple($meeting_nids);
 
   foreach ($nodes as $node) {
     $speaker_uids = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIds($node, 'field_meeting_speaker');
@@ -30,7 +32,9 @@ function _printMeetingNidsWhenHaveTwoSpeakers() {
 }
 
 function _getValue() {
-  $entity = \Drupal::entityTypeManager()->getStorage('node')->load(41659);
+  $entity = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->load(41659);
   $reactset = $entity->get('field_evaluation_reactset')->getValue();
 }
 
@@ -77,7 +81,9 @@ function _get_json_file() {
 function _get_taxonomy_term_tree() {
   $tids =  \Drupal::getContainer()->get('flexinfo.term.service')->getTidsFromVidName('therapeuticarea');
 
-  $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadMultiple($tids);
+  $terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadMultiple($tids);
 
   foreach ($terms as $key => $term) {
     // $bu_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($term, 'field_program_theraparea');
@@ -95,7 +101,9 @@ function _get_taxonomy_term_tree() {
 }
 
 function _get_term_tid($tid = NULL) {
-  $term  = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+  $term  = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->load($tid);
 }
 
 function _state_value($key = NULL) {
@@ -119,7 +127,9 @@ function _service_keyvalue($key = NULL) {
 
 function _storage_load_node() {
   $nid = 5;
-  $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+  $node  = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->load($nid);
 
   $methods = get_class_methods($node);
   // dpm($methods);
@@ -148,9 +158,13 @@ function _create_node() {
   );
 
   // create node object
-  $node = \Drupal::entityTypeManager()->getStorage('node')->create($field_array);
+  $node = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->create($field_array);
 
-  \Drupal::entityTypeManager()->getStorage('node')->save($node);
+  \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->save($node);
 }
 
 // use \Drupal\node\Entity\Node;
@@ -169,7 +183,9 @@ function _create_node2() {
 }
 
 function _edit_node($nid = NULL) {
-  $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+  $node  = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->load($nid);
   if ($node) {
     // $node->set($field_name, $field_value);
     $node->set('title', 'new title');
@@ -184,7 +200,9 @@ function _edit_node($nid = NULL) {
   _get_node(3);
  */
 function _get_node($nid = NULL) {
-  $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+  $node  = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->load($nid);
   // Entity reference
   // dpm('// tid value - ');
   // dpm($node->get('field_page_tags')->target_id);

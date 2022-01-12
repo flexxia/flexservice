@@ -682,7 +682,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function htmlBasicTableDataByTopProgram($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $program_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('program', 0);
+    $program_trees = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('program', 0);
     if (is_array($program_trees)) {
 
       // first loop get top 10 Program
@@ -769,7 +771,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTopProgram($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $program_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('program', 0);
+    $program_trees = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('program', 0);
     if (is_array($program_trees)) {
 
       // first loop get top 10 Program
@@ -861,7 +865,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTopProgramTemplate2($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
-    $program_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('program', 0);
+    $program_trees = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('program', 0);
     if (is_array($program_trees)) {
 
       // first loop get top 10 Program
@@ -1347,7 +1353,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       ->queryUidsByStatus(1);
 
     if ($uids && is_array($uids)) {
-      $users = \Drupal::entityManager()->getStorage('user')->loadMultiple($uids);
+      $users = \Drupal::entityTypeManager()
+        ->getStorage('user')
+        ->loadMultiple($uids);
       foreach ($users as $user) {
 
         if (in_array('administrator', $user->getRoles($exclude_locked_roles = True))) {

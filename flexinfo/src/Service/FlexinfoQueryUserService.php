@@ -122,7 +122,7 @@ class FlexinfoQueryUserService extends ControllerBase {
    */
   public function wrapperUsersByRoleNames($role_names = array()) {
     $uids = $this->wrapperUidsByRoles($role_names);
-    $users = \Drupal::entityManager()->getStorage('user')->loadMultiple($uids);
+    $users = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple($uids);
 
     return $users;
   }

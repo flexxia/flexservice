@@ -18,7 +18,7 @@ class NgdataUser extends NgdataEntity implements NgdataUserInterface {
 
   /**
    * Load all users
-   * $users = \Drupal::entityManager()->getStorage('user')->loadMultiple(NULL);
+   * $users = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple(NULL);
    */
 
 }
