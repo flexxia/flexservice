@@ -1,7 +1,7 @@
 name: FlexTable
 description: 'FlexTable Module'
 type: module
-core: 8.x
+core_version_requirement: ^8.8.0 || ^9
 package: Zen
 dependencies:
   - flexpage

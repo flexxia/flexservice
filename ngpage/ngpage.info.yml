@@ -1,5 +1,5 @@
 name: NgPage
 type: module
 description: 'NG angular page'
-core: 8.x
+core_version_requirement: ^8.8.0 || ^9
 package: Zen
