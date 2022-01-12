@@ -23,15 +23,12 @@ services:
   # QueryNode
   flexinfo.querynode.service:
     class: Drupal\flexinfo\Service\FlexinfoQueryNodeService
-    arguments: ['@entity.query']
   # QueryTerm
   flexinfo.queryterm.service:
     class: Drupal\flexinfo\Service\FlexinfoQueryTermService
-    arguments: ['@entity.query']
   # QueryUser
   flexinfo.queryuser.service:
     class: Drupal\flexinfo\Service\FlexinfoQueryUserService
-    arguments: ['@entity.query']
   # setting custom
   flexinfo.setting.service:
     class: Drupal\flexinfo\Service\FlexinfoSettingService

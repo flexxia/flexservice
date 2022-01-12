@@ -7,7 +7,6 @@
 namespace Drupal\flexinfo\Service;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\Query\QueryFactory;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -21,13 +20,10 @@ use Drupal\Component\Utility\Timer;
  */
 class FlexinfoQueryTermService extends ControllerBase {
 
-  protected $entity_query;
-
   /**
    * {@inheritdoc}
    */
-  public function __construct(QueryFactory $entity_query) {
-    $this->entity_query = $entity_query;
+  public function __construct() {
   }
 
   /**

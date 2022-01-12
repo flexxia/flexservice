@@ -8,7 +8,6 @@
 namespace Drupal\flexinfo\Service;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\Query\QueryFactory;
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\TypedData\Plugin\DataType\Timestamp;
@@ -26,13 +25,10 @@ use Drupal\Component\Utility\Timer;
  */
 class FlexinfoQueryNodeService extends ControllerBase {
 
-  protected $entity_query;
-
   /**
    * {@inheritdoc}
    */
-  public function __construct(QueryFactory $entity_query) {
-    $this->entity_query = $entity_query;
+  public function __construct() {
   }
 
   /**
