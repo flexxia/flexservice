@@ -71,7 +71,10 @@ class FlexformContentGenerator {
   public function entityView($entity_type, $entity_bundle, $entity_id) {
     $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id);
     $view_mode = 'full';  // or teaser
-    $entity_view = entity_view($entity, $view_mode);
+    $view_builder = \Drupal::entityTypeManager()
+      ->getViewBuilder($entity
+      ->getEntityTypeId());
+    $entity_view = $view_builder->view($entity, $view_mode);
 
     $output = '<div class="col-xs-12 col-md-8 col-md-offset-2">';
       $output .= '<div class="margin-left-12">';
