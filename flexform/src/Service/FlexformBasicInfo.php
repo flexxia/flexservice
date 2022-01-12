@@ -115,7 +115,7 @@ class FlexformBasicInfo extends ControllerBase {
    */
   public function getEvaluationFormEntityFromMeetingNode($meeting_node = NULL) {
     $output = \Drupal::service('flexinfo.field.service')
-      ->getFieldFirstTargetIdTermEntity($meeting_node, 'field_meeting_evaluationform');
+      ->getFieldFirstTargetIdToEntity($meeting_node, 'taxonomy_term', 'field_meeting_evaluationform');
 
     return $output;
   }
