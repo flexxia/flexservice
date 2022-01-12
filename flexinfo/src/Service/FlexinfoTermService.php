@@ -36,7 +36,7 @@ class FlexinfoTermService {
     $tid = NULL;
 
     if ($term_name) {
-      $vocabulary_entity = taxonomy_vocabulary_load($vocabulary);
+      $vocabulary_entity = \Drupal\taxonomy\Entity\Vocabulary::load($vocabulary);
       if ($vocabulary_entity) {
         $term_value = [
           'name' => $term_name,

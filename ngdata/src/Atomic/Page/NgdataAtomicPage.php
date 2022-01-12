@@ -353,7 +353,7 @@ class NgdataAtomicPage extends NgdataAtomic {
   public function standardtermPageContent($entity_id, $start, $end) {
     $output = [];
 
-    $vocabulary_entity = taxonomy_vocabulary_load($entity_id);
+    $vocabulary_entity = \Drupal\taxonomy\Entity\Vocabulary::load($entity_id);
 
     if ($vocabulary_entity && $vocabulary_entity->getDescription()) {
       $headerText = $vocabulary_entity->getDescription();
