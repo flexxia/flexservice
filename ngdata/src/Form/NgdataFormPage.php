@@ -271,7 +271,7 @@ class NgdataFormPage {
                   $form_elements[] = \Drupal::service('ngdata.form.template')->formNodeEvaluationQuestionElements(
                     $question_term,
                     $meeting_node,
-                    $question_term->getName() . ' - ' . $speaker_user->getUsername(),
+                    $question_term->getName() . ' - ' . $speaker_user->getAccountName(),
                     array(
                       'returnValue' => array(
                         'refer_uid' => $speaker_user->id(),

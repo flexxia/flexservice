@@ -274,7 +274,7 @@ class FlexEvaluationForm extends FormBase {
     if ($speaker_users) {
       foreach ($speaker_users as $speaker_user) {
         $row = $basic_element;
-        $row['#title'] .= " - - - " . $speaker_user->getUsername();
+        $row['#title'] .= " - - - " . $speaker_user->getAccountName();
         $row['#refer_value']['refer_uid'] = $speaker_user->id();
 
         $output[] = $row;
@@ -334,7 +334,7 @@ class FlexEvaluationForm extends FormBase {
     if ($speaker_users) {
       foreach ($speaker_users as $speaker_user) {
         $row = $basic_element;
-        $row['#title'] .= " - - - " . $speaker_user->getUsername();
+        $row['#title'] .= " - - - " . $speaker_user->getAccountName();
         $row['#refer_value']['refer_uid'] = $speaker_user->id();
 
         $output[] = $row;
@@ -398,7 +398,7 @@ class FlexEvaluationForm extends FormBase {
     if ($speaker_users) {
       foreach ($speaker_users as $speaker_user) {
         $row = $basic_element;
-        $row['#title'] .= " - - - " . $speaker_user->getUsername();
+        $row['#title'] .= " - - - " . $speaker_user->getAccountName();
         $row['#refer_value']['refer_uid'] = $speaker_user->id();
 
         $output[] = $row;

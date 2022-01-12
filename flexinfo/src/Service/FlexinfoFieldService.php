@@ -224,7 +224,7 @@ class FlexinfoFieldService {
     if ($target_ids && is_array($target_ids)) {
       foreach ($target_ids as $target_id) {
         $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($target_id);
-        $output[] = $entity->getUsername();
+        $output[] = $entity->getAccountName();
       }
     }
 

@@ -44,7 +44,7 @@ function _getUidByUserName($user_name = NULL) {
   if ($user_name) {
     $user = user_load_by_name($user_name);
     if (count($user) > 0) {
-      // dpm($user->getUsername());
+      // dpm($user->getAccountName());
       // dpm($user->getAccountName());
       // dpm($user->getDisplayName());
       // dpm($user->id());

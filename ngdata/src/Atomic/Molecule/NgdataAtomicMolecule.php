@@ -1092,7 +1092,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $row = $result_row;
           $row['tableBodyData'] = $result_row;
-          $row['Speaker'] = $user->getUserName();
+          $row['Speaker'] = $user->getAccountName();
 
           $output[] = $row;
         }
@@ -1172,7 +1172,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           );
 
           $row['exportData'] = array(
-            'Speaker' => $user->getUserName(),
+            'Speaker' => $user->getAccountName(),
             'Events' => $num_meeting_nodes,
             'Reach' => $signature_total,
             'Responses' => $evaluation_nums,
@@ -1363,7 +1363,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         }
 
         $output[] = [
-          'Name' => $user->getUsername(),
+          'Name' => $user->getAccountName(),
           'Role' => implode(", ", $user->getRoles($exclude_locked_roles = TRUE)),
           'Edit' => \Drupal::service('flexinfo.user.service')->getUserEditLinkByFlexform($user->id()),
         ];

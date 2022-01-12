@@ -27,7 +27,7 @@ trait FlexSummaryEvaluationFormElement {
         $refer = [];
         foreach ($element as $key => $element_row) {
           if (isset($element_row['#type']) && $element_row['#type'] == 'label') {
-            $element_row['#title'] .= " - - - " . $speaker_user->getUsername();
+            $element_row['#title'] .= " - - - " . $speaker_user->getAccountName();
           }
           if (isset($element_row['#refer_value'])) {
             $element_row['#refer_value']['refer_uid'] = $speaker_user->id();
@@ -135,7 +135,7 @@ trait FlexSummaryEvaluationFormElement {
         $speaker_uid = $speaker_user->id();
         $refer_element = $this->getmElementBasicTextfieldWithAjaxAddMore($form, $form_state, $question_term, $speaker_uid);
 
-        $refer_element[$fieldset_key]['#title'] .= " - - - " . $speaker_user->getUsername();
+        $refer_element[$fieldset_key]['#title'] .= " - - - " . $speaker_user->getAccountName();
         $refer_element[$fieldset_key]['#refer_value']['refer_uid'] = $speaker_uid;
 
         // Html::getUniqueId()

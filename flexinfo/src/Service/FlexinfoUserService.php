@@ -182,7 +182,7 @@ class FlexinfoUserService {
     if ($uid) {
       $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
       if ($user) {
-        $output = $user->getUsername();
+        $output = $user->getAccountName();
       }
     }
 

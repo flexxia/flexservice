@@ -87,7 +87,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
               foreach ($speaker_users as $speaker_user) {
                 $form['reactset']['question_item_' . $tid . $speaker_user->id()] = array(
                   '#type' => 'label',
-                  '#title' => $question_term->getName() . ' - ' . $speaker_user->getUsername(),
+                  '#title' => $question_term->getName() . ' - ' . $speaker_user->getAccountName(),
                   '#prefix' => '<div class="clear-both h5 font-size-16">',
                   '#suffix' => '</div>',
                 );

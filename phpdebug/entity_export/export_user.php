@@ -26,7 +26,7 @@ function _get_entity_users() {
   if (is_array($users)) {
     foreach ($users as $user) {
       $value = [
-        'name' => $user->getUserName(),
+        'name' => $user->getAccountName(),
         'email' => $user->getEmail(),
         'roles' => $user->getRoles(),
         // 'field' => _get_term_field_value($user, $vid),

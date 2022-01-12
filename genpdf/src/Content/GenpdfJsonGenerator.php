@@ -674,7 +674,7 @@ class GenpdfJsonGenerator extends ControllerBase {
             $count_values = array_count_values($row);
 
             $result = array(
-              $user->getUserName(),
+              $user->getAccountName(),
               count($row)
             );
             for ($i = 5; $i > 0; $i--) {

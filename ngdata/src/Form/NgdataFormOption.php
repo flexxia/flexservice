@@ -153,7 +153,7 @@ class NgdataFormOption {
       foreach ($users as $user) {
         $term_options[] = array(
           "termTid" => $user->id(),
-          "termName" => $user->getUsername(),
+          "termName" => $user->getAccountName(),
         );
       }
     }
