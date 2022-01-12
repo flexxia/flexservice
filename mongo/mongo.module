@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains mongo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function mongo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the mongo module.
+    case 'help.page.mongo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('MongoDB Driver Set') . '</p>';
+      return $output;
+
+    default:
+  }
+}

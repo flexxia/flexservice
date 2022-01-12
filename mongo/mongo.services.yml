@@ -1,0 +1,4 @@
+services:
+  mongo.driver.set:
+    class: Drupal\mongo\Services\MongoDriverSet
+    arguments: []

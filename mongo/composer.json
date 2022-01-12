@@ -1,0 +1,14 @@
+{
+  "name": "drupal/mongo",
+  "type": "drupal-module",
+  "description": "MongoDB Driver Set",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/mongo",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/mongo",
+    "source": "http://cgit.drupalcode.org/mongo"
+  },
+  "require": { }
+}

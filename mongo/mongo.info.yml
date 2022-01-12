@@ -1,0 +1,5 @@
+name: 'mongo'
+type: module
+description: 'MongoDB Driver Set'
+core: 8.x
+package: 'Zen'
