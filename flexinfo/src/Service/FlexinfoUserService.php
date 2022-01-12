@@ -384,7 +384,7 @@ class FlexinfoUserService {
     $user_default_country_tid = $this->getUserDataDefaultCountryTid();
     $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($user_default_country_tid);
     if ($term) {
-      $term_vid = $term->getVocabularyId();
+      $term_vid = $term->bundle();
     }
 
     return $term_vid;

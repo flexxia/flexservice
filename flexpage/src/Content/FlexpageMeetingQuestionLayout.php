@@ -50,7 +50,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
       ->nodesByStandardByFieldValue('meeting', 'field_meeting_program', $entity_id);;
 
     if ($evaluationform_term) {
-      if ($evaluationform_term && $evaluationform_term->getVocabularyId() == 'evaluationform') {
+      if ($evaluationform_term && $evaluationform_term->bundle() == 'evaluationform') {
         $output .= '<div class="questions-page-layout-wrapper">';
           $output .= $this->meetingPageLayoutByEvaluationformTerm($meeting_nodes, $evaluationform_term);
         $output .= '</div>';
@@ -76,7 +76,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
         ->getStorage('taxonomy_term')
         ->load($evaluationform_tid);
 
-      if ($evaluationform_term && $evaluationform_term->getVocabularyId() == 'evaluationform') {
+      if ($evaluationform_term && $evaluationform_term->bundle() == 'evaluationform') {
         $output .= '<div class="questions-page-layout-wrapper">';
           $output .= $this->meetingPageLayoutByEvaluationformTerm(array($meeting_node), $evaluationform_term);
         $output .= '</div>';

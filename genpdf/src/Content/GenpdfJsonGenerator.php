@@ -134,7 +134,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     if (empty($evaluationform_term)) {
       return $output;
     }
-    if ($evaluationform_term->getVocabularyId() != 'evaluationform') {
+    if ($evaluationform_term->bundle() != 'evaluationform') {
       return $output;
     }
 

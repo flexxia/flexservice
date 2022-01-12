@@ -44,7 +44,7 @@ class FlexpageEventLayout extends ControllerBase {
         ->getStorage('taxonomy_term')
         ->load($evaluationform_tid);
 
-      if ($evaluationform_term && $evaluationform_term->getVocabularyId() == 'evaluationform') {
+      if ($evaluationform_term && $evaluationform_term->bundle() == 'evaluationform') {
         $question_tids = \Drupal::getContainer()
           ->get('flexinfo.field.service')
           ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');

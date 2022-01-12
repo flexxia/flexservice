@@ -128,7 +128,7 @@ class FlexinfoNodeService {
             $question_type = NULL;
             $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
             if ($question_term) {
-              if ($question_term->getVocabularyId() == 'questionlibrary') {
+              if ($question_term->bundle() == 'questionlibrary') {
                 $question_type = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_fieldtype');
               }
             }
