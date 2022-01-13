@@ -26,6 +26,8 @@ sudo php -d memory_limit=-1 /Users/Dong/Documents/app/composer/1.10.19/composer.
 # 参数
  --ignore-platform-reqs
 
+composer require "flexxia/flexservice"
+
 sudo php -d memory_limit=4096M /usr/local/bin/composer require "flexxia/flexservice:dev-master"
 ## 有时需要加 --dev
 sudo php -d memory_limit=4096M /usr/local/bin/composer require --dev "flexxia/flexservice:dev-master"
