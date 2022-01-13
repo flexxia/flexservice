@@ -24,12 +24,12 @@ class GenpdfImagesController extends ControllerBase {
     $pdf = new FPDF();
     $pdf->AddPage();
 
-    $pdf->SetXY(28, 10);
     $pdf->SetFont('Arial', '', 16);
     $pdf->SetTextColor(50, 178, 228);
-    $pdf->Write(10, 'Hello World!');
+    $pdf->Cell(0, 10, 'Hello World');
 
-    $pdf->Image($image_path . '001.png', 20, 20, 120, 120);
+    // 还可以加链接
+    $pdf->Image($image_path . '001.png', 20, 20, 120, 120, 'PNG', 'www.google.com');
     $pdf->Image($image_path . '002.png', 20, 160, 120, 120);
 
     $pdf->AddPage();
