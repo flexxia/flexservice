@@ -46,3 +46,12 @@ genpdf.program.json:
     _access: 'TRUE'
   options:
     no_cache: TRUE
+
+#
+genpdf.from.images:
+  path: '/genpdf/from/images'
+  defaults:
+    _controller: '\Drupal\genpdf\Controller\GenpdfImagesController::pdfFromImages'
+    _title: 'Gen Pdf File'
+  requirements:
+    _permission: 'access content'
