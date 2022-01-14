@@ -1,5 +1,5 @@
 name: GenPDF
-description: 'GenPDF Module to create PDF file with using fpdf library'
+description: 'FlexService GenPDF Module to create PDF file with using fpdf library'
 type: module
 core_version_requirement: ^8.8.0 || ^9
 package: Zen

@@ -1,5 +1,5 @@
 name: 'NgData'
 type: module
-description: 'Provides some NG Data for ngjson'
+description: 'FlexService Provides some NG Data for ngjson'
 core_version_requirement: ^8.8.0 || ^9
 package: 'Zen'
