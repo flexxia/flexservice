@@ -233,7 +233,7 @@ class FlexinfoUserService {
    */
   public function getUserAddLink($link_text = 'Add') {
     $url = Url::fromUserInput('/admin/people/create');
-    $link = Link::fromTextAndUrl(t($link_text), $url);
+    $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
 
     return $link;
   }
@@ -246,7 +246,7 @@ class FlexinfoUserService {
 
     if ($uid) {
       $url = Url::fromUserInput('/user/' . $uid . '/edit');
-      $link = Link::fromTextAndUrl(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
     }
 
     return $link;
@@ -257,7 +257,7 @@ class FlexinfoUserService {
    */
   public function getUserAddLinkByFlexform($link_text = 'Add') {
     $url = Url::fromUserInput('/flexform/entityadd/user/user');
-    $link = Link::fromTextAndUrl(t($link_text), $url);
+    $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
 
     return $link;
   }
@@ -270,7 +270,7 @@ class FlexinfoUserService {
 
     if ($uid) {
       $url = Url::fromUserInput('/user/' . $uid . '/Edit');
-      $link = Link::fromTextAndUrl(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
     }
 
     return $link;

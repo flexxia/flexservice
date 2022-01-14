@@ -68,7 +68,7 @@ class NgdataNode extends NgdataEntity implements NgdataNodeInterface {
 
     if ($nid) {
       $url = Url::fromUserInput('/node/' . $nid . '/edit');
-      $link = Link::fromTextAndUrl(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
     }
 
     return $link;
@@ -82,7 +82,7 @@ class NgdataNode extends NgdataEntity implements NgdataNodeInterface {
 
     if ($nid) {
       $url = Url::fromUserInput('/node/' . $nid);
-      $link = Link::fromTextAndUrl(t($view_text), $url);
+      $link = Link::fromTextAndUrl(t($view_text), $url)->toString();
     }
 
     return $link;

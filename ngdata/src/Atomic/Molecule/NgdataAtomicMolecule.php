@@ -423,7 +423,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'Speaker' => $speaker,
           'Reach' => $reach,
           'Responses' => $responses,
-          'View' => Link::fromTextAndUrl('View', $internal_url),
+          'View' => Link::fromTextAndUrl('View', $internal_url)->toString(),
         );
 
         $row = $result_row;
@@ -469,7 +469,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'HCP Reach' => $reach,
           'Responses' => $responses,
           'Status' => $this->atom->getMeetingStatusIconHtml($node),
-          'View' => Link::fromTextAndUrl('View', $internal_url),
+          'View' => Link::fromTextAndUrl('View', $internal_url)->toString(),
         );
 
         $row['exportData'] = array(
@@ -500,7 +500,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
        'HCP Reach' => $reach,
        'Responses' => $responses,
        'Status' => $this->atom->getMeetingStatusIconHtml($node),
-       'View' => Link::fromTextAndUrl('View', $internal_url),
+       'View' => Link::fromTextAndUrl('View', $internal_url)->toString(),
      );
 
      $row['exportData'] = array(
@@ -540,7 +540,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'City' => $city,
           'Rep' => $rep,
           'Status' => $this->atom->getMeetingStatusIconHtml($node),
-          'View' => Link::fromTextAndUrl('View', $internal_url),
+          'View' => Link::fromTextAndUrl('View', $internal_url)->toString(),
         );
 
         $row = $result_row;
@@ -737,7 +737,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $program_html = '<div class="html-tooltip-wrapper">';
             $program_html .= '<span class="html-tooltip-text-wrapper">';
-              $program_html .= Link::fromTextAndUrl($program_short_name, $internal_url);
+              $program_html .= Link::fromTextAndUrl($program_short_name, $internal_url)->toString();
             $program_html .= '</span>';
             $program_html .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-6 padding-5 position-absolute z-index-1">';
               $program_html .= $term->name;
@@ -826,7 +826,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $program_html = '<div class="html-tooltip-wrapper">';
             $program_html .= '<span class="html-tooltip-text-wrapper">';
-              $program_html .= Link::fromTextAndUrl($program_short_name, $internal_url);
+              $program_html .= Link::fromTextAndUrl($program_short_name, $internal_url)->toString();
             $program_html .= '</span>';
             $program_html .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-6 padding-5 position-absolute z-index-1">';
               $program_html .= $term->name;
@@ -923,7 +923,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
           $program_html = '<div class="html-tooltip-wrapper">';
             $program_html .= '<span class="html-tooltip-text-wrapper">';
-              $program_html .= Link::fromTextAndUrl($program_short_name, $internal_url);
+              $program_html .= Link::fromTextAndUrl($program_short_name, $internal_url)->toString();
             $program_html .= '</span>';
             $program_html .= '<span class="html-tooltip-hover-wrapper visibility-hidden color-000 min-width-120 bg-c6c6c6 text-align-center border-radius-6 padding-5 position-absolute z-index-1">';
               $program_html .= $term->name;
@@ -1199,7 +1199,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       foreach ($nodes as $key => $node) {
         $output[] = array(
           'Name' => $node->getTitle(),
-          'Edit' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/node/" . $node->id() . "/edit")),
+          'Edit' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/node/" . $node->id() . "/edit"))->toString(),
         );
       }
     }
@@ -1219,7 +1219,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         $output[] = array(
           'Name' => $term->getName(),
           'DESCRIPTION' => $term->getDescription(),
-          'Edit' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+          'Edit' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
         );
       }
     }
@@ -1250,8 +1250,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
         'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
         'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
-        'Add' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id())),
-        'Summary' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id())),
+        'Add' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id()))->toString(),
+        'Summary' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id()))->toString(),
       );
 
       $row = $result_row;
@@ -1287,8 +1287,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
         'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
         'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
-        'Add' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id())),
-        'Summary' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id())),
+        'Add' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id()))->toString(),
+        'Summary' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id()))->toString(),
       );
 
       $row = $result_row;
@@ -1326,8 +1326,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'Speaker' => \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_speaker'),
         'Num' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_evaluationnum'),
         'Edit' => \Drupal::service('flexinfo.node.service')->getNodeEditLink($node->id()),
-        'Add' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id())),
-        'Summary' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id())),
+        'Add' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/evaluation/form/' . $node->id()))->toString(),
+        'Summary' => Link::fromTextAndUrl('Add', Url::fromUserInput('/flexform/node/add/summaryevaluation/form/' . $node->id()))->toString(),
         'Summary Eval' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, 'field_meeting_summaryevaluation'),
       );
 
@@ -1391,7 +1391,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
           'BU' => \Drupal::service('flexinfo.field.service')
             ->getFieldFirstTargetIdTermName($theraparea_term, 'field_theraparea_businessunit'),
           'TA' => \Drupal::service('flexinfo.field.service')->getFieldFirstValue($theraparea_term, 'name'),
-          'Edit' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+          'Edit' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
         );
       }
     }
@@ -1419,7 +1419,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
             ->getFieldFirstTargetIdTermName($term, 'field_queslibr_fieldtype'),
           'QuestionType' => \Drupal::service('flexinfo.field.service')
             ->getFieldFirstTargetIdTermName($term, 'field_queslibr_questiontype'),
-          'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+          'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
         );
       }
     }
@@ -1453,7 +1453,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'NAME' => $term->getName(),
         'DESCRIPTION' => $term->getDescription(),
         'PROGRAM NUM' => $program_num,
-        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
       );
     }
 
@@ -1471,7 +1471,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $output[] = array(
         'NAME' => $term->getName(),
         'DESCRIPTION' => $term->getDescription(),
-        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
       );
     }
 
@@ -1535,7 +1535,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $output[] = array(
         'NAME' => $term->getName(),
         'EvalNum' => $this->tablePopUpTemplate($evaluationform_num, $evaluationform_data, $term->id()),
-        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
       );
     }
 
@@ -1552,8 +1552,8 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     foreach ($terms as $term) {
       $output[] = array(
         'NAME' => $term->getName(),
-        'EvalForms' => Link::fromTextAndUrl(t('View'), Url::fromUserInput("/ngpage/questionevalforms/" . $term->id())),
-        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit")),
+        'EvalForms' => Link::fromTextAndUrl(t('View'), Url::fromUserInput("/ngpage/questionevalforms/" . $term->id()))->toString(),
+        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
       );
     }
 

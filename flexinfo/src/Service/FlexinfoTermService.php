@@ -416,7 +416,7 @@ class FlexinfoTermService {
 
     if ($vid) {
       $url = Url::fromUserInput('/admin/structure/taxonomy/manage/' . $vid . '/add');
-      $link = Link::fromTextAndUrl(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
     }
 
     return $link;
@@ -430,7 +430,7 @@ class FlexinfoTermService {
 
     if ($tid) {
       $url = Url::fromUserInput('/taxonomy/term/' . $tid . '/edit');
-      $link = Link::fromTextAndUrl(t($link_text), $url);
+      $link = Link::fromTextAndUrl(t($link_text), $url)->toString();
     }
 
     return $link;
@@ -444,7 +444,7 @@ class FlexinfoTermService {
 
     if ($tid) {
       $url = Url::fromUserInput('/taxonomy/term/' . $tid);
-      $link = Link::fromTextAndUrl(t($view_text), $url);
+      $link = Link::fromTextAndUrl(t($view_text), $url)->toString();
     }
 
     return $link;

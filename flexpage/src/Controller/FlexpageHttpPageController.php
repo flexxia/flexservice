@@ -66,7 +66,7 @@ class FlexpageHttpPageController extends ControllerBase {
 
       $markup .= '<div class="margin-0">';
         $markup .= '<span class="h6">';
-          $markup .=  Link::fromTextAndUrl(t('Login'), Url::fromUserInput($uri));
+          $markup .= Link::fromTextAndUrl(t('Login'), Url::fromUserInput($uri))->toString();
         $markup .= '</span>';
       $markup .= '</div>';
     }
@@ -95,7 +95,7 @@ class FlexpageHttpPageController extends ControllerBase {
 
         if (\Drupal::currentUser()->isAnonymous()) {
           $markup .= '<div class="">';
-            $markup .=  Link::fromTextAndUrl(t('Login'), Url::fromUserInput($uri));
+            $markup .= Link::fromTextAndUrl(t('Login'), Url::fromUserInput($uri))->toString();
           $markup .= '</div>';
         }
 
