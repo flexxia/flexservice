@@ -19,9 +19,7 @@ sudo composer require flexxia/flexservice
 vendor/drush/drush/drush cr
 
 ######################
-composer require --dev flexxia/flexservice:dev-master
-
-sudo php -d memory_limit=-1 /Users/Dong/Documents/app/composer/1.10.19/composer.phar require --dev "flexxia/flexservice:dev-master"
+sudo php -d memory_limit=-1 /Users/Dong/Documents/app/composer/1.10.19/composer.phar require "flexxia/flexservice:dev-master"
 
 # 参数
  --ignore-platform-reqs
