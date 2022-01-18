@@ -639,7 +639,7 @@ function _export_d7_node_pool() {
           }
 
           $type_tid = $pieces[1];
-          $question_term = taxonomy_term_load($question_tid);
+          $question_term = \Drupal\taxonomy\Entity\Term::load($question_tid);
           if (isset($question_term->name)) {
             $output[$node->nid]['field_pool_answer'][$question_key]['field_pool_questionname'] = $question_term->name;
           }
@@ -659,7 +659,7 @@ function _export_d7_node_pool() {
           }
 
           // field type
-          $type_term = taxonomy_term_load($type_tid);
+          $type_term = \Drupal\taxonomy\Entity\Term::load($type_tid);
           if (isset($type_term->name)) {
             $output[$node->nid]['field_pool_answer'][$question_key]['field_pool_questiontype'] = $type_term->name;
           }
@@ -671,7 +671,7 @@ function _export_d7_node_pool() {
           foreach ($node->{$row['d7_field_name']}['und'] as $key => $value) {
             if ($key > 0) {
               if ($type_term->name == 'selectkey') {
-                $selectkey_term = taxonomy_term_load($value['value']);
+                $selectkey_term = \Drupal\taxonomy\Entity\Term::load($value['value']);
                 if ($selectkey_term) {
                   $output[$node->nid]['field_pool_answer'][$question_key]['field_pool_selectkey_tid'][] = $value['value'];
                   $output[$node->nid]['field_pool_answer'][$question_key]['answer'][] = $selectkey_term->name;

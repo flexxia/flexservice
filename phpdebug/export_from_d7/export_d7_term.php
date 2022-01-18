@@ -29,7 +29,7 @@ function _taxonomyGetTreeTidNames($vid = NULL) {
     if (is_array($terms)) {
       foreach ($terms as $term) {
         $output[$term->tid]['name'] = $term->name;
-        $term = taxonomy_term_load($term->tid);
+        $term = \Drupal\taxonomy\Entity\Term::load($term->tid);
 
         foreach ($field_names as $field_name => $row) {
           $field_value = NULL;
@@ -46,7 +46,7 @@ function _taxonomyGetTreeTidNames($vid = NULL) {
                   }
                 }
                 else {
-                  $field_term = taxonomy_term_load($value['target_id']);
+                  $field_term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
                   if (isset($field_term->name)) {
                     $field_value[] = $field_term->name;
                   }
@@ -102,14 +102,14 @@ function _getEvaluationFormTreeTidNames() {
       foreach ($terms as $key => $term) {
         if (1 < 2) {
           $output[$term->tid]['name'] = $term->name;
-          $term = taxonomy_term_load($term->tid);
+          $term = \Drupal\taxonomy\Entity\Term::load($term->tid);
 
           $field_value = NULL;
 
           if (isset($term->field_quesset_question['und'])) {
             // custom compound field
             foreach ($term->field_quesset_question['und'] as $value) {
-              $field_term = taxonomy_term_load($value['quesset_question_tid']);
+              $field_term = \Drupal\taxonomy\Entity\Term::load($value['quesset_question_tid']);
               if (isset($field_term->name)) {
                 $field_value[] = $field_term->name;
               }

@@ -100,7 +100,7 @@ class ManageContent {
     }
 
     Timer::stop($name);
-    dpm(Timer::read($name) . 'ms');
+    // dpm(Timer::read($name) . 'ms');
   }
 
   /**
@@ -160,7 +160,7 @@ class ManageContent {
     $query->condition('tablename.entity_id', $nid);
 
     $count = $query->countQuery()->execute()->fetchField();
-    dpm($count);
+    // dpm($count);
 
     $output = $query->execute()->fetchAll();
 
@@ -203,7 +203,7 @@ class ManageContent {
       ->runQueryAggregate();
 
     Timer::stop($name);
-    dpm(Timer::read($name) . 'ms');
+    // dpm(Timer::read($name) . 'ms');
   }
 
   /**
@@ -221,9 +221,9 @@ class ManageContent {
 
     $nids = $query_container->runQueryWithGroup($query);
 
-    dpm(count($nids));
+    // dpm(count($nids));
     Timer::stop($name);
-    dpm(Timer::read($name) . 'ms EntityQueryFind');
+    // dpm(Timer::read($name) . 'ms EntityQueryFind');
   }
 
 

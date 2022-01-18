@@ -37,7 +37,7 @@ function _load_user_print_info() {
           else {
             if (isset($user->{$row['d7_field_name']}['und'][0]['target_id'])) {
               foreach ($user->{$row['d7_field_name']}['und'] as $value) {
-                $field_term = taxonomy_term_load($value['target_id']);
+                $field_term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
                 if (isset($field_term->name)) {
                   $field_value[] = $field_term->name;
                 }

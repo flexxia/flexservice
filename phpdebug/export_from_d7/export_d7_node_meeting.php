@@ -61,7 +61,7 @@ function _export_d7_node_meeting() {
                 }
               }
               else {
-                $field_term = taxonomy_term_load($value['target_id']);
+                $field_term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
                 if (isset($field_term->name)) {
                   $field_value[] = $field_term->name;
                 }
