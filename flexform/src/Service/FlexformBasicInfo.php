@@ -51,7 +51,7 @@ class FlexformBasicInfo extends ControllerBase {
    */
   public function getElementMeetingInfo($meeting_node = NULL) {
     $DashpageObjectContent = new DashpageObjectContent();
-    $meeting_tile_html = $DashpageObjectContent->blockTileMeetingHtml($meeting_node, $meeting_share_link = FALSE, $meeting_snapshot_link = FALSE);
+    $meeting_tile_html = $DashpageObjectContent->blockTileMeetingHtml($meeting_node, $meeting_share_link = FALSE, $meeting_snapshot_link = TRUE);
 
     $output = [
       '#type' => 'item',
