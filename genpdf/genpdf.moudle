@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @implements hook_cron()
+ */
+function genpdf_cron() {
+  $app_root = \Drupal::hasService('app.root') ? \Drupal::root() : DRUPAL_ROOT;
+
+  $pdf_files = glob($app_root . "/sites/default/files/pdf/*.pdf");
+  $backup_files = glob($app_root . "/sites/default/files/private/backup_migrate/*");
+  $backup_files_month = glob($app_root . "/sites/default/files/private/backup_migrate/month/*");
+  $files = array_merge($pdf_files, $backup_files, $backup_files_month);
+
+  $now = time();
+  $num = 0;
+  foreach ($files as $file) {
+    if (is_file($file)) {
+      // 7 days
+      if ($now - filemtime($file) >= 86400 * 7) {
+        unlink($file);
+        $num++;
+      }
+    }
+  }
+
+  $message = "Total Remove " . $num . " files";
+  \Drupal::logger('demo_module')->notice($message);
+}
