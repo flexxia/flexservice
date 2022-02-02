@@ -226,8 +226,8 @@ class FlexpageEventLayout extends ControllerBase {
    */
   public function blockEventsSnapshotMultipleQuestions($meeting_nodes = array(), $evaluationform_term = NULL) {
     $question_tids = \Drupal::getContainer()
-      ->get('baseinfo.queryterm.service')
-      ->wrapperMultipleQuestionTidsFromEvaluationform($evaluationform_term);
+      ->get('flexinfo.queryterm.service')
+      ->wrapperMultipleQuestionTidsFromEvaluationformForMeetingSpeaker($evaluationform_term);
 
     $output = $this->getHtmlTableByMultipleQuestionsByReferUid($question_tids, $meeting_nodes);
 
