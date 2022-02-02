@@ -34,7 +34,7 @@ class FlexpageEventLayout extends ControllerBase {
   }
 
   /**
-   *
+   * @deprecated
    */
   public function blockEventsSnapshot($meeting_nodes = array(), $evaluationform_tid = NULL, $page_view = NULL) {
     $output = array();
@@ -222,7 +222,7 @@ class FlexpageEventLayout extends ControllerBase {
   }
 
   /**
-   *
+   * @deprecated
    */
   public function blockEventsSnapshotMultipleQuestions($meeting_nodes = array(), $evaluationform_term = NULL) {
     $question_tids = \Drupal::getContainer()
