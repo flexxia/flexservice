@@ -222,6 +222,13 @@ class GenpdfJsonGenerator extends ControllerBase {
 
     $question_tids = array_intersect($question_tids, $filter_tids);
 
+    // Override tids by specify order
+    if (\Drupal::hasService('baseinfo.queryterm.service')) {
+      if (method_exists(\Drupal::service('baseinfo.queryterm.service'), 'getRadioTidsBySpecifyOrder')) {
+        $question_tids = \Drupal::service('baseinfo.queryterm.service')->getRadioTidsBySpecifyOrder($question_tids);
+      }
+    }
+
     if (is_array($question_tids) && $question_tids) {
       $question_terms = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term')
@@ -370,7 +377,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     if (!$color_palette) {
       $color_palette_name = 'colorPlateFive';
       if (\Drupal::hasService('baseinfo.chart.service')) {
-        if(method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')){
+        if (method_exists(\Drupal::service('baseinfo.chart.service'), 'renderChartPieDataSetColorPlate')) {
           $color_palette_name = \Drupal::service('baseinfo.chart.service')->renderChartPieDataSetColorPlate();
         }
       }
@@ -597,8 +604,8 @@ class GenpdfJsonGenerator extends ControllerBase {
    * for Comments
    */
   public function getQuestionDataByTextfieldNew($comment_header = NULL, $comment_content = array()) {
-    $output = array();
-    $question_comments = array();
+    $output = [];
+    $question_comments = [];
 
     $output['block'] = array(
       'type'  => 'comments',
@@ -634,15 +641,29 @@ class GenpdfJsonGenerator extends ControllerBase {
    *
    */
   public function blockEventsTableForRelatedFieldQuestion($meeting_nodes = array(), $evaluationform_term = NULL, $question_tids = array()) {
-    $output = array();
+    $output = [];
 
-    $question_tids = \Drupal::service('baseinfo.queryterm.service')
-      ->wrapperMultipleQuestionTidsFromEvaluationform($evaluationform_term);
-
-    $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids);
+    // ForMeetingSpeaker
+    $question_tids_meeting_speaker = \Drupal::service('flexinfo.queryterm.service')
+      ->wrapperMultipleQuestionTidsFromEvaluationformForMeetingSpeaker($evaluationform_term);
+    $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids_meeting_speaker);
     if ($question_terms) {
       foreach ($question_terms as $question_term) {
-        $result = $this->getQuestionDataByTableForRelatedFieldQuestion($meeting_nodes, $question_term);
+        $result = $this->getQuestionDataByTableForRelatedFieldQuestionForMeetingSpeaker($meeting_nodes, $question_term);
+
+        if ($result) {
+          $output[] = $result;
+        }
+      }
+    }
+
+    // For Relatedtype
+    $question_tids_relatedtype = \Drupal::service('flexinfo.queryterm.service')
+      ->wrapperMultipleQuestionTidsFromEvaluationformForRelatedtype($evaluationform_term);
+    $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids_relatedtype);
+    if ($question_terms) {
+      foreach ($question_terms as $question_term) {
+        $result = $this->getQuestionDataByTableForRelatedFieldQuestionForRelatedtype($meeting_nodes, $question_term);
 
         if ($result) {
           $output[] = $result;
@@ -656,12 +677,11 @@ class GenpdfJsonGenerator extends ControllerBase {
   /**
    * for table
    */
-  public function getQuestionDataByTableForRelatedFieldQuestion($meeting_nodes = array(), $question_term = NULL) {
+  public function getQuestionDataByTableForRelatedFieldQuestionForMeetingSpeaker($meeting_nodes = array(), $question_term = NULL) {
     $output = array();
 
     $FlexpageEventLayout = new FlexpageEventLayout();
     $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithReferUid($meeting_nodes, $question_term->id());
-
     $tbody = array();
     if ($pool_data && count($pool_data) > 1) {
       foreach ($pool_data as $key => $row) {
@@ -703,7 +723,67 @@ class GenpdfJsonGenerator extends ControllerBase {
       }
 
       $output['data']["tbody"] = $tbody;
+    }
+    // sample tbody
+    // $output['data']["tbody"] = [
+    //   [
+    //     "Family Physician",
+    //     9,
+    //     "90%"
+    //   ],
+    //   [
+    //     "Dietitian",
+    //     1,
+    //     "10%"
+    //   ],
+    // ];
 
+    return $output;
+  }
+
+  /**
+   * for table
+   */
+  public function getQuestionDataByTableForRelatedFieldQuestionForRelatedtype($meeting_nodes = array(), $question_term = NULL) {
+    $output = array();
+
+    $FlexpageEventLayout = new FlexpageEventLayout();
+    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithReferOther($meeting_nodes, $question_term->id());
+    $tbody = array();
+    if ($pool_data && count($pool_data) > 1) {
+      foreach ($pool_data as $key => $row) {
+        if ($key) {
+          $count_values = array_count_values($row);
+
+          $result = array(
+            $key,
+            count($row)
+          );
+          for ($i = 5; $i > 0; $i--) {
+            $cell_value = isset($count_values[$i]) ? $count_values[$i] : 0;
+            $cell_value .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+            $result[] = $cell_value;
+          }
+
+          $tbody[] = $result;
+        }
+      }
+
+      $output['block'] = array(
+        'type'  => 'table',
+        'class' => 'table',
+        'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+      );
+
+      $output['data']["thead"] = [
+        "Name",
+        "Total",
+      ];
+      for ($i = 5; $i > 0; $i--) {
+        $output['data']["thead"][] = $i;
+      }
+
+      $output['data']["tbody"] = $tbody;
     }
     // sample tbody
     // $output['data']["tbody"] = [
