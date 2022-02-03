@@ -302,6 +302,7 @@ trait FlexSummaryEvaluationFormElement {
         '#type' => 'textfield',
         '#title' => ucfirst($question_tid) . " (Value " . ($i + 1) . ")",
         '#title_display' => "invisible",
+        '#maxlength' => 1024,
       ];
     }
 
