@@ -45,8 +45,7 @@ class FlexpageEventLayout extends ControllerBase {
         ->load($evaluationform_tid);
 
       if ($evaluationform_term && $evaluationform_term->bundle() == 'evaluationform') {
-        $question_tids = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $question_tids = \Drupal::service('flexinfo.field.service')
           ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
         $output = $this->blockEventsSnapshotAuto($meeting_nodes, $question_tids, $page_view);
@@ -109,8 +108,7 @@ class FlexpageEventLayout extends ControllerBase {
           }
         }
 
-        $color_plate = \Drupal::getContainer()
-          ->get('flexinfo.setting.service')
+        $color_plate = \Drupal::service('flexinfo.setting.service')
           ->colorPlateOutputKeyPlusOneByPaletteName('EventPie5', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
         if ($question_scale == 7) {
           $color_plate = \Drupal::getContainer()
@@ -123,8 +121,7 @@ class FlexpageEventLayout extends ControllerBase {
             ->colorPlateOutputKeyPlusOneByPaletteName('EventPie10', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
         }
 
-        $chart_data = \Drupal::getContainer()
-          ->get('flexinfo.chart.service')
+        $chart_data = \Drupal::service('flexinfo.chart.service')
           ->{$chart_render_method}($pool_data, $pool_label, NULL, $question_term, $color_plate);
 
         $block_option  = $this->getBlockOption($pool_data, $question_term, $chart_type_method, $color_plate);
@@ -163,8 +160,7 @@ class FlexpageEventLayout extends ControllerBase {
   public function blockEventsSnapshotAuto($meeting_nodes = array(), $question_tids = array(), $page_view = NULL) {
     $output = array();
 
-    $filter_tids = \Drupal::getContainer()
-      ->get('baseinfo.queryterm.service')
+    $filter_tids = \Drupal::service('baseinfo.queryterm.service')
       ->wrapperQuestionTidsByRadiosByLearningObjective($question_tids, FALSE);
 
     $sort_tids = array_intersect($question_tids, $filter_tids);
@@ -186,8 +182,7 @@ class FlexpageEventLayout extends ControllerBase {
   public function blockEventsSnapshotLearningObjectiveQuestions($meeting_nodes = array(), $question_tids = array(), $page_view = NULL) {
     $output = array();
 
-    $filter_tids = \Drupal::getContainer()
-      ->get('baseinfo.queryterm.service')
+    $filter_tids = \Drupal::service('baseinfo.queryterm.service')
       ->wrapperQuestionTidsByRadiosByLearningObjective($question_tids, TRUE);
 
     $sort_tids = array_intersect($question_tids, $filter_tids);
@@ -207,12 +202,10 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function blockEventsSnapshotComments($meeting_nodes = array(), $question_tids = array()) {
-    $textfield_tid= \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $textfield_tid= \Drupal::service('flexinfo.term.service')
       ->getTidByTermName($term_name = 'textfield', $vocabulary_name = 'fieldtype');
 
-    $textfield_question_tids = \Drupal::getContainer()
-      ->get('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $textfield_tid);
+    $textfield_question_tids = \Drupal::service('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $textfield_tid);
 
     $sort_tids = array_intersect($question_tids, $textfield_question_tids);
 
@@ -225,8 +218,7 @@ class FlexpageEventLayout extends ControllerBase {
    * @deprecated
    */
   public function blockEventsSnapshotMultipleQuestions($meeting_nodes = array(), $evaluationform_term = NULL) {
-    $question_tids = \Drupal::getContainer()
-      ->get('flexinfo.queryterm.service')
+    $question_tids = \Drupal::service('flexinfo.queryterm.service')
       ->wrapperMultipleQuestionTidsFromEvaluationformForMeetingSpeaker($evaluationform_term);
 
     $output = $this->getHtmlTableByMultipleQuestionsByReferUid($question_tids, $meeting_nodes);
@@ -238,8 +230,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function blockEventsSnapshotRankingQuestions($meeting_nodes = array(), $evaluationform_term = NULL) {
-    $question_tids = \Drupal::getContainer()
-      ->get('baseinfo.queryterm.service')
+    $question_tids = \Drupal::service('baseinfo.queryterm.service')
       ->wrapperRankingQuestionTidsFromEvaluationform($evaluationform_term);
 
     $output = $this->getHtmlTableByMultipleQuestionsByReferTid($question_tids, $meeting_nodes);
@@ -251,8 +242,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function blockEventsSnapshotSelectKeyQuestions($meeting_nodes = array(), $evaluationform_term = NULL) {
-    $question_tids = \Drupal::getContainer()
-      ->get('baseinfo.queryterm.service')
+    $question_tids = \Drupal::service('baseinfo.queryterm.service')
       ->wrapperFieldtypeQuestionTidsFromEvaluationform('selectkey', $evaluationform_term);
 
     // or $this->getCommonTableBySelectKeyAnswers()
@@ -267,11 +257,9 @@ class FlexpageEventLayout extends ControllerBase {
   public function getBlockOption($pool_data, $question_term, $chart_type_method, $color_plate) {
     $grid_class = "col-md-6";
 
-    $chart_block_title = \Drupal::getContainer()
-      ->get('flexinfo.chart.service')
+    $chart_block_title = \Drupal::service('flexinfo.chart.service')
       ->getChartTitleByQuestion($question_term);
-    $middle_bottom = \Drupal::getContainer()
-      ->get('flexinfo.chart.service')
+    $middle_bottom = \Drupal::service('flexinfo.chart.service')
       ->renderChartBottomFooter($pool_data, $question_term, TRUE, TRUE);
 
     $block_option = array(
@@ -281,8 +269,7 @@ class FlexpageEventLayout extends ControllerBase {
       ),
     );
 
-    $question_scale = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_scale = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
     $legend_data = \Drupal::service('baseinfo.chart.service')->getChartLegendFromLegendTextField($question_term);
@@ -352,8 +339,7 @@ class FlexpageEventLayout extends ControllerBase {
       if (isset($pool_data[1])) {
         $middle_text = "No Bias";
 
-        $legends = \Drupal::getContainer()
-          ->get('flexinfo.calc.service')
+        $legends = \Drupal::service('flexinfo.calc.service')
           ->getPercentageDecimal($pool_data[1], array_sum($pool_data), 0) . '%';
       }
 
@@ -398,7 +384,7 @@ class FlexpageEventLayout extends ControllerBase {
             $tbody[] = array(
               $selectAnswerTerm->getName(),
               $row,
-              \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($row, $pool_data_sum, 0) . '%'
+              \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($row, $pool_data_sum, 0) . '%'
             );
           }
 
@@ -442,7 +428,7 @@ class FlexpageEventLayout extends ControllerBase {
       foreach ($question_terms as $question_term) {
 
         $pool_data = $this->getQuestionAnswerAllDataWithReferTid($meeting_nodes, $question_term->id());
-        $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+        $question_scale = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
         $table = NULL;
         if ($pool_data && count($pool_data) > 1) {
@@ -486,7 +472,7 @@ class FlexpageEventLayout extends ControllerBase {
 
                           $table .= '<th class="font-weight-normal">';
                             $table .= $cell_value;
-                            $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                            $table .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                           $table .= '</th>';
                         }
                       $table .= '</tr>';
@@ -570,7 +556,7 @@ class FlexpageEventLayout extends ControllerBase {
 
                           $table .= '<th class="font-weight-normal">';
                             $table .= $cell_value;
-                            $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                            $table .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                           $table .= '</th>';
                         }
                       $table .= '</tr>';
@@ -679,8 +665,7 @@ class FlexpageEventLayout extends ControllerBase {
    * @before the name is filterQuestionData()
    */
   public function getQuestionAnswerByQuestionTid($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL) {
-    $evaluation_nodes = \Drupal::getContainer()
-      ->get('baseinfo.querynode.service')
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
     $output = 0;
@@ -716,8 +701,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function getQuestionAnswerAllDataWithReferUid($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluation_nodes = \Drupal::getContainer()
-      ->get('baseinfo.querynode.service')
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
     $output = array();
@@ -740,8 +724,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function getQuestionAnswerAllDataWithReferTid($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluation_nodes = \Drupal::getContainer()
-      ->get('baseinfo.querynode.service')
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
     $output = array();
@@ -764,8 +747,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function getQuestionAnswerAllDataWithReferOther($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluation_nodes = \Drupal::getContainer()
-      ->get('baseinfo.querynode.service')
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
     $output = array();
@@ -776,6 +758,40 @@ class FlexpageEventLayout extends ControllerBase {
         foreach ($result as $row) {
           if ($row['question_tid'] == $question_tid && $row['question_answer']) {
             $output[$row['refer_other']][] = $row['question_answer'];
+          }
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getQuestionAnswerAllDataWithProgramBreakDownField($meeting_nodes = array(), $question_tid = NULL) {
+    $output = array();
+
+    $breakdown_values = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_module');
+    if ($breakdown_values) {
+      foreach ($breakdown_values as $breakdown_value) {
+        $filter_meeting_nodes = \Drupal::service('flexinfo.querynode.service')
+          ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_module', $breakdown_value);
+
+        $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
+          ->wrapperEvaluationNodeFromMeetingNodes($filter_meeting_nodes);
+
+
+        if ($evaluation_nodes && is_array($evaluation_nodes)) {
+          foreach ($evaluation_nodes as $evaluation_node) {
+            $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
+
+            foreach ($result as $row) {
+              if ($row['question_tid'] == $question_tid && $row['question_answer']) {
+                $output[$breakdown_value][] = $row['question_answer'];
+              }
+            }
           }
         }
       }
@@ -824,8 +840,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function getTextfieldQuestionAllData($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluation_nodes = \Drupal::getContainer()
-      ->get('baseinfo.querynode.service')
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
       ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
 
     $output = array();
