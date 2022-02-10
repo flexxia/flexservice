@@ -164,7 +164,7 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
       ->getFieldFirstTargetId($program_entity, 'field_program_evaluationform');
 
     $EventStandardLayoutContent = new EventStandardLayoutContent();
-    $output = $EventStandardLayoutContent->blockEventsSnapshot($meeting_nodes, $evaluationform_tid, 'program_view');
+    $output = $EventStandardLayoutContent->blockEventsSnapshot($meeting_nodes, $evaluationform_tid, 'program_view', $entity_id);
 
     return $output;
   }
