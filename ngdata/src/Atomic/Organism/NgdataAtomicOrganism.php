@@ -474,6 +474,65 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
+  public function getHtmlTableByMultipleQuestionByProgramBreakDownField($question_term = NULL, $meeting_nodes = array()) {
+    $FlexpageEventLayout = new FlexpageEventLayout();
+    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithProgramBreakDownField($meeting_nodes, $question_term->id());
+
+    $table = NULL;
+    if ($pool_data && count($pool_data) > 1) {
+      $table .= '<div class="panel-body padding-bottom-2 bg-ffffff font-size-12 margin-left-12">';
+        $table .= '<table class="table table-hover margin-bottom-0">';
+          $table .= '<thead class="font-bold">';
+            $table .= '<tr>';
+              $table .= '<th>';
+                $table .= 'Name';
+              $table .= '</th>';
+              $table .= '<th>';
+                $table .= 'Total';
+              $table .= '</th>';
+              for ($i = 5; $i > 0; $i--) {
+                $table .= '<th>';
+                  $table .= $i;
+                $table .= '</th>';
+              }
+            $table .= '</tr>';
+          $table .= '</thead>';
+
+          foreach ($pool_data as $key => $row) {
+            if ($key) {
+              $count_values = array_count_values($row);
+
+              $table .= '<tbody>';
+                $table .= '<tr>';
+                  $table .= '<th class="font-weight-normal">';
+                    $table .= $key;
+                  $table .= '</th>';
+                  $table .= '<th class="font-weight-normal">';
+                    $table .= count($row);
+                  $table .= '</th>';
+                  for ($i = 5; $i > 0; $i--) {
+                    $cell_value = isset($count_values[$i]) ? $count_values[$i] : 0;
+
+                    $table .= '<th class="font-weight-normal">';
+                      $table .= $cell_value;
+                      $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                    $table .= '</th>';
+                  }
+                $table .= '</tr>';
+              $table .= '</tbody>';
+            }
+          }
+
+        $table .= '</table>';
+      $table .= '</div">';
+    }
+
+    return $table;
+  }
+
+  /**
+   *
+   */
   public function tileSectionGroup($meeting_nodes = array(), $eight_tile = TRUE) {
     $output = array();
 
