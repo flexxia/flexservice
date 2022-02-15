@@ -40,4 +40,14 @@ function _run_create_meeting_from_json2() {
   // $response = $client->send($request);
 }
 
-
+/**
+ *
+require_once(DRUPAL_ROOT . '/modules/custom/flexservice/phpdebug/import_json/import_node_meeting.php');
+ _run_convert_json_to_array();
+ */
+function _run_convert_json_to_array() {
+  $php_array = \Drupal::service('flexinfo.json.service')
+    ->fetchConvertJsonToArrayFromInternalPath('/modules/custom/flexservice/phpdebug/import_json/product.json');
+  ksort($php_array[0]);
+  dpm($php_array[0]);
+}
