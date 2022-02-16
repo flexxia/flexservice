@@ -196,7 +196,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
    */
   public function meetingNidsByDateTimeRange($start_time = NULL, $end_time = NULL) {
     $query = $this->queryNidsByBundle('meeting');
-    $group = $this->groupByMeetingDateTime($start_time, $end_time);
+    $group = $this->groupByMeetingDateTime($query, $start_time, $end_time);
     $query->condition($group);
 
     $nids = $this->runQueryWithGroup($query);
@@ -218,7 +218,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
    */
   public function meetingNidsByTimestampRange($start_timestamp = NULL, $end_timestamp = NULL) {
     $query = $this->queryNidsByBundle('meeting');
-    $group = $this->groupByMeetingTimestamp($start_timestamp, $end_timestamp);
+    $group = $this->groupByMeetingTimestamp($query, $start_timestamp, $end_timestamp);
     $query->condition($group);
 
     $nids = $this->runQueryWithGroup($query);
