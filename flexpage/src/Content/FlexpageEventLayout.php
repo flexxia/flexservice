@@ -202,7 +202,7 @@ class FlexpageEventLayout extends ControllerBase {
    *
    */
   public function blockEventsSnapshotComments($meeting_nodes = array(), $question_tids = array()) {
-    $textfield_tid= \Drupal::service('flexinfo.term.service')
+    $textfield_tid = \Drupal::service('flexinfo.term.service')
       ->getTidByTermName($term_name = 'textfield', $vocabulary_name = 'fieldtype');
 
     $textfield_question_tids = \Drupal::service('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $textfield_tid);
