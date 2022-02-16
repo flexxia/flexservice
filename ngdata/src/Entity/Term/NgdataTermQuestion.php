@@ -293,6 +293,41 @@ class NgdataTermQuestion extends NgdataTerm {
   /**
    *
    */
+  public function getQuestionAllAnswers($meeting_nodes = array(), $question_tids = []) {
+    $output = array();
+
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
+      ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
+
+    $output = $this->getQuestionAllAnswersFromEvaluationNodes($evaluation_nodes, $question_tids);
+
+    return $output;
+  }
+
+  /**
+   * Maybe multiple answers for same question tid
+   */
+  public function getQuestionAllAnswersFromEvaluationNodes($evaluation_nodes = array(), $question_tids = []) {
+    $output = array();
+
+    if ($evaluation_nodes && is_array($evaluation_nodes)) {
+      foreach ($evaluation_nodes as $evaluation_node) {
+        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
+
+        foreach ($result as $row) {
+          if (in_array($row['question_tid'], $question_tids) && $row['question_answer']) {
+            $output[] = $row['question_answer'];
+          }
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function getTextfieldQuestionAllData($meeting_nodes = array(), $question_tid = NULL) {
     $output = array();
 
