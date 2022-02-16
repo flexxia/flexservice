@@ -192,7 +192,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
   /** - - - - - - get nids or nodes  - - - - - - - - - - - - - - - - - - - -  */
 
   /**
-   * \Drupal::service('flexinfo.querynode.service')->meetingNidsByDateTime("2016-01-01T23:30:00", "2016-12-31T23:55:00");
+   * \Drupal::service('flexinfo.querynode.service')->meetingNidsByDateTimeRange("2016-01-01T23:30:00", "2016-12-31T23:55:00");
    */
   public function meetingNidsByDateTimeRange($start_time = NULL, $end_time = NULL) {
     $query = $this->queryNidsByBundle('meeting');
@@ -204,10 +204,32 @@ class FlexinfoQueryNodeService extends ControllerBase {
     return $nids;
   }
   /**
-   * \Drupal::service('flexinfo.querynode.service')->meetingNodesByDateTime("2016-01-01T23:30:00", "2016-12-31T23:55:00");
+   * \Drupal::service('flexinfo.querynode.service')->meetingNodesByDateTimeRange("2016-01-01T23:30:00", "2016-12-31T23:55:00");
    */
-  public function meetingNodesByDateTime($start_time = NULL, $end_time = NULL) {
+  public function meetingNodesByDateTimeRange($start_time = NULL, $end_time = NULL) {
     $nids = $this->meetingNidsByDateTimeRange($start_time, $end_time);
+    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+
+    return $nodes;
+  }
+
+  /**
+   *
+   */
+  public function meetingNidsByTimestampRange($start_timestamp = NULL, $end_timestamp = NULL) {
+    $query = $this->queryNidsByBundle('meeting');
+    $group = $this->groupByMeetingTimestamp($start_timestamp, $end_timestamp);
+    $query->condition($group);
+
+    $nids = $this->runQueryWithGroup($query);
+
+    return $nids;
+  }
+  /**
+   *
+   */
+  public function meetingNodesByTimestampRange($start_timestamp = NULL, $end_timestamp = NULL) {
+    $nids = $this->meetingNidsByTimestampRange($start_timestamp, $end_timestamp);
     $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
 
     return $nodes;
