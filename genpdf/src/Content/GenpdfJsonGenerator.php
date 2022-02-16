@@ -555,10 +555,8 @@ class GenpdfJsonGenerator extends ControllerBase {
       'title' => $textfield_question_term->getName(),
     );
 
-    // $pool_datas = \Drupal::service('flexinfo.querynode.service')
-    //   ->wrapperPoolAnswerTextDataByQuestionTid($meeting_nodes, $textfield_question_term->id());
-
-    $pool_data = $this->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
+    $pool_data = \Drupal::service('ngdata.term.question')
+      ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
     if (isset($pool_data) && count($pool_data) > 0) {
       foreach ($pool_data as $key => $row) {
