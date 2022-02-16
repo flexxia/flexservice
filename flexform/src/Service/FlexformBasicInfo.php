@@ -32,14 +32,15 @@ class FlexformBasicInfo extends ControllerBase {
   /**
    *
    */
-  public function getElementEvaluationFormInfo($meeting_node = NULL) {
+  public function getElementEvaluationFormInfo($meeting_entity = NULL) {
     $output = [];
-    $evaluation_form_entity = $this->getEvaluationFormEntityFromMeetingNode($meeting_node);
+    $evaluation_form_entity = \Drupal::service('flexinfo.node.service')
+      ->getMeetingEvaluationformTerm($meeting_entity);
 
     if ($evaluation_form_entity) {
       $output = [
         '#type' => 'item',
-        '#title' => $evaluation_form_entity->getName($meeting_node),
+        '#title' => $evaluation_form_entity->getName($meeting_entity),
       ];
     }
 
@@ -111,7 +112,8 @@ class FlexformBasicInfo extends ControllerBase {
   }
 
   /**
-   *
+   * @deprecated
+   * @see \Drupal::service('flexinfo.node.service')->getMeetingEvaluationformTerm($meeting_entity);
    */
   public function getEvaluationFormEntityFromMeetingNode($meeting_node = NULL) {
     $output = \Drupal::service('flexinfo.field.service')
@@ -123,8 +125,9 @@ class FlexformBasicInfo extends ControllerBase {
   /**
    *
    */
-  public function getQuestionTermsFromMeetingNode($meeting_node = NULL) {
-    $evaluation_form_entity = $this->getEvaluationFormEntityFromMeetingNode($meeting_node);
+  public function getQuestionTermsFromMeetingNode($meeting_entity = NULL) {
+    $evaluation_form_entity = \Drupal::service('flexinfo.node.service')
+      ->getMeetingEvaluationformTerm($meeting_entity);
 
     $output = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIdsEntitys($evaluation_form_entity, 'field_evaluationform_questionset');
