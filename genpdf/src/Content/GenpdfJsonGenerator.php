@@ -505,7 +505,6 @@ class GenpdfJsonGenerator extends ControllerBase {
         $question_answers = \Drupal::service('ngdata.term.question')
         ->getTextfieldQuestionAllData($meeting_nodes, $question_term->id());
 
-        // $output['question'][] = $this->getQuestionDataByTextfield($question_term, $meeting_nodes);
         if ($question_answers) {
           $output['question'][] = $this->getQuestionDataByTextfieldNew($question_term, $question_answers);
         }
