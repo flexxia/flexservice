@@ -56,8 +56,8 @@ class NgdataExcel {
     // Adding Comments Answer
     $row = 2; // comments starting row
     $col = 1;
-    foreach ($content_array as $key => $value) {
-      foreach ($value as $key => $group) {
+    foreach ($content_array as $value) {
+      foreach ($value as $group) {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, strip_tags($group));
         $row++;
       }
