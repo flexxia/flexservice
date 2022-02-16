@@ -811,7 +811,8 @@ class FlexpageEventLayout extends ControllerBase {
 
       foreach ($textfield_question_terms as $textfield_question_term) {
 
-        $pool_data = $this->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
+        $pool_data = \Drupal::service('ngdata.term.question')
+          ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
         $question_comments = NULL;
         if (isset($pool_data) && count($pool_data) > 0) {
@@ -829,31 +830,6 @@ class FlexpageEventLayout extends ControllerBase {
           );
 
           $output[] = $this->FlexpageBaseJson->getBlockHtmlSnippet($block_option, $question_comments);
-        }
-      }
-    }
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function getTextfieldQuestionAllData($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
-      ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
-
-    $output = array();
-    if ($evaluation_nodes && is_array($evaluation_nodes)) {
-      foreach ($evaluation_nodes as $evaluation_node) {
-        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
-
-        foreach ($result as $row) {
-          if ($row['question_tid'] == $question_tid && $row['question_answer']) {
-            $output[] = $row['question_answer'];
-
-            break;
-          }
         }
       }
     }
