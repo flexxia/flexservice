@@ -483,31 +483,6 @@ class GenpdfJsonGenerator extends ControllerBase {
   }
 
   /**
-   * Deprecated
-   */
-  public function getTextfieldQuestionAllData($meeting_nodes = array(), $question_tid = NULL) {
-    $evaluationNids = $this->getEvaluationNids($meeting_nodes);
-    $evaluation_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($evaluationNids);
-
-    $output = array();
-    if ($evaluation_nodes && is_array($evaluation_nodes)) {
-      foreach ($evaluation_nodes as $evaluation_node) {
-        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
-
-        foreach ($result as $row) {
-          if ($row['question_tid'] == $question_tid && $row['question_answer']) {
-            $output[] = $row['question_answer'];
-
-            break;
-          }
-        }
-      }
-    }
-
-    return $output;
-  }
-
-  /**
    *
    */
   public function blockEventsComments($meeting_nodes = array(), $evaluationform_term = NULL, $question_tids = array()) {
@@ -550,10 +525,8 @@ class GenpdfJsonGenerator extends ControllerBase {
       $textfield_question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($textfield_question_tids);
 
       foreach ($textfield_question_terms as $textfield_question_term) {
-
-        // $pool_data = \Drupal::service('flexinfo.querynode.service')
-        //   ->wrapperPoolAnswerTextDataByQuestionTid($meeting_nodes, $textfield_question_term->id());
-        $pool_data = $this->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
+        $pool_data = \Drupal::service('ngdata.term.question')
+          ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
 
         $question_comments = NULL;
         if (isset($pool_data) && count($pool_data) > 0) {
