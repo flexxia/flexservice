@@ -26,7 +26,7 @@ class FlexinfoNodeService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
+   \Drupal::service('flexinfo.node.service')->entityCreateNode($field_array);
    */
   public function entityCreateNode($field_array = array()) {
     $node = \Drupal::entityTypeManager()->getStorage('node')->create($field_array);
@@ -60,7 +60,7 @@ class FlexinfoNodeService {
    * @param array $nodes
    * The entitys
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($nodes);
+   \Drupal::service('flexinfo.node.service')->getNidsFromNodes($nodes);
    */
   public function getNidsFromNodes($nodes = array()) {
     $nids = array();
@@ -80,7 +80,7 @@ class FlexinfoNodeService {
   /**
    * @param nid
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->getNodeEditLink($nid);
+   \Drupal::service('flexinfo.node.service')->getNodeEditLink($nid);
    */
   public function getNodeEditLink($nid = NULL, $link_text = 'Edit') {
     $link = NULL;
@@ -111,10 +111,10 @@ class FlexinfoNodeService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->entityCreatePoolFromEvaluation($entity);
+   \Drupal::service('flexinfo.node.service')->entityCreatePoolFromEvaluation($entity);
    */
   public function entityCreatePoolFromEvaluation($entity = NULL) {
-    $meeting_nid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($entity, 'field_evaluation_meetingnid');
+    $meeting_nid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($entity, 'field_evaluation_meetingnid');
 
     if ($meeting_nid) {
       $reactset_value = $entity->get('field_evaluation_reactset')->getValue();
@@ -129,7 +129,7 @@ class FlexinfoNodeService {
             $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
             if ($question_term) {
               if ($question_term->bundle() == 'questionlibrary') {
-                $question_type = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_fieldtype');
+                $question_type = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($question_term, 'field_queslibr_fieldtype');
               }
             }
 
@@ -207,7 +207,7 @@ class FlexinfoNodeService {
       $field_array[$refer_key] = $refer_field_array[$refer_key];
     }
 
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $query_container = \Drupal::service('flexinfo.querynode.service');
     $query = $query_container->queryNidsByBundle('pool');
 
     $group = $query_container->groupStandardByFieldValue($query, 'field_pool_meetingnid', $meeting_nid);
@@ -220,7 +220,7 @@ class FlexinfoNodeService {
       $query->condition($group);
     }
 
-    $pool_nids_result = \Drupal::getContainer()->get('flexinfo.querynode.service')->runQueryWithGroup($query);
+    $pool_nids_result = \Drupal::service('flexinfo.querynode.service')->runQueryWithGroup($query);
     $pool_nid = reset($pool_nids_result);
 
     // checkbox tid is 2490
@@ -279,10 +279,10 @@ class FlexinfoNodeService {
   public function groupEvaluationAnswers($evaluation_raw_answer = array(), $question_term = NULL) {
     $evaluation_group_answer = array();
 
-    $evaluation_raw_answer = \Drupal::getContainer()->get('flexinfo.calc.service')->removeArrayEmptyElements($evaluation_raw_answer);
+    $evaluation_raw_answer = \Drupal::service('flexinfo.calc.service')->removeArrayEmptyElements($evaluation_raw_answer);
     $evaluation_group_answer = array_count_values($evaluation_raw_answer);
 
-    $question_scale = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
+    $question_scale = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
     // $max_key_value = 0;
     // if ($evaluation_group_answer) {
@@ -304,7 +304,7 @@ class FlexinfoNodeService {
    *
    */
   public function updateMeetingForEvaluationNum($entity = NULL) {
-    $meeting_nid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($entity, 'field_evaluation_meetingnid');
+    $meeting_nid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($entity, 'field_evaluation_meetingnid');
 
     if ($meeting_nid) {
       $meeting_node  = \Drupal::entityTypeManager()->getStorage('node')->load($meeting_nid);
@@ -327,23 +327,23 @@ class FlexinfoNodeService {
   /**
    * @param array $meeting_entity
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingEvaluationformTid($meeting_entity);
+   \Drupal::service('flexinfo.node.service')->getMeetingEvaluationformTid($meeting_entity);
    */
   public function getMeetingEvaluationformTid($meeting_entity = NULL) {
     $evaluationform_tid = NULL;
 
     if ($meeting_entity && method_exists($meeting_entity, 'getType')) {
       if ($meeting_entity->getType() == 'meeting') {
-        $meeting_evaluationform_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($meeting_entity, 'field_meeting_evaluationform');
+        $meeting_evaluationform_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($meeting_entity, 'field_meeting_evaluationform');
 
         if ($meeting_evaluationform_tid) {
           $evaluationform_tid = $meeting_evaluationform_tid;
         }
         else {
-          $program_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($meeting_entity, 'field_meeting_program');
+          $program_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($meeting_entity, 'field_meeting_program');
           $program_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($program_tid);
 
-          $evaluationform_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($program_entity, 'field_program_evaluationform');
+          $evaluationform_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($program_entity, 'field_program_evaluationform');
         }
       }
     }
@@ -352,7 +352,7 @@ class FlexinfoNodeService {
   }
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingEvaluationformTerm($meeting_entity);
+   \Drupal::service('flexinfo.node.service')->getMeetingEvaluationformTerm($meeting_entity);
    */
   public function getMeetingEvaluationformTerm($meeting_entity = NULL) {
     $evaluationform_term = NULL;   //  "empty" object
@@ -374,7 +374,7 @@ class FlexinfoNodeService {
     $boolean = FALSE;
 
     if ($node) {
-      $evaluation_num = \Drupal::getContainer()->get('flexinfo.field.service')
+      $evaluation_num = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
 
       if ($evaluation_num > 0) {
@@ -388,7 +388,7 @@ class FlexinfoNodeService {
   /**
    * @return Completed Meeting Nodes
    *  evaluated  -- after meeting time && meeting evaluation number > 0
-   \Drupal::getContainer()->get('flexinfo.node.service')->getCompletedMeetingNodes($nodes);
+   \Drupal::service('flexinfo.node.service')->getCompletedMeetingNodes($nodes);
    */
   public function getCompletedMeetingNodes($nodes = array()) {
     $output = array();
@@ -411,7 +411,7 @@ class FlexinfoNodeService {
    *  overdue    -- meeting evaluation number = 0 && after meeting time > 2 days (not 48 hours, 2 whole days)
    *  in PROGRESS -- meeting evaluation number = 0 && after meeting time < 2 days (not 48 hours, 2 whole days)
    *
-   \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingStatus($node);
+   \Drupal::service('flexinfo.node.service')->getMeetingStatus($node);
    */
   public function getMeetingStatus($node = NULL) {
     $status = NULL;
@@ -422,7 +422,7 @@ class FlexinfoNodeService {
 
     $now_timestamp = strtotime("now");
 
-    $meeting_timestamp = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateTimestamp($node, 'field_meeting_date');
+    $meeting_timestamp = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateTimestamp($node, 'field_meeting_date');
 
     if ($now_timestamp <= $meeting_timestamp) {
       $status = t('Upcoming');
@@ -430,14 +430,14 @@ class FlexinfoNodeService {
     else {
       $status = t('Overdue');
 
-      $evaluation_num = \Drupal::getContainer()->get('flexinfo.field.service')
+      $evaluation_num = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstValue($node, 'field_meeting_evaluationnum');
 
       if ($evaluation_num > 0) {
         $status = t('Evaluated');
       }
       else {
-        $meeting_day_value = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date', 'html_date');
+        $meeting_day_value = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date', 'html_date');
 
         $now_timestamp_minus_2_day = $now_timestamp - (60 * 60 * 24 * 2);
 
@@ -555,7 +555,7 @@ class FlexinfoNodeService {
 
     $now_timestamp = strtotime("now");
 
-    $meeting_timestamp = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateTimestamp($node, 'field_webinar_date');
+    $meeting_timestamp = \Drupal::service('flexinfo.field.service')->getFieldFirstValueDateTimestamp($node, 'field_webinar_date');
 
     if ($now_timestamp <= $meeting_timestamp) {
       $status = t('Upcoming');
