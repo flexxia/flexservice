@@ -21,7 +21,7 @@ use Drupal\Component\Utility\Timer;
    $FlexinfoQueryNodeService = new FlexinfoQueryNodeService();
    $FlexinfoQueryNodeService->runQueryWithGroup();
  *
-   \Drupal::getContainer()->get('flexinfo.querynode.service')->runQueryWithGroup();
+   \Drupal::service('flexinfo.querynode.service')->runQueryWithGroup();
  */
 class FlexinfoQueryNodeService extends ControllerBase {
 
@@ -193,7 +193,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.querynode.service')->nodeNidsByStandardByFieldValue('meeting', $field_name, $field_value);
+   \Drupal::service('flexinfo.querynode.service')->nodeNidsByStandardByFieldValue('meeting', $field_name, $field_value);
    */
   public function nodeNidsByStandardByFieldValue($node_bundle, $field_name, $field_value, $operator = NULL, $langcode = NULL) {
     $query = $this->queryNidsByBundle($node_bundle);
@@ -207,7 +207,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.querynode.service')->nodeNidsByTwoStandardByFieldValue('meeting', $field_name, $field_value);
+   \Drupal::service('flexinfo.querynode.service')->nodeNidsByTwoStandardByFieldValue('meeting', $field_name, $field_value);
    */
   public function nodeNidsByTwoStandardByFieldValue($node_bundle, $first_field_name, $first_field_value, $first_operator = NULL, $two_field_name, $two_field_value, $two_operator = NULL, $langcode = NULL) {
     $query = $this->queryNidsByBundle($node_bundle);
@@ -225,7 +225,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.querynode.service')->nodesByStandardByFieldValue('meeting', $field_name, $field_value);
+   \Drupal::service('flexinfo.querynode.service')->nodesByStandardByFieldValue('meeting', $field_name, $field_value);
    */
   public function nodesByStandardByFieldValue($node_bundle, $field_name, $field_value, $operator = NULL, $langcode = NULL) {
     $nids = $this->nodeNidsByStandardByFieldValue($node_bundle, $field_name, $field_value, $operator);
@@ -238,7 +238,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.querynode.service')->nodeNidsByTwoStandardByFieldValue('meeting', $field_name, $field_value);
+   \Drupal::service('flexinfo.querynode.service')->nodeNidsByTwoStandardByFieldValue('meeting', $field_name, $field_value);
    */
   public function wrapperEvaluationNidsByTwoFieldValue($meeting_nid, $meeting_operator = NULL, $question_tid, $question_operator = NULL, $langcode = NULL) {
     $query = $this->queryNidsByBundle('evaluation');
@@ -258,10 +258,10 @@ class FlexinfoQueryNodeService extends ControllerBase {
    *  @before the name is getEvaluationNids()
    */
   public function wrapperEvaluationNidsByQuestion($meeting_nodes = array(), $question_tid = NULL, $question_answer = NULL) {
-    $meeting_nids = \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
+    $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
 
     // query container
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $query_container = \Drupal::service('flexinfo.querynode.service');
     $query = $query_container->queryNidsByBundle('evaluation');
 
     $group = $query_container->groupStandardByFieldValue($query, 'field_evaluation_meetingnid', $meeting_nids, 'IN');
@@ -284,10 +284,10 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
   /**
    * @param $field_value is like - $businessunit_tids, $program_tids
-   \Drupal::getContainer()->get('flexinfo.querynode.service')->wrapperMeetingNodesByFieldValue($meeting_nodes, $field_name, $field_value);
+   \Drupal::service('flexinfo.querynode.service')->wrapperMeetingNodesByFieldValue($meeting_nodes, $field_name, $field_value);
    */
   public function wrapperMeetingNodesByFieldValue($meeting_nodes = array(), $field_name = NULL, $field_value = NULL, $operator = NULL, $langcode = NULL) {
-    $meeting_nids = \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
+    $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
 
     $query = $this->queryNidsByBundle('meeting');
     $group = $this->groupStandardByFieldValue($query, $field_name, $field_value, $operator);
@@ -309,8 +309,8 @@ class FlexinfoQueryNodeService extends ControllerBase {
   public function wrapperPoolAnswerTypeDataNodes($meeting_nodes = array(), $question_tid = NULL, $operator = NULL) {
     $pool_nodes = $this->nodesByStandardByFieldValue('pool', 'field_pool_questiontid', $question_tid, $operator);
 
-    $meeting_nids = \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
-    $pool_nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->poolNodesByPoolMeetingNids($pool_nodes, $meeting_nids);
+    $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
+    $pool_nodes = \Drupal::service('flexinfo.querynode.service')->poolNodesByPoolMeetingNids($pool_nodes, $meeting_nids);
 
     return $pool_nodes;
   }
@@ -337,13 +337,13 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
     switch ($field_name) {
       case 'field_pool_answerint':
-        $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, $field_name);
+        $pool_answer_data = \Drupal::service('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, $field_name);
         break;
       case 'field_pool_answerterm':
-        $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerTermArray($pool_nodes, $field_name);
+        $pool_answer_data = \Drupal::service('flexinfo.field.service')->getFieldAnswerTermArray($pool_nodes, $field_name);
         break;
       case 'field_pool_answertext':
-        $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerTextArray($pool_nodes, $field_name);
+        $pool_answer_data = \Drupal::service('flexinfo.field.service')->getFieldAnswerTextArray($pool_nodes, $field_name);
         break;
 
       default:
@@ -358,9 +358,9 @@ class FlexinfoQueryNodeService extends ControllerBase {
     $pool_answer_data = array();
 
     if ($meeting_nodes) {
-      $meeting_nids = \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
+      $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
 
-      $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+      $query_container = \Drupal::service('flexinfo.querynode.service');
       $query = $query_container->queryNidsByBundle('pool');
 
       $group = $query_container->groupStandardByFieldValue($query, 'field_pool_questiontid', $question_tid);
@@ -374,16 +374,16 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
       $pool_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($pool_nids);
 
-      $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, 'field_pool_answerint');
+      $pool_answer_data = \Drupal::service('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, 'field_pool_answerint');
     }
 
     return $pool_answer_data;
   }
 
   public function wrapperPoolAnswerIntDataByQuestionTidByReferUid($meeting_nodes = array(), $question_tid = NULL, $refer_uid = NULL) {
-    $meeting_nids = \Drupal::getContainer()->get('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
+    $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
 
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $query_container = \Drupal::service('flexinfo.querynode.service');
     $query = $query_container->queryNidsByBundle('pool');
 
     $group = $query_container->groupStandardByFieldValue($query, 'field_pool_questiontid', $question_tid);
@@ -397,7 +397,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
 
     $pool_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($pool_nids);
 
-    $pool_answer_data = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, 'field_pool_answerint');
+    $pool_answer_data = \Drupal::service('flexinfo.field.service')->getFieldAnswerIntArray($pool_nodes, 'field_pool_answerint');
     return $pool_answer_data;
   }
 
@@ -440,7 +440,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
         foreach($meeting_nodes as $node) {
 
           // 2016-04-25T23:30:00
-          $date_time = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue('node', $node, 'field_meeting_date');
+          $date_time = \Drupal::service('flexinfo.field.service')->getFieldFirstValue('node', $node, 'field_meeting_date');
           $timestamp = date_format(date_create($date_time, timezone_open('America/Toronto')), "U");
 
           if ($start_time) {
@@ -478,7 +478,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
    * get each businessunit_tid of program to check in_array()
    */
   public function meetingNodesByBusinessunit($meeting_nodes = array(), $businessunit_tids = array()) {
-    $program_tids = \Drupal::getContainer()->get('flexinfo.queryterm.service')->programTidsByBusinessunit($businessunit_tids);
+    $program_tids = \Drupal::service('flexinfo.queryterm.service')->programTidsByBusinessunit($businessunit_tids);
     $output = $this->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', $program_tids, 'IN');
 
     return $output;
@@ -489,7 +489,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
    * get each businessunit_tid of program to check in_array()
    */
   public function meetingNodesByDiseasestate($meeting_nodes = array(), $diseasestate_tids = array()) {
-    $program_tids = \Drupal::getContainer()->get('flexinfo.queryterm.service')->programTidsByDiseasestate($diseasestate_tids);
+    $program_tids = \Drupal::service('flexinfo.queryterm.service')->programTidsByDiseasestate($diseasestate_tids);
     $output = $this->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', $program_tids, 'IN');
 
     return $output;
@@ -499,7 +499,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
    * get program tids for businessunit_tids to check in_array()
    */
   public function meetingNodesByTheraparea($meeting_nodes = array(), $theraparea_tids = array()) {
-    $program_tids = \Drupal::getContainer()->get('flexinfo.queryterm.service')->programTidsByTheraparea($theraparea_tids);
+    $program_tids = \Drupal::service('flexinfo.queryterm.service')->programTidsByTheraparea($theraparea_tids);
     $output = $this->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', $program_tids, 'IN');
 
     return $output;
@@ -531,7 +531,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
     if (is_array($meeting_nodes)) {
       foreach($meeting_nodes as $node) {
 
-        $speaker_uids = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIds($node, 'field_meeting_speaker');
+        $speaker_uids = \Drupal::service('flexinfo.field.service')->getFieldAllTargetIds($node, 'field_meeting_speaker');
 
         if (is_array($speaker_uids) && count($speaker_uids) > 0) {
           if (array_intersect($speaker_uids, $uids)) {
@@ -556,7 +556,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
     if (is_array($nodes)) {
       foreach($nodes as $node) {
 
-        $date_time = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, $field_name);
+        $date_time = \Drupal::service('flexinfo.field.service')->getFieldFirstValue($node, $field_name);
         if ($date_time) {
 
           preg_match("/^20\d\d\-(\d\d)/i", $date_time, $matches);
@@ -612,7 +612,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
     if (is_array($pool_nodes)) {
       foreach($pool_nodes as $node) {
 
-        $meeting_nid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($node, 'field_pool_meetingnid');
+        $meeting_nid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($node, 'field_pool_meetingnid');
         if ($meeting_nid) {
           if (in_array($meeting_nid, $param_meeting_nids)) {
             $output[] = $node;
