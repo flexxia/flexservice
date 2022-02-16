@@ -310,8 +310,7 @@ class FlexinfoNodeService {
       $meeting_node  = \Drupal::entityTypeManager()->getStorage('node')->load($meeting_nid);
 
       if ($meeting_node) {
-        $evaluation_nids = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $evaluation_nids = \Drupal::service('flexinfo.querynode.service')
           ->nodesByStandardByFieldValue('evaluation', 'field_evaluation_meetingnid', $meeting_nid);
 
         $evaluation_num = count($evaluation_nids);
