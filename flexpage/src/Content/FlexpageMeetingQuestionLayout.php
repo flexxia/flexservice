@@ -245,7 +245,8 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
   public function getHtmlTextfieldByQuestionComment($meeting_nodes = array(), $question_term = NULL) {
     $output = NULL;
 
-    $pool_data = $this->FlexpageEventLayout->getTextfieldQuestionAllData($meeting_nodes, $question_term->id());
+    $pool_data = \Drupal::service('ngdata.term.question')
+      ->getTextfieldQuestionAllData($meeting_nodes, $question_term->id());
 
     $output = NULL;
     if (isset($pool_data) && count($pool_data) > 0) {
