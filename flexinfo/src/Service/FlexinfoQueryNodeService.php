@@ -192,6 +192,28 @@ class FlexinfoQueryNodeService extends ControllerBase {
   /** - - - - - - get nids or nodes  - - - - - - - - - - - - - - - - - - - -  */
 
   /**
+   * \Drupal::service('flexinfo.querynode.service')->meetingNidsByDateTime("2016-01-01T23:30:00", "2016-12-31T23:55:00");
+   */
+  public function meetingNidsByDateTimeRange($start_time = NULL, $end_time = NULL) {
+    $query = $this->queryNidsByBundle('meeting');
+    $group = $this->groupByMeetingDateTime($start_time, $end_time);
+    $query->condition($group);
+
+    $nids = $this->runQueryWithGroup($query);
+
+    return $nids;
+  }
+  /**
+   * \Drupal::service('flexinfo.querynode.service')->meetingNodesByDateTime("2016-01-01T23:30:00", "2016-12-31T23:55:00");
+   */
+  public function meetingNodesByDateTime($start_time = NULL, $end_time = NULL) {
+    $nids = $this->meetingNidsByDateTimeRange($start_time, $end_time);
+    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+
+    return $nodes;
+  }
+
+  /**
    *
    \Drupal::service('flexinfo.querynode.service')->nodeNidsByStandardByFieldValue('meeting', $field_name, $field_value);
    */
@@ -428,7 +450,7 @@ class FlexinfoQueryNodeService extends ControllerBase {
   /** - - - - - - other test - - - - - - - - - - - - - - - - - - - - - - -  */
 
   /**
-   * Old version
+   * Old version Filter meeting nodes by time
    * @return array,
    */
   public function meetingNidsByTime($meeting_nodes = array(), $start_time = NULL, $end_time = NULL) {
