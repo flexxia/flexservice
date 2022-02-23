@@ -150,9 +150,8 @@ class GenpdfJsonGenerator extends ControllerBase {
 
     $output['commentSection'] = $this->blockEventsComments($meeting_nodes, $evaluationform_term, $question_tids);
 
-    $tableSection = $this->blockEventsTableForRelatedFieldQuestion($meeting_nodes, $evaluationform_term, $question_tids);
     $output['tableSection']['question'] = array_merge(
-      $tableSection,
+      $this->blockEventsTableForRelatedFieldQuestion($meeting_nodes, $evaluationform_term, $question_tids);
       $this->blockEventsTableForSelectkeyQuestion($meeting_nodes, $evaluationform_term, $question_tids)
     );
 
@@ -174,22 +173,6 @@ class GenpdfJsonGenerator extends ControllerBase {
     );
 
     return $output;
-  }
-
-  /**
-   *
-   */
-  public function getTermNameByFliedMachineName($term, $field_name) {
-    $objective_name = NULL;
-
-    $objective_goal_term = \Drupal::service('flexinfo.field.service')
-      ->getFieldFirstTargetIdToEntity($term, 'taxonomy_term', $field_name);
-
-    if ($objective_goal_term) {
-      $objective_name = $objective_goal_term->getName();
-    }
-
-    return $objective_name;
   }
 
   /**
