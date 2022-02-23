@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 use Drupal\taxonomy\Entity\Term;
 
 /**
- *
+ * \Drupal::service('flexinfo.term.service')->demo();
  */
 class FlexinfoTermService {
 
@@ -190,6 +190,7 @@ class FlexinfoTermService {
   }
 
   /**
+   * @deprecated
    * @return array, term tids
    */
   public function getNamesFromTermTree($term_tree = array()) {
@@ -212,7 +213,7 @@ class FlexinfoTermService {
     $trees = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
       ->loadTree($vid, 0);
-    $tids = $this->getTidsFromTermTree($trees);
+    $tids = $this->getNamesFromTermTree($trees);
 
     return $tids;
   }
@@ -333,6 +334,7 @@ class FlexinfoTermService {
   }
 
   /**
+   * @deprecated
    * @return array, term tids
    */
   public function getTidsFromTermTree($term_tree = array()) {
@@ -349,7 +351,6 @@ class FlexinfoTermService {
 
   /**
    * @return array, term tids
-   \Drupal::service('flexinfo.term.service')->getTidsFromVidName($vid);
    */
   public function getTidsFromVidName($vid = NULL) {
     $trees = \Drupal::entityTypeManager()
@@ -358,6 +359,22 @@ class FlexinfoTermService {
     $tids = $this->getTidsFromTermTree($trees);
 
     return $tids;
+  }
+
+  /**
+   * @return array, term tids
+   */
+  public function getTidsNamesPairFromVidName($vid = NULL) {
+    $output = [];
+
+    $term_tree = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree($vid, 0);
+    foreach ($term_tree as $term) {
+      $output[$term->tid] = $term->name;
+    }
+
+    return $output;
   }
 
   /**
