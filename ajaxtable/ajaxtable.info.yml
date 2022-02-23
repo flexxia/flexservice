@@ -1,0 +1,5 @@
+name: 'ajaxtable'
+type: module
+description: 'FlexService ajaxtable Module'
+core: 8.x
+package: 'Zen'

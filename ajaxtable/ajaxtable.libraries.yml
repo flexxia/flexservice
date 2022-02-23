@@ -1,0 +1,4 @@
+# demo_table_ajax_invoke_js_form
+loggy:
+  js:
+    js/loggy.js: {}
