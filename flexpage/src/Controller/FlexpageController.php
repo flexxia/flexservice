@@ -49,9 +49,6 @@ class FlexpageController extends ControllerBase {
       '#markup' => $markup,
       '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
       '#attached' => array(
-        'library' => array(
-          'flexpage/angular.snapshot',
-        ),
         'drupalSettings' => [
           'flexpage' => [
             'flexpageData' => [
