@@ -60,7 +60,7 @@ class GenpdfJsonGenerator extends ControllerBase {
       ->getStorage('taxonomy_term')
       ->load($evaluationform_tid);
 
-    $output['pdfjson'] = $this->eventsData($meeting_nodes, $evaluationform_term);
+    $output['pdfjson'] = $this->eventsData($meeting_nodes, $evaluationform_term, 'program', $entity_id);
 
     $output['fixedSection'] = $FlexpageBaseJson->generateTileStyleOne(
       $DashpageObjectContent->pageTopFixedSectionData($meeting_nodes)
@@ -126,9 +126,9 @@ class GenpdfJsonGenerator extends ControllerBase {
   }
 
   /**
-   *
+   * @param $type is 'meeting' or 'program'
    */
-  public function eventsData($meeting_nodes = array(), $evaluationform_term = NULL) {
+  public function eventsData($meeting_nodes = array(), $evaluationform_term = NULL, $type = 'meeting', $entity_id = NULL) {
     $output = array();
 
     if (empty($evaluationform_term)) {
@@ -150,8 +150,13 @@ class GenpdfJsonGenerator extends ControllerBase {
 
     $output['commentSection'] = $this->blockEventsComments($meeting_nodes, $evaluationform_term, $question_tids);
 
+    $table_data = [];
+    if ($type == 'program') {
+      $table_data = $this->blockEventsTableForMeetingFieldQuestion($meeting_nodes, $evaluationform_term, $entity_id);
+    }
     $output['tableSection']['question'] = array_merge(
-      $this->blockEventsTableForRelatedFieldQuestion($meeting_nodes, $evaluationform_term, $question_tids);
+      $table_data,
+      $this->blockEventsTableForRelatedFieldQuestion($meeting_nodes, $evaluationform_term),
       $this->blockEventsTableForSelectkeyQuestion($meeting_nodes, $evaluationform_term, $question_tids)
     );
 
@@ -591,9 +596,40 @@ class GenpdfJsonGenerator extends ControllerBase {
   }
 
   /**
+   * Breakdown table for specify quesitons on the program term.
+   */
+  public function blockEventsTableForMeetingFieldQuestion($meeting_nodes = array(), $evaluationform_term = NULL, $entity_id = NULL) {
+    $output = [];
+
+    $breakdown_values = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_module');
+
+    $program_term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($entity_id);
+
+    if ($breakdown_values && count($breakdown_values) > 1) {
+      $question_terms = \Drupal::service('flexinfo.field.service')
+        ->getFieldAllTargetIdsEntitys($program_term, 'field_program_breakdown_question');
+
+      if ($question_terms) {
+        foreach ($question_terms as $question_term) {
+          $result = $this->getQuestionDataByTableForMeetingFieldQuestion($meeting_nodes, $question_term);
+
+          if ($result) {
+            $output[] = $result;
+          }
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    *
    */
-  public function blockEventsTableForRelatedFieldQuestion($meeting_nodes = array(), $evaluationform_term = NULL, $question_tids = array()) {
+  public function blockEventsTableForRelatedFieldQuestion($meeting_nodes = array(), $evaluationform_term = NULL) {
     $output = [];
 
     // ForMeetingSpeaker
@@ -690,6 +726,54 @@ class GenpdfJsonGenerator extends ControllerBase {
     //     "10%"
     //   ],
     // ];
+
+    return $output;
+  }
+
+  /**
+   * for table
+   */
+  public function getQuestionDataByTableForMeetingFieldQuestion($meeting_nodes = array(), $question_term = NULL) {
+    $output = array();
+
+    $FlexpageEventLayout = new FlexpageEventLayout();
+    $pool_data = $FlexpageEventLayout->getQuestionAnswerAllDataWithProgramBreakDownField($meeting_nodes, $question_term->id());
+    $tbody = array();
+    if ($pool_data && count($pool_data) > 1) {
+      foreach ($pool_data as $key => $row) {
+        if ($key) {
+          $count_values = array_count_values($row);
+
+          $result = array(
+            $key,
+            count($row)
+          );
+          for ($i = 5; $i > 0; $i--) {
+            $cell_value = isset($count_values[$i]) ? $count_values[$i] : 0;
+            $cell_value .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+            $result[] = $cell_value;
+          }
+
+          $tbody[] = $result;
+        }
+      }
+
+      $output['block'] = array(
+        'type'  => 'table',
+        'class' => 'table',
+        'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+      );
+
+      $output['data']["thead"] = [
+        "Name",
+        "Total",
+      ];
+      for ($i = 5; $i > 0; $i--) {
+        $output['data']["thead"][] = $i;
+      }
+
+      $output['data']["tbody"] = $tbody;
+    }
 
     return $output;
   }
