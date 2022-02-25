@@ -18,6 +18,7 @@ use Drupal\genpdf\Content\GenpdfDrawTable;
 use Drupal\genpdf\Content\GenpdfJsonGenerator;
 
 use Drupal\genpdfstyle\Content\ChartBlock;
+use Drupal\genpdfstyle\Content\CommentBlock;
 use Drupal\genpdfstyle\Content\TableBlock;
 
 /**
