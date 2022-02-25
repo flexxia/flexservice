@@ -11,8 +11,8 @@ use Drupal\Core\Controller\ControllerBase;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Drupal\genpdfstyle\Content\GenpdfContentGenerator;
 use Drupal\genpdf\Content\GenpdfJsonGenerator;
+use Drupal\genpdf\Generator\GenpdfContentGenerator;
 
 /**
  * An example controller.
