@@ -9,7 +9,7 @@ use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
-use Drupal\ajaxtable\Content\ajaxtableContentGenerator;
+use Drupal\ajaxtable\Form\DebugControllerForm;
 
 /**
  * An example controller.
@@ -22,10 +22,9 @@ class AjaxtableController extends ControllerBase {
   public function debugControllerForm() {
     $form = \Drupal::formBuilder()->getForm('Drupal\ajaxtable\Form\DebugControllerForm');
 
-    //
-    return new JsonResponse($form);
 
-    //
+    // return new JsonResponse($form);
+
     // $jsonData = json_encode($form, JSON_PRETTY_PRINT);
 
     // or render

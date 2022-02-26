@@ -56,7 +56,7 @@ class DemoFormConditionalOptionForm extends FormBase {
     $form['select_one']['select_country'] = [
       '#type' => 'select',
       '#title' => $this->t('两个option，不同的国家显示不同的省'),
-      "#empty_option"=>t('- Select -'),
+      "#empty_option"=>t('- 请选择 -'),
       '#options' => [
         'Usa' => $this->t('Usa'),
         'Canada' => $this->t('Canada'),
@@ -76,7 +76,7 @@ class DemoFormConditionalOptionForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Load province'),
       '#options' =>  $this->_ajax_get_province_dropdown_options($selected),
-      "#empty_option"=>t('- Select -'),
+      "#empty_option"=>t('- 请先选择国家 -'),
       '#prefix' => '<div id="load-american-wrapper">',
       '#suffix' => '</div>',
     );
@@ -138,7 +138,8 @@ class DemoFormConditionalOptionForm extends FormBase {
     $form['radio_one']['country'] = array(
       '#type' => 'select',
       '#title' => $this->t('Load country'),
-      '#options' =>  $this->_ajax_get_province_dropdown_options($selected),
+      '#options' =>  $this->_ajax_get_second_dropdown_options($selected),
+      '#empty_option' => '- Please Select -',
       '#prefix' => '<div id="load-country-wrapper">',
       '#suffix' => '</div>',
     );
