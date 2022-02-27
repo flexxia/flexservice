@@ -25,11 +25,16 @@ function ajaxtable_help($route_name, RouteMatchInterface $route_match) {
 
 /**
  * Implements hook_theme().
+ * .html.twig file
  */
 function ajaxtable_theme() {
   return [
     'ajaxtable' => [
       'render element' => 'children',
+    ],
+    // templates/render-by-template-form.html.twig
+    'render_by_template_form' => [
+      'render element' => 'form',
     ],
   ];
 }
