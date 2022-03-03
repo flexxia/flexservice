@@ -12,13 +12,13 @@ use Drupal\Core\Render\Element;
  * Class DemoForm.
  * https://www.webomelette.com/ajax-elements-drupal-form-tables
  */
-class DemoForm extends FormBase {
+class DemoFormDebugController extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'demo_form';
+    return 'debug_controller_form';
   }
 
   /**

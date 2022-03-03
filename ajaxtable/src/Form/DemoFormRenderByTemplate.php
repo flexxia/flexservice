@@ -11,7 +11,7 @@ use Drupal\Core\Render\Element;
 /**
  * Class DemoForm.
  */
-class DemoFormRenderByTemplateForm extends FormBase {
+class DemoFormRenderByTemplate extends FormBase {
 
   /**
    * {@inheritdoc}

@@ -42,7 +42,7 @@ class DemoTableAjaxForm extends FormBase {
          'callback' => '::checkUserEmailValidation',
           'progress' => array(
              'type' => 'throbber',
-             'message' => NULL,
+             'message' => t('Fetching content...'),
           ),
       )
     ];

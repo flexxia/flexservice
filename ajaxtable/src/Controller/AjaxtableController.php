@@ -19,7 +19,7 @@ class AjaxtableController extends ControllerBase {
   /**
    *
    */
-  public function debugControllerForm() {
+  public function DemoFormDebugController() {
     $form = \Drupal::formBuilder()->getForm('Drupal\ajaxtable\Form\DebugControllerForm');
 
 

@@ -13,7 +13,7 @@ use Drupal\Component\Utility\Html;
  * Class DemoFormMultiUnlimitedTextfieldsForm.
  * https://drupal.stackexchange.com/a/290222
  */
-class DemoFormMultiUnlimitedTextfieldsForm extends FormBase {
+class DemoFormMultiUnlimitedTextfields extends FormBase {
 
   /**
    * {@inheritdoc}

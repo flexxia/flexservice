@@ -12,7 +12,7 @@ use Drupal\Core\Render\Element;
  * Class DemoForm.
  * https://www.webomelette.com/ajax-elements-drupal-form-tables
  */
-class DemoFormTriggerButtonForm extends FormBase {
+class DemoFormTriggerButton extends FormBase {
 
   /**
    * {@inheritdoc}

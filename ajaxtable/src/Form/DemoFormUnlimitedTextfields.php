@@ -12,7 +12,7 @@ use Drupal\Core\Render\Element;
  * Class DemoFormUnlimitedTextfieldsForm.
  * https://drupal.stackexchange.com/a/290222
  */
-class DemoFormUnlimitedTextfieldsForm extends FormBase {
+class DemoFormUnlimitedTextfields extends FormBase {
 
   /**
    * {@inheritdoc}

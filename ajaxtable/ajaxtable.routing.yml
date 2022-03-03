@@ -1,5 +1,5 @@
 # Render Form directly.
-ajaxtable.demo_form:
+ajaxtable.demo_form.sample:
   path: '/ajaxtable/demoform/sample'
   defaults:
     _form: '\Drupal\ajaxtable\Form\SampleForm'
@@ -8,87 +8,97 @@ ajaxtable.demo_form:
     _access: 'TRUE'
 
 # Render Form by Controller.
-ajaxtable.demo.controller.form:
+ajaxtable.demo_form.controller:
   path: '/ajaxtable/debug/controller'
   defaults:
-    _controller: '\Drupal\ajaxtable\Controller\AjaxtableController::debugControllerForm'
+    _controller: '\Drupal\ajaxtable\Controller\AjaxtableController::DemoFormDebugController'
     _title: 'Predefined Debug Controller Demo Form'
   requirements:
     _access: 'TRUE'
 
 # render a form in custom template from theme
-ajaxtable.demo.renderbytemplate.form:
-  path: '/ajaxtable/demoform/renderbytemplateform'
+ajaxtable.demo_form.renderbytemplate:
+  path: '/ajaxtable/demoform/renderbytemplate'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormRenderByTemplateForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormRenderByTemplate'
     _title: 'DemoFormRenderByTemplateForm'
   requirements:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_form.ajaxclearaction.form:
+ajaxtable.demo_form.ajaxclearaction:
   path: '/ajaxtable/demoform/ajaxclearaction'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormAjaxClearActionForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormAjaxClearAction'
     _title: 'DemoFormAjaxClearActionForm'
   requirements:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_form.clearaction.form:
+ajaxtable.demo_form.clearaction:
   path: '/ajaxtable/demoform/clearaction'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormClearActionForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormClearAction'
     _title: 'DemoFormClearActionForm'
   requirements:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_form.conditional_field.form:
+ajaxtable.demo_form.conditional_field:
   path: '/ajaxtable/demoform/conditional-field'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormConditionalFieldForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormConditionalField'
     _title: 'DemoFormConditionalFieldForm'
   requirements:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_form.conditional_option.form:
+ajaxtable.demo_form.conditional_option:
   path: '/ajaxtable/demoform/conditional-option'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormConditionalOptionForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormConditionalOption'
     _title: 'DemoFormConditionalOptionForm'
   requirements:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_form.unlimited.textfields.form:
+ajaxtable.demo_form.unlimited.textfields:
   path: '/ajaxtable/demoform/unlimited/textfields'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormUnlimitedTextfieldsForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormUnlimitedTextfields'
     _title: 'DemoForm Unlimited Textfields Form'
   requirements:
     _access: 'TRUE'
-#
 
-ajaxtable.demo_form.multiunlimited.textfields.form:
+#
+ajaxtable.demo_form.multiunlimited.textfields:
   path: '/ajaxtable/demoform/multiunlimited/textfields'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormMultiUnlimitedTextfieldsForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormMultiUnlimitedTextfields'
     _title: 'DemoForm Multi Unlimited Textfields Form'
   requirements:
     _access: 'TRUE'
 
-ajaxtable.demo_form.trigger.button.form:
+#
+ajaxtable.demo_form.trigger.button:
   path: '/ajaxtable/demoform/trigger/button'
   defaults:
-    _form: '\Drupal\ajaxtable\Form\DemoFormTriggerButtonForm'
+    _form: '\Drupal\ajaxtable\Form\DemoFormTriggerButton'
+    _title: 'DemoForm Trigger Button Form'
+  requirements:
+    _access: 'TRUE'
+
+#
+ajaxtable.demo_form.multiple.dependent:
+  path: '/ajaxtable/demoform/multiple/dependent'
+  defaults:
+    _form: '\Drupal\ajaxtable\Form\DemoFormMultipleDependent'
     _title: 'DemoForm Trigger Button Form'
   requirements:
     _access: 'TRUE'
 
 # Table
-ajaxtable.demo_table.ajaxaction.form:
+ajaxtable.demo_table.ajaxaction:
   path: '/ajaxtable/demotable/ajaxinvokejs'
   defaults:
     _form: '\Drupal\ajaxtable\Form\DemoTableAjaxActionForm'
@@ -97,7 +107,7 @@ ajaxtable.demo_table.ajaxaction.form:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_table.ajax.form:
+ajaxtable.demo_table.ajax:
   path: '/ajaxtable/demotable/ajax'
   defaults:
     _form: '\Drupal\ajaxtable\Form\DemoTableAjaxForm'
@@ -106,7 +116,7 @@ ajaxtable.demo_table.ajax.form:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_table.ajaxinvokejs.form:
+ajaxtable.demo_table.ajaxinvokejs:
   path: '/ajaxtable/demotable/ajaxinvokejs'
   defaults:
     _form: '\Drupal\ajaxtable\Form\DemoTableAjaxInvokeJsForm'
@@ -115,7 +125,7 @@ ajaxtable.demo_table.ajaxinvokejs.form:
     _access: 'TRUE'
 
 #
-ajaxtable.demo_table.input.form:
+ajaxtable.demo_table.input:
   path: '/ajaxtable/demotable/input'
   defaults:
     _form: '\Drupal\ajaxtable\Form\DemoTableInputForm'
@@ -123,7 +133,7 @@ ajaxtable.demo_table.input.form:
   requirements:
     _access: 'TRUE'
 #
-ajaxtable.demo_table.select.form:
+ajaxtable.demo_table.select:
   path: '/ajaxtable/demotable/select'
   defaults:
     _form: '\Drupal\ajaxtable\Form\DemoTableSelectForm'

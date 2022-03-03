@@ -12,7 +12,7 @@ use Drupal\Core\Render\Element;
  * Class DemoForm.
  * https://www.drupal.org/node/717742
  */
-class DemoFormConditionalOptionForm extends FormBase {
+class DemoFormConditionalOption extends FormBase {
 
   /**
    * {@inheritdoc}
