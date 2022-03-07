@@ -328,14 +328,14 @@ class FlexinfoFieldService {
    * @return Entity
    */
   public function getFieldFirstTargetIdToEntity($entity = NULL, $entity_type = NULL, $field_name = NULL) {
-    $entity = NULL;
+    $output = NULL;
 
     $target_id = $this->getFieldFirstTargetId($entity, $field_name);
     if ($target_id) {
-      $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($target_id);
+      $output = \Drupal::entityTypeManager()->getStorage($entity_type)->load($target_id);
     }
 
-    return $entity;
+    return $output;
   }
 
   /**
