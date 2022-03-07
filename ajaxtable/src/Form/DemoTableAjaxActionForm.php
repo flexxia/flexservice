@@ -31,7 +31,7 @@ class DemoTableAjaxActionForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'cargar_boleta_form';
+    // return 'cargar_boleta_form';
     return 'demo_table_ajax_action_form';
   }
 

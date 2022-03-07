@@ -1368,10 +1368,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByCustomNodeByMeetingShowProductEntity($meeting_nodes, $entity_id, $start, $end) {
     $output = array();
 
-    // $nodes = \Drupal::service('flexinfo.querynode.service')->nodesByBundle('meeting');
-
     foreach ($meeting_nodes as $node) {
-      $program_entity = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
+      $program_entity = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstTargetIdToEntity($node, 'taxonomy_term', 'field_meeting_program');
 
       $result_row = array(
         'Name' => $program_entity ? $program_entity->getName() : '',
