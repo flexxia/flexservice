@@ -494,7 +494,7 @@ class GenpdfJsonGenerator extends ControllerBase {
         ->getTextfieldQuestionAllData($meeting_nodes, $question_term->id());
 
         if ($question_answers) {
-          $output['question'][] = $this->getQuestionDataByTextfieldNew($question_term, $question_answers);
+          $output['question'][] = $this->getQuestionDataByTextfield($question_term, $question_answers);
         }
       }
     }
@@ -503,65 +503,9 @@ class GenpdfJsonGenerator extends ControllerBase {
   }
 
   /**
-   * Deprecated
-   */
-  public function getTextfieldQuestionComments($textfield_question_tids = array(), $meeting_nodes = array()) {
-    $output = array();
-
-    if (is_array($textfield_question_tids)) {
-      $textfield_question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($textfield_question_tids);
-
-      foreach ($textfield_question_terms as $textfield_question_term) {
-        $pool_data = \Drupal::service('ngdata.term.question')
-          ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
-
-        $question_comments = NULL;
-        if (isset($pool_data) && count($pool_data) > 0) {
-          foreach ($pool_data as $key => $row) {
-            $question_comments[] = $row;
-          }
-
-          $output[] = $question_comments;
-        }
-      }
-    }
-
-    return $output;
-  }
-
-  /**
-   *  Deprecated
-   * for Comments
-   * new function getQuestionDataByTextfieldNew()
-   */
-  public function getQuestionDataByTextfield($textfield_question_term = NULL, $meeting_nodes = array()) {
-    $output = array();
-
-    $output['block'] = array(
-      'type'  => 'comments',
-      'class' => 'comments',
-      'title' => $textfield_question_term->getName(),
-    );
-
-    $pool_data = \Drupal::service('ngdata.term.question')
-      ->getTextfieldQuestionAllData($meeting_nodes, $textfield_question_term->id());
-
-    if (isset($pool_data) && count($pool_data) > 0) {
-      foreach ($pool_data as $key => $row) {
-        $question_comments[] = $row;
-      }
-
-      $output['data'] = $question_comments;
-    }
-
-    return $output;
-  }
-
-  /**
-   * New
    * for Comments
    */
-  public function getQuestionDataByTextfieldNew($comment_header = NULL, $comment_content = array()) {
+  public function getQuestionDataByTextfield($comment_header = NULL, $comment_content = array()) {
     $output = [];
     $question_comments = [];
 

@@ -77,7 +77,7 @@ class DemoTableAjaxActionForm extends FormBase {
     $form['imprimir'] = [
       '#type' => 'link',
       '#title' => t('Imprimir'), // <i class="fas fa-user-tie"></i></i> Empleados
-      '#url' => Url::fromRoute("ajaxtable.demo_table.input.form", ['boletaId' => $boleta->id()]),
+      '#url' => Url::fromRoute("ajaxtable.demo_table.input", ['boletaId' => $boleta->id()]),
       '#attributes' => [
         'class' => ['btn btn-lg btn-primary icon-before m-3'],
         'target' => '_blank',
@@ -91,12 +91,12 @@ class DemoTableAjaxActionForm extends FormBase {
     $form['boletas'] = [
       '#type' => 'link',
       '#title' => t('Boletas'), // <i class="fas fa-user-tie"></i></i> Empleados
-      '#url' => Url::fromRoute("ajaxtable.demo_table.input.form", ['arg_0' => $boleta->field_empleador->target_id]),
+      '#url' => Url::fromRoute("ajaxtable.demo_table.input", ['arg_0' => $boleta->field_empleador->target_id]),
       '#attributes' => ['class' => ['btn btn-lg btn-secondary icon-before m-3']],
       '#weight' => -1000,
     ];
 
-    $form_state->setRedirect("ajaxtable.demo_table.input.form", ['arg_0' => $boleta->field_empleador->target_id]);
+    $form_state->setRedirect("ajaxtable.demo_table.input", ['arg_0' => $boleta->field_empleador->target_id]);
   }
 
   private function buildTitulo(array &$form, FormStateInterface $form_state, $boleta) {
@@ -108,7 +108,7 @@ class DemoTableAjaxActionForm extends FormBase {
     $form['boletas'] = [
       '#type' => 'link',
       '#title' => t('Boletas'), // <i class="fas fa-user-tie"></i></i> Empleados
-      '#url' => Url::fromRoute("ajaxtable.demo_table.input.form", ['arg_0' => $boleta->field_empleador->target_id]),
+      '#url' => Url::fromRoute("ajaxtable.demo_table.input", ['arg_0' => $boleta->field_empleador->target_id]),
       '#attributes' => ['class' => ['btn btn-sm btn-secondary icon-before float-right mt-2 mb-2 ml-1 mr-3']],
       '#weight' => -1010,
     ];

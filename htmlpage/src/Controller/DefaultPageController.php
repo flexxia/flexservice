@@ -49,7 +49,7 @@ class DefaultPageController extends ControllerBase {
       '#cache' => [
         'max-age' => 0,
       ],
-      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
+      '#allowed_tags' => \Drupal::service('flexinfo.setting.service')->adminTag(),
     ];
 
     return $build;
@@ -85,7 +85,7 @@ class DefaultPageController extends ControllerBase {
           ],
         ],
       ],
-      // '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
+      // '#allowed_tags' => \Drupal::service('flexinfo.setting.service')->adminTag(),
     ];
 
     return $build;
