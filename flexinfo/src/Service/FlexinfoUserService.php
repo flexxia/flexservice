@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 
 /**
  * An example Service container.
- \Drupal::getContainer()->get('flexinfo.user.service')->checkUserNameExist($uid);
+ \Drupal::service('flexinfo.user.service')->checkUserNameExist($uid);
  */
 class FlexinfoUserService {
 
@@ -61,7 +61,7 @@ class FlexinfoUserService {
 
   /**
    * @return boolean
-   \Drupal::getContainer()->get('flexinfo.user.service')->checkUserHasSpecificRolesFromUid($valid_roles, $uid);
+   \Drupal::service('flexinfo.user.service')->checkUserHasSpecificRolesFromUid($valid_roles, $uid);
    */
   public function checkUserHasSpecificRolesFromUid($valid_roles = array(), $uid = NULL, $authenticated = FALSE) {
     $user_roles = $this->getUserRolesFromUid($uid, $authenticated);
@@ -191,7 +191,7 @@ class FlexinfoUserService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.user.service')->getUserRolesFromUid($uid);
+   \Drupal::service('flexinfo.user.service')->getUserRolesFromUid($uid);
    */
   public function getUserRolesFromUid($uid = NULL, $authenticated = FALSE) {
     $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
@@ -280,14 +280,14 @@ class FlexinfoUserService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.user.service')->getHubTidByCountryTid();
+   \Drupal::service('flexinfo.user.service')->getHubTidByCountryTid();
    */
   public function getHubTidByCountryTid($country_tid = NULL) {
     $hub_tid = NULL;
 
     $country_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($country_tid);
     if ($country_term) {
-      $hub_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($country_term, 'field_eventcountry_hub');
+      $hub_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($country_term, 'field_eventcountry_hub');
     }
 
     return $hub_tid;
@@ -295,14 +295,14 @@ class FlexinfoUserService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.user.service')->getRegionTidByHubTid();
+   \Drupal::service('flexinfo.user.service')->getRegionTidByHubTid();
    */
   public function getRegionTidByHubTid($hub_tid = NULL) {
     $region_tid = NULL;
 
     $hub_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($hub_tid);
     if ($hub_term) {
-      $region_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($hub_term, 'field_eventhub_region');
+      $region_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($hub_term, 'field_eventhub_region');
     }
 
     return $region_tid;
@@ -341,7 +341,7 @@ class FlexinfoUserService {
 
     $region_tids = NULL;
     if ($user_current_country_vid == 'eventglobal') {
-      $region_tids = \Drupal::getContainer()->get('flexinfo.term.service')->getTidsFromVidName('eventregion');
+      $region_tids = \Drupal::service('flexinfo.term.service')->getTidsFromVidName('eventregion');
     }
     else {
       $region_tid = $this->getRegionTidByUserDataCountryTid();
@@ -355,7 +355,7 @@ class FlexinfoUserService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.user.service')->getUserDataDefaultCountryTid();
+   \Drupal::service('flexinfo.user.service')->getUserDataDefaultCountryTid();
    */
   public function getUserDataDefaultCountryTid() {
     $user_default_country_tid = \Drupal::service('user.data')
@@ -366,8 +366,8 @@ class FlexinfoUserService {
       $user_default_country_tid = NULL;
 
       if (\Drupal::hasService('baseinfo.user.service')) {
-        if (method_exists(\Drupal::getContainer()->get('baseinfo.user.service'), 'getSiteDefaultCountryTid')){
-          $user_default_country_tid = \Drupal::getContainer()->get('baseinfo.user.service')->getSiteDefaultCountryTid();
+        if (method_exists(\Drupal::service('baseinfo.user.service'), 'getSiteDefaultCountryTid')){
+          $user_default_country_tid = \Drupal::service('baseinfo.user.service')->getSiteDefaultCountryTid();
         }
       }
     }
@@ -399,7 +399,7 @@ class FlexinfoUserService {
     $theraparea_tids_current_region = \Drupal::getContainer()
       ->get('flexinfo.queryterm.service')->wrapperTermTidsByField('therapeuticarea', 'field_theraparea_eventregion', $user_current_region_tids, 'IN');
 
-    $user_theraparea_tids = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllTargetIds($user, 'field_user_theraparea');
+    $user_theraparea_tids = \Drupal::service('flexinfo.field.service')->getFieldAllTargetIds($user, 'field_user_theraparea');
 
     $current_theraparea_tids = array_intersect($user_theraparea_tids, $theraparea_tids_current_region);
 

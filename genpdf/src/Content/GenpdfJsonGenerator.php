@@ -797,8 +797,7 @@ class GenpdfJsonGenerator extends ControllerBase {
     $question_tids = \Drupal::service('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($question_tids, 'questionlibrary', 'field_queslibr_fieldtype', $selectkey_tid);
 
     // new need test
-    // $filter_tids = \Drupal::getContainer()
-    // ->get('baseinfo.queryterm.service')
+    // $filter_tids = \Drupal::service('baseinfo.queryterm.service')
     // ->wrapperFieldtypeQuestionTidsFromEvaluationform('selectkey', $evaluationform_term);
 
     // $question_tids = array_intersect($question_tids, $filter_tids);

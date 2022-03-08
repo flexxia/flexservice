@@ -111,13 +111,11 @@ class FlexpageEventLayout extends ControllerBase {
         $color_plate = \Drupal::service('flexinfo.setting.service')
           ->colorPlateOutputKeyPlusOneByPaletteName('EventPie5', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
         if ($question_scale == 7) {
-          $color_plate = \Drupal::getContainer()
-            ->get('flexinfo.setting.service')
+          $color_plate = \Drupal::service('flexinfo.setting.service')
             ->colorPlateOutputKeyPlusOneByPaletteName('EventPie7', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
         }
         elseif ($question_scale == 10) {
-          $color_plate = \Drupal::getContainer()
-            ->get('flexinfo.setting.service')
+          $color_plate = \Drupal::service('flexinfo.setting.service')
             ->colorPlateOutputKeyPlusOneByPaletteName('EventPie10', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
         }
 
@@ -293,13 +291,11 @@ class FlexpageEventLayout extends ControllerBase {
 
     $legends = [];
     if ($chart_type_method == 'getChartPie') {
-      $legends = \Drupal::getContainer()
-        ->get('flexinfo.chart.service')
+      $legends = \Drupal::service('flexinfo.chart.service')
         ->renderLegendSquare($legend_text, $color_plate);
     }
     elseif ($chart_type_method == 'getChartDoughnut') {
-      $legends = \Drupal::getContainer()
-        ->get('flexinfo.chart.service')
+      $legends = \Drupal::service('flexinfo.chart.service')
         ->renderChartDoughnutLegend($pool_data, $question_term);
     }
 

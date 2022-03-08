@@ -134,8 +134,7 @@ class FlexinfoNodeService {
             }
 
             // get all evaluation for this $meeting_nid and this $question_tid
-            $evaluation_nids = \Drupal::getContainer()
-              ->get('flexinfo.querynode.service')
+            $evaluation_nids = \Drupal::service('flexinfo.querynode.service')
               ->wrapperEvaluationNidsByTwoFieldValue($meeting_nid, NULL, $question_tid);
 
             if (is_array($evaluation_nids)) {
@@ -175,13 +174,11 @@ class FlexinfoNodeService {
 
               // multiselect tid is 2492, selectkey tid is 2494
               if ($question_type == 2492 || $question_type == 2494) {
-                $evaluation_raw_answer = \Drupal::getContainer()
-                  ->get('flexinfo.field.service')
+                $evaluation_raw_answer = \Drupal::service('flexinfo.field.service')
                   ->getReactsetFieldAllValueCollectionWithSubfieldCondition($evaluation_nodes, 'field_evaluation_reactset', 'question_answer', $subfield_condition_array);
               }
               else {
-                $evaluation_raw_answer = \Drupal::getContainer()
-                  ->get('flexinfo.field.service')
+                $evaluation_raw_answer = \Drupal::service('flexinfo.field.service')
                   ->getReactsetFieldFirstValueCollectionWithSubfieldCondition($evaluation_nodes, 'field_evaluation_reactset', 'question_answer', $subfield_condition_array);
               }
 

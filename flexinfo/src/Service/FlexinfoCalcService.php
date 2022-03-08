@@ -160,7 +160,7 @@ class FlexinfoCalcService {
    */
   public function percentage5or4ByAnswerInt($pool_data = array(), $decimals = 2) {
     $output = $this->getPercentageDecimal(
-      \Drupal::getContainer() ->get('flexinfo.calc.service')->sum5or4ByAnswerInt($pool_data),
+      \Drupal::service('flexinfo.calc.service')->sum5or4ByAnswerInt($pool_data),
       array_sum($pool_data),
       $decimals
     );

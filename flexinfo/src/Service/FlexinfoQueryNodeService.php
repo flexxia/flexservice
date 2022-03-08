@@ -147,11 +147,9 @@ class FlexinfoQueryNodeService extends ControllerBase {
    *
    */
   public function groupByMeetingTimestamp($query = NULL, $start_timestamp = NULL, $end_timestamp = NULL) {
-    $start_time = \Drupal::getContainer()
-      ->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($start_timestamp, 'html_datetime', $format = NULL, 'UTC');
+    $start_time = \Drupal::service('flexinfo.setting.service')->convertTimeStampToHtmlDate($start_timestamp, 'html_datetime', $format = NULL, 'UTC');
 
-    $end_time = \Drupal::getContainer()
-      ->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($end_timestamp, 'html_datetime', $format = NULL, 'UTC');
+    $end_time = \Drupal::service('flexinfo.setting.service')->convertTimeStampToHtmlDate($end_timestamp, 'html_datetime', $format = NULL, 'UTC');
 
     $group = $this->groupByMeetingDateTime($query, $start_time, $end_time);
 
@@ -178,11 +176,9 @@ class FlexinfoQueryNodeService extends ControllerBase {
    *
    */
   public function groupByEntityCreateTimestamp($query = NULL, $start_timestamp = NULL, $end_timestamp = NULL) {
-    $start_time = \Drupal::getContainer()
-      ->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($start_timestamp, 'html_datetime', $format = NULL, 'UTC');
+    $start_time = \Drupal::service('flexinfo.setting.service')->convertTimeStampToHtmlDate($start_timestamp, 'html_datetime', $format = NULL, 'UTC');
 
-    $end_time = \Drupal::getContainer()
-      ->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($end_timestamp, 'html_datetime', $format = NULL, 'UTC');
+    $end_time = \Drupal::service('flexinfo.setting.service')->convertTimeStampToHtmlDate($end_timestamp, 'html_datetime', $format = NULL, 'UTC');
 
     $group = $this->groupByEntityCreateDateTime($query, $start_time, $end_time);
 

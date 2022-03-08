@@ -9,7 +9,7 @@ namespace Drupal\flexinfo\Service;
 /**
  * An example Service container.
  *
-   \Drupal::getContainer()->get('flexinfo.entity.service')->getEntity($entity_type);
+   \Drupal::service('flexinfo.entity.service')->getEntity($entity_type);
  */
 class FlexinfoEntityService {
 
@@ -20,51 +20,51 @@ class FlexinfoEntityService {
   function getEntity($entity_type) {
     switch ($entity_type) {
       case 'calc':
-        $container = \Drupal::getContainer()->get('flexinfo.calc.service');
+        $container = \Drupal::service('flexinfo.calc.service');
         break;
 
       case 'chart':
-        $container = \Drupal::getContainer()->get('flexinfo.chart.service');
+        $container = \Drupal::service('flexinfo.chart.service');
         break;
 
       case 'entityform':
-        $container = \Drupal::getContainer()->get('flexinfo.entityform.service');
+        $container = \Drupal::service('flexinfo.entityform.service');
         break;
 
       case 'field':
-        $container = \Drupal::getContainer()->get('flexinfo.field.service');
+        $container = \Drupal::service('flexinfo.field.service');
         break;
 
       case 'json':
-        $container = \Drupal::getContainer()->get('flexinfo.json.service');
+        $container = \Drupal::service('flexinfo.json.service');
         break;
 
       case 'node':
-        $container = \Drupal::getContainer()->get('flexinfo.node.service');
+        $container = \Drupal::service('flexinfo.node.service');
         break;
 
       case 'querynode':
-        $container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+        $container = \Drupal::service('flexinfo.querynode.service');
         break;
 
       case 'queryterm':
-        $container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+        $container = \Drupal::service('flexinfo.queryterm.service');
         break;
 
       case 'queryuser':
-        $container = \Drupal::getContainer()->get('flexinfo.queryuser.service');
+        $container = \Drupal::service('flexinfo.queryuser.service');
         break;
 
       case 'setting':
-        $container = \Drupal::getContainer()->get('flexinfo.setting.service');
+        $container = \Drupal::service('flexinfo.setting.service');
         break;
 
       case 'term':
-        $container = \Drupal::getContainer()->get('flexinfo.term.service');
+        $container = \Drupal::service('flexinfo.term.service');
         break;
 
       case 'user':
-        $container = \Drupal::getContainer()->get('flexinfo.user.service');
+        $container = \Drupal::service('flexinfo.user.service');
         break;
 
       default:

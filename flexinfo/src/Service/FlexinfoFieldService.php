@@ -877,8 +877,7 @@ class FlexinfoFieldService {
     $entitys = \Drupal::entityTypeManager()->getStorage($entity_type)->loadMultiple($evaluation_nids);
     foreach ($entitys as $entity) {
 
-      $search_question_answer = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $search_question_answer = \Drupal::service('flexinfo.field.service')
         ->getReactsetFieldFirstValue($entity, 'field_evaluation_reactset', 'question_answer', $search_question_tid);
 
       $reasctset_values = $entity->get('field_evaluation_reactset')->getValue();
@@ -926,8 +925,7 @@ class FlexinfoFieldService {
     $entitys = \Drupal::entityTypeManager()->getStorage($entity_type)->loadMultiple($evaluation_nids);
     foreach ($entitys as $entity) {
 
-      $get_evaluation_answer = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $get_evaluation_answer = \Drupal::service('flexinfo.field.service')
         ->getReactsetFieldFirstValue($entity, 'field_evaluation_reactset', 'question_answer', $search_question_tid);
 
       if ($get_evaluation_answer == $search_question_answer) {

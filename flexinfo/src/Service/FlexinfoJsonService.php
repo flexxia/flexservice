@@ -88,7 +88,7 @@ class FlexinfoJsonService {
 
   /**
    * @return array, terms entity
-     \Drupal::getContainer()->get('flexinfo.json.service')->fetchConvertJsonToArrayFromInternalPath();
+     \Drupal::service('flexinfo.json.service')->fetchConvertJsonToArrayFromInternalPath();
    *
    * @param $file_path, internal file path
      $file_path = '/sites/default/files/json/bi_lilly_meeting_sheet.json'

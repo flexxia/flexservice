@@ -49,8 +49,7 @@ class FlexinfoTermService {
             $field = \Drupal\field\Entity\FieldStorageConfig::loadByName('taxonomy_term', $field_row['field_name']);
 
             if ($field) {
-              $field_standard_type = \Drupal::getContainer()
-                ->get('flexinfo.field.service')
+              $field_standard_type = \Drupal::service('flexinfo.field.service')
                 ->getFieldStandardType();
 
               if (is_array($field_row['value'])) {
@@ -597,18 +596,15 @@ class FlexinfoTermService {
     $output = NULL;
 
     if ($program_entity) {
-      $theraparea_entity = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $theraparea_entity = \Drupal::service('flexinfo.field.service')
         ->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_theraparea');
 
       if ($theraparea_entity) {
-        $output = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $output = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetIdTermEntity($theraparea_entity, 'field_theraparea_businessunit');
       }
       else {
-        $output = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $output = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetIdTermEntity($program_entity, 'field_program_businessunit');
       }
     }

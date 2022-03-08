@@ -41,12 +41,10 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
 
     $program_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($entity_id);
 
-    $evaluationform_term = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $evaluationform_term = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetIdTermEntity($program_term, 'field_program_evaluationform');
 
-    $meeting_nodes = \Drupal::getContainer()
-      ->get('flexinfo.querynode.service')
+    $meeting_nodes = \Drupal::service('flexinfo.querynode.service')
       ->nodesByStandardByFieldValue('meeting', 'field_meeting_program', $entity_id);;
 
     if ($evaluationform_term) {
@@ -67,8 +65,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
     $output = NULL;
 
     $meeting_node = \Drupal::entityTypeManager()->getStorage('node')->load($entity_id);
-    $evaluationform_tid = \Drupal::getContainer()
-      ->get('flexinfo.node.service')
+    $evaluationform_tid = \Drupal::service('flexinfo.node.service')
       ->getMeetingEvaluationformTid($meeting_node);
 
     if ($evaluationform_tid) {
@@ -92,8 +89,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
   public function meetingPageLayoutByEvaluationformTerm($meeting_nodes = array(), $evaluationform_term = NULL) {
     $output = NULL;
 
-    $question_tids = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_tids = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
     $question_terms = \Drupal::entityTypeManager()
@@ -128,8 +124,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
    *
    */
   public function getQuestionAnswerAllDataByProvince($meeting_nodes = array(), $question_term = NULL) {
-    $province_terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $province_terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('province');
 
     if (is_array($province_terms)) {
@@ -153,8 +148,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
   public function getHtmlTableByQuestionTerm($meeting_nodes = array(), $question_term = NULL, $select_key_answer = FALSE) {
     $output = NULL;
 
-    $province_terms = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $province_terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('province');
 
     $pool_data = $this->FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());

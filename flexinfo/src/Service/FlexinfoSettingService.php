@@ -18,7 +18,7 @@ class FlexinfoSettingService {
    *
    * @return Xss::getAdminTagList() + custom tags
    *
-   * \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag();
+   * \Drupal::service('flexinfo.setting.service')->adminTag();
    */
   public function adminTag() {
     $admin_tags = Xss::getAdminTagList();
@@ -60,7 +60,7 @@ class FlexinfoSettingService {
    *
    * @return Xss::getAdminTagList() + custom tags
    *
-   * \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag();
+   * \Drupal::service('flexinfo.setting.service')->adminTag();
    */
   public function adminTagMaterial() {
     $output = [
@@ -86,7 +86,7 @@ class FlexinfoSettingService {
    * @to distinguish local or live site or test site
    * @return Boolean
    *
-   * $is_local_environment = \Drupal::getContainer()->get('flexinfo.setting.service')->checkCurrentIsLocalEnvironment();
+   * $is_local_environment = \Drupal::service('flexinfo.setting.service')->checkCurrentIsLocalEnvironment();
    */
   public function checkCurrentIsLocalEnvironment() {
     $app_root = \Drupal::hasService('app.root') ? \Drupal::root() : DRUPAL_ROOT;
@@ -146,7 +146,7 @@ class FlexinfoSettingService {
 
   /**
    * @param $pound_sign (#)
-     \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateTwo();
+     \Drupal::service('flexinfo.setting.service')->colorPlateTwo();
    */
   public function colorPlateTwo($key = NULL, $pound_sign = FALSE) {
     $plate_array = array(
@@ -223,7 +223,7 @@ class FlexinfoSettingService {
 
   /**
    * @param $pound_sign (#)
-     \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateFive();
+     \Drupal::service('flexinfo.setting.service')->colorPlateFive();
    */
   public function colorPlateFive($key = NULL, $pound_sign = FALSE) {
     $plate_array = array(
@@ -337,9 +337,9 @@ class FlexinfoSettingService {
   public function colorPlateOutputKeyByPaletteName($palette_name = NULL, $color_key = NULL, $pound_sign = FALSE, $default = NULL) {
     $output = NULL;
 
-    $palette_term = \Drupal::getContainer()->get('flexinfo.term.service')->getTermByTermName($palette_name, 'palette');
+    $palette_term = \Drupal::service('flexinfo.term.service')->getTermByTermName($palette_name, 'palette');
     if ($palette_term) {
-      $color_array = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllValues($palette_term, 'field_palette_rgb');
+      $color_array = \Drupal::service('flexinfo.field.service')->getFieldAllValues($palette_term, 'field_palette_rgb');
 
       $output = $this->colorPlateOutput($color_array, $color_key, $pound_sign, $default);
     }
@@ -353,9 +353,9 @@ class FlexinfoSettingService {
   public function colorPlateOutputKeyPlusOneByPaletteName($palette_name = NULL, $color_key = NULL, $pound_sign = FALSE, $default = NULL) {
     $output = NULL;
 
-    $palette_term = \Drupal::getContainer()->get('flexinfo.term.service')->getTermByTermName($palette_name, 'palette');
+    $palette_term = \Drupal::service('flexinfo.term.service')->getTermByTermName($palette_name, 'palette');
     if ($palette_term) {
-      $color_array = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldAllValues($palette_term, 'field_palette_rgb');
+      $color_array = \Drupal::service('flexinfo.field.service')->getFieldAllValues($palette_term, 'field_palette_rgb');
 
       $output = $this->colorPlateOutputKeyPlusOne($color_array, $color_key, $pound_sign, $default);
     }
@@ -377,7 +377,7 @@ class FlexinfoSettingService {
    * $timestamp = date_format(date_create($date_time, timezone_open('America/Toronto')), "U");
    *
    * @param 'html_date' is HTML Date like 2017-03-24
-   \Drupal::getContainer()->get('flexinfo.setting.service')->convertTimeStampToHtmlDate();
+   \Drupal::service('flexinfo.setting.service')->convertTimeStampToHtmlDate();
    *
    * @param $timezone default is NULL means current timezone by date_default_timezone_get();
    */
@@ -414,7 +414,7 @@ class FlexinfoSettingService {
    *   [6] => 1491019199
    * );
    *
-   \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
+   \Drupal::service('flexinfo.setting.service')->getCurrentPathArgs();
    */
   public function getCurrentPathArgs() {
     $current_path = \Drupal::service('path.current')->getPath();
@@ -480,7 +480,7 @@ class FlexinfoSettingService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.setting.service')->getPageTitle();
+   \Drupal::service('flexinfo.setting.service')->getPageTitle();
    */
   public function getPageTitle() {
     $output = 'Snapshot';
@@ -564,7 +564,7 @@ class FlexinfoSettingService {
 
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.setting.service')->setPageTitle();
+   \Drupal::service('flexinfo.setting.service')->setPageTitle();
    */
   public function setPageTitle($title = NULL) {
     $request = \Drupal::request();
@@ -576,7 +576,7 @@ class FlexinfoSettingService {
   /**
    * @param 403, 404
    *
-   \Drupal::getContainer()->get('flexinfo.setting.service')->throwExceptionPage(403);
+   \Drupal::service('flexinfo.setting.service')->throwExceptionPage(403);
    */
   public function throwExceptionPage($code = NULL) {
     if ($code) {
@@ -610,7 +610,7 @@ class FlexinfoSettingService {
   }
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.setting.service')->userStartTimeFormatDate();
+   \Drupal::service('flexinfo.setting.service')->userStartTimeFormatDate();
    */
   public function userStartTimeFormatDate() {
     $output = $this->convertTimeStampToHtmlDate($this->userStartTime());
@@ -638,7 +638,7 @@ class FlexinfoSettingService {
   }
   /**
    *
-   \Drupal::getContainer()->get('flexinfo.setting.service')->userEndtTimeFormatDate();
+   \Drupal::service('flexinfo.setting.service')->userEndtTimeFormatDate();
    */
   public function userEndTimeFormatDate() {
     $output = $this->convertTimeStampToHtmlDate($this->userEndTime());

@@ -16,7 +16,7 @@ use Drupal\Component\Utility\Timer;
    $FlexinfoQueryTermService = new FlexinfoQueryTermService();
    $FlexinfoQueryTermService->runQueryWithGroup();
  *
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->programTidsByBusinessunit();
+   \Drupal::service('flexinfo.queryterm.service')->programTidsByBusinessunit();
  */
 class FlexinfoQueryTermService extends ControllerBase {
 
@@ -81,7 +81,7 @@ class FlexinfoQueryTermService extends ControllerBase {
 
   /**
    * @return array, term tid
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->wrapperTermTidsByField();
+   \Drupal::service('flexinfo.queryterm.service')->wrapperTermTidsByField();
    */
   public function wrapperTermTidsByField($vid = NULL, $field_name = NULL, $field_value = NULL, $operator = NULL, $langcode = NULL) {
     $query = $this->queryTidsByBundle($vid);
@@ -94,7 +94,7 @@ class FlexinfoQueryTermService extends ControllerBase {
 
   /**
    * @return array, term tid
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->wrapperTermTidsByField();
+   \Drupal::service('flexinfo.queryterm.service')->wrapperTermTidsByField();
    */
   public function wrapperTermEntitysByField($vid = NULL, $field_name = NULL, $field_value = NULL, $operator = NULL, $langcode = NULL) {
     $tids = $this->wrapperTermTidsByField($vid, $field_name, $field_value, $operator, $langcode);
@@ -106,7 +106,7 @@ class FlexinfoQueryTermService extends ControllerBase {
   /**
    * @param array, term tids
    * @return array, term tids
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($tids);
+   \Drupal::service('flexinfo.queryterm.service')->wrapperStandardTidsByTidsByField($tids);
    */
   public function wrapperStandardTidsByTidsByField($tids = NULL, $vid = NULL, $field_name = NULL, $field_value = NULL, $operator = NULL, $langcode = NULL) {
     $query = $this->queryTidsByBundle($vid);
@@ -126,7 +126,7 @@ class FlexinfoQueryTermService extends ControllerBase {
   /**
    * @param Learning Objective's tid is 2451
             radios is 2493
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->wrapperQuestionTidsByRadiosByLearningObjective();
+   \Drupal::service('flexinfo.queryterm.service')->wrapperQuestionTidsByRadiosByLearningObjective();
    */
   public function wrapperQuestionTidsByRadiosByLearningObjective($question_tids = array(), $learning_objective = TRUE) {
     $query = $this->queryTidsByBundle('questionlibrary');
@@ -155,7 +155,7 @@ class FlexinfoQueryTermService extends ControllerBase {
   /**
    * @param Learning Objective's tid is 2451
             radios is 2493
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->wrapperQuestionTidsByRadiosByLearningObjective();
+   \Drupal::service('flexinfo.queryterm.service')->wrapperQuestionTidsByRadiosByLearningObjective();
    */
   public function wrapperQuestionTidsByRadiosByQuestiontype($question_tids = array(), $questiontype_tid = NULL) {
     $query = $this->queryTidsByBundle('questionlibrary');
@@ -184,16 +184,14 @@ class FlexinfoQueryTermService extends ControllerBase {
    *
    */
   public function wrapperMultipleQuestionTidsFromEvaluationformForMeetingSpeaker($evaluationform_term = NULL) {
-    $radios_tid = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $radios_tid = \Drupal::service('flexinfo.term.service')
       ->getTidByTermName($term_name = 'radios', $vocabulary_name = 'fieldtype');
 
-    $question_tids_current_form = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_tids_current_form = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
     //
-    $query_container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+    $query_container = \Drupal::service('flexinfo.queryterm.service');
     $query = $query_container->queryTidsByBundle('questionlibrary');
 
     // filter by tids
@@ -215,16 +213,14 @@ class FlexinfoQueryTermService extends ControllerBase {
    *
    */
   public function wrapperMultipleQuestionTidsFromEvaluationformForRelatedtype($evaluationform_term = NULL) {
-    $radios_tid = \Drupal::getContainer()
-      ->get('flexinfo.term.service')
+    $radios_tid = \Drupal::service('flexinfo.term.service')
       ->getTidByTermName($term_name = 'radios', $vocabulary_name = 'fieldtype');
 
-    $question_tids_current_form = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_tids_current_form = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
     //
-    $query_container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+    $query_container = \Drupal::service('flexinfo.queryterm.service');
     $query = $query_container->queryTidsByBundle('questionlibrary');
 
     // filter by tids
@@ -249,14 +245,14 @@ class FlexinfoQueryTermService extends ControllerBase {
 
   /**
    * @return array, term object
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->programTermsByBusinessunit();
+   \Drupal::service('flexinfo.queryterm.service')->programTermsByBusinessunit();
    */
   public function programTermsByBusinessunit($program_terms = array(), $businessunit_tids = array()) {
     $output = array();
 
     if (is_array($program_terms)) {
       foreach ($program_terms as $program_term) {
-        $businessunit_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($program_term, 'field_program_businessunit');
+        $businessunit_tid = \Drupal::service('flexinfo.field.service')->getFieldFirstTargetId($program_term, 'field_program_businessunit');
         if ($businessunit_tid) {
           if (in_array($businessunit_tid, $businessunit_tids)) {
             $output[] = $program_term;
@@ -270,7 +266,7 @@ class FlexinfoQueryTermService extends ControllerBase {
 
   /**
    * @return array, term tid
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->programTidsByBusinessunit();
+   \Drupal::service('flexinfo.queryterm.service')->programTidsByBusinessunit();
    */
   public function programTidsByBusinessunit($businessunit_tids = array()) {
     $tids = $this->wrapperTermTidsByField('program', 'field_program_businessunit', $businessunit_tids, 'IN');
@@ -295,7 +291,7 @@ class FlexinfoQueryTermService extends ControllerBase {
 
   /**
    * @param Learning Objective's tid is 2451
-   \Drupal::getContainer()->get('flexinfo.queryterm.service')->questionTermsOnlyLearningObjective();
+   \Drupal::service('flexinfo.queryterm.service')->questionTermsOnlyLearningObjective();
    */
   public function questionTermsOnlyLearningObjective($question_terms = array()) {
     $output = NULL;

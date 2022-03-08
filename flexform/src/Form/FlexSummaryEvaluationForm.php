@@ -68,8 +68,7 @@ trait FlexSummaryEvaluationFormElement {
     $field_type = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_fieldtype');
 
-    $question_relatedfield = \Drupal::getContainer()
-      ->get('flexinfo.field.service')
+    $question_relatedfield = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
 
     $speaker_users = [];

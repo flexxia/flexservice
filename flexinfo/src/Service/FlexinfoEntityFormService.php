@@ -9,7 +9,7 @@ namespace Drupal\flexinfo\Service;
 /**
  * An example Service container.
  *
-   \Drupal::getContainer()->get('flexinfo.entityform.service')->getEntity($entity_type);
+   \Drupal::service('flexinfo.entityform.service')->getEntity($entity_type);
  */
 class FlexinfoEntityFormService {
 

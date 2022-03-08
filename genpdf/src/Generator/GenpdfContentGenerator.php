@@ -63,8 +63,7 @@ class GenpdfContentGenerator {
     $PdfPage = new PdfPage();
     $PdfPage->drawPdfPage($pdf_file_url, $json_data, $entity_id, $entity_type);
 
-    $base_path_url = \Drupal::getContainer()
-      ->get('flexinfo.setting.service')
+    $base_path_url = \Drupal::service('flexinfo.setting.service')
       ->getHttpsBaseUrl();
 
     $output = '';

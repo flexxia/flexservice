@@ -9,7 +9,7 @@ namespace Drupal\flexinfo\Service;
 
 /**
  * An example Service container.
-   \Drupal::getContainer()->get('flexinfo.vocabulary.service')->somefunctionname($field_name);
+   \Drupal::service('flexinfo.vocabulary.service')->somefunctionname($field_name);
  */
 class FlexinfoVocabularyService {
 
