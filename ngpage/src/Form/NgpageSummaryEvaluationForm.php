@@ -52,16 +52,13 @@ class NgpageSummaryEvaluationForm extends FormBase {
     $all_question_terms = $this->_getQuestionTermsByMeetingNid($entity_id);
     if ($all_question_terms) {
       foreach ($all_question_terms as $tid => $question_term) {
-        $question_scale = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $question_scale = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstValue($question_term, 'field_queslibr_scale');
 
-        $question_fieldtype = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $question_fieldtype = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetIdTermName($question_term, 'field_queslibr_fieldtype');
 
-        $related_field = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $related_field = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
 
         $form['reactset']['question_item_' . $tid] = array(
@@ -301,12 +298,10 @@ class NgpageSummaryEvaluationForm extends FormBase {
 
     $meeting_entity = \Drupal::entityTypeManager()->getStorage('node')->load($entity_id);
     if ($meeting_entity) {
-      $evaluationform_term = \Drupal::getContainer()
-        ->get('flexinfo.node.service')
+      $evaluationform_term = \Drupal::service('flexinfo.node.service')
         ->getMeetingEvaluationformTerm($meeting_entity);
 
-      $output = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $output = \Drupal::service('flexinfo.field.service')
         ->getFieldAllTargetIdsEntitys($evaluationform_term, 'field_evaluationform_questionset');
     }
 

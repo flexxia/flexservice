@@ -129,8 +129,7 @@ class FlexpageMeetingQuestionLayout extends ControllerBase {
 
     if (is_array($province_terms)) {
       foreach ($province_terms as $key => $province_term) {
-        $meeting_nodes_by_province_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meeting_nodes_by_province_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_province', array($key));
 
         $pool_data = $this->FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes_by_province_term, $question_term->id());

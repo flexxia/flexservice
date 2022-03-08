@@ -121,8 +121,7 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
         ->loadMultiple($question_tids);
 
       foreach ($question_terms as $question_term) {
-        $question_relatedfield = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $question_relatedfield = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstValue($question_term, 'field_queslibr_relatedfield');
         if ($question_relatedfield == 'field_meeting_speaker') {
           $output[] = $this->block->getBlockHtmlTableByRadioQuestionMultipleByReferUid($question_term, $meeting_nodes);

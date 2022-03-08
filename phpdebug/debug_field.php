@@ -148,8 +148,7 @@ function _save_question_field_for_selectkeyanswer_value() {
       ->getFieldFirstTargetIdTermEntity($selectkeyanswer_term, 'field_keyanswer_question');
 
     if ($question_entity) {
-      \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      \Drupal::service('flexinfo.field.service')
         ->updateAdditionalFieldValue('taxonomy_term', $question_entity, 'field_queslibr_selectkeyanswer', array($selectkeyanswer_term->id()));
     }
   }

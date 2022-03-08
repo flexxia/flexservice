@@ -291,8 +291,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
 
       foreach ($all_answer_terms as $key => $answer_term) {
         $num_answer = isset($answer_data_count[$key]) ? $answer_data_count[$key] : 0;
-        $selectAnswerTermPercentage = \Drupal::getContainer()
-          ->get('flexinfo.calc.service')
+        $selectAnswerTermPercentage = \Drupal::service('flexinfo.calc.service')
           ->getPercentageDecimal($num_answer, $answer_data_sum, 0) . '%';
 
         $output[] = array(

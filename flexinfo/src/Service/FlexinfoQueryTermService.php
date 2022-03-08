@@ -299,8 +299,7 @@ class FlexinfoQueryTermService extends ControllerBase {
     if (is_array($question_terms)) {
       foreach ($question_terms as $question_term) {
 
-        $queslibr_fieldtype_tid = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $queslibr_fieldtype_tid = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetId($question_term, 'field_queslibr_questiontype');
 
         if ($queslibr_fieldtype_tid == 2451) {

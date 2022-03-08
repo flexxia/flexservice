@@ -397,8 +397,7 @@ class NgdataChartChartjs extends NgdataChart {
     foreach ($meeting_nodes_by_event_type as $key => $row) {
       $num = array();
       foreach ($terms as $term) {
-        $nodes_by_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $nodes_by_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue(
             $row, 'field_meeting_province', $term->id()
           );
@@ -441,8 +440,7 @@ class NgdataChartChartjs extends NgdataChart {
     foreach ($meeting_nodes_by_event_type as $key => $row) {
       $nums = array();
       foreach ($terms as $term) {
-        $nodes_by_term = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $nodes_by_term = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue(
             $row, 'field_meeting_fundingsource', $term->id()
           );

@@ -198,8 +198,7 @@ class NgdataTermQuestion extends NgdataTerm {
     }
 
     if ($question_data_total) {
-      $output = \Drupal::getContainer()
-        ->get('flexinfo.calc.service')
+      $output = \Drupal::service('flexinfo.calc.service')
         ->arrayAverageByCount($question_data_total, 1);
     }
 

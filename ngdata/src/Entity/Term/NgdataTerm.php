@@ -74,8 +74,7 @@ class NgdataTerm extends NgdataEntity implements NgdataTermInterface {
       ->getFullTermsFromVidName('therapeuticarea');
     if (is_array($terms)) {
       foreach ($terms as $key => $term) {
-        $bu_tid = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $bu_tid = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetId($term, 'field_theraparea_businessunit');
 
         if (in_array($bu_tid, $businessunit_tids)) {

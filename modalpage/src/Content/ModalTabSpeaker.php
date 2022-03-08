@@ -546,11 +546,9 @@ class ModalTabSpeaker {
 
     if ($program_collection && is_array($program_collection)) {
       foreach ($program_collection as $program_tid => $program_count) {
-        $meetings_nodes_this_program = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meetings_nodes_this_program = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_program', array($program_tid), 'IN');
-        $meetings_nodes_this_city = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
+        $meetings_nodes_this_city = \Drupal::service('flexinfo.querynode.service')
           ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_city', array($program_tid), 'IN');
 
         $output["content"][] = array(

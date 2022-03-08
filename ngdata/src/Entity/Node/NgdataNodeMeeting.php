@@ -25,8 +25,7 @@ class NgdataNodeMeeting extends NgdataNode {
 
     if ($meeting_entity && method_exists($meeting_entity, 'getType')) {
       if ($meeting_entity->getType() == 'meeting') {
-        $meeting_evaluationform_tid = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $meeting_evaluationform_tid = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetId($meeting_entity, 'field_meeting_evaluationform');
 
         if ($meeting_evaluationform_tid) {
@@ -78,8 +77,7 @@ class NgdataNodeMeeting extends NgdataNode {
       $theraparea_tids = \Drupal::getContainer()->get('flexinfo.queryterm.service')
         ->wrapperTermTidsByField('therapeuticarea', 'field_theraparea_businessunit', array($bu_tid), 'IN');
 
-      $output[] = \Drupal::getContainer()
-        ->get('flexinfo.querynode.service')
+      $output[] = \Drupal::service('flexinfo.querynode.service')
         ->meetingNodesByTheraparea($meeting_nodes, $theraparea_tids);
     }
 
@@ -104,8 +102,7 @@ class NgdataNodeMeeting extends NgdataNode {
     $TermList = \Drupal::service('ngdata.term')->getTermListByVocabulary($vid);
 
     foreach ($TermList['tid'] as $key => $row) {
-      $output[$row] = \Drupal::getContainer()
-        ->get('flexinfo.querynode.service')
+      $output[$row] = \Drupal::service('flexinfo.querynode.service')
         ->wrapperMeetingNodesByFieldValue($meeting_nodes, $node_field, array($row), 'IN');
     }
 
@@ -132,8 +129,7 @@ class NgdataNodeMeeting extends NgdataNode {
       ->getTermTherapeuticAreaListByBuTids($bu_tids)['tid'];
 
     foreach ($therap_tids as $key => $therap_tid) {
-      $output[] = \Drupal::getContainer()
-        ->get('flexinfo.querynode.service')
+      $output[] = \Drupal::service('flexinfo.querynode.service')
         ->meetingNodesByTheraparea($meeting_nodes, array($therap_tid));
     }
 
@@ -149,8 +145,7 @@ class NgdataNodeMeeting extends NgdataNode {
     $diseasestate_tids = \Drupal::service('ngdata.term')->getTermListByVocabulary('diseasestate')['tid'];
 
     foreach ($diseasestate_tids as $key => $diseasestate_tid) {
-      $output[] = \Drupal::getContainer()
-        ->get('flexinfo.querynode.service')
+      $output[] = \Drupal::service('flexinfo.querynode.service')
         ->meetingNodesByDiseasestate($meeting_nodes, array($diseasestate_tid));
     }
 

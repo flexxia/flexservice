@@ -224,12 +224,10 @@ class NgdataFormPage {
       ->getStorage('node')
       ->load($meeting_nid);
     if ($meeting_node) {
-      $evaluationform_term = \Drupal::getContainer()
-        ->get('flexinfo.node.service')
+      $evaluationform_term = \Drupal::service('flexinfo.node.service')
         ->getMeetingEvaluationformTerm($meeting_node);
 
-      $question_terms = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $question_terms = \Drupal::service('flexinfo.field.service')
         ->getFieldAllTargetIdsEntitys($evaluationform_term, 'field_evaluationform_questionset');
 
       $form_elements = $this->getFormFieldElelements($meeting_node, $question_terms);
@@ -248,12 +246,10 @@ class NgdataFormPage {
       foreach ($question_terms as $question_term) {
         $boolean_duplicate_question = FALSE;
 
-        $related_fields = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $related_fields = \Drupal::service('flexinfo.field.service')
           ->getFieldAllValues($question_term, 'field_queslibr_relatedfield');
 
-        $fieldtype_tid = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $fieldtype_tid = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetId($question_term, 'field_queslibr_fieldtype');
 
         if ($related_fields) {

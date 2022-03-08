@@ -66,12 +66,10 @@ function _get_term_field_value($entity, $vid) {
         }
       }
       else {
-        $output[$field_name]['value'] = \Drupal::getContainer()
-          ->get('flexinfo.field.service')
+        $output[$field_name]['value'] = \Drupal::service('flexinfo.field.service')
           ->getFieldAllValues($entity, $field_name);
       }
-      $output[$field_name]['vid'] = \Drupal::getContainer()
-        ->get('flexinfo.field.service')
+      $output[$field_name]['vid'] = \Drupal::service('flexinfo.field.service')
         ->getReferenceVidByFieldName($field_name, $vid, $entity_type);
     }
   }
