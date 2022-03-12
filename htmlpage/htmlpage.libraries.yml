@@ -84,7 +84,6 @@ jqvmap:
 ######
   # custom
 ######
-
 #
 block-chartjs:
   version: 3.x
@@ -97,6 +96,7 @@ block-chartjs:
     - htmlpage/axios
     - htmlpage/chartjs
     - htmlpage/chartjs-plugin-datalabels
+
 #
 block-d3:
   version: 3.x
@@ -108,6 +108,7 @@ block-d3:
   dependencies:
     - htmlpage/d3
     - htmlpage/d3-cloud
+
 #
 block-echarts:
   version: 3.x
