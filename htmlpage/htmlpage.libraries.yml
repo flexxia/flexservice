@@ -42,6 +42,14 @@ d3:
     name: ISC License
   js:
     /libraries/node_modules/d3/dist/d3.min.js: {}
+# d3-cloud
+d3-cloud:
+  version: 1.2.5
+  remote: https://github.com/jasondavies/d3-cloud
+  license:
+    name: ISC License
+  js:
+    /libraries/node_modules/d3-cloud/build/d3.layout.cloud.js: {}
 
 # ECharts
 echarts:
@@ -99,6 +107,7 @@ block-d3:
     js/block_d3.js: {}
   dependencies:
     - htmlpage/d3
+    - htmlpage/d3-cloud
 #
 block-echarts:
   version: 3.x
