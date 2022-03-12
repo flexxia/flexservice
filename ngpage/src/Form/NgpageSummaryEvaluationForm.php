@@ -18,7 +18,7 @@ class NgpageSummaryEvaluationForm extends FormBase {
    * {@inheritdoc}.
    */
   public function getFormId() {
-    return 'manageinfo_summary_evaluation_form';
+    return 'ngpage_summary_evaluation_form';
   }
 
   /**
