@@ -28,7 +28,13 @@ function htmlpage_help($route_name, RouteMatchInterface $route_match) {
  */
 function htmlpage_theme() {
   return [
-    'htmlpage' => [
+    'htmlpage_default' => [
+      'render element' => 'children',
+      'variables' => [
+        'htmlpage_content' => NULL,
+      ],
+    ],
+    'htmlpage_sample' => [
       'render element' => 'children',
       'variables' => [
         'htmlpage_content' => NULL,

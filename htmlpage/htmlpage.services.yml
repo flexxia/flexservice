@@ -54,5 +54,8 @@ services:
     class: Drupal\htmlpage\ChartHtmlTemplate\MapSection
 
   #
-  htmlpage.content.object.samplepage:
+  htmlpage.object.content:
+    class: Drupal\htmlpage\Content\HtmlpageObjectContent
+  #
+  htmlpage.object.samplepage:
     class: Drupal\htmlpage\Content\SamplepageObject

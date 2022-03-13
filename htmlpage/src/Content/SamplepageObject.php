@@ -7,7 +7,7 @@
 namespace Drupal\htmlpage\Content;
 
 /**
- * \Drupal::service('htmlpage.content.object.samplepage')->demo().
+ * \Drupal::service('htmlpage.object.samplepage')->demo().
  */
 class SamplepageObject {
 
@@ -60,24 +60,6 @@ class SamplepageObject {
   /**
    *
    */
-  public function d3Axis() {
-    $d3_canvas_id = 'd3-axis-sample-1';
-    $block_definition = [
-      'title' => 'D3 Js Axis Chart and Average line',
-      'block_id' => 'd3-axis-sample-block-1',
-      'chart_canvas_id' => $d3_canvas_id,
-    ];
-    $output['html_content'] = \Drupal::service('htmlpage.charthtmltemplate.section.d3')
-      ->blockD3TemplateAxis($block_definition);
-    $output['json_content'] = \Drupal::service('htmlpage.chartjsonbase.d3template')
-      ->d3BaseJson('axis', $d3_canvas_id);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
   public function d3Bar() {
     $d3_canvas_id = 'd3-bar-sample-1';
     $block_definition = [
@@ -89,6 +71,24 @@ class SamplepageObject {
       ->blockD3Template($block_definition);
     $output['json_content'] = \Drupal::service('htmlpage.chartjsonbase.d3template')
       ->d3BaseJson('bar', $d3_canvas_id);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function d3Cloud() {
+    $d3_canvas_id = 'd3-cloud-sample-1';
+    $block_definition = [
+      'title' => 'D3Js Word Cloud Layout',
+      'block_id' => 'd3-cloud-sample-block-1',
+      'chart_canvas_id' => $d3_canvas_id,
+    ];
+    $output['html_content'] = \Drupal::service('htmlpage.charthtmltemplate.section.d3')
+      ->blockD3Template($block_definition);
+    $output['json_content'] = \Drupal::service('htmlpage.chartjsonbase.d3template')
+      ->d3BaseJson('cloud', $d3_canvas_id);
 
     return $output;
   }
@@ -169,25 +169,7 @@ class SamplepageObject {
   /**
    *
    */
-  public function d3ViolinPlot() {
-    $d3_canvas_id = 'd3-violinplot-sample-1';
-    $block_definition = [
-      'title' => 'Sample Violin plot D3',
-      'block_id' => 'd3-violinplot-sample-block-1',
-      'chart_canvas_id' => $d3_canvas_id,
-    ];
-    $output['html_content'] = \Drupal::service('htmlpage.charthtmltemplate.section.d3')
-      ->blockD3Template($block_definition);
-    $output['json_content'] = \Drupal::service('htmlpage.chartjsonbase.d3template')
-      ->d3BaseJson('violin_plot', $d3_canvas_id);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function EChartsBar() {
+  public function eChartsBar() {
     $block_definition = [
       'title' => 'ECharts Bar ',
       'block_id' => 'echarts-bar-sample-block-1',
@@ -233,14 +215,6 @@ class SamplepageObject {
     // $output['html_content'] .= $this->d37Fairy()['html_content'];
     // $output['json_content'][] = $this->d37Fairy()['json_content'];
 
-    // D3 violin plot.
-    // $output['html_content'] .= $this->d3ViolinPlot()['html_content'];
-    // $output['json_content'][] = $this->d3ViolinPlot()['json_content'];
-
-    // D3 Axis.
-    $output['html_content'] .= $this->d3Axis()['html_content'];
-    $output['json_content'][] = $this->d3Axis()['json_content'];
-
     // D3 Bar.
     $output['html_content'] .= $this->d3Bar()['html_content'];
     $output['json_content'][] = $this->d3Bar()['json_content'];
@@ -257,9 +231,13 @@ class SamplepageObject {
     // $output['html_content'] .= $this->d3Text()['html_content'];
     // $output['json_content'][] = $this->d3Text()['json_content'];
 
-    // D3 Text.
-    $output['html_content'] .= $this->EChartsBar()['html_content'];
-    $output['json_content'][] = $this->EChartsBar()['json_content'];
+    // D3 EChart.
+    $output['html_content'] .= $this->eChartsBar()['html_content'];
+    $output['json_content'][] = $this->eChartsBar()['json_content'];
+
+    // D3 Cloud.
+    $output['html_content'] .= $this->d3Cloud()['html_content'];
+    $output['json_content'][] = $this->d3Cloud()['json_content'];
 
     // Bootstrap Table.
     // $output['html_content'] .= \Drupal::service('htmlpage.charthtmltemplate.section.bootstraptable')

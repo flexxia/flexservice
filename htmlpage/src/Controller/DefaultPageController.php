@@ -59,12 +59,55 @@ class DefaultPageController extends ControllerBase {
    *
    */
   public function standardPage($section, $entity_id, $start_timestamp, $end_timestamp) {
-    $page_content = \Drupal::service('htmlpage.content.object.samplepage')
-      ->samplePageContent()['html_content'];
+    $page_content = '';
+
+    if ($section == 'meeting') {
+      $page_content = \Drupal::service('htmlpage.object.content')
+        ->meetingPageContent()['html_content'];
+    }
+    $build = [
+      '#type' => 'markup',
+      '#theme' => 'htmlpage_default',
+      '#htmlpage_content' => $page_content,
+      '#cache' => [
+        'max-age' => 0,
+      ],
+      '#attached' => [
+        'library' => [
+          'htmlpage/draw-canvas',
+          'htmlpage/bootstrap-table',
+          'htmlpage/block-chartjs',
+          'htmlpage/block-d3',
+          'htmlpage/block-echarts',
+          'htmlpage/block-jqvmap',
+          'ngpage/html2canvas_save_png',
+        ],
+        'drupalSettings' => [
+          'htmlpage' => [
+            'jsonUrl' => 'htmlpage/' . $section . '/json/' .$entity_id . '/' . $start_timestamp . '/' . $end_timestamp,
+          ],
+        ],
+      ],
+    ];
+
+    if ($section == 'samplepage' || $section == 'samplechart') {
+      $build = $this->samplePage($section, $entity_id, $start_timestamp, $end_timestamp);
+    }
+
+    return $build;
+  }
+
+  /**
+   *
+   */
+  public function samplePage($section, $entity_id, $start_timestamp, $end_timestamp) {
+    $page_content = '';
+    $page_content = \Drupal::service('htmlpage.object.samplepage')
+        ->samplePageContent()['html_content'];
 
     $build = [
       '#type' => 'markup',
-      '#theme' => 'htmlpage',
+      '#theme' => 'htmlpage_sample',
       '#htmlpage_content' => $page_content,
       '#cache' => [
         'max-age' => 0,

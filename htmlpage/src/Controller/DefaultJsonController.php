@@ -28,10 +28,9 @@ class DefaultJsonController extends ControllerBase {
   /**
    * @return array
    *   Json Array.
-
    */
   public function chartjsBlockSamplePageJson() {
-    $json_content = \Drupal::service('htmlpage.content.object.samplepage')
+    $json_content = \Drupal::service('htmlpage.object.samplepage')
       ->samplePageContent()['json_content'];
 
     return $json_content;
