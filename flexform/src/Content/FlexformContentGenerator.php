@@ -28,14 +28,14 @@ class FlexformContentGenerator {
       // $entity->set('field_article_age', "32") ;
       $entity->set('title', "Entity Form Add " . $entity_bundle);
     }
-    else if ($entity_type == 'taxonomy_term') {
+    elseif ($entity_type == 'taxonomy_term') {
       $entity = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term')
         ->create(
           array('vid' => $entity_bundle)
         );
     }
-    else if ($entity_type == 'user') {
+    elseif ($entity_type == 'user') {
       $entity = \Drupal::entityTypeManager()
         ->getStorage('user')
         ->create();

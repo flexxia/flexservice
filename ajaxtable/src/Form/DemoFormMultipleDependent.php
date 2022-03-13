@@ -125,7 +125,7 @@ class DemoFormMultipleDependent extends FormBase {
         'fr' => 'French',
       ];
     }
-    else if ($selected_region == 'as') {
+    elseif ($selected_region == 'as') {
       $output = [
         'ch' => 'Chinese',
         'jp' => 'Janpanese',
@@ -158,7 +158,7 @@ class DemoFormMultipleDependent extends FormBase {
         'Ireland',
       ];
     }
-    else if ($selected_region == 'as') {
+    elseif ($selected_region == 'as') {
       $output = [
         'Japan',
         'China',
@@ -173,18 +173,18 @@ class DemoFormMultipleDependent extends FormBase {
           'Ireland',
         ];
       }
-      else if ($selected_language['fr']) {
+      elseif ($selected_language['fr']) {
         $output = [
           'France',
         ];
       }
-      else if ($selected_language['ch']) {
+      elseif ($selected_language['ch']) {
         $output = [
           'China',
           'Singapore',
         ];
       }
-      else if ($selected_language['jp']) {
+      elseif ($selected_language['jp']) {
         $output = [
           'Japan',
         ];

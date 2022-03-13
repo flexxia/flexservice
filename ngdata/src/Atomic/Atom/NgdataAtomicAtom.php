@@ -218,7 +218,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
     if ($footeranswer == 'NTS') {
       $output = $this->getChartBottomFooterForNTS($question_term, $meeting_nodes, $footeranswer);
     }
-    else if ($footeranswer) {
+    elseif ($footeranswer) {
       $output = $this->getChartBottomFooterForKeyValuesPercentage($question_term, $meeting_nodes);
     }
     else {
