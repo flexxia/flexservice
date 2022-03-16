@@ -293,23 +293,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $lower_right_text = 'Best Answer';
     }
 
+    $all_data = \Drupal::service('ngdata.term.question')
+      ->getQuestionAnswerAllDataWithReferOther($meeting_nodes, $question_term->id());
+
     $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
       $output .= $this->atom->getBottomHtmlCell4Grid(
-        count(\Drupal::service('ngdata.term.question')
-          ->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
+        count($all_data['Pre']),
         'RESPONSES'
       );
       $output .= $this->atom->getBottomHtmlCell4Grid(
-        $this->atom->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
+        $this->atom->getChartBottomFooterForAverageNumberByTidByReferOther($question_term->id(), $meeting_nodes, 'Pre'),
         $lower_right_text
       );
       $output .= $this->atom->getBottomHtmlCell4Grid(
-        count(\Drupal::service('ngdata.term.question')
-          ->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
+        count($all_data['Post']),
         'RESPONSES'
       );
       $output .= $this->atom->getBottomHtmlCell4Grid(
-        $this->atom->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
+        $this->atom->getChartBottomFooterForAverageNumberByTidByReferOther($question_term->id(), $meeting_nodes, 'Post'),
         $lower_right_text
       );
     $output .= '</div>';
