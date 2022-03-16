@@ -10,9 +10,7 @@ use Drupal\Core\Url;
 /**
  * @deprecate
  */
-use Drupal\flexpage\Content\FlexpageEventLayout;
 use Drupal\modalpage\Content\ModalTabSpeaker;
-use Drupal\ngjson\Content\EventStandardLayoutContent;
 
 /**
  * Class NgdataAtomicMolecule.
@@ -262,8 +260,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function getRaidoQuestionBottom($question_term = NULL, $meeting_nodes = array()) {
     $output = '';
 
-    $FlexpageEventLayout = new FlexpageEventLayout();
-
     $lower_right_text = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValue($question_term, 'field_queslibr_chartfooter');
     if (!$lower_right_text) {
@@ -272,10 +268,47 @@ class NgdataAtomicMolecule extends NgdataAtomic {
 
     $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
       $output .= $this->atom->getBottomHtmlCell(
-        count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
+        count(\Drupal::service('ngdata.term.question')->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
         'RESPONSES'
       );
       $output .= $this->atom->getBottomHtmlCell(
+        $this->atom->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
+        $lower_right_text
+      );
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   * @return String
+   *   Bottom is four sections
+   */
+  public function getRaidoPrePostQuestionBottom($question_term = NULL, $meeting_nodes = array()) {
+    $output = '';
+
+    $lower_right_text = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_chartfooter');
+    if (!$lower_right_text) {
+      $lower_right_text = 'Best Answer';
+    }
+
+    $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
+      $output .= $this->atom->getBottomHtmlCell4Grid(
+        count(\Drupal::service('ngdata.term.question')
+          ->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
+        'RESPONSES'
+      );
+      $output .= $this->atom->getBottomHtmlCell4Grid(
+        $this->atom->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
+        $lower_right_text
+      );
+      $output .= $this->atom->getBottomHtmlCell4Grid(
+        count(\Drupal::service('ngdata.term.question')
+          ->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
+        'RESPONSES'
+      );
+      $output .= $this->atom->getBottomHtmlCell4Grid(
         $this->atom->renderChartBottomFooterAnswerValue($question_term, $meeting_nodes),
         $lower_right_text
       );
