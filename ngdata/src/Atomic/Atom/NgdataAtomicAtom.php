@@ -214,8 +214,14 @@ class NgdataAtomicAtom extends NgdataAtomic {
   /**
    * Horizontal is float
    */
-  public function renderLegendSquareHorizontal($legend_text = array(), $legend_color = array(), $max_length = NULL) {
+  public function renderLegendSquareHorizontal($legend_text = array(), $legend_color = array(), $prefix = NULL, $suffix = NULL) {
     $legends = '<div class="legend-square-wrapper margin-left-12 margin-top-24 font-size-12 width-pt-100">';
+
+    if ($prefix) {
+      $legends .= '<div class="">';
+        $legends .= $prefix;
+      $legends .= '</div>';
+    }
 
     foreach ($legend_text as $key => $value) {
       $bg_color_class = NULL;
