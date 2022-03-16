@@ -269,10 +269,12 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function getRaidoQuestionLegendHorizontalWithReferOther($question_term = NULL, $meeting_nodes = array(), $refer_value = NULL) {
+  public function getRaidoQuestionLegendHorizontalWithReferOther($question_term = NULL, $meeting_nodes = array(), $refer_value = NULL, $prefix = NULL, $suffix = NULL) {
     $output = $this->atom->renderLegendSquareHorizontal(
       $this->molecule->getRaidoQuestionLegendTextWithReferOther($question_term, $meeting_nodes, $refer_value),
-      \Drupal::service('ngdata.term.question')->getRaidoQuestionColors($question_term)
+      \Drupal::service('ngdata.term.question')->getRaidoQuestionColors($question_term),
+      $prefix,
+      $suffix
     );
 
     return $output;
@@ -713,7 +715,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       ->colorPlateOutputKeyByPaletteName('colorPlatePieChartOne', $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
 
     $output = \Drupal::service('ngdata.atomic.atom')
-      ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');
+      ->renderLegendSquareHorizontal($legend_text, $legend_color);
 
     return $output;
   }
@@ -735,7 +737,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       ->colorPlateOutputKeyByPaletteName($chart_palette, $color_key = NULL, $pound_sign = FALSE, 'f6f6f6');
 
     $output = \Drupal::service('ngdata.atomic.atom')
-      ->renderLegendSquareHorizontal($legend_text, $legend_color, $max_length = NULL, 'font-size-12');
+      ->renderLegendSquareHorizontal($legend_text, $legend_color);
 
     return $output;
   }
