@@ -917,12 +917,12 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $bottom_value = "";
     $bottom_value .= '<div class="text-center width-pt-50 display-inline-block">';
       $bottom_value .= '<div class="display-inline-block">';
-        $bottom_value .= $this->organism->getRaidoQuestionLegendHorizontalWithReferOther($question_term, $meeting_nodes, "Pre");
+        $bottom_value .= $this->organism->getRaidoQuestionLegendHorizontalWithReferOther($question_term, $meeting_nodes, "Pre", "PRE-PORGRAM");
       $bottom_value .= '</div>';
     $bottom_value .= '</div>';
     $bottom_value .= '<div class="text-center width-pt-50 display-inline-block">';
       $bottom_value .= '<div class="display-inline-block">';
-        $bottom_value .= $this->organism->getRaidoQuestionLegendHorizontalWithReferOther($question_term, $meeting_nodes, "Post");
+        $bottom_value .= $this->organism->getRaidoQuestionLegendHorizontalWithReferOther($question_term, $meeting_nodes, "Post", "POST-PORGRAM");
       $bottom_value .= '</div>';
     $bottom_value .= '</div>';
     $bottom_value .= '<div class="clear-both">';
