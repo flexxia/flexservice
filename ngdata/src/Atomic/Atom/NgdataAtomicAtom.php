@@ -24,6 +24,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
 
   /**
    * @param $bottom_value is '&nbsp;' or 'RESPONSES'
+   * Format is 2 Columns/2 Grids, 50% and 50%
    */
   public function getBottomHtmlCell($top_value = NULL, $bottom_value = '&nbsp;') {
     if (!$bottom_value) {
@@ -44,10 +45,23 @@ class NgdataAtomicAtom extends NgdataAtomic {
   }
 
   /**
-   *
+   * @param $bottom_value is '&nbsp;' or 'RESPONSES'
+   * Format is 4 Columns/4 Grids, 25%, 25%, 25%, 25%
    */
-  public function getChartBottomFooterForAverageNumber($question_term = NULL, $meeting_nodes = array()) {
-    $output = $this->getChartBottomFooterForAverageNumberByTid($question_term->id(), $meeting_nodes);
+  public function getBottomHtmlCell4Grid($top_value = NULL, $bottom_value = '&nbsp;') {
+    if (!$bottom_value) {
+      $bottom_value = '&nbsp;';
+    }
+
+    $output = '';
+    $output .= '<div class="display-inline-block width-pt-25 height-66 border-1-eee border-bottom-none">';
+      $output .= '<div class="font-bold height-32 padding-top-6">';
+        $output .= $top_value;
+      $output .= '</div>';
+      $output .= '<div class="font-size-10 text-center">';
+        $output .= $bottom_value;
+      $output .= '</div>';
+    $output .= '</div>';
 
     return $output;
   }
@@ -57,12 +71,31 @@ class NgdataAtomicAtom extends NgdataAtomic {
    */
   public function getChartBottomFooterForAverageNumberByTid($question_tid = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
-    $chartAllData = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_tid);
+    $all_data = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_tid);
 
     $mean_number = \Drupal::service('flexinfo.calc.service')
-      ->getPercentageDecimal(array_sum($chartAllData), count($chartAllData), 0);
+      ->getPercentageDecimal(array_sum($all_data), count($all_data), 0);
 
     $output = $mean_number / 100;
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function getChartBottomFooterForAverageNumberByTidByReferOther($question_tid = NULL, $meeting_nodes = array(), $refer_other = '') {
+    $output = 0;
+
+    $all_data = \Drupal::service('ngdata.term.question')
+      ->getQuestionAnswerAllDataWithReferOther($meeting_nodes, $question_tid);
+
+    if ($refer_other && isset($all_data[$refer_other])) {
+      $mean_number = \Drupal::service('flexinfo.calc.service')
+        ->getPercentageDecimal(array_sum($all_data[$refer_other]), count($all_data[$refer_other]), 0);
+
+      $output = $mean_number / 100;
+    }
 
     return $output;
   }
@@ -222,7 +255,7 @@ class NgdataAtomicAtom extends NgdataAtomic {
       $output = $this->getChartBottomFooterForKeyValuesPercentage($question_term, $meeting_nodes);
     }
     else {
-      $output = $this->getChartBottomFooterForAverageNumber($question_term, $meeting_nodes);
+      $output = $this->getChartBottomFooterForAverageNumberByTid($question_term->id(), $meeting_nodes);
     }
 
     return $output;
