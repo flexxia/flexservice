@@ -927,7 +927,7 @@ class NgdataAtomicBlock extends NgdataAtomic {
     $bottom_value .= '</div>';
     $bottom_value .= '<div class="clear-both">';
     $bottom_value .= '</div>';
-    $bottom_value .= $this->molecule->getRaidoQuestionBottom($question_term, $meeting_nodes);
+    $bottom_value .= $this->molecule->getRaidoPrePostQuestionBottom($question_term, $meeting_nodes);
     $output['blockContent'][0]['tabData']['bottom']["value"] = $bottom_value;
 
     return $output;
