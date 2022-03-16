@@ -70,8 +70,8 @@ class NgdataAtomicAtom extends NgdataAtomic {
    *
    */
   public function getChartBottomFooterForAverageNumberByTid($question_tid = NULL, $meeting_nodes = array()) {
-    $FlexpageEventLayout = new FlexpageEventLayout();
-    $all_data = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_tid);
+    $all_data = \Drupal::service('ngdata.term.question')
+      ->getQuestionAnswerAllData($meeting_nodes, $question_tid);
 
     $mean_number = \Drupal::service('flexinfo.calc.service')
       ->getPercentageDecimal(array_sum($all_data), count($all_data), 0);
@@ -121,8 +121,8 @@ class NgdataAtomicAtom extends NgdataAtomic {
           );
       }
 
-      $FlexpageEventLayout = new FlexpageEventLayout();
-      $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
+      $sum_data = count(\Drupal::service('ngdata.term.question')
+        ->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
       $output = \Drupal::service('flexinfo.calc.service')
         ->getPercentageDecimal(($data[1] - $data[0]), $sum_data, 0);
       $output .= '%';
@@ -153,8 +153,8 @@ class NgdataAtomicAtom extends NgdataAtomic {
       foreach ($footeranswers as $key => $row) {
         $key_value = $this->getChartBottomFooterBySpecifyKeyValue($question_term, $meeting_nodes, $row);
 
-        $FlexpageEventLayout = new FlexpageEventLayout();
-        $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
+        $sum_data = count(\Drupal::service('ngdata.term.question')
+          ->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
 
         $output += \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($key_value, $sum_data, 0);
       }
@@ -173,8 +173,8 @@ class NgdataAtomicAtom extends NgdataAtomic {
 
     $key_value = $this->getChartBottomFooterBySpecifyKeyValue($question_term, $meeting_nodes, $key);
 
-    $FlexpageEventLayout = new FlexpageEventLayout();
-    $sum_data = count($FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
+    $sum_data = count(\Drupal::service('ngdata.term.question')
+      ->getQuestionAnswerAllData($meeting_nodes, $question_term->id()));
 
     $output = \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($key_value, $sum_data, 0);
     $output .= '%';
@@ -310,15 +310,14 @@ class NgdataAtomicAtom extends NgdataAtomic {
   public function tableDataByByBasicQuestion($meeting_nodes = array(), $question_tid = NULL) {
     $output = array();
 
-    $FlexpageEventLayout = new FlexpageEventLayout();
-
     $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($question_tid);
     if ($question_term) {
       $all_answer_terms = \Drupal::getContainer()
         ->get('flexinfo.field.service')
         ->getFieldAllTargetIdsEntitys($question_term, 'field_queslibr_selectkeyanswer');
 
-      $result = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
+      $result = \Drupal::service('ngdata.term.question')
+        ->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
       $answer_data_sum = count($result);
       $answer_data_count = array_count_values($result);
 
