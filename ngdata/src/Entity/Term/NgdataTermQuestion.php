@@ -111,6 +111,29 @@ class NgdataTermQuestion extends NgdataTerm {
   }
 
   /**
+   *
+   */
+  public function getQuestionAnswerAllDataWithReferOther($meeting_nodes = array(), $question_tid = NULL) {
+    $output = array();
+
+    $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
+      ->wrapperEvaluationNodeFromMeetingNodes($meeting_nodes);
+    if ($evaluation_nodes && is_array($evaluation_nodes)) {
+      foreach ($evaluation_nodes as $evaluation_node) {
+        $result = $evaluation_node->get('field_evaluation_reactset')->getValue();
+
+        foreach ($result as $row) {
+          if ($row['question_tid'] == $question_tid && $row['question_answer']) {
+            $output[$row['refer_other']][] = $row['question_answer'];
+          }
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    * Using EvaluationNid as Output Key.
    */
   public function getQuestionAnswerAllDataWithEvaluationNidWithReferUid($meeting_nodes = array(), $question_tid = NULL) {
