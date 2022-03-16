@@ -740,7 +740,8 @@ class FlexpageEventLayout extends ControllerBase {
   }
 
   /**
-   *
+   * @deprecated
+   * @see \Drupal::service('ngdata.term.question')->getQuestionAnswerAllDataWithReferOther();
    */
   public function getQuestionAnswerAllDataWithReferOther($meeting_nodes = array(), $question_tid = NULL) {
     $evaluation_nodes = \Drupal::service('baseinfo.querynode.service')
