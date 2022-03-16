@@ -70,7 +70,6 @@ fileSaverJs:
   js:
     /libraries/node_modules/file-saver/dist/FileSaver.min.js: {}
 
-
 # JQVMap
 jqvmap:
   version: 1.5.1
@@ -81,6 +80,10 @@ jqvmap:
     /libraries/node_modules/jqvmap/dist/jquery.vmap.js: {}
     /libraries/node_modules/jqvmap/dist/maps/jquery.vmap.canada.js: {}
 
+######
+  # Other Library
+  # wordcloud2.js
+######
 ######
   # custom
 ######
