@@ -201,8 +201,8 @@ class PdfPage {
   public function drawPdfChart($chartSection, $pdf) {
     $ChartBlock = new ChartBlock();
 
-    $frameHeight = $ChartBlock->getFrameHeight();
-    $frameWidth = $ChartBlock->getFrameWidth();
+    $frameHeight = $ChartBlock->frameHeight;
+    $frameWidth = $ChartBlock->frameWidth;
     $frameFirstRowYPosition = $ChartBlock->getFrameFirstRowYPosition();
 
     $chartRightXPositioncol6 = $ChartBlock->getChartRightXPositioncol6();
