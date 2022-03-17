@@ -810,7 +810,11 @@ class GenpdfJsonGenerator extends ControllerBase {
       $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids);
 
       foreach ($question_terms as $question_term) {
-        $output[] = $this->getQuestionDataByTableForSelectkeyQuestion($meeting_nodes, $question_term);
+        $block_row = $this->getQuestionDataByTableForSelectkeyQuestion($meeting_nodes, $question_term);
+        // Only append not empty block.
+        if ($block_row) {
+          $output[] = $block_row;
+        }
       }
     }
 
@@ -819,15 +823,22 @@ class GenpdfJsonGenerator extends ControllerBase {
 
   /**
    * for table
+   * @return array
+   $output['data']["tbody"] = [
+     [
+       "Family Physician",
+       9,
+       "90%"
+     ],
+     [
+       "Dietitian",
+       1,
+       "10%"
+     ],
+   ];
    */
   public function getQuestionDataByTableForSelectkeyQuestion($meeting_nodes = array(), $question_term = NULL) {
-    $output = array();
-
-    $output['block'] = array(
-      'type'  => 'table',
-      'class' => 'table',
-      'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
-    );
+    $output = [];
 
     $all_answer_tids = $this->getSelectkeyQuestionAllAnswerTids($meeting_nodes, $question_term);
 
@@ -838,37 +849,30 @@ class GenpdfJsonGenerator extends ControllerBase {
 
     $answer_tids_sum = count($all_answer_tids);
 
-    $result = array();
+    $result = [];
     if (isset($key_answer_terms) && count($key_answer_terms) > 0) {
       foreach ($key_answer_terms as $term) {
-        $result[] = array(
+        $result[] = [
           $term->getName(),
           $count_answer_tids[$term->id()],
           \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($count_answer_tids[$term->id()], $answer_tids_sum, 0) . '%',
-        );
+        ];
       }
     }
+    if ($result) {
+      $output['block'] = [
+        'type'  => 'table',
+        'class' => 'table',
+        'title' => \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term),
+      ];
 
-    $output['data']["thead"] = [
-      "Name",
-      "Number",
-      "Percentage",
-    ];
-    $output['data']["tbody"] = $result;
-
-    // sample tbody
-    // $output['data']["tbody"] = [
-    //   [
-    //     "Family Physician",
-    //     9,
-    //     "90%"
-    //   ],
-    //   [
-    //     "Dietitian",
-    //     1,
-    //     "10%"
-    //   ],
-    // ];
+      $output['data']["thead"] = [
+        "Name",
+        "Number",
+        "Percentage",
+      ];
+      $output['data']["tbody"] = $result;
+    }
 
     return $output;
   }
