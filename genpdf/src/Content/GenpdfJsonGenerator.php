@@ -90,7 +90,7 @@ class GenpdfJsonGenerator extends ControllerBase {
   /**
    * @internal only for debug use
    */
-  function getDebugMeetingJsonFromFileUrl() {
+  public function getDebugMeetingJsonFromFileUrl() {
     $file_url = '/modules/custom/flexservice/genpdf/json/jsonv6.json';
 
     $output = \Drupal::service('flexinfo.json.service')
@@ -102,7 +102,7 @@ class GenpdfJsonGenerator extends ControllerBase {
   /**
    *
    */
-  function getPdfName($entity_id = NULL) {
+  public function getPdfName($entity_id = NULL) {
     $pdf_folder_path = 'sites/default/files/pdf/';
     $output = $pdf_folder_path . date("Y_m_d_H_i_s") . ".pdf";
 
