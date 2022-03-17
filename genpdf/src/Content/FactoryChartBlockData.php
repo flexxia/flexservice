@@ -12,7 +12,7 @@ class FactoryChartBlockData {
 
   // frame
   public $frameHeight = 472;
-  public $frameWidth = 600;
+  public $frameWidth = 630;
   public $frameFirstRowYPosition = 148;
 
   // chart x position
@@ -114,22 +114,6 @@ class FactoryChartBlockData {
 
   function setTextColorB($parameter) {
     $this->textColorB = $parameter;
-  }
-
-  function getFrameHeight() {
-    return $this->frameHeight;
-  }
-
-  function setFrameHeight($parameter) {
-    $this->frameHeight = $parameter;
-  }
-
-  function getFrameWidth() {
-    return $this->frameWidth;
-  }
-
-  function setFrameWidth($parameter) {
-    $this->frameWidth = $parameter;
   }
 
   function getFrameFirstRowYPosition() {
