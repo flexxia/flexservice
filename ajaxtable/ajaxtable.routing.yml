@@ -62,6 +62,15 @@ ajaxtable.demo_form.conditional_option:
     _access: 'TRUE'
 
 #
+ajaxtable.demo_form.draggable.textfields:
+  path: '/ajaxtable/demoform/draggable/textfields'
+  defaults:
+    _form: '\Drupal\ajaxtable\Form\DemoFormDraggableTextfields'
+    _title: 'DemoForm Draggable Textfields Form'
+  requirements:
+    _access: 'TRUE'
+
+#
 ajaxtable.demo_form.unlimited.textfields:
   path: '/ajaxtable/demoform/unlimited/textfields'
   defaults:
