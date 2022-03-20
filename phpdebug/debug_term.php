@@ -22,7 +22,7 @@ function _createTermSample() {
   $fields_value = array(
     array(
       'field_name' => 'field_city_province',
-      'value' => array(35),
+      'value' => array(35),   // array, even single value
       'vid' => 'province',    // field reference term vid
     )
   );
