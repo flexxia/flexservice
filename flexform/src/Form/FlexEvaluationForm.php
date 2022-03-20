@@ -236,7 +236,7 @@ class FlexEvaluationForm extends FormBase {
 
     if ($field_type == 'customtext') {
       $output = \Drupal::service('flexform.service.basic.info')
-      ->getElementCustomText($question_term);
+        ->getElementCustomText($question_term);
     }
     if ($field_type == 'radios') {
       $output = $this->_getElementNumberDropdown($question_term, $speaker_users, $meeting_relatedtypes);
