@@ -27,7 +27,7 @@ class FlexinfoTermService {
     $fields_value = array(
       array(
         'field_name' => 'field_city_province',
-        'value' => array(25),
+        'value' => array(25),   // array, even single value
         'vid' => 'province',
       ),
     );
