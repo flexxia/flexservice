@@ -131,7 +131,6 @@ class FlexEvaluationLayoutForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     foreach ($form_state->getValues() as $key => $value) {
-      // dpm($value);
       // \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
     }
 
@@ -208,14 +207,14 @@ class FlexEvaluationLayoutForm extends FormBase {
     $question_terms = \Drupal::service('flexinfo.field.service')
       ->getFieldAllTargetIdsEntitys($evaluation_form_entity, 'field_evaluationform_questionset');
     if ($question_terms) {
-        $weight = -10;
+      $weight = -10;
       foreach ($question_terms as $question_tid => $question_term) {
         $form['evallayout_questionset'][$question_tid] = [
           'data' => [],
         ];
         $form['evallayout_questionset'][$question_tid]['#attributes']['class'] = ['draggable'];
 
-        // type is weight
+        // Type is weight.
         $form['evallayout_questionset'][$question_tid]['weight'] = [
           '#type' => 'weight',
           '#title' => t('Weight'),
