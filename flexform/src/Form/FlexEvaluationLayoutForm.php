@@ -25,12 +25,8 @@ class FlexEvaluationLayoutForm extends FormBase {
       ->getStorage('taxonomy_term')->load($evaluation_form_tid);
 
     if ($evaluation_form_entity && $evaluation_form_entity->getVocabularyId() == 'evaluationform') {
-
       $evaluation_layout_tids = \Drupal::service('flexinfo.queryterm.service')
         ->wrapperTermTidsByField('evaluationlayout', 'field_evallayout_form', $evaluation_form_tid);
-
-        dpm($evaluation_form_tid);
-        dpm($evaluation_layout_tids);
       if ($evaluation_layout_tids) {
         $form = $this->generateExistMessage($form, $form_state, $evaluation_form_entity);
       }
@@ -134,9 +130,8 @@ class FlexEvaluationLayoutForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // \Drupal::messenger()->addMessage("form_state value is below line 133");
     foreach ($form_state->getValues() as $key => $value) {
-      dpm($value);
+      // dpm($value);
       // \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
     }
 
