@@ -34,6 +34,15 @@ flexform.node.add.evaluation.form:
   requirements:
     _permission: 'access content'
 
+#
+flexform.term.add.evaluationlayout.form:
+  path: '/flexform/term/add/evaluationlayout/form/{evaluation_form_tid}'
+  defaults:
+    _form: '\Drupal\flexform\Form\FlexEvaluationLayoutForm'
+    _title: 'Predefined Evaluation Layout Form'
+  requirements:
+    _permission: 'access content'
+
 # Render Form by Controller.
 flexform.node.add.summaryevaluation.form:
   path: '/flexform/node/add/summaryevaluation/form/{meeting_nid}'
