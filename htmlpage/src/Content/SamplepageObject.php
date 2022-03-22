@@ -58,7 +58,7 @@ class SamplepageObject {
   }
 
   /**
-   *
+   * @see block_id is for save png
    */
   public function d3Bar() {
     $d3_canvas_id = 'd3-bar-sample-1';
@@ -88,7 +88,7 @@ class SamplepageObject {
     $output['html_content'] = \Drupal::service('htmlpage.charthtmltemplate.section.d3')
       ->blockD3Template($block_definition);
     $output['json_content'] = \Drupal::service('htmlpage.chartjsonbase.d3template')
-      ->d3BaseJson('cloud', $d3_canvas_id);
+      ->d3BaseJson('word_cloud', $d3_canvas_id);
 
     return $output;
   }

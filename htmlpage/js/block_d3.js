@@ -9,8 +9,13 @@
   Drupal.behaviors.htmlpageD3DefaultChart = {
     attach: function (context, settings) {
 
-      // Run Once.
-      // Once('id') is unique.
+      // Global Variable
+      const siteBaseUrl = settings.path.baseUrl;
+
+      /**
+       * Run Once.
+       * Once('id') is unique.
+       */
       $('.htmlpage-wrapper', context).once('htmlpageBehaviorD3').each(function () {
         initOnce();
       });
@@ -19,8 +24,7 @@
        *
        */
       function initOnce() {
-        var siteBaseUrl = settings.path.baseUrl;
-        var jsonUrl = siteBaseUrl + drupalSettings.htmlpage.jsonUrl;
+        const jsonUrl = siteBaseUrl + drupalSettings.htmlpage.jsonUrl;
 
         axios.get(jsonUrl)
           .then(function (response) {
@@ -35,7 +39,7 @@
                     case "bar":
                       drawBarChart(item['chart_canvas_id'], item['content']);
                       break;
-                    case "cloud":
+                    case "word_cloud":
                       drawWordCloud(item['chart_canvas_id'], item['content']);
                       break;
                     case "map":
@@ -62,6 +66,7 @@
           });
       }
 
+
       /**
        *
        */
@@ -86,7 +91,6 @@
        * https://doc.yonyoucloud.com/doc/wiki/project/d3wiki/makechart.html
        */
       function drawBasicMap(chartCanvasId, chartContent) {
-        var siteBaseUrl = settings.path.baseUrl;
         const pathToJSON = siteBaseUrl + "modules/custom/flexservice/htmlpage/data/map_world.geojson";
         // const pathToJSON = siteBaseUrl + "modules/custom/flexservice/htmlpage/data/map_beijing.json";
         axios.get(pathToJSON)
@@ -359,33 +363,55 @@
        *
        */
       function drawWordCloud(chartCanvasId, chartContent) {
-        // 添加 SVG 画布.
-        var width = 300;    // 画布的宽度
-        var height = 200;   // 画布的高度
+        const canvasWidth = 800;
+        const canvasHeight = 400;
 
-        var svg = d3.select("#" + chartCanvasId)     // 选择文档中的body元素
-          .append("svg")              // append添加一个svg元素
-          .attr("width", width)       // 设定宽度
-          .attr("height", height);    // 设定高度
+        const svg = d3.select("#" + chartCanvasId)
+          .append("svg")
+          .attr("width", canvasWidth)
+          .attr("height", canvasHeight);
 
-        // 画布周边的空白.
-        var padding = {
+        const padding = {
           left: 30,
           right: 30,
           top: 20,
           bottom: 20
         };
 
-        var siteBaseUrl = settings.path.baseUrl;
-        const pathToJSON = siteBaseUrl + "modules/custom/flexservice/htmlpage/data/all_time_olympic_medal.json";
+        if (chartCanvasId == 'd3-cloud-meeting-1') {
+          var dataset = [
+            {
+              name: 'ppp',
+              count_field: 20,
+            },
+            {
+              name: 'ooo',
+              count_field: 10,
+            },
+          ];
+          dataset = chartContent['data']['datasets'];
+          drawCloudLayout(dataset);
+        }
+        else if (chartCanvasId == 'd3-cloud-sample-1') {
+          // Draw Sample
+          const pathToJSON = siteBaseUrl + "modules/custom/flexservice/htmlpage/data/all_time_olympic_medal.json";
 
-        d3.json(pathToJSON).then(function(data) {
-          drawCloudLayout(data);
-        });
+          d3.json(pathToJSON).then(function(rawData) {
+            // 转换数据键值 为标准的'name'和'count_field'
+            const dataset = rawData.map(function(element) {
+              var elementCopy = element;
+              elementCopy['name'] = element['team'];
+              elementCopy['count_field'] = element['summer_gold'];
+              return element;
+            });
+            // 作用域，dataset 需要放在里面
+            drawCloudLayout(dataset);
+          });
+        }
 
         function drawCloudLayout(dataset) {
           const maxValue = d3.max(dataset, function(d, i) {
-            return parseInt(d.summer_gold);
+            return parseInt(d.count_field);
           });
 
           const wordScale = d3.scaleLinear()
@@ -393,11 +419,11 @@
             .range([10, 100]);
 
           d3.layout.cloud()
-            .size([800, 500])
+            .size([800, 400])
             .rotate(0)
             .words(dataset)
             .fontSize( function(d) {
-              return wordScale(parseInt(d.summer_gold));
+              return wordScale(parseInt(d.count_field));
             })
             .on("end", drawWordTag)
             .start();
@@ -405,7 +431,7 @@
 
         function drawWordTag(words) {
           svg.append("g")
-            .attr("transform", "translate(50, 20)")
+            .attr("transform", "translate(400, 200)")
             .selectAll("text")
             .data(words)
             .enter()
@@ -415,7 +441,7 @@
               .attr("text-anchor", "middle")
               .attr("transform", d =>
                 `translate(${[d.x, d.y]}) rotate(${d.rotate})`)
-              .text(d => d.team);
+              .text(d => d.name);
         }
       }
 

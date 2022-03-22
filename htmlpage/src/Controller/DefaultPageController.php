@@ -90,7 +90,7 @@ class DefaultPageController extends ControllerBase {
       ],
     ];
 
-    if ($section == 'samplepage' || $section == 'samplechart') {
+    if ($section == 'sample' ||$section == 'samplepage' || $section == 'samplechart') {
       $build = $this->samplePage($section, $entity_id, $start_timestamp, $end_timestamp);
     }
 

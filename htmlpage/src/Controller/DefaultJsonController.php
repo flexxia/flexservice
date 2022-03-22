@@ -6,34 +6,29 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class DefaultJsonController.
+ * Class Return Htmlpage Json.
  */
 class DefaultJsonController extends ControllerBase {
 
   /**
+   * Standard Page Json.
+   *
    * @return array
    *   Json Array.
    */
   public function standardJson($section, $entity_id, $start_timestamp, $end_timestamp) {
-    $output = $this->chartjsBlockSamplePageJson();
+    $output = [];
+    if ($section == 'meeting') {
+      $output = \Drupal::service('htmlpage.object.content')
+        ->meetingPageContent()['json_content'];
+    }
+    elseif ($section == 'sample' ||$section == 'samplepage' || $section == 'samplechart') {
+      // Sample Page.
+      $output = \Drupal::service('htmlpage.object.samplepage')
+        ->samplePageContent()['json_content'];
+    }
 
     return new JsonResponse($output);
-
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Vue Page: hello with parameter(s): ') . $section,
-    ];
-  }
-
-  /**
-   * @return array
-   *   Json Array.
-   */
-  public function chartjsBlockSamplePageJson() {
-    $json_content = \Drupal::service('htmlpage.object.samplepage')
-      ->samplePageContent()['json_content'];
-
-    return $json_content;
   }
 
 }

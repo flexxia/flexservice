@@ -25,6 +25,27 @@ class D3Template {
       'chart_library' => 'd3',
       'content' => [
         'type' => $type,
+        "data" => [
+          "labels" => [
+            "Jan",
+            "Feb",
+            "Mar",
+          ],
+          "datasets" => [
+            [
+              "label" => '',          // 图例文字
+              "data" => [
+              ],
+              "backgroundColor" => [
+              ],
+              "borderColor" => [
+              ],
+              "borderWidth" => 1,
+            ],
+          ],
+        ],
+        "options" => [
+        ],
       ],
     ];
 
