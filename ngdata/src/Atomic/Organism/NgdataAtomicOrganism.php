@@ -1033,18 +1033,6 @@ class NgdataAtomicOrganism extends NgdataAtomic {
   /**
    *
    */
-  public function tableContentCustomTermEvaluationLayout() {
-    $tableData = $this->molecule->tableDataByCustomTermEvaluationLayout();
-    $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
-
-    $output = $this->tableContentStandardTemplate($tableMiddleFields, $tableData);
-
-    return $output;
-  }
-
-  /**
-   *
-   */
   public function tableContentCustomTermProgram() {
     $tableData = $this->molecule->tableDataByCustomTermByProgram();
     $tableMiddleFields = $this->molecule->tableHeaderGenerateFromTableDataArrayKeys($tableData);
