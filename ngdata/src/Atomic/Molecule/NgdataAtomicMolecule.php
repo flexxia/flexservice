@@ -1535,9 +1535,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('questionlibrary');
 
-    // $evaluation_terms = \Drupal::service('flexinfo.term.service')
-    //   ->getFullTermsFromVidName($vid = 'evaluationform');
-
     if (is_array($terms)) {
 
       foreach ($terms as $term) {
@@ -1593,7 +1590,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         if (in_array($term->id(), $evaluation_tids)) {
           $program_num ++;
         }
-
       }
 
       $output[] = array(
@@ -1601,6 +1597,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'DESCRIPTION' => $term->getDescription(),
         'PROGRAM NUM' => $program_num,
         'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
+        'Layout' => Link::fromTextAndUrl(t('Add'), Url::fromUserInput("/flexform/term/add/evaluationlayout/form/" . $term->id()))->toString(),
       );
     }
 
@@ -1627,7 +1624,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         if (in_array($term->id(), $question_tids)) {
           $evaluationform_num++;
           $evaluationform_terms[] = $evaluation_term;
-
         }
       }
 
