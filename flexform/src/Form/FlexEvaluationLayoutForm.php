@@ -59,7 +59,7 @@ class FlexEvaluationLayoutForm extends FormBase {
   public function generateEmptyValueForm(array $form, FormStateInterface $form_state) {
     $form['form_info'] = [
       '#type' => 'item',
-      '#title' => 'The Evaluation Form is not correct, Please try again.',
+      '#title' => 'The Evaluation Form ID is not correct, Please try again.',
     ];
 
     return $form;
@@ -112,7 +112,7 @@ class FlexEvaluationLayoutForm extends FormBase {
     ];
 
     // Add your asset library here.
-    // $form['#attached']['library'][] = 'flexform/node_add_evaluation_form';
+    $form['#attached']['library'][] = 'flexform/term_add_evaluation_layout_form';
 
     return $form;
   }
@@ -228,7 +228,7 @@ class FlexEvaluationLayoutForm extends FormBase {
           ],
         ];
         $form['evallayout_questionset'][$question_tid]['label'] = [
-          '#markup' => $question_term->getName() . ' - ' . $question_tid,
+          '#markup' => $question_term->getName(),
         ];
 
         $weight++;
