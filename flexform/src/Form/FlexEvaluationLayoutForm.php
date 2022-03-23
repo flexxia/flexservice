@@ -59,7 +59,7 @@ class FlexEvaluationLayoutForm extends FormBase {
   public function generateEmptyValueForm(array $form, FormStateInterface $form_state) {
     $form['form_info'] = [
       '#type' => 'item',
-      '#title' => 'The Evaluation ID is not correct, Please try again.',
+      '#title' => 'The Evaluation Form is not correct, Please try again.',
     ];
 
     return $form;
@@ -76,6 +76,7 @@ class FlexEvaluationLayoutForm extends FormBase {
       '#size' => 64,
       '#default_value' => 'Evaluation Form Layout - ' . $evaluation_form_entity->getName(),
       '#required' => TRUE,
+      '#disabled' => TRUE,
     ];
 
     // Storage of internal information.
