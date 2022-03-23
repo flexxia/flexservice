@@ -4,6 +4,7 @@ namespace Drupal\flexform\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Flex Evaluation Form.
@@ -138,9 +139,9 @@ class FlexEvaluationLayoutForm extends FormBase {
     $this->_createEvaluationLayoutTerm($form, $form_state);
 
     // Page redirect.
-    // $url_path = '/ngpage/standardterm/page/evaluationform';
-    // $url = Url::fromUserInput($url_path);
-    // $form_state->setRedirectUrl($url);
+    $url_path = '/ngpage/standardterm/page/evaluationlayout';
+    $url = Url::fromUserInput($url_path);
+    $form_state->setRedirectUrl($url);
   }
 
   /**
