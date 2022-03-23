@@ -1559,6 +1559,24 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   /**
    *
    */
+  public function tableDataByCustomTermBusinessunit() {
+    $terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName('businessunit');
+
+    foreach ($terms as $term) {
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'DESCRIPTION' => $term->getDescription(),
+        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function tableDataByCustomTermEvaluationForm() {
     $terms = \Drupal::service('flexinfo.term.service')
       ->getFullTermsFromVidName('evaluationform');
@@ -1583,45 +1601,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'DESCRIPTION' => $term->getDescription(),
         'PROGRAM NUM' => $program_num,
         'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
-      );
-    }
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function tableDataByCustomTermBusinessunit() {
-    $terms = \Drupal::service('flexinfo.term.service')
-      ->getFullTermsFromVidName('businessunit');
-
-    foreach ($terms as $term) {
-      $output[] = array(
-        'NAME' => $term->getName(),
-        'DESCRIPTION' => $term->getDescription(),
-        'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
-      );
-    }
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function tableDataByCustomTermTherapeuticarea() {
-    $terms = \Drupal::service('flexinfo.term.service')
-      ->getFullTermsFromVidName('therapeuticarea');
-
-    foreach ($terms as $term) {
-      $output[] = array(
-        'NAME' => $term->getName(),
-        'DESCRIPTION' => $term->getDescription(),
-        'BU' => \Drupal::service('flexinfo.field.service')
-          ->getFieldFirstTargetIdTermName($term, 'field_theraparea_businessunit'),
-        'EDIT' => \Drupal::service('flexinfo.term.service')
-          ->getTermEditLink($term->id()),
       );
     }
 
@@ -1683,6 +1662,27 @@ class NgdataAtomicMolecule extends NgdataAtomic {
         'NAME' => $term->getName(),
         'EvalForms' => Link::fromTextAndUrl(t('View'), Url::fromUserInput("/ngpage/questionevalforms/" . $term->id()))->toString(),
         'EDIT' => Link::fromTextAndUrl(t('Edit'), Url::fromUserInput("/taxonomy/term/" . $term->id() . "/edit"))->toString(),
+      );
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function tableDataByCustomTermTherapeuticarea() {
+    $terms = \Drupal::service('flexinfo.term.service')
+      ->getFullTermsFromVidName('therapeuticarea');
+
+    foreach ($terms as $term) {
+      $output[] = array(
+        'NAME' => $term->getName(),
+        'DESCRIPTION' => $term->getDescription(),
+        'BU' => \Drupal::service('flexinfo.field.service')
+          ->getFieldFirstTargetIdTermName($term, 'field_theraparea_businessunit'),
+        'EDIT' => \Drupal::service('flexinfo.term.service')
+          ->getTermEditLink($term->id()),
       );
     }
 
