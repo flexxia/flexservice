@@ -32,7 +32,7 @@ class BootstrapTableSection {
    */
   public function tableWrapper($table_thead, $table_tbody = NULL) {
     $output = '';
-    $output .= '<div class="">';
+    $output .= '<div class="htmlpage-bootstraptable-section-wrapper">';
       $output .= '<table
           data-toggle="table"
           data-pagination="true"
