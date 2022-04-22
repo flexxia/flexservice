@@ -11,7 +11,7 @@
 
       // Run Once.
       // Once('id') is unique.
-      $('.htmlpage-default-wrapper', context).once('htmlpageBehaviorECharts').each(function () {
+      $('.htmlpage-wrapper', context).once('htmlpageBehaviorECharts').each(function () {
         initOnce();
       });
 

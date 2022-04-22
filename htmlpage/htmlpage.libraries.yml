@@ -87,14 +87,6 @@ jqvmap:
 ######
   # custom
 ######
-
-# Common use for all kinds of chart, table
-block-chart-basic:
-  version: 9.x
-  css:
-    theme:
-      css/htmlpage_chart_basic.css: {}
-
 #
 block-chartjs:
   version: 3.x
@@ -137,7 +129,7 @@ block-jqvmap:
     - htmlpage/jqvmap
 
 #
-draw-canvas-tile:
+draw-canvas:
   version: 3.x
   js:
-    js/draw_canvas_tile.js: {}
+    js/draw_canvas.js: {}

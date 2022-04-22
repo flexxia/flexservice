@@ -109,6 +109,7 @@ class NgpageController extends ControllerBase {
       '#allowed_tags' => $admin_tags,
       '#attached' => [
         'library' => [
+          'fxt/font-awesome',
           // 'ngpage/primeng_app', // To load the library only with this block
           'ngpage/primeng7_app', // To load the library only with this block
           'ngpage/bootstrap_slider',

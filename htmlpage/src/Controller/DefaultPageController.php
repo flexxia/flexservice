@@ -58,12 +58,12 @@ class DefaultPageController extends ControllerBase {
   /**
    *
    */
-  public function standardHtmlPage($section, $entity_id, $start_timestamp, $end_timestamp) {
+  public function standardPage($section, $entity_id, $start_timestamp, $end_timestamp) {
     $page_content = '';
 
     if ($section == 'meeting') {
-      $page_content = \Drupal::service('htmlpage.content.object')
-        ->meetingPageContent($entity_id, 'from-standardPage')['html_content'];
+      $page_content = \Drupal::service('htmlpage.object.content')
+        ->meetingPageContent()['html_content'];
     }
     $build = [
       '#type' => 'markup',
@@ -74,13 +74,12 @@ class DefaultPageController extends ControllerBase {
       ],
       '#attached' => [
         'library' => [
-          'htmlpage/block-chart-basic',
+          'htmlpage/draw-canvas',
+          'htmlpage/bootstrap-table',
           'htmlpage/block-chartjs',
           'htmlpage/block-d3',
           'htmlpage/block-echarts',
           'htmlpage/block-jqvmap',
-          'htmlpage/bootstrap-table',
-          'htmlpage/draw-canvas-tile',
           'ngpage/html2canvas_save_png',
         ],
         'drupalSettings' => [
@@ -91,7 +90,6 @@ class DefaultPageController extends ControllerBase {
       ],
     ];
 
-    // Sample page
     if ($section == 'sample' ||$section == 'samplepage' || $section == 'samplechart') {
       $build = $this->samplePage($section, $entity_id, $start_timestamp, $end_timestamp);
     }
@@ -102,22 +100,9 @@ class DefaultPageController extends ControllerBase {
   /**
    *
    */
-  public function htmlGuestPage($section, $entity_id, $start_timestamp, $end_timestamp) {
-    $output = '';
-
-    if ($section == 'meeting') {
-      $output = $this->standardHtmlPage($section, $entity_id, $start_timestamp, $end_timestamp);
-    }
-
-    return $output;
-  }
-
-  /**
-   *
-   */
   public function samplePage($section, $entity_id, $start_timestamp, $end_timestamp) {
     $page_content = '';
-    $page_content = \Drupal::service('htmlpage.content.samplepage')
+    $page_content = \Drupal::service('htmlpage.object.samplepage')
         ->samplePageContent()['html_content'];
 
     $build = [
@@ -129,13 +114,12 @@ class DefaultPageController extends ControllerBase {
       ],
       '#attached' => [
         'library' => [
-          'htmlpage/block-chart-basic',
+          'htmlpage/draw-canvas',
+          'htmlpage/bootstrap-table',
           'htmlpage/block-chartjs',
           'htmlpage/block-d3',
           'htmlpage/block-echarts',
           'htmlpage/block-jqvmap',
-          'htmlpage/bootstrap-table',
-          'htmlpage/draw-canvas-tile',
           'ngpage/html2canvas_save_png',
         ],
         'drupalSettings' => [

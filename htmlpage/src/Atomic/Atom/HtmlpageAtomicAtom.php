@@ -17,12 +17,4 @@ class HtmlpageAtomicAtom extends HtmlpageAtomic {
 
   }
 
-  /**
-   *
-   */
-  public function generateUniqueId() {
-    $output = hexdec(substr(uniqid(NULL, TRUE), 15, 8));
-    return $output;
-  }
-
 }

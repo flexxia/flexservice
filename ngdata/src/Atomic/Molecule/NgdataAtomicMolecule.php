@@ -266,8 +266,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
       $lower_right_text = 'Best Answer';
     }
 
-    // remove class block-box-shadow
-    $output .= '<div class="text-center bottom-n-1 padding-0">';
+    $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
       $output .= $this->atom->getBottomHtmlCell(
         count(\Drupal::service('ngdata.term.question')->getQuestionAnswerAllData($meeting_nodes, $question_term->id())),
         'RESPONSES'
@@ -297,8 +296,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     $all_data = \Drupal::service('ngdata.term.question')
       ->getQuestionAnswerAllDataWithReferOther($meeting_nodes, $question_term->id());
 
-    // remove class block-box-shadow
-    $output .= '<div class="text-center bottom-n-1 padding-0">';
+    $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
       $output .= $this->atom->getBottomHtmlCell4Grid(
         count($all_data['Pre']),
         'RESPONSES'
@@ -325,8 +323,6 @@ class NgdataAtomicMolecule extends NgdataAtomic {
    */
   public function getSelectkeyQuestionBottom($question_term = NULL, $meeting_nodes = array()) {
     $output = '';
-
-    // remove class block-box-shadow
     $output .= '<div class="text-center bottom-n-1 padding-0 block-box-shadow">';
       $output .= $this->atom->getBottomHtmlCell(
         array_sum(\Drupal::service('ngdata.term.question')

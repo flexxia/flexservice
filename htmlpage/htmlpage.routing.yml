@@ -1,29 +1,21 @@
 #
-# /htmlpage/samplepage/page/all/111/222
+# /htmlpage/samplechart/page/all/111/222
 htmlpage.default.page.controller:
   path: '/htmlpage/{section}/page/{entity_id}/{start_timestamp}/{end_timestamp}'
   defaults:
-    _controller: '\Drupal\htmlpage\Controller\DefaultPageController::standardHtmlPage'
+    _controller: '\Drupal\htmlpage\Controller\DefaultPageController::standardPage'
     _title: 'Htmlpage'
   requirements:
     _permission: 'access content'
-
-htmlguest.default.page.controller:
-  path: '/htmlguest/{section}/page/{entity_id}/{start_timestamp}/{end_timestamp}'
-  defaults:
-    _controller: '\Drupal\htmlpage\Controller\DefaultPageController::htmlGuestPage'
-    _title: 'Guestpage Page'
-  requirements:
-    _access: 'TRUE'
 
 # /htmlpage/samplechart/json/all/111/222
 htmlpage.default.json.controller:
   path: '/htmlpage/{section}/json/{entity_id}/{start_timestamp}/{end_timestamp}'
   defaults:
-    _controller: '\Drupal\htmlpage\Controller\DefaultJsonController::standardHtmlJson'
+    _controller: '\Drupal\htmlpage\Controller\DefaultJsonController::standardJson'
     _title: 'Htmlpage Json'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
 
 #
 htmlpage.save.png.controller:

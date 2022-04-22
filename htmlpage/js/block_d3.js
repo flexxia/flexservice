@@ -16,7 +16,7 @@
        * Run Once.
        * Once('id') is unique.
        */
-      $('.htmlpage-default-wrapper', context).once('htmlpageBehaviorD3').each(function () {
+      $('.htmlpage-wrapper', context).once('htmlpageBehaviorD3').each(function () {
         initOnce();
       });
 
@@ -25,7 +25,6 @@
        */
       function initOnce() {
         const jsonUrl = siteBaseUrl + drupalSettings.htmlpage.jsonUrl;
-
 
         axios.get(jsonUrl)
           .then(function (response) {
@@ -379,14 +378,14 @@
           bottom: 20
         };
 
-        if (chartCanvasId == 'd3-cloud-sample-meeting-1') {
+        if (chartCanvasId == 'd3-cloud-meeting-1') {
           var dataset = [
             {
-              name: 'foo',
+              name: 'ppp',
               count_field: 20,
             },
             {
-              name: 'bar',
+              name: 'ooo',
               count_field: 10,
             },
           ];
@@ -419,9 +418,6 @@
             .domain([0, maxValue])
             .range([10, 100]);
 
-          if(!d3.hasOwnProperty('layout')){
-            console.log("d3.layout is not exist, d3-cloud not install");
-          }
           d3.layout.cloud()
             .size([800, 400])
             .rotate(0)

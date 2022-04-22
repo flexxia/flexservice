@@ -16,15 +16,15 @@ class DefaultJsonController extends ControllerBase {
    * @return array
    *   Json Array.
    */
-  public function standardHtmlJson($section, $entity_id, $start_timestamp, $end_timestamp) {
+  public function standardJson($section, $entity_id, $start_timestamp, $end_timestamp) {
     $output = [];
     if ($section == 'meeting') {
-      $output = \Drupal::service('htmlpage.content.object')
-        ->meetingPageContent($entity_id, 'from-standardJson')['json_content'];
+      $output = \Drupal::service('htmlpage.object.content')
+        ->meetingPageContent()['json_content'];
     }
     elseif ($section == 'sample' ||$section == 'samplepage' || $section == 'samplechart') {
       // Sample Page.
-      $output = \Drupal::service('htmlpage.content.samplepage')
+      $output = \Drupal::service('htmlpage.object.samplepage')
         ->samplePageContent()['json_content'];
     }
 

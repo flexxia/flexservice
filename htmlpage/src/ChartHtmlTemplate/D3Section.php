@@ -23,13 +23,13 @@ class D3Section {
    */
   public function blockD3Template($block_data = []) {
     $html_template = '';
-    $html_template .= '<div class="htmlpage-d3-section-wrapper">';
+    $html_template .= '<div class="htmlpage-d3-wrapper">';
       $html_template .= '<div id="' . $block_data['chart_canvas_id'] . '" class="padding-10">';
       $html_template .= '</div>';
     $html_template .= '</div>';
 
     $output = \Drupal::service('htmlpage.atomic.block')
-      ->blockChartSectionTemplate($block_data, $html_template);
+      ->blockChartTemplate($block_data, $html_template);
 
     return $output;
   }
@@ -39,13 +39,13 @@ class D3Section {
    */
   public function blockD3Template7Fairy($block_data = []) {
     $html_template = '';
-    $html_template .= '<div class="htmlpage-d3-section-wrapper">';
+    $html_template .= '<div class="htmlpage-d3-wrapper">';
       $html_template .= '<div id="' . $block_data['chart_canvas_id'] . '" class="padding-10">';
       $html_template .= '</div>';
     $html_template .= '</div>';
 
     $output = \Drupal::service('htmlpage.atomic.block')
-      ->blockChartSectionTemplate($block_data, $html_template);
+      ->blockChartTemplate($block_data, $html_template);
 
     return $output;
   }
@@ -55,7 +55,7 @@ class D3Section {
    */
   public function blockD3TemplateMapSvg($block_data = []) {
     $html_template = '';
-    $html_template .= '<div class="htmlpage-d3-section-wrapper">';
+    $html_template .= '<div class="htmlpage-d3-wrapper">';
       $html_template .= '<div id="' . $block_data['chart_canvas_id'] . '" class="padding-10">';
       $html_template .= '</div>';
       $html_template .= '<div id="content">
@@ -69,7 +69,7 @@ class D3Section {
     $html_template .= '</div>';
 
     $output = \Drupal::service('htmlpage.atomic.block')
-      ->blockChartSectionTemplate($block_data, $html_template);
+      ->blockChartTemplate($block_data, $html_template);
 
     return $output;
   }

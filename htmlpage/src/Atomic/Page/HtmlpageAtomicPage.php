@@ -16,6 +16,4 @@ class HtmlpageAtomicPage extends HtmlpageAtomic {
   public function __construct() {
   }
 
-
-
 }

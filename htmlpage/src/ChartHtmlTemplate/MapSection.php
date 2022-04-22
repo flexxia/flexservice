@@ -24,13 +24,13 @@ class MapSection {
    */
   public function blockMapJqvmapTemplate(array $block_data = []) {
     $html_template = '';
-    $html_template .= '<div class="htmlpage-map-section-wrapper">';
+    $html_template .= '<div class="">';
       $html_template .= '<div id="" class="htmlpage-jqvmap-wrapper padding-10 height-500">';
       $html_template .= '</div>';
     $html_template .= '</div>';
 
     $output = \Drupal::service('htmlpage.atomic.block')
-      ->blockChartSectionTemplate($block_data, $html_template);
+      ->blockChartTemplate($block_data, $html_template);
 
     return $output;
   }

@@ -37,7 +37,6 @@ services:
   htmlpage.chartjsonbase.echartstemplate:
     class: Drupal\htmlpage\ChartJsonBase\EChartsTemplate
 
-  # Charthtmltemplate.
   #
   htmlpage.charthtmltemplate.section.bootstraptable:
     class: Drupal\htmlpage\ChartHtmlTemplate\BootstrapTableSection
@@ -51,18 +50,12 @@ services:
   htmlpage.charthtmltemplate.section.echarts:
     class: Drupal\htmlpage\ChartHtmlTemplate\EChartsSection
   #
-  htmlpage.charthtmltemplate.section.html:
-    class: Drupal\htmlpage\ChartHtmlTemplate\HtmlSection
-  #
   htmlpage.charthtmltemplate.section.map:
     class: Drupal\htmlpage\ChartHtmlTemplate\MapSection
 
   #
-  htmlpage.content.object:
+  htmlpage.object.content:
     class: Drupal\htmlpage\Content\HtmlpageObjectContent
   #
-  htmlpage.content.meeting:
-    class: Drupal\htmlpage\Content\HtmlpageMeetingContent
-  #
-  htmlpage.content.samplepage:
+  htmlpage.object.samplepage:
     class: Drupal\htmlpage\Content\SamplepageObject
