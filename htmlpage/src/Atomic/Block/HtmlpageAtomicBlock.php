@@ -19,9 +19,9 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
   /**
    *
    */
-  public function blockTileSectionAdmindashboard() {
+  public function blockTileSectionAdmindashboardSample() {
     $output = '';
-    $output .= '<div class="htmlpage-wrapper">';
+    $output .= '<div class="htmlpage-tile-section-wrapper">';
       $output .= \Drupal::service('htmlpage.atomic.organism')
         ->tileSection(161, "Total Users", "bg-344a5f color-fff");
       $output .= \Drupal::service('htmlpage.atomic.organism')
@@ -30,6 +30,51 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
         ->tileSection(161, "HCP Attended", "bg-f24b99 color-fff");
       $output .= \Drupal::service('htmlpage.atomic.organism')
         ->tileSection(161, "Total Learners", "bg-99dc3b color-fff");
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   * @return string
+   */
+  public function blockTileSectionMeetingHeader($meeting_node = NULL, $meeting_share_link = TRUE) {
+    $output = '';
+
+    $fixed_section_param = \Drupal::service('htmlasset.meeting.service')
+      ->blockTileMeetingHeaderValue($meeting_node);
+
+    $output .= '<div class="htmlpage-meeting-header-wrapper">';
+      $output .= '<div class="row margin-left-12 margin-bottom-12">';
+        $output .= '<div class="col-md-9">';
+          $output .= '<span class="color-00a9e0 font-size-20 font-weight-300">';
+            $output .= \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($meeting_node, 'field_meeting_program');
+          $output .= '</span>';
+        $output .= '</div>';
+        if ($meeting_share_link && \Drupal::currentUser()->isAuthenticated()) {
+          $output .= '<div class="col-md-2 float-right">';
+            // $output .= $this->blockTileMeetingShareLink($meeting_node->id());
+          $output .= '</div>';
+        }
+      $output .= '</div>';
+      $output .= '<div class="margin-left-12 clear-both">';
+        foreach ($fixed_section_param as $row) {
+          if ($row['value'] == 'Speaker') {
+            $html_span_tag_col = '<span class="col-md-12 col-sm-12 padding-top-12">';
+          }
+          else {
+            $html_span_tag_col = '<span class="col-md-3 col-sm-6 padding-top-12">';
+          }
+          $output .= $html_span_tag_col;
+            $output .= '<span class="dashpage-square-text">';
+              $output .= $row['value'] . ':';
+            $output .= '</span>';
+            $output .= '<span class="dashpage-square-text padding-left-6">';
+              $output .= $row['value_one'];
+            $output .= '</span>';
+          $output .= '</span>';
+        }
+      $output .= '</div>';
     $output .= '</div>';
 
     return $output;
@@ -52,27 +97,35 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
   }
 
   /**
-   * ECharts.
+   * Charts.
    */
-  public function blockChartTemplate(array $block_data, $html_template = NULL) {
+  public function blockChartSectionTemplate(array $block_data, $html_template = NULL) {
     $output = '';
 
-    $block_id = NULL;
     if (isset($block_data['block_id'])) {
-      $block_id = ' id=' . $block_data['block_id'];
+      $block_id = $block_data['block_id'];
     }
-    $output .= '<div class="col-xs-12 margin-top-32">';
+    else {
+      $block_id = \Drupal::service('htmlpage.atomic.atom')->generateUniqueId();
+    }
+
+    $block_column = 'col-xs-12';
+    if (isset($block_data['block_column'])) {
+      $block_column = $block_data['block_column'];
+    }
+
+    $output .= '<div class="' . $block_column . ' margin-top-16 margin-bottom-24">';
 
       $output .= $this->getOrganismSavePng($block_data);
 
-      $output .= '<div' . $block_id . ' class="">';
+      $output .= '<div id="' . $block_id . '" class="">';
         $output .= '<div class="panel panel-primary">';
           $output .= '<div class="panel-heading">';
-            $output .= '<span class="font-size-16">';
+            $output .= '<span class="font-size-16 line-height-1-2 ">';
               $output .= $block_data['title'];
             $output .= '</span>';
           $output .= '</div>';
-          $output .= '<div class="panel-body margin-top-12 margin-bottom-24">';
+          $output .= '<div class="panel-body padding-0">';
             $output .= '<div class="tab-content clearfix">';
               $output .= $html_template;
             $output .= '</div>';
@@ -85,9 +138,9 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
   }
 
   /**
-   * Chartjs
+   * Chart
    */
-  public function blockChartTemplateTabs(array $block_data, array $html_templates) {
+  public function blockChartSectionTemplateTabs(array $block_data, array $html_templates) {
     $output = '';
     $output .= '<div class="col-xs-12 margin-top-32">';
 
@@ -133,6 +186,47 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
               $output .= '</div>';
             $output .= '</div>';
 
+          $output .= '</div>';
+        $output .= '</div>';
+      $output .= '</div>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   * Charts.
+   */
+  public function blockHtmlSectionTemplate(array $block_data, $html_template = NULL) {
+    $output = '';
+
+    if (isset($block_data['block_id'])) {
+      $block_id = $block_data['block_id'];
+    }
+    else {
+      $block_id = \Drupal::service('htmlpage.atomic.atom')->generateUniqueId();
+    }
+
+    $block_column = 'col-xs-12';
+    if (isset($block_data['block_column'])) {
+      $block_column = $block_data['block_column'];
+    }
+
+    $output .= '<div class="' . $block_column . ' margin-top-16">';
+
+      $output .= $this->getOrganismSavePng($block_data);
+
+      $output .= '<div id="' . $block_id . '" class="">';
+        $output .= '<div class="panel panel-primary panel-box-shadow-none">';
+          $output .= '<div class="panel-heading">';
+            $output .= '<span class="font-size-14">';
+              $output .= $block_data['title'];
+            $output .= '</span>';
+          $output .= '</div>';
+          $output .= '<div class="panel-body margin-top-2 margin-bottom-2 font-size-12">';
+            $output .= '<div class="tab-content clearfix">';
+              $output .= $html_template;
+            $output .= '</div>';
           $output .= '</div>';
         $output .= '</div>';
       $output .= '</div>';

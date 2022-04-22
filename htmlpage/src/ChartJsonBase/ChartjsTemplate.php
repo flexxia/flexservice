@@ -228,4 +228,87 @@ class ChartjsTemplate {
     return $output;
   }
 
+  /**
+   * @return array
+   *   Json Array.
+   */
+  public function chartjsBasePie() {
+    $output = [
+      "chart_canvas_id" => "chartjs-doughnut-sample-1",
+      "chart_library" => "chartjs",
+      "content" => [
+        "type" => "pie",
+        "data" => [
+          "labels" => [
+            "Jan",
+            "Feb",
+            "Mar",
+          ],
+          "datasets" => [
+            [
+              "label" => 'Pie Chart',       // 图例文字
+              "data" => [
+                16,
+                21,
+                28,
+              ],
+              "backgroundColor" => [
+                $this->chartjsSampleColor()[0],
+                $this->chartjsSampleColor()[1],
+                $this->chartjsSampleColor()[2],
+              ],
+              "hoverOffset" => 5,           // Hover时，偏移量
+            ],
+          ],
+        ],
+        "options" => [
+          "responsive" => TRUE,             // 让图片width 100%
+          "plugins" => [
+            "legend" => [
+              "position" => 'top',
+            ],
+            "title" => [
+              "display" => TRUE,
+              "text"  => 'Chart Top Title'
+            ],
+            // "datalabels" => [
+            //   "display" => TRUE,
+            //   "formatter" => 'Math.round',
+            //   "color"  => '#36A2EB'
+            // ],
+          ],
+        ],
+      ],
+    ];
+    return $output;
+  }
+
+  /**
+   * @return array
+   *   Json Array.
+   * For meeting page.
+   */
+  public function chartjsBasePiePure() {
+    $output = $this->chartjsBasePie();
+    $output["content"]["options"] = [
+      "responsive" => TRUE,             // 让图片width 100%
+      "plugins" => [
+        "legend" => [
+          "position" => NULL,
+        ],
+        "title" => [
+          "display" => FALSE,
+          "text"  => 'Chart Top Title'
+        ],
+        // "datalabels" => [
+        //   "display" => TRUE,
+        //   "formatter" => 'Math.round',
+        //   "color"  => '#36A2EB'
+        // ],
+      ],
+    ];
+
+    return $output;
+  }
+
 }

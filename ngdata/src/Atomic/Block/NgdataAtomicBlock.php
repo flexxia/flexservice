@@ -6,6 +6,7 @@ use Drupal\ngdata\Atomic\NgdataAtomic;
 
 use Drupal\ngjson\Content\NgjsonObjectContent;
 
+
 /**
  * Class NgdataAtomicBlock.
  \Drupal::service('ngdata.atomic.block')->demo()
