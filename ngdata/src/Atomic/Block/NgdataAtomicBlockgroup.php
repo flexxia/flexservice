@@ -75,7 +75,6 @@ class NgdataAtomicBlockgroup extends NgdataAtomic {
       $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($question_tids);
 
       foreach ($question_terms as $question_term) {
-        // $output[] = $this->getBlockChartBySelectkeyQuestionForPie($question_term, $meeting_nodes);
         $output[] = $this->block->getBlockHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
       }
     }

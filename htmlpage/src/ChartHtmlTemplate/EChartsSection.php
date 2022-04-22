@@ -24,13 +24,13 @@ class EChartsSection {
    */
   public function blockEChartsTemplate($block_data = []) {
     $html_template = '';
-    $html_template .= '<div class="htmlpage-echarts-wrapper">';
+    $html_template .= '<div class="htmlpage-echarts-section-wrapper">';
       $html_template .= '<div id="' . $block_data['chart_canvas_id'] . '" class="padding-10 height-500">';
       $html_template .= '</div>';
     $html_template .= '</div>';
 
     $output = \Drupal::service('htmlpage.atomic.block')
-      ->blockChartTemplate($block_data, $html_template);
+      ->blockChartSectionTemplate($block_data, $html_template);
 
     return $output;
   }
