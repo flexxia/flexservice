@@ -24,8 +24,8 @@ class HtmlpageAtomicTemplate extends HtmlpageAtomic {
 
     $output .= '<div class="block-html-clear-both-wrapper clear-both">';
     $output .= '</div>';
-    $output .= '<div style="clear:both; height:1px;">';
-    $output .= '</div>';
+    // $output .= '<div style="clear:both; height:1px;">';
+    // $output .= '</div>';
 
     return $output;
   }

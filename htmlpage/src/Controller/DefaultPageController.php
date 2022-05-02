@@ -61,9 +61,17 @@ class DefaultPageController extends ControllerBase {
   public function standardHtmlPage($section, $entity_id, $start_timestamp, $end_timestamp) {
     $page_content = '';
 
+    // Override timestamp from user settings.
+    $start_timestamp = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end_timestamp = \Drupal::service('flexinfo.setting.service')->userEndTime();
+
     if ($section == 'meeting') {
       $page_content = \Drupal::service('htmlpage.content.object')
         ->meetingPageContent($entity_id, 'from-standardPage')['html_content'];
+    }
+    elseif ($section == 'program') {
+      $page_content = \Drupal::service('htmlpage.content.object')
+        ->programPageContent($entity_id, $start_timestamp, $end_timestamp, 'from-standardPage')['html_content'];
     }
     $build = [
       '#type' => 'markup',

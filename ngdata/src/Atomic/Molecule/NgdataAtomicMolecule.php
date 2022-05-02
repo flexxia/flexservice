@@ -303,7 +303,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
     }
     $post_num = 0;
     if (isset($all_data['Post'])) {
-      $pre_num = count($all_data['Post']);
+      $post_num = count($all_data['Post']);
     }
 
     // remove class block-box-shadow

@@ -36,6 +36,79 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
   }
 
   /**
+   *
+   */
+  public function blockTileSectionProgramHeader($meeting_nodes) {
+    $output = '';
+
+    $signature_total = array_sum(
+      \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_signature')
+    );
+    $evaluation_nums = array_sum(
+      \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_evaluationnum')
+    );
+
+    $tile_array[] = array(
+      'name'  => 'Total Events',
+      'value' => count($meeting_nodes),
+    );
+    $tile_array[] = array(
+      'name'  => 'HCP Reached',
+      'value' => $signature_total,
+    );
+    $tile_array[] = array(
+      'name'  => 'Evaluations Received',
+      'value' => $evaluation_nums,
+    );
+    $tile_array[] = array(
+      'name'  => 'HCP Response',
+      'value' => \Drupal::service('flexinfo.calc.service')
+        ->getPercentageDecimal($evaluation_nums, $signature_total, 0) . '%',
+    );
+
+    $output = '';
+    foreach ($tile_array as $key => $tile) {
+      $css_class = ' bg-' . \Drupal::service('baseinfo.setting.service')
+        ->colorPlateForTile($key + 1, FALSE);
+      $output .= \Drupal::service('htmlpage.atomic.organism')
+        ->tileSection($tile['value'], $tile['name'], $css_class . " color-fff");
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return string
+   */
+  public function blockTileSectionProgramNameHeader($program_term = NULL, $meeting_share_link = FALSE, $meeting_nid = NULL) {
+    $output = '';
+
+    $output .= '<div class="htmlpage-program-name-wrapper">';
+      $output .= '<div class="row margin-left-12 margin-bottom-12">';
+
+        $output .= \Drupal::service('htmlpage.atomic.atom')
+          ->getProgramImage($program_term);
+
+        $output .= '<div class="col-md-9">';
+          $output .= '<span class="color-00a9e0 font-size-20 font-weight-300">';
+            $output .= $program_term->getName();
+          $output .= '</span>';
+        $output .= '</div>';
+        if ($meeting_share_link && $meeting_nid && \Drupal::currentUser()->isAuthenticated()) {
+          $output .= '<div class="col-md-2 float-right margin-right-16">';
+            $output .= \Drupal::service('htmlpage.atomic.atom')
+              ->getBlockTileMeetingShareLink($meeting_nid);
+          $output .= '</div>';
+        }
+      $output .= '</div>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
    * @return string
    */
   public function blockTileSectionMeetingHeader($meeting_node = NULL, $meeting_share_link = TRUE) {
@@ -44,19 +117,7 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
     $fixed_section_param = \Drupal::service('htmlasset.meeting.service')
       ->blockTileMeetingHeaderValue($meeting_node);
 
-    $output .= '<div class="htmlpage-meeting-header-wrapper">';
-      $output .= '<div class="row margin-left-12 margin-bottom-12">';
-        $output .= '<div class="col-md-9">';
-          $output .= '<span class="color-00a9e0 font-size-20 font-weight-300">';
-            $output .= \Drupal::service('flexinfo.field.service')->getFieldFirstTargetIdTermName($meeting_node, 'field_meeting_program');
-          $output .= '</span>';
-        $output .= '</div>';
-        if ($meeting_share_link && \Drupal::currentUser()->isAuthenticated()) {
-          $output .= '<div class="col-md-2 float-right">';
-            // $output .= $this->blockTileMeetingShareLink($meeting_node->id());
-          $output .= '</div>';
-        }
-      $output .= '</div>';
+    $output .= '<div class="htmlpage-meeting-tile-header-wrapper">';
       $output .= '<div class="margin-left-12 clear-both">';
         foreach ($fixed_section_param as $row) {
           if ($row['value'] == 'Speaker') {

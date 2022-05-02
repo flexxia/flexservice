@@ -39,6 +39,20 @@ class HtmlpageMeetingContent {
   /**
    *
    */
+  public function programPageBlocks($meeting_nodes = [], $program_entity = NULL) {
+    $output = [];
+
+    $evaluationform_tid = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstTargetId($program_entity, 'field_program_evaluationform');
+
+    $output = $this->meetingPageBlocksContent($meeting_nodes, $evaluationform_tid, 'meeting_view');
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function meetingPageBlocksContent($meeting_nodes = array(), $evaluationform_tid = NULL, $view_type = 'meeting_view', $entity_id = NULL) {
     $output = [];
 
@@ -121,6 +135,8 @@ class HtmlpageMeetingContent {
    */
   public function meetingPageBlocksContentDefault($meeting_nodes = array(), $evaluationform_tid = NULL, $view_type = 'meeting_view', $entity_id = NULL) {
     $output = [];
+    $output['html_content'] = NULL;
+    $output['json_content'] = [];
 
     if ($evaluationform_tid) {
       $evaluationform_term = \Drupal::entityTypeManager()
@@ -131,8 +147,13 @@ class HtmlpageMeetingContent {
         $question_tids = \Drupal::service('flexinfo.field.service')
           ->getFieldAllTargetIds($evaluationform_term, 'field_evaluationform_questionset');
 
+        // Titlesection
+        $output['html_content'] .= $this->blockGroupForTitlesectionQuestion($meeting_nodes, $question_tids, $evaluationform_term);
+
         // PrePost is one of Radio Question. All Radio Question
-        $output = $this->blockGroupForRadioQuestionChart($meeting_nodes, $question_tids);
+        $radioCharts = $this->blockGroupForRadioQuestionChart($meeting_nodes, $question_tids);
+        $output['html_content'] .= $radioCharts['html_content'];
+        $output['json_content'] = $radioCharts['json_content'];
 
         // SelectKey
         $output['html_content'] .= $this->blockGroupForSelectKeyQuestion($meeting_nodes, $question_tids, $evaluationform_term);
@@ -242,6 +263,28 @@ class HtmlpageMeetingContent {
   /**
    *
    */
+  public function blockGroupForTitlesectionQuestion($meeting_nodes = array(), $question_tids = array(), $evaluationform_term = NULL) {
+    $output = NULL;
+    $filter_tids = \Drupal::service('baseinfo.queryterm.service')
+      ->wrapperFieldtypeQuestionTidsFromEvaluationform('titlesection', $evaluationform_term);
+
+
+    $sort_tids = array_intersect($question_tids, $filter_tids);
+
+    if (is_array($sort_tids) && $sort_tids) {
+      $question_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($sort_tids);
+
+      foreach ($question_terms as $question_term) {
+        $output .= $this->blockContentTitlesection($meeting_nodes, $question_term);
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function blockGroupForTextfieldComment($meeting_nodes = array(), $question_tids = array(), $evaluationform_term = NULL) {
     $output = NULL;
 
@@ -313,12 +356,11 @@ class HtmlpageMeetingContent {
       'chart_canvas_id' => NULL,
     ];
 
+    $comments = NULL;
     if ($question_term) {
       $question_answers = \Drupal::service('ngdata.term.question')
         ->getTextfieldQuestionAllData($meeting_nodes, $question_term->id());
-
-      if (isset($question_answers) && $question_answers !== NULL) {
-        $comments = NULL;
+      if (isset($question_answers) && $question_answers) {
         $comments .= '<ul class="padding-bottom-2 bg-ffffff font-size-12 margin-left-0">';
           foreach ($question_answers as $key => $row) {
             $comments .= '<li>' . $row . '</li>';
@@ -327,8 +369,10 @@ class HtmlpageMeetingContent {
       }
     }
 
-    $output = \Drupal::service('htmlpage.charthtmltemplate.section.html')
-      ->blockHtmlTemplate($block_definition, $comments);
+    if ($comments) {
+      $output = \Drupal::service('htmlpage.charthtmltemplate.section.html')
+        ->blockHtmlTemplate($block_definition, $comments);
+    }
 
     return $output;
   }
@@ -382,10 +426,12 @@ class HtmlpageMeetingContent {
       'chart_canvas_id' => NULL,
     ];
 
-    $table_body = $this->getHtmlTableBySelectKeyAnswerQuestion($question_term, $meeting_nodes);
+    $table_body = $this->getHtmlTableBySelectKeyQuestion($question_term, $meeting_nodes);
 
-    $output = \Drupal::service('htmlpage.charthtmltemplate.section.html')
-      ->blockHtmlTemplate($block_definition, $table_body);
+    if ($table_body) {
+      $output = \Drupal::service('htmlpage.charthtmltemplate.section.html')
+        ->blockHtmlTemplate($block_definition, $table_body);
+    }
 
     return $output;
   }
@@ -456,7 +502,7 @@ class HtmlpageMeetingContent {
   /**
    *
    */
-  public function getHtmlTableBySelectKeyAnswerQuestion($question_term = NULL, $meeting_nodes = array()) {
+  public function getHtmlTableBySelectKeyQuestion($question_term = NULL, $meeting_nodes = array()) {
     $FlexpageEventLayout = new FlexpageEventLayout();
 
     $pool_data = $FlexpageEventLayout->getQuestionAnswerAllData($meeting_nodes, $question_term->id());
@@ -544,11 +590,27 @@ class HtmlpageMeetingContent {
    * PrePost Pie Chart Column12.
    */
   public function getBlockChartjsByRadioQuestionForPrePostPieChartColumn12($meeting_nodes, $question_term) {
+    $pre_answers = \Drupal::service('ngdata.node.evaluation')
+      ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Pre');
+    $post_answers = \Drupal::service('ngdata.node.evaluation')
+      ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Post');
+
+    $pre_percentage = \Drupal::service('flexinfo.calc.service')
+      ->getPercentageDecimal($pre_answers[0], array_sum($pre_answers), 0);
+    $post_percentage = \Drupal::service('flexinfo.calc.service')
+      ->getPercentageDecimal($post_answers[0], array_sum($post_answers), 0);
+
+    $middle_section_text = \Drupal::service('flexinfo.field.service')
+      ->getFieldFirstValue($question_term, 'field_queslibr_middle_section');
+
     $block_definition = [
       'title' => $question_term->getName(),
       'block_id' => 'chartjs-block-question-' . $question_term->id(),
       'block_column' => 'col-xs-12',
       'chart_canvas_id' => 'see below array',
+      'other_value' => [
+        'prepost_diff' => ($post_percentage - $pre_percentage) . '% ' . $middle_section_text,
+      ],
       'multiple_chart' => [
         [
           'block_column' => 'col-xs-6',
@@ -564,13 +626,12 @@ class HtmlpageMeetingContent {
     $output['html_content'] = \Drupal::service('htmlpage.charthtmltemplate.section.chartjs')
       ->blockChartjsTemplateForMeetingPageForPrePostPieChartColumn12($block_definition, $meeting_nodes, $question_term);
 
-    //
+    // Json Content
     $base_pie_data = \Drupal::service('htmlpage.chartjsonbase.chartjstemplate')
       ->chartjsBasePiePure();
     $base_pie_data["content"]["data"]["labels"] = \Drupal::service('ngdata.atomic.atom')
       ->getRaidoQuestionLegend($question_term);;
-    $base_pie_data["content"]["data"]["datasets"][0]["data"] = \Drupal::service('ngdata.node.evaluation')
-      ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Pre');
+    $base_pie_data["content"]["data"]["datasets"][0]["data"] = $pre_answers;
     $base_pie_data["content"]["data"]["datasets"][0]["backgroundColor"] = \Drupal::service('ngdata.term.question')
       ->getRaidoQuestionColors($question_term, TRUE);
     $base_pie_data['chart_canvas_id'] = $block_definition['multiple_chart'][0]['chart_canvas_id'];
@@ -581,8 +642,7 @@ class HtmlpageMeetingContent {
       ->chartjsBasePiePure();
     $base_pie_data["content"]["data"]["labels"] = \Drupal::service('ngdata.atomic.atom')
       ->getRaidoQuestionLegend($question_term);;
-    $base_pie_data["content"]["data"]["datasets"][0]["data"] = \Drupal::service('ngdata.node.evaluation')
-      ->getRaidoQuestionDataWithReferOther($question_term, $meeting_nodes, 'Post');
+    $base_pie_data["content"]["data"]["datasets"][0]["data"] = $post_answers;
     $base_pie_data["content"]["data"]["datasets"][0]["backgroundColor"] = \Drupal::service('ngdata.term.question')
       ->getRaidoQuestionColors($question_term, TRUE);
     $base_pie_data['chart_canvas_id'] = $block_definition['multiple_chart'][1]['chart_canvas_id'];

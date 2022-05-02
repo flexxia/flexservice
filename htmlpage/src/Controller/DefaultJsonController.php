@@ -22,6 +22,13 @@ class DefaultJsonController extends ControllerBase {
       $output = \Drupal::service('htmlpage.content.object')
         ->meetingPageContent($entity_id, 'from-standardJson')['json_content'];
     }
+    elseif ($section == 'program') {
+      $start_timestamp = \Drupal::service('flexinfo.setting.service')->userStartTime();
+      $end_timestamp = \Drupal::service('flexinfo.setting.service')->userEndTime();
+
+      $output = \Drupal::service('htmlpage.content.object')
+        ->programPageContent($entity_id, $start_timestamp, $end_timestamp, 'from-standardJson')['json_content'];
+    }
     elseif ($section == 'sample' ||$section == 'samplepage' || $section == 'samplechart') {
       // Sample Page.
       $output = \Drupal::service('htmlpage.content.samplepage')

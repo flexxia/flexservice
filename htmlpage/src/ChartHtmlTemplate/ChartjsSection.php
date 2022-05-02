@@ -108,6 +108,12 @@ class ChartjsSection {
       $html_template .= '<div class="border-none">';
         $html_template .= '<div class="height-auto">';
 
+          $html_template .= '<div class="col-xs-12">';
+            $html_template .= '<div class="text-center">';
+              $html_template .= $block_definition['other_value']['prepost_diff'];
+            $html_template .= '</div>';
+          $html_template .= '</div>';
+
           $html_template .= '<div class="col-xs-6">';
             $html_template .= '<div class="col-xs-6 col-md-offset-3">';
               $html_template .= '<div class="margin-top-42 margin-bottom-20 margin-left-12">';

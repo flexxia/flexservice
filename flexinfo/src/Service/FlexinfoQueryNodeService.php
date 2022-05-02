@@ -326,6 +326,36 @@ class FlexinfoQueryNodeService extends ControllerBase {
    * @param $field_value is like - $businessunit_tids, $program_tids
    \Drupal::service('flexinfo.querynode.service')->wrapperMeetingNodesByFieldValue($meeting_nodes, $field_name, $field_value);
    */
+  public function wrapperMeetingNodesByProgramByTimestampRange($program_tids, $start_timestamp = NULL, $end_timestamp = NULL) {
+    $query = $this->queryNidsByBundle('meeting');
+    $group = $this->groupStandardByFieldValue($query, 'field_meeting_program', $program_tids, 'IN');
+    $query->condition($group);
+
+    $start_time = \Drupal::service('flexinfo.setting.service')
+      ->convertTimeStampToHtmlDate($start_timestamp, 'html_datetime', $format = NULL, 'UTC');
+    if ($end_timestamp) {
+      $end_time = \Drupal::service('flexinfo.setting.service')
+        ->convertTimeStampToHtmlDate($end_timestamp, 'html_datetime', $format = NULL, 'UTC');
+
+      $group = $query->andConditionGroup()
+        ->condition('field_meeting_date', $start_time, '>')
+        ->condition('field_meeting_date', $end_time, '<');
+    }
+    else {
+      $group = $query->andConditionGroup()
+        ->condition('field_meeting_date', $start_time, '>');
+    }
+
+    $filter_meeting_nids = $this->runQueryWithGroup($query);
+    $filter_nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($filter_meeting_nids);
+
+    return $filter_nodes;
+  }
+
+  /**
+   * @param $field_value is like - $businessunit_tids, $program_tids
+   \Drupal::service('flexinfo.querynode.service')->wrapperMeetingNodesByFieldValue($meeting_nodes, $field_name, $field_value);
+   */
   public function wrapperMeetingNodesByFieldValue($meeting_nodes = array(), $field_name = NULL, $field_value = NULL, $operator = NULL, $langcode = NULL) {
     $meeting_nids = \Drupal::service('flexinfo.node.service')->getNidsFromNodes($meeting_nodes);
 

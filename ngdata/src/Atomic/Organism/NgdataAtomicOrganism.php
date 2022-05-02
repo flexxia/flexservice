@@ -246,7 +246,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     $output = '<div class="block-comment-header-wrapper clear-both">';
       $output .= '<div class="panel-header block-header bg-0f69af color-fff line-height-px-42 padding-left-18 padding-right-24 margin-top-12">';
         $output .= '<span>';
-          $output .= \Drupal::getContainer()->get('flexinfo.chart.service')->getChartTitleByQuestion($question_term);
+          $output .= \Drupal::service('flexinfo.chart.service')->getChartTitleByQuestion($question_term);
         $output .= '</span>';
       $output .= '</div>';
     $output .= '</div>';
@@ -398,7 +398,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
                       $table .= '<th class="font-weight-normal">';
                         $table .= $cell_value;
-                        $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                        $table .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                       $table .= '</th>';
                     }
                   $table .= '</tr>';
@@ -458,7 +458,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
                     $table .= '<th class="font-weight-normal">';
                       $table .= $cell_value;
-                      $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                      $table .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                     $table .= '</th>';
                   }
                 $table .= '</tr>';
@@ -517,7 +517,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
 
                     $table .= '<th class="font-weight-normal">';
                       $table .= $cell_value;
-                      $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                      $table .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                     $table .= '</th>';
                   }
                 $table .= '</tr>';
@@ -539,11 +539,11 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     $output = array();
 
     $signature_total = array_sum(
-      \Drupal::getContainer()->get('flexinfo.field.service')
+      \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_signature')
     );
     $evaluation_nums = array_sum(
-      \Drupal::getContainer()->get('flexinfo.field.service')
+      \Drupal::service('flexinfo.field.service')
       ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_evaluationnum')
     );
 
@@ -561,7 +561,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     );
     $tile_array[] = array(
       'name'  => 'HCP Response',
-      'value' => \Drupal::getContainer()->get('flexinfo.calc.service')
+      'value' => \Drupal::service('flexinfo.calc.service')
         ->getPercentageDecimal($evaluation_nums, $signature_total, 0) . '%',
     );
 
@@ -589,11 +589,10 @@ class NgdataAtomicOrganism extends NgdataAtomic {
     }
 
     foreach ($tile_array as $key => $row) {
-      $output[] = \Drupal::service('ngdata.atomic.organism')
-        ->tileSection(
+      $output[] = $this->tileSection(
           $row['value'],
           $row['name'],
-          ' bg-' . \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateForTile($key + 1, FALSE)
+          ' bg-' . \Drupal::service('baseinfo.setting.service')->colorPlateForTile($key + 1, FALSE)
         );
     }
 
@@ -769,7 +768,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       }
     }
 
-    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateStackedBarChartByScale10(NULL, FALSE);
+    $legend_color = \Drupal::service('baseinfo.setting.service')->colorPlateStackedBarChartByScale10(NULL, FALSE);
     $legends = \Drupal::getContainer()
       ->get('flexinfo.chart.service')
       ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
@@ -796,7 +795,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       }
     }
 
-    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlatePieChartOne(NULL, FALSE);
+    $legend_color = \Drupal::service('baseinfo.setting.service')->colorPlatePieChartOne(NULL, FALSE);
     $legends = \Drupal::getContainer()
       ->get('flexinfo.chart.service')
       ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
@@ -819,7 +818,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       }
     }
 
-    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, FALSE);
+    $legend_color = \Drupal::service('baseinfo.setting.service')->colorPlateLineChartOne(NULL, FALSE);
     $legends = \Drupal::getContainer()
       ->get('flexinfo.chart.service')
       ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
@@ -840,7 +839,7 @@ class NgdataAtomicOrganism extends NgdataAtomic {
       }
     }
 
-    $legend_color = \Drupal::getContainer()->get('baseinfo.setting.service')->colorPlateLineChartOne(NULL, FALSE);
+    $legend_color = \Drupal::service('baseinfo.setting.service')->colorPlateLineChartOne(NULL, FALSE);
     $legends = \Drupal::getContainer()
       ->get('flexinfo.chart.service')
       ->renderLegendSquareColorKeyPlusOne($legend_text, $legend_color, $max_length = NULL, 'font-size-14');
