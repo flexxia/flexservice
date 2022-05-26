@@ -10,15 +10,16 @@ use Drupal\field\Entity\FieldConfig;
 
 /**
  * An example Service container.
- *
+ * \Drupal::service('flexinfo.field.service')->demo();
  */
 class FlexinfoFieldService {
 
   /**
    * @return boolean
+   * $entity_type = 'node', $bundle = 'page'
    */
-  public function checkBundleHasField($entity_type_id = NULL, $bundle = NULL, $field_name = NULL) {
-    $bundle_fields = \Drupal::service('entity_field.manager')->getFieldDefinitions($entity_type_id, $bundle);
+  public function checkBundleHasField($entity_type = NULL, $bundle = NULL, $field_name = NULL) {
+    $bundle_fields = \Drupal::service('entity_field.manager')->getFieldDefinitions($entity_type, $bundle);
     if (isset($bundle_fields[$field_name])) {
       $boolean = TRUE;
     }
