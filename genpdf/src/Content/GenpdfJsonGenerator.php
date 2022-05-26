@@ -545,23 +545,27 @@ class GenpdfJsonGenerator extends ControllerBase {
   public function blockEventsTableForMeetingFieldQuestion($meeting_nodes = array(), $evaluationform_term = NULL, $entity_id = NULL) {
     $output = [];
 
-    $breakdown_values = \Drupal::service('flexinfo.field.service')
-      ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_module');
+    $field_exist = \Drupal::service('flexinfo.field.service')
+      ->checkBundleHasField('node', 'meeting', 'field_meeting_module');
+    if ($field_exist) {
+      $breakdown_values = \Drupal::service('flexinfo.field.service')
+        ->getFieldFirstValueCollection($meeting_nodes, 'field_meeting_module');
 
-    $program_term = \Drupal::entityTypeManager()
-      ->getStorage('taxonomy_term')
-      ->load($entity_id);
+      if ($breakdown_values && count($breakdown_values) > 1) {
+        $program_term = \Drupal::entityTypeManager()
+          ->getStorage('taxonomy_term')
+          ->load($entity_id);
 
-    if ($breakdown_values && count($breakdown_values) > 1) {
-      $question_terms = \Drupal::service('flexinfo.field.service')
-        ->getFieldAllTargetIdsEntitys($program_term, 'field_program_breakdown_question');
+        $question_terms = \Drupal::service('flexinfo.field.service')
+          ->getFieldAllTargetIdsEntitys($program_term, 'field_program_breakdown_question');
 
-      if ($question_terms) {
-        foreach ($question_terms as $question_term) {
-          $result = $this->getQuestionDataByTableForMeetingFieldQuestion($meeting_nodes, $question_term);
+        if ($question_terms) {
+          foreach ($question_terms as $question_term) {
+            $result = $this->getQuestionDataByTableForMeetingFieldQuestion($meeting_nodes, $question_term);
 
-          if ($result) {
-            $output[] = $result;
+            if ($result) {
+              $output[] = $result;
+            }
           }
         }
       }
