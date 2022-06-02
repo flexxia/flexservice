@@ -340,10 +340,12 @@ class FlexinfoQueryNodeService extends ControllerBase {
       $group = $query->andConditionGroup()
         ->condition('field_meeting_date', $start_time, '>')
         ->condition('field_meeting_date', $end_time, '<');
+      $query->condition($group);
     }
     else {
       $group = $query->andConditionGroup()
         ->condition('field_meeting_date', $start_time, '>');
+      $query->condition($group);
     }
 
     $filter_meeting_nids = $this->runQueryWithGroup($query);

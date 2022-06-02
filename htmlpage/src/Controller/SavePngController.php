@@ -19,44 +19,31 @@ class SavePngController extends ControllerBase {
    * @return png
    *   Return Hello png.
    */
-  public function standardImage0($section, $entity_id, $start_timestamp, $end_timestamp) {
+  public function standardImage1($section, $entity_id, $start_timestamp, $end_timestamp) {
     $build = [
       '#type' => 'markup',
-      '#markup' => 'ccc',
+      '#markup' => 'Save Png function',
       '#cache' => [
         'max-age' => 0,
       ],
     ];
 
+    $this->createImage();
+
     return $build;
   }
 
   /**
+   * 先创建，然后Display Image
    *
-   */
-  public function createImage() {
-    $img_file = imagecreate(500, 300);
-    $background_color = imagecolorallocate($img_file, 240, 56, 125);
-    $text_color = imagecolorallocate($img_file, 255, 255, 255);
-
-    imagefilledrectangle($img_file, 0, 0, 500, 300, $background_color);
-    imagestring($img_file, 5, 50, 60, "Hello TEXT", $text_color);
-
-    $filepath = 'sites/default/files/images/generate_png/generate.png';
-
-    $output = imagepng($img_file, $filepath);
-    imagedestroy($img_file);
-  }
-
-  /**
-   * standardPdf
    */
   public function standardImage($section, $entity_id, $start_timestamp, $end_timestamp) {
     global $base_url;
-    $filepath = $base_url . '/sites/default/files/images/generate_png/generate.png';
-    $filename = "chart.png";
 
     $this->createImage();
+
+    $filepath = $base_url . '/sites/default/files/images/generate_png/generate.png';
+    $filename = "chart.png";
 
     $response = new Response();
     $response->headers->set('Content-Type', 'image/png');
@@ -72,6 +59,23 @@ class SavePngController extends ControllerBase {
   }
 
   /**
+   * imagecreate 创建一个空白的画布并输出一个 PNG 格式的图片
+   */
+  public function createImage() {
+    $img_file = imagecreate(500, 300);
+    $background_color = imagecolorallocate($img_file, 240, 56, 125);
+    $text_color = imagecolorallocate($img_file, 255, 255, 255);
+
+    imagefilledrectangle($img_file, 0, 0, 500, 300, $background_color);
+    imagestring($img_file, 5, 50, 60, "Hello Save Png", $text_color);
+
+    $filepath = 'sites/default/files/images/generate_png/generate.png';
+
+    $output = imagepng($img_file, $filepath);
+    imagedestroy($img_file);
+  }
+
+  /**
    * downloadImage
    */
   public function downloadImage($section, $entity_id, $start_timestamp, $end_timestamp) {
@@ -84,34 +88,6 @@ class SavePngController extends ControllerBase {
     );
 
     return new BinaryFileResponse($file_uri, 200, $headers, TRUE);
-  }
-
-  /**
-   * downloadPDF
-   */
-  public function downloadPDF($section, $entity_id, $start_timestamp, $end_timestamp) {
-    $file_uri = 'public://' . 'pdf/2021_07_10_15_53_06.pdf';
-    $file_name = "sample_download.pdf";
-
-    $headers = array(
-      'Content-Type' => 'application/pdf',
-      'Content-Disposition' => 'attachment;filename="' . $file_name . '"',
-    );
-
-    return new BinaryFileResponse($file_uri, 200, $headers, TRUE);
-  }
-
-  /**
-   * displayPdf
-   */
-  public function displayPdf($section, $entity_id, $start_timestamp, $end_timestamp) {
-    global $base_url;
-    $path = $base_url . '/sites/default/files/pdf/2021_07_10_15_53_06.pdf';
-
-    $response = new Response();
-    $response->setContent(file_get_contents($path));
-    $response->headers->set('Content-Type', 'application/pdf');
-    return $response;
   }
 
 }

@@ -1,4 +1,4 @@
-#
+# Permission Access the Meeting Pdf Page
 genpdf.generate.meeting:
   path: '/genpdf/meeting/page/{entity_id}'
   defaults:

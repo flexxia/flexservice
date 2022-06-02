@@ -4,6 +4,9 @@ namespace Drupal\htmlpage\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+
 /**
  * Class DefaultPageController.
  */
@@ -115,6 +118,13 @@ class DefaultPageController extends ControllerBase {
 
     if ($section == 'meeting') {
       $output = $this->standardHtmlPage($section, $entity_id, $start_timestamp, $end_timestamp);
+    }
+    elseif ($section == 'program') {
+      $output = $this->standardHtmlPage($section, $entity_id, $start_timestamp, $end_timestamp);
+    }
+    else {
+      // ... disable it, return 404 page for now
+      throw new NotFoundHttpException();
     }
 
     return $output;

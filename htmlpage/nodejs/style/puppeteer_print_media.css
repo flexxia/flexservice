@@ -1,0 +1,151 @@
+/**
+ * 打印样式
+ *
+ *
+ * 星号(*)被称为CSS通用选择器
+ *
+ * !important 例外规则, 当在一个样式声明中使用一个 !important 规则时，此声明将覆盖任何其他声明。
+ */
+@media print {
+  .htmlpage-default-wrapper .panel .print-panel-heading {
+    background-color: #2196f3 !important;
+    border-color: #2196f3 !important;
+  }
+
+  .htmlpage-default-wrapper .panel .print-panel-heading span {
+    color: #ffffff !important;
+  }
+
+  .htmlpage-default-wrapper .htmlpage-program-name-wrapper span {
+    color: #00a9e0 !important;
+    font-weight: 300;
+  }
+
+  /**
+   * Bootstrap doesn't come with a defined grid for printing media query,
+   */
+  .htmlpage-default-wrapper .htmlpage-meeting-tile-section-wrapper {
+    width: 25%;
+    float: left;
+    font-size: 12px;
+  }
+  .htmlpage-default-wrapper .htmlpage-meeting-tile-section-wrapper.col-md-12 {
+    width: 100%;
+    float: left;
+  }
+
+  .htmlpage-default-wrapper .htmlpage-program-tile-section-wrapper.col-md-3 {
+    width: 25%;
+    float: left;
+  }
+
+  /**
+   * font color
+   */
+  .htmlpage-default-wrapper .htmlpage-program-tile-section-wrapper.col-md-3 .color-ffffff {
+    font-size: 12px;
+    color: #ffffff !important;
+  }
+
+  /**
+   * bg color
+   */
+  .htmlpage-default-wrapper .bg-05d23e {
+    background-color: #05d23e !important;
+  }
+  .htmlpage-default-wrapper .bg-0f69af {
+    background-color: #0f69af !important;
+  }
+  .htmlpage-default-wrapper .bg-149b5f {
+    background-color: #149b5f !important;
+  }
+  .htmlpage-default-wrapper .bg-2fa9e0 {
+    background-color: #2fa9e0 !important;
+  }
+  .htmlpage-default-wrapper .bg-c6c6c6 {
+    background-color: #c6c6c6 !important;
+  }
+  .htmlpage-default-wrapper .bg-e61e50 {
+    background-color: #e61e50 !important;
+  }
+  .htmlpage-default-wrapper .bg-f24b99 {
+    background-color: #f24b99 !important;
+  }
+  .htmlpage-default-wrapper .bg-f7d417 {
+    background-color: #f7d417 !important;
+  }
+  .htmlpage-default-wrapper .bg-ffc832 {
+    background-color: #ffc832 !important;
+  }
+
+  /**
+   * display none
+   */
+  .htmlpage-default-wrapper .chartjs-block-question-wrapper .panel-primary {
+    border: 1px solid #e9e9e9;
+  }
+  .htmlpage-default-wrapper .html-block-question-wrapper .panel-primary {
+    border: none !important;
+  }
+  .htmlpage-default-wrapper .html-block-question-wrapper .htmlpage-html-section-wrapper ul {
+    padding-left: 0.5em;
+  }
+
+  /**
+   * display none
+   */
+  .htmlpage-default-wrapper .html-block-save-png-icon-wrapper {
+    display: none;
+  }
+
+  /**
+   * font-size
+   */
+  .htmlpage-default-wrapper .print-font-size-12 {
+    font-size: 12px;
+  }
+  .htmlpage-default-wrapper .legend-square-wrapper .legend-text {
+    font-size: 10px;
+  }
+
+  /**
+   * legend-square
+   */
+  .htmlpage-default-wrapper .legend-square-wrapper .legend-square {
+    margin-top: 3px;
+  }
+
+  /**
+   * print page break
+   * page-break properties apply only to block-level elements
+   * can't use page-break css rules with flexbox like display: flex;
+   */
+  .htmlpage-default-wrapper .htmlpage-blocks-group-wrapper.display-flex {
+    display: block;
+  }
+
+  .htmlpage-default-wrapper .flex-section-wrapper {
+    page-break-after: always; /* depreciating, use break-after */
+    break-after: always;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .htmlpage-default-wrapper .flex-section-wrapper .panel {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+}
+
+/**
+ * @page可以控制打印页面的边距大小，就像word中那样:
+ */
+@page {
+  /* 必须设置-1，否则图片重叠 */
+  margin: -1cm;
+  margin-top: 1cm;
+  margin-bottom: 0.5cm;
+  /* 当没有设置format时，width需要在await page.pdf() 里设置， */
+  /*width: 1600cm;*/
+}

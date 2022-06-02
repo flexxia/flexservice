@@ -21,7 +21,7 @@ class HtmlpageAtomicOrganism extends HtmlpageAtomic {
    */
   public function tileSection($num, $tile_name, $css_class = NULL) {
     $output = '';
-    $output .= '<div class="tile-block-section-wrapper col-xs-12 col-sm-6 col-md-3 margin-top-12">';
+    $output .= '<div class="htmlpage-program-tile-section-wrapper col-xs-12 col-sm-6 col-md-3 margin-top-12">';
       $output .= \Drupal::service('htmlpage.atomic.molecule')
         ->getTileBlockHeader($num, $tile_name, $css_class, TRUE);
     $output .= "</div>";

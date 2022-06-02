@@ -38,31 +38,27 @@ services:
     class: Drupal\htmlpage\ChartJsonBase\EChartsTemplate
 
   # Charthtmltemplate.
-  #
   htmlpage.charthtmltemplate.section.bootstraptable:
     class: Drupal\htmlpage\ChartHtmlTemplate\BootstrapTableSection
-  #
   htmlpage.charthtmltemplate.section.chartjs:
     class: Drupal\htmlpage\ChartHtmlTemplate\ChartjsSection
-  #
   htmlpage.charthtmltemplate.section.d3:
     class: Drupal\htmlpage\ChartHtmlTemplate\D3Section
-  #
   htmlpage.charthtmltemplate.section.echarts:
     class: Drupal\htmlpage\ChartHtmlTemplate\EChartsSection
-  #
   htmlpage.charthtmltemplate.section.html:
     class: Drupal\htmlpage\ChartHtmlTemplate\HtmlSection
-  #
   htmlpage.charthtmltemplate.section.map:
     class: Drupal\htmlpage\ChartHtmlTemplate\MapSection
 
-  #
+  # Content
   htmlpage.content.object:
     class: Drupal\htmlpage\Content\HtmlpageObjectContent
-  #
   htmlpage.content.meeting:
     class: Drupal\htmlpage\Content\HtmlpageMeetingContent
-  #
   htmlpage.content.samplepage:
     class: Drupal\htmlpage\Content\SamplepageObject
+
+  # Nodejs App
+  htmlpage.nodejsapp.puppeteer.print.pdf:
+    class: Drupal\htmlpage\NodejsApp\PuppeteerPrintPdf

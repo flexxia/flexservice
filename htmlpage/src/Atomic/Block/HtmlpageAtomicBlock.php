@@ -82,7 +82,7 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
   /**
    * @return string
    */
-  public function blockTileSectionProgramNameHeader($program_term = NULL, $meeting_share_link = FALSE, $meeting_nid = NULL) {
+  public function blockTileSectionProgramNameHeader($program_term = NULL, $share_link_content = NULL) {
     $output = '';
 
     $output .= '<div class="htmlpage-program-name-wrapper">';
@@ -96,14 +96,49 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
             $output .= $program_term->getName();
           $output .= '</span>';
         $output .= '</div>';
-        if ($meeting_share_link && $meeting_nid && \Drupal::currentUser()->isAuthenticated()) {
-          $output .= '<div class="col-md-2 float-right margin-right-16">';
-            $output .= \Drupal::service('htmlpage.atomic.atom')
-              ->getBlockTileMeetingShareLink($meeting_nid);
-          $output .= '</div>';
-        }
+
+        $output .= $share_link_content;
+
       $output .= '</div>';
     $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   * @return string
+   */
+  public function blockTileSectionProgramNameHeaderForMeeting($program_term = NULL, $meeting_share_link = FALSE, $meeting_nid = NULL) {
+    $output = '';
+    $share_link_content = '';
+
+    if ($meeting_share_link && $meeting_nid && \Drupal::currentUser()->isAuthenticated()) {
+      $share_link_content .= '<div class="col-md-2 float-right margin-right-16">';
+        $share_link_content .= \Drupal::service('htmlpage.atomic.atom')
+          ->getBlockTileMeetingShareLink($meeting_nid);
+      $share_link_content .= '</div>';
+    }
+
+    $output = $this->blockTileSectionProgramNameHeader($program_term, $share_link_content);
+
+    return $output;
+  }
+
+  /**
+   * @return string
+   */
+  public function blockTileSectionProgramNameHeaderForProgram($program_term = NULL, $program_share_link = FALSE) {
+    $output = '';
+    $share_link_content = '';
+
+    if ($program_share_link && $program_term && \Drupal::currentUser()->isAuthenticated()) {
+      $share_link_content .= '<div class="col-md-2 float-right margin-right-16">';
+        $share_link_content .= \Drupal::service('htmlpage.atomic.atom')
+          ->getBlockTileProgramShareLink($program_term->id());
+      $share_link_content .= '</div>';
+    }
+
+    $output = $this->blockTileSectionProgramNameHeader($program_term, $share_link_content);
 
     return $output;
   }
@@ -121,10 +156,10 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
       $output .= '<div class="margin-left-12 clear-both">';
         foreach ($fixed_section_param as $row) {
           if ($row['value'] == 'Speaker') {
-            $html_span_tag_col = '<span class="col-md-12 col-sm-12 padding-top-12">';
+            $html_span_tag_col = '<span class="col-md-12 col-sm-12 padding-top-12 htmlpage-meeting-tile-section-wrapper">';
           }
           else {
-            $html_span_tag_col = '<span class="col-md-3 col-sm-6 padding-top-12">';
+            $html_span_tag_col = '<span class="col-md-3 col-sm-6 padding-top-12 htmlpage-meeting-tile-section-wrapper">';
           }
           $output .= $html_span_tag_col;
             $output .= '<span class="dashpage-square-text">';
@@ -175,14 +210,14 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
       $block_column = $block_data['block_column'];
     }
 
-    $output .= '<div class="' . $block_column . ' margin-top-16 margin-bottom-24">';
+    $output .= '<div class="' . $block_column . ' margin-top-16 margin-bottom-24 flex-section-wrapper">';
 
       $output .= $this->getOrganismSavePng($block_data);
 
-      $output .= '<div id="' . $block_id . '" class="">';
+      $output .= '<div id="' . $block_id . '" class="chartjs-block-question-wrapper">';
         $output .= '<div class="panel panel-primary">';
-          $output .= '<div class="panel-heading">';
-            $output .= '<span class="font-size-16 line-height-1-2 ">';
+          $output .= '<div class="panel-heading print-panel-heading">';
+            $output .= '<span class="font-size-16 line-height-1-2 print-font-size-12">';
               $output .= $block_data['title'];
             $output .= '</span>';
           $output .= '</div>';
@@ -203,13 +238,13 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
    */
   public function blockChartSectionTemplateTabs(array $block_data, array $html_templates) {
     $output = '';
-    $output .= '<div class="col-xs-12 margin-top-32">';
+    $output .= '<div class="col-xs-12 margin-top-32 flex-section-wrapper">';
 
       $output .= $this->getOrganismSavePng($block_data);
 
-      $output .= '<div id="' . $block_data['block_id'] . '" class="">';
+      $output .= '<div id="' . $block_data['block_id'] . '" class="chartjs-block-question-wrapper chartjs-block-question-tabs-wrapper">';
         $output .= '<div class="panel panel-primary">';
-          $output .= '<div class="panel-heading">';
+          $output .= '<div class="panel-heading print-panel-heading">';
             $output .= '<span class="font-size-16">';
               $output .= $block_data['title'];
             $output .= '</span>';
@@ -273,14 +308,14 @@ class HtmlpageAtomicBlock extends HtmlpageAtomic {
       $block_column = $block_data['block_column'];
     }
 
-    $output .= '<div class="' . $block_column . ' margin-top-16">';
+    $output .= '<div class="' . $block_column . ' margin-top-16 flex-section-wrapper">';
 
       $output .= $this->getOrganismSavePng($block_data);
 
-      $output .= '<div id="' . $block_id . '" class="">';
+      $output .= '<div id="' . $block_id . '" class="html-block-question-wrapper">';
         $output .= '<div class="panel panel-primary panel-box-shadow-none">';
-          $output .= '<div class="panel-heading">';
-            $output .= '<span class="font-size-14">';
+          $output .= '<div class="panel-heading print-panel-heading">';
+            $output .= '<span class="font-size-14 print-font-size-12">';
               $output .= $block_data['title'];
             $output .= '</span>';
           $output .= '</div>';

@@ -30,7 +30,7 @@ class HtmlpageObjectContent {
     $program_term = \Drupal::service('flexinfo.field.service')
       ->getFieldFirstTargetIdTermEntity($meeting_node, 'field_meeting_program');
     $output['html_content'] .= \Drupal::service('htmlpage.atomic.block')
-      ->blockTileSectionProgramNameHeader($program_term, TRUE, $entity_id);
+      ->blockTileSectionProgramNameHeaderForMeeting($program_term, TRUE, $entity_id);
     $output['html_content'] .= \Drupal::service('htmlpage.atomic.block')
       ->blockTileSectionMeetingHeader($meeting_node);
     $output['html_content'] .= \Drupal::service('htmlpage.atomic.template')
@@ -42,7 +42,7 @@ class HtmlpageObjectContent {
 
     if (isset($meeting_page_blocks['html_content'])) {
       // Add flex layout, flex-wrap to allow the items to wrap as needed with this property.
-      $output['html_content'] .= '<div class="htmlpage-default-wrapper display-flex" style="flex-wrap: wrap;">';
+      $output['html_content'] .= '<div class="htmlpage-blocks-group-wrapper display-flex" style="flex-wrap: wrap;">';
         $output['html_content'] .= $meeting_page_blocks['html_content'];
       $output['html_content'] .= '</div>';
     }
@@ -73,7 +73,7 @@ class HtmlpageObjectContent {
 
     // Tile Header
     $output['html_content'] .= \Drupal::service('htmlpage.atomic.block')
-      ->blockTileSectionProgramNameHeader($program_term);
+      ->blockTileSectionProgramNameHeaderForProgram($program_term, TRUE);
     $output['html_content'] .= \Drupal::service('htmlpage.atomic.block')
       ->blockTileSectionProgramHeader($meeting_nodes);
     $output['html_content'] .= \Drupal::service('htmlpage.atomic.template')
@@ -85,7 +85,7 @@ class HtmlpageObjectContent {
 
     if (isset($meeting_page_blocks['html_content'])) {
       // Add flex layout, flex-wrap to allow the items to wrap as needed with this property.
-      $output['html_content'] .= '<div class="htmlpage-default-wrapper display-flex" style="flex-wrap: wrap;">';
+      $output['html_content'] .= '<div class="htmlpage-blocks-group-wrapper display-flex" style="flex-wrap: wrap;">';
         $output['html_content'] .= $meeting_page_blocks['html_content'];
       $output['html_content'] .= '</div>';
     }

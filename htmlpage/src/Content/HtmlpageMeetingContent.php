@@ -484,7 +484,7 @@ class HtmlpageMeetingContent {
 
                     $table .= '<th class="font-weight-normal">';
                       $table .= $cell_value;
-                      $table .= ' (' . \Drupal::getContainer()->get('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
+                      $table .= ' (' . \Drupal::service('flexinfo.calc.service')->getPercentageDecimal($cell_value, count($row), 0) . '%)';
                     $table .= '</th>';
                   }
                 $table .= '</tr>';

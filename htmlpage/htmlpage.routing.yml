@@ -34,4 +34,13 @@ htmlpage.save.png.controller:
   requirements:
     _permission: 'access content'
 
+# puppeteer print pdf for meeting/program page.
+htmlpage.print.pdf.controller:
+  path: '/htmlpage/{section}/print_pdf/{entity_id}/{start_timestamp}/{end_timestamp}'
+  defaults:
+    _controller: '\Drupal\htmlpage\Controller\PrintPdfController::standardPrintPdf'
+    _title: 'Htmlpage Print Pdf'
+  requirements:
+    _permission: 'access content'
+
 

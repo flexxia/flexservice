@@ -444,12 +444,17 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByEventList($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
+    $start = \Drupal::service('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::service('flexinfo.setting.service')->userEndTime();
+
     if (is_array($meeting_nodes)) {
       foreach ($meeting_nodes as $node) {
         $program_entity = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
 
-        $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/meeting/page/' . $node->id(), array('attributes' => array('class' => array('text-primary'))));
+        $meeting_url = '/htmlpage/meeting/page/' . $node->id()  . '/' . $start . '/' . $end;
+
+        $internal_url = \Drupal\Core\Url::fromUserInput($meeting_url, array('attributes' => array('class' => array('text-primary'))));
 
         $date = \Drupal::service('flexinfo.field.service')
           ->getFieldFirstValueDateFormat($node, 'field_meeting_date');
@@ -818,6 +823,9 @@ class NgdataAtomicMolecule extends NgdataAtomic {
   public function tableDataByTopProgram($meeting_nodes = array(), $limit_row = NULL) {
     $output = array();
 
+    $start = \Drupal::getContainer()->get('flexinfo.setting.service')->userStartTime();
+    $end = \Drupal::getContainer()->get('flexinfo.setting.service')->userEndTime();
+
     $program_trees = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
       ->loadTree('program', 0);
@@ -867,7 +875,7 @@ class NgdataAtomicMolecule extends NgdataAtomic {
               ->getFieldFirstValueCollection($meeting_nodes_by_current_term, 'field_meeting_evaluationnum')
           );
 
-          $internal_url = \Drupal\Core\Url::fromUserInput('/ngpage/program/page/' . $term->tid, array('attributes' => array('class' => array('text-primary'))));
+          $internal_url = \Drupal\Core\Url::fromUserInput('/htmlpage/program/page/' . $term->tid  . '/' . $start . '/' . $end, array('attributes' => array('class' => array('text-primary'))));
 
           $program_short_name = \Drupal\Component\Utility\Unicode::truncate($term->name, 36, $wordsafe = TRUE, $add_ellipsis = TRUE);
 

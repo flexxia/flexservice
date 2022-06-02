@@ -141,3 +141,13 @@ draw-canvas-tile:
   version: 3.x
   js:
     js/draw_canvas_tile.js: {}
+
+# puppeteer print pdf for meeting/program page.
+puppeteer-print-debug-pdf:
+  version: 1.x
+  css:
+    theme:
+      css/puppeteer_debug_print_pdf.css: {}
+  js:
+    js/puppeteer_debug_print_pdf.js: {}
+#
